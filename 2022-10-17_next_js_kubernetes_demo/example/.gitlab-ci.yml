@@ -1,0 +1,83 @@
+image: sikalabs/ci
+
+stages:
+  - lint
+  - build
+  - deploy dev
+  - deploy prod
+
+variables:
+  GIT_CLEAN_FLAGS: -ffdx -e .yarn-cache
+  IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA-$CI_PIPELINE_ID
+
+editorconfig:
+  stage: lint
+  script:
+    - editorconfig-checker
+
+prettier:
+  image: node:16-slim
+  stage: lint
+  script:
+    - yarn install --frozen-lockfile --cache-folder .yarn-cache --prefer-offline
+    - yarn run fmt-check
+
+docker-build:
+  stage: build
+  script:
+    - docker login $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
+    - make all IMAGE_NAME=$IMAGE
+
+deploy-one-image dev:
+  stage: deploy dev
+  script:
+    - helm upgrade --install example
+      one-image --repo https://helm.sikalabs.io
+      -n $CI_PROJECT_PATH_SLUG --create-namespace
+      --set host=example-a.k8s.sikademo.com
+      --set image=$IMAGE
+      --set containerPort=3000
+  environment:
+    name: dev one-image
+    url: https://example-a.k8s.sikademo.com
+
+deploy-local dev:
+  stage: deploy dev
+  script:
+    - helm upgrade --install example-local
+      ./kubernetes/charts/example
+      -n $CI_PROJECT_PATH_SLUG --create-namespace
+      --set host=example-b.k8s.sikademo.com
+      --set image=$IMAGE
+  environment:
+    name: dev local
+    url: https://example-b.k8s.sikademo.com
+
+deploy-one-image prod:
+  stage: deploy prod
+  when: manual
+  allow_failure: false
+  script:
+    - helm upgrade --install example
+      one-image --repo https://helm.sikalabs.io
+      -n $CI_PROJECT_PATH_SLUG-prod --create-namespace
+      --set host=example-a-prod.k8s.sikademo.com
+      --set image=$IMAGE
+      --set containerPort=3000
+  environment:
+    name: prod one-image
+    url: https://example-a-prod.k8s.sikademo.com
+
+deploy-local prod:
+  stage: deploy prod
+  when: manual
+  allow_failure: false
+  script:
+    - helm upgrade --install example-local
+      ./kubernetes/charts/example
+      -n $CI_PROJECT_PATH_SLUG-prod --create-namespace
+      --set host=example-b-prod.k8s.sikademo.com
+      --set image=$IMAGE
+  environment:
+    name: prod local
+    url: https://example-b-prod.k8s.sikademo.com

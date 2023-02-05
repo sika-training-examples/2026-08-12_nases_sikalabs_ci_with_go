@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ak-example
+spec:
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: ak-example
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: ak-example
+    spec:
+      containers:
+        - name: main
+          image: registry.sikalabs.com/examples/ak-example/ak-example:master-dc40c261-7511
+          ports:
+            - name: http
+              containerPort: 3000
+          resources:
+            requests:
+              cpu: 50m
+              memory: 100Mi
+            limits:
+              cpu: 200m
+              memory: 200Mi

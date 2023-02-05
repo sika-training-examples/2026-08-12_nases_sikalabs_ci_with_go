@@ -1,0 +1,65 @@
+image: sikalabs/ci
+
+stages:
+  - plan
+  - apply
+
+variables:
+  GIT_CLEAN_FLAGS: -ffdx -e dev/.terraform -e prod/.terraform
+
+.dev:
+  variables:
+    ENV: dev
+  rules:
+    - changes:
+        paths:
+          - env/dev/**/*
+          - projects/**/*
+          - modules/**/*
+
+.prod:
+  variables:
+    ENV: prod
+  rules:
+    - changes:
+        paths:
+          - env/prod/**/*
+          - projects/**/*
+          - modules/**/*
+
+.plan:
+  stage: plan
+  script:
+    - cd env/${ENV}
+    - make terraform-init-state
+    - terraform plan -out plan.tfplan
+  artifacts:
+    paths:
+      - env/**/plan.tfplan
+
+.apply:
+  stage: apply
+  script:
+    - cd env/${ENV}
+    - make terraform-init-state
+    - terraform apply plan.tfplan
+
+dev plan:
+  extends:
+    - .dev
+    - .plan
+
+prod plan:
+  extends:
+    - .prod
+    - .plan
+
+dev apply:
+  extends:
+    - .dev
+    - .apply
+
+prod apply:
+  extends:
+    - .prod
+    - .apply

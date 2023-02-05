@@ -1,0 +1,10 @@
+---
+- name: Cron Example
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - cron:
+        name: "who cares"
+        minute: "*"
+        job: "date >> /tmp/date.txt"

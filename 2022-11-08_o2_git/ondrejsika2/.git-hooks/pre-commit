@@ -1,0 +1,4 @@
+#!/bin/sh
+
+editorconfig-checker
+yarn run prettier-check

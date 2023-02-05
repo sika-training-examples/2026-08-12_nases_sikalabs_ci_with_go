@@ -1,0 +1,16 @@
+image: sikalabs/ci
+
+test:
+    variables:
+        VAULT_ADDR: http://runner.sikademo.com:8200
+    script:
+        - vault login -method=userpass username=demo-app password=demo-app
+        - vault read -format json database/creds/readonly > creds.json
+        - slu postgres ping -H  runner.sikademo.com -P 5432
+            -u $(jq -r ".data.username" creds.json)
+            -p $(jq -r ".data.password" creds.json)
+            -n postgres
+        - echo slu postgres ping -H  runner.sikademo.com -P 5432
+            -u $(jq -r ".data.username" creds.json)
+            -p $(jq -r ".data.password" creds.json)
+            -n postgres

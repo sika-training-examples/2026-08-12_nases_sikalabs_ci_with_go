@@ -1,0 +1,16 @@
+apiVersion: kibana.k8s.elastic.co/v1
+kind: Kibana
+metadata:
+  name: main
+  namespace: elk
+spec:
+  version: 8.5.0
+  count: 2
+  elasticsearchRef:
+    name: main
+  config:
+    server.publicBaseUrl: https://kb.k8s.sikademo.com
+  http:
+    tls:
+      selfSignedCertificate:
+        disabled: true

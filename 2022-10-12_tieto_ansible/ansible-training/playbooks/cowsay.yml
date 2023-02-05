@@ -1,0 +1,10 @@
+---
+- name: Install Cowsay
+  hosts: vm1.sikademo.com
+  gather_facts: false
+
+  tasks:
+    - name: Install Cowsay
+      apt:
+        name: cowsay
+        update_cache: yes

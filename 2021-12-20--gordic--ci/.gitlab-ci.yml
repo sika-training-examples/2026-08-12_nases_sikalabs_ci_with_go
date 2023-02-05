@@ -1,0 +1,16 @@
+# .gitlab-ci.yml
+test:
+  image: ondrejsika/pytest
+  script:
+    - pytest --junitxml=report.xml
+  artifacts:
+    reports:
+      junit: report.xml
+
+test2:
+  script:
+    - mkdir -p test-output
+    - echo "<h1>Hello Gordic</h1>" > test-output/index.html
+  artifacts:
+    paths:
+      - "test-output/**/*"

@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-ak-example-go
+spec:
+  replicas: {{ .Values.replicas }}
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: ak-example-go
+  template:
+    metadata:
+      labels:
+        app: ak-example-go
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: main
+          image: {{ required ".Values.image is required" .Values.image }}
+          ports:
+            - name: http
+              containerPort: 8000
+          env:
+            - name: REDIS_HOST
+              value: {{ .Release.Name }}-ak-example-go-redis
+          resources:
+            requests:
+              cpu: 30m
+              memory: 30Mi
+            limits:
+              cpu: 100m
+              memory: 100Mi

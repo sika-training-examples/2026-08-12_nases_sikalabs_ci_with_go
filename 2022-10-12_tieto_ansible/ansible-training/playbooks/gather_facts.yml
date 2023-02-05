@@ -1,0 +1,12 @@
+---
+- name: Copy Example
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Gather facts manually
+      gather_facts:
+        filter: ansible_all_ipv4_addresses
+
+    - debug:
+        var: ansible_facts.all_ipv4_addresses

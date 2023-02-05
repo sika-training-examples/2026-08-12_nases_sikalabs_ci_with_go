@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{.Release.Name}}-redis
+  labels:
+    project: counter
+spec:
+  selector:
+    project: counter
+    app: redis
+    release: {{.Release.Name}}
+  ports:
+    - port: 6379

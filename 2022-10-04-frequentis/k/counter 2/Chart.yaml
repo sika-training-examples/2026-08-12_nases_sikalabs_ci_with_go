@@ -1,0 +1,5 @@
+apiVersion: v2
+description: An example app for Frequentis
+name: counter
+type: application
+version: 2022.10.07

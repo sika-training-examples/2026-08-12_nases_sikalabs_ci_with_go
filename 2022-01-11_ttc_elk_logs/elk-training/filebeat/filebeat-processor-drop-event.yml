@@ -1,0 +1,18 @@
+filebeat.inputs:
+  - type: stdin
+
+processors:
+  - drop_fields:
+      fields:
+        - agent
+        - log
+        - input
+        - ecs
+        - host
+  - drop_event:
+      when:
+        regexp:
+          message: "DEBUG|INFO"
+
+output.console:
+  pretty: true

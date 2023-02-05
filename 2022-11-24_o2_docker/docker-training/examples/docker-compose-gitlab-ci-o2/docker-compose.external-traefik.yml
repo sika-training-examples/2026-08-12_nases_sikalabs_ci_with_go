@@ -1,0 +1,12 @@
+version: "3.9"
+services:
+  counter:
+    deploy:
+      replicas: 2
+    networks:
+      - default
+      - traefik
+
+networks:
+  traefik:
+    name: traefik

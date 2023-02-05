@@ -1,0 +1,6 @@
+{{
+    set dotnetVersion to join(slice(split(PRODUCT_VERSION, "."), 0, 2), ".") ^
+    set isWindows to find(OS_VERSION, "nanoserver") >= 0 || find(OS_VERSION, "windowsservercore") >= 0 ^
+    set lineContinuation to when(isWindows, "`", "\")
+}}# ASP.NET Core version
+ENV ASPNET_VERSION={{VARIABLES[cat("aspnet|", dotnetVersion, "|build-version")]}}

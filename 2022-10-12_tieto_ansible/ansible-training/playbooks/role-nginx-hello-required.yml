@@ -1,0 +1,9 @@
+---
+- name: nginx-hello-required role example
+  hosts: all
+  gather_facts: false
+  vars:
+    full_name: Nela
+
+  roles:
+    - nginx-hello-required

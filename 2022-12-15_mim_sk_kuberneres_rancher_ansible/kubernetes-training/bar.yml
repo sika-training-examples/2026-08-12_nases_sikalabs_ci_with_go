@@ -1,0 +1,40 @@
+---
+# Source: hello-world/templates/service.yml
+apiVersion: v1
+kind: Service
+metadata:
+  name: bar
+  labels:
+    release: bar
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      name: http
+      targetPort: http
+  selector:
+    release: bar
+---
+# Source: hello-world/templates/deployment.yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bar
+  labels:
+    release: bar
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      release: bar
+  template:
+    metadata:
+      labels:
+        release: bar
+    spec:
+      containers:
+        - name: main
+          image: sikalabs/hello-world-server
+          ports:
+            - name: http
+              containerPort: 8000

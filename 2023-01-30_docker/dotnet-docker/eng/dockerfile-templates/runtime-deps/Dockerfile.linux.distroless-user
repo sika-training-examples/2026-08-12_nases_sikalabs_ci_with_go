@@ -1,0 +1,34 @@
+{{
+    _ Configures the app user and group for distroless containers
+    _ ARGS:
+        staging-dir: Path to the distroless staging directory
+        create-dir (optional): Indicates whether the etc directory should be created in staging
+        exclusive (optional): Indicates whether the app user is the only user and all other users are removed
+        name: Name of the user/group to create
+        uid: ID of the user to be created
+        gid: ID of the group to be created
+        create-home (optional): Indicates whether a home directory should be created for the user ^
+    set dotnetVersion to join(slice(split(PRODUCT_VERSION, "."), 0, 2), ".") ^
+    set isMariner to find(OS_VERSION, "cbl-mariner") >= 0
+}}groupadd \
+    --system \
+    --gid={{ARGS["gid"]}} \
+    {{ARGS["name"]}} \
+&& adduser \
+    --uid {{ARGS["uid"]}} \
+    --gid {{ARGS["gid"]}} \
+    --shell /bin/false \{{if !ARGS["create-home"]:
+    --no-create-home \}}
+    --system \
+    {{ARGS["name"]}} \{{
+if ARGS["create-home"]:
+&& install -d -m 0755 -o {{ARGS["uid"]}} -g {{ARGS["gid"]}} "{{ARGS["staging-dir"]}}/home/{{ARGS["name"]}}" \}}{{
+if ARGS["exclusive"]:{{if ARGS["create-dir"]:
+&& mkdir -p "{{ARGS["staging-dir"]}}/etc" \}}
+&& rootOrAppRegex='@^\(root\|app\):' \
+&& cat /etc/passwd | grep $rootOrAppRegex > "{{ARGS["staging-dir"]}}/etc/passwd" \
+&& cat /etc/group | grep $rootOrAppRegex > "{{ARGS["staging-dir"]}}/etc/group"^
+else:
+# Copy user/group info to staging
+&& cp /etc/passwd {{ARGS["staging-dir"]}}/etc/passwd \
+&& cp /etc/group {{ARGS["staging-dir"]}}/etc/group}}

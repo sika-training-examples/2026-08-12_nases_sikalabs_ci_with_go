@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: test-hello-world-go
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: 1=registry.sikademo.com/tacr/hello-world-go:master
+    argocd-image-updater.argoproj.io/1.helm.image-spec: image
+    argocd-image-updater.argoproj.io/1.update-strategy: digest
+    argocd-image-updater.argoproj.io/1.force-update: 'true'
+    argocd-image-updater.argoproj.io/1.platforms: linux/amd64
+spec:
+  destination:
+    namespace: test-hello-world-go
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    repoURL: https://gitlab.sikademo.com/tacr/hello-world-go.git
+    targetRevision: HEAD
+    path: kubernetes/charts/hello-world-go
+    helm:
+      releaseName: test-hello-world-go
+      values: |
+        host: test-hello-world-go.k8s.sikademo.com
+        image: registry.sikademo.com/tacr/hello-world-go:master
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true

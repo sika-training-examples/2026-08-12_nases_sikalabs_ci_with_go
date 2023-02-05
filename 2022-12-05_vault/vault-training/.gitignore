@@ -1,0 +1,23 @@
+.DS_Store
+
+local.txt
+*.local.txt
+
+/tmp
+*.snap
+
+tergum.yml
+
+# Terraform
+
+.terraform
+terraform.tfvars
+terraform.auto.tfvars
+.terraform.tfstate.lock.info
+*.tfstate
+*.backup
+*.tfvars
+!*.EXAMPLE.tfvars
+
+# Infracost
+.infracost

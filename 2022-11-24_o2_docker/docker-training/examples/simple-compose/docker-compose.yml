@@ -1,0 +1,23 @@
+version: "3.9"
+name: counter
+services:
+  counter:
+    build: ./counter
+    image: reg.istry.cz/ondrej/counter
+    ports:
+      - ${PORT:-8000}:80
+    depends_on:
+      redis:
+        condition: service_healthy
+  redis:
+    build: ./redis
+    image: reg.istry.cz/ondrej/redis-slow
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 2s
+      timeout: 1s
+      start_period: 5s
+volumes:
+  redis-data:

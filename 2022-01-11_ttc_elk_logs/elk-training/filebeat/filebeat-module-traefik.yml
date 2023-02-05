@@ -1,0 +1,20 @@
+setup.dashboards.enabled: true
+
+filebeat.modules:
+  - module: traefik
+    access:
+      enabled: true
+      input:
+        type: container
+        paths:
+          - "/var/lib/docker/containers/*/*.log"
+
+processors:
+  - drop_event:
+      when:
+        has_fields:
+          - error
+
+output.elasticsearch:
+  hosts:
+    - "localhost:9200"

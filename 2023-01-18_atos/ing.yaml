@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hello-atos-image-updater2
+  namespace: example2
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: hello-atos-image-updater.joh.k8s.sl.zone
+    http:
+      paths:
+      - backend:
+          service:
+            name: hello-world
+            port:
+              name: http
+        path: /hello
+        pathType: Prefix
+  tls:
+  - hosts:
+    - hello-atos-image-updater.joh.k8s.sl.zone
+    secretName: hello-atos-image-updater-tls

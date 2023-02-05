@@ -1,0 +1,5 @@
+vault write auth/oidc/config \
+         oidc_discovery_url="https://sso.k8s.sikademo.com/realms/vault" \
+         oidc_client_id="vault" \
+         oidc_client_secret="UoYHEO8pUtpbY1iqBcAIS8dV7mQ4QuZK" \
+         default_role="reader"

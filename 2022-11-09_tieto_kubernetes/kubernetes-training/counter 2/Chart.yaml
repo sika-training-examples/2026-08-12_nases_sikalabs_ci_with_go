@@ -1,0 +1,5 @@
+apiVersion: v2
+description: Example counter app for Tieto training
+name: counter
+type: application
+version: 2022.11.10

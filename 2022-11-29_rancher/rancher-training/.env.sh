@@ -1,0 +1,4 @@
+export TF_VAR_digitalocean_token=dop_v1_b706db6b49128d64e577b2108ee88aeeac6f1ca2253a72601d6128cf31be7b92
+export TF_VAR_base_domain=do4.sikademo.com
+export TF_VAR_rancher_api_url=https://rancher.do4.sikademo.com
+export TF_VAR_rancher_token_key=token-9n49q:5gb22dzwp5mhzkns6tbmnj9b4nb7jh275jbxgdqjsklq2jvk8lc5dn

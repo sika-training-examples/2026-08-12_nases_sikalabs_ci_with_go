@@ -1,0 +1,8 @@
+---
+- name: Shell Example
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - shell:
+        cmd: apt install -y nginx && false

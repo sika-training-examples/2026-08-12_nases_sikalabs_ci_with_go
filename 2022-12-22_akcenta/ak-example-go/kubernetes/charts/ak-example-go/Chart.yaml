@@ -1,0 +1,5 @@
+apiVersion: v2
+name: ak-example-go
+description: An example app for AK
+type: application
+version: 0.1.0-dev

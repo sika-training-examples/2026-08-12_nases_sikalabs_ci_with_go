@@ -1,0 +1,18 @@
+filebeat.inputs:
+  - type: stdin
+    multiline:
+      pattern: "^[[:space:]]|^Caused by:"
+      negate: false
+      match: after
+
+processors:
+  - drop_fields:
+      fields:
+        - agent
+        - log
+        - input
+        - ecs
+        - host
+
+output.console:
+  pretty: true

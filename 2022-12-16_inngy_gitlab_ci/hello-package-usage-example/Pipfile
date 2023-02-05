@@ -1,0 +1,12 @@
+[[source]]
+url = "https://gitlab.sikademo.com/api/v4/projects/6/packages/pypi/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+hello = "1.1.0"
+
+[dev-packages]
+
+[requires]
+python_version = "3.10"

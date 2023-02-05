@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: metrics-example
+spec:
+  groups:
+    - name: metrics-example.rules
+      rules:
+        - alert: ExampleRateAlert
+          annotations:
+            message: |
+              High request rate
+          expr: sum(rate(example_request_duration_seconds_count{path="/"}[10m])) by (instance) > 10
+          labels:
+            severity: warn
+            team: infra

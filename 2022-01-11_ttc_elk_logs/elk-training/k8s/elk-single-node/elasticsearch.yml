@@ -1,0 +1,20 @@
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  name: main
+  namespace: elk
+spec:
+  version: 8.5.3
+  nodeSets:
+    - name: default
+      count: 1
+      config:
+        node.roles:
+          - master
+          - data
+          - ingest
+        node.store.allow_mmap: false
+  http:
+    tls:
+      selfSignedCertificate:
+        disabled: true

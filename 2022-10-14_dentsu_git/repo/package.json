@@ -1,0 +1,19 @@
+{
+  "name": "hello-world-dentsu",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Ondrej Sika <ondrej@ondrejsika.com>",
+  "license": "MIT",
+  "scripts": {
+    "fmt-check": "prettier --check .",
+    "fmt": "prettier --write .",
+    "setup-git-hooks": "rm -rf .git/hooks && (cd .git && ln -s ../.git-hooks hooks)",
+    "dev": "next"
+  },
+  "dependencies": {
+    "next": "^12.3.1",
+    "prettier": "^2.7.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}

@@ -1,0 +1,3 @@
+include:
+  project: examples/ak-example/ak-example
+  file: .gitlab-ci.yml

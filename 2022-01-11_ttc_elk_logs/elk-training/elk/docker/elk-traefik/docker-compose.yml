@@ -1,0 +1,29 @@
+version: "3.7"
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.0
+    environment:
+      discovery.type: single-node
+    labels:
+      traefik.frontend.rule: Host:es.elk.sikademo.com
+      traefik.enable: "true"
+      traefik.port: 9200
+    networks:
+      - default
+      - traefik
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.10.0
+    environment:
+      discovery.type: single-node
+    labels:
+      traefik.frontend.rule: Host:kb.elk.sikademo.com
+      traefik.enable: "true"
+      traefik.port: 5601
+    networks:
+      - default
+      - traefik
+
+networks:
+  traefik:
+    external:
+      name: traefik

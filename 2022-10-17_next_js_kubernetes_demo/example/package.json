@@ -1,0 +1,24 @@
+{
+  "name": "devx-example",
+  "version": "0.1.0",
+  "author": "Ondrej Sika <ondrej@ondrejsika.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "export": "next export",
+    "fmt-check": "prettier --check .",
+    "fmt": "prettier --write .",
+    "setup-git-hooks": "rm -rf .git/hooks && (cd .git && ln -s ../.git-hooks hooks)"
+  },
+  "dependencies": {
+    "next": "^12.3.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.7.1"
+  }
+}

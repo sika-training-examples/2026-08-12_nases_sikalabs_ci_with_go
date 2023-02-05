@@ -1,0 +1,45 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: webservers
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  ingressClassName: nginx
+  tls:
+    - secretName: webservers-tls
+      hosts:
+        - foo-bar-baz.aks.sikademo.com
+        - ondrej-apache.aks.sikademo.com
+        - ondrej-caddy.aks.sikademo.com
+  rules:
+    - host: foo-bar-baz.aks.sikademo.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: nginx
+                port:
+                  number: 80
+    - host: ondrej-apache.aks.sikademo.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: apache
+                port:
+                  number: 80
+    - host: ondrej-caddy.aks.sikademo.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: caddy
+                port:
+                  number: 80

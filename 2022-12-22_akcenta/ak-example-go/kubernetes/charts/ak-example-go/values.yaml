@@ -1,0 +1,6 @@
+# Required
+image:
+hostname:
+
+# Optional
+replicas: 2

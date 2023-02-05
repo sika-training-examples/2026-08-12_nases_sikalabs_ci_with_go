@@ -1,0 +1,19 @@
+
+# b/.gitlab-ci.yml
+
+stages:
+  - build
+  - test
+  - deploy
+
+build:
+  stage: build
+  script: echo Build service B 
+
+test:
+  stage: test
+  script: echo Deploy service B
+
+deploy:
+  stage: deploy
+  script: echo Deploy service B

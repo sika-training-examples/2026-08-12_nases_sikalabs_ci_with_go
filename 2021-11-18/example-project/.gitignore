@@ -1,0 +1,16 @@
+# Mac
+.DS_Store
+
+# Editor
+.vscode
+
+# Global
+*.log
+
+# JS
+node_modules
+.yarn-cache
+
+# Next.js
+out
+.next

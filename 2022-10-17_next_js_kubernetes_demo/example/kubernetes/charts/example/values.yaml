@@ -1,0 +1,7 @@
+# Required
+image:
+host:
+
+# Optional
+replicas: 2
+clusterIssuer: letsencrypt

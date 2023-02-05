@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fake-consumer
+spec:
+  selector:
+    matchLabels:
+      app: fake-consumer
+  template:
+    metadata:
+      labels:
+        app: fake-consumer
+    spec:
+      containers:
+        - name: main
+          image: ondrejsika/training-example
+---
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: kafka-scaledobject
+spec:
+  scaleTargetRef:
+    name: fake-consumer
+  pollingInterval: 30
+  minReplicaCount: 1
+  maxReplicaCount: 10
+  triggers:
+  - type: kafka
+    metadata:
+      bootstrapServers: k-0-kafka-bootstrap.kafka.svc:9092
+      consumerGroup: a
+      topic: a
+      # lagThreshold: '5'
+      # activationLagThreshold: '3'
+      # offsetResetPolicy: latest
+      # allowIdleConsumers: "false"
+      # scaleToZeroOnInvalidOffset: "false"
+      # excludePersistentLag: "false"
+      # version: 1.0.0

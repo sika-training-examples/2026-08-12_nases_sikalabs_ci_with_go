@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: default-pvc
+spec:
+  storageClassName: longhorn-retain
+  volumeName: pvc-990f9338-c99f-408b-878e-0f2c67462e04
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prod-ak-example-go
+  namespace: argocd
+spec:
+  destination:
+    namespace: prod-ak-example-go
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    repoURL: https://gitlab.sikalabs.com/examples/ak-example/ak-example-go.git
+    targetRevision: HEAD
+    path: kubernetes/charts/ak-example-go
+    helm:
+      releaseName: prod
+      values: |
+        host: ak-example-go.sikademo.com
+        image: registry.sikalabs.com/examples/ak-example/ak-example-go:r2-f2fe2d3f-7536
+        replicas: 3
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true

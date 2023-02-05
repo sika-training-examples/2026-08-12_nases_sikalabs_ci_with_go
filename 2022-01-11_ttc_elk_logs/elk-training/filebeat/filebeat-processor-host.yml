@@ -1,0 +1,7 @@
+filebeat.inputs:
+  - type: stdin
+
+processors:
+  - add_host_metadata:
+
+output.console:

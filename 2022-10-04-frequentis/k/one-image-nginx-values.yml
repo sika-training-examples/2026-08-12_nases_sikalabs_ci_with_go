@@ -1,0 +1,5 @@
+image: ondrejsika/training-example
+host: hello.k8s.sikademo.com
+basicAuth:
+  username: foo
+  password: bar

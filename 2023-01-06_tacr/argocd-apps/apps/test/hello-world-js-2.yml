@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: test-hello-world-js-2
+  namespace: argocd
+spec:
+  destination:
+    namespace: test-hello-world-js-2
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    repoURL: https://github.com/sikalabs/charts.git
+    targetRevision: HEAD
+    path: charts/one-image
+    helm:
+      releaseName: test-hello-world-js-2
+      values: |
+        host: test-hello-world-js-2.k8s.sikademo.com
+        image: registry.sikademo.com/tacr/hello-world-js:master-dc29feeb-1
+        containerPort: 3000
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true

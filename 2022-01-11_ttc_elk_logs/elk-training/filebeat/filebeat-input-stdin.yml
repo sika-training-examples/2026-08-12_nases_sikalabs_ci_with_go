@@ -1,0 +1,4 @@
+filebeat.inputs:
+  - type: stdin
+
+output.console:

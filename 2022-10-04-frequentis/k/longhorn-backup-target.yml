@@ -1,0 +1,6 @@
+apiVersion: longhorn.io/v1beta1
+kind: Setting
+metadata:
+  name: backup-target
+  namespace: longhorn-system
+value: nfs://165.227.145.26:/nfs

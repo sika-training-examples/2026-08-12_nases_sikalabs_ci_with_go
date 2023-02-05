@@ -1,0 +1,18 @@
+---
+- name: Register Example
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: List of files and directories
+      command: ls /
+      register: content
+
+    - name: Print content variable
+      debug:
+        var: content
+
+    - name: Print files and directoris
+      debug:
+        msg: "{{ item }}"
+      loop: "{{ content.stdout_lines }}"

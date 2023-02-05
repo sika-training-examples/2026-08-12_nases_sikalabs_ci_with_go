@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-ak-example-go-redis
+spec:
+  selector:
+    app: ak-example-go-redis
+    release: {{ .Release.Name }}
+  ports:
+    - port: 6379
+      targetPort: redis

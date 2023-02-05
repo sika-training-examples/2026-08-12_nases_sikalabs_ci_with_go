@@ -1,0 +1,22 @@
+
+filebeat.inputs:
+  - type: container
+    paths:
+      - "/var/lib/docker/containers/*/*.log"
+    processors:
+      - add_docker_metadata:
+          # host: "unix:///var/run/docker.sock"
+
+output.kafka:
+  hosts:
+    - 159.89.11.176:31638           
+    - 159.89.11.176:32701            
+    - 159.89.11.176:30710     
+
+  topic: "c"
+  partition.round_robin:
+    reachable_only: false
+
+  required_acks: 1
+  max_message_bytes: 1000000
+

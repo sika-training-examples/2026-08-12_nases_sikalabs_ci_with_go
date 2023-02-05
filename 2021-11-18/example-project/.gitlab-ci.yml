@@ -1,0 +1,123 @@
+image: sikalabs/ci
+
+stages:
+  - lint
+  - build
+  - deploy dev
+  - test dev
+  - deploy prod
+
+variables:
+  IMAGE: $CI_REGISTRY_IMAGE/app:$CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA-$CI_PIPELINE_ID
+  IMAGE_BRANCH: $CI_REGISTRY_IMAGE/app:$CI_COMMIT_REF_SLUG
+  GIT_CLEAN_FLAGS: -ffdx -e .yarn-cache
+
+
+.deploy: &deploy
+  script:
+    - helm repo add sikalabs https://helm.oxs.cz
+    - helm upgrade --install $HELM_RELEASE
+      sikalabs/one-image
+      --wait
+      --timeout 60s
+      --set image=$IMAGE
+      --set host=$HOST
+
+
+lint:
+  stage: lint
+  image: node:16
+  except:
+    variables:
+      - $SKIP_STAGE_lint == "1" && $SKIP_BRANCH == $CI_COMMIT_REF_NAME
+  script:
+    - yarn --cache-folder .yarn-cache install
+    - yarn lint
+
+
+build:
+  stage: build
+  except:
+    variables:
+      - $SKIP_STAGE_build == "1" && $SKIP_BRANCH == $CI_COMMIT_REF_NAME
+  script:
+    - docker login $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
+    - docker build -t $IMAGE -t $IMAGE_BRANCH .
+    - docker push $IMAGE
+    - docker push $IMAGE_BRANCH
+
+build tag only:
+  stage: build
+  only:
+    variables:
+      - $SKIP_STAGE_build == "1" && $SKIP_BRANCH == $CI_COMMIT_REF_NAME
+  script:
+    - docker login $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
+    - docker pull $IMAGE_BRANCH
+    - docker tag $IMAGE_BRANCH $IMAGE
+    - docker push $IMAGE
+
+deploy dev:
+  <<: *deploy
+  stage: deploy dev
+  variables:
+    HELM_RELEASE: proj-$CI_PROJECT_ID-$CI_COMMIT_REF_SLUG
+    HOST: $CI_PROJECT_PATH_SLUG-$CI_COMMIT_REF_SLUG.$KUBE_INGRESS_BASE_DOMAIN
+  except:
+    variables:
+      - $SKIP_STAGE_deploy_dev == "1" && $SKIP_BRANCH == $CI_COMMIT_REF_NAME
+  environment:
+    name: dev/$CI_COMMIT_REF_SLUG
+    url: https://$CI_PROJECT_PATH_SLUG-$CI_COMMIT_REF_SLUG.$KUBE_INGRESS_BASE_DOMAIN
+    kubernetes:
+      namespace: default
+    on_stop: stop dev
+
+stop dev:
+  stage: deploy dev
+  when: manual
+  variables:
+    GIT_STRATEGY: none
+  except:
+    variables:
+      - $SKIP_STAGE_deploy_dev == "1" && $SKIP_BRANCH == $CI_COMMIT_REF_NAME
+  script:
+    - helm uninstall proj-$CI_PROJECT_ID-$CI_COMMIT_REF_SLUG
+  environment:
+    name: dev/$CI_COMMIT_REF_SLUG
+    kubernetes:
+      namespace: default
+    action: stop
+
+test dev:
+  stage: test dev
+  except:
+    variables:
+      - $SKIP_STAGE_test_dev == "1" && $SKIP_BRANCH == $CI_COMMIT_REF_NAME
+  script:
+    # - slu wait-for-ssl https://$CI_PROJECT_PATH_SLUG-$CI_COMMIT_REF_SLUG.$KUBE_INGRESS_BASE_DOMAIN
+    - sleep 20
+    - curl https://$CI_PROJECT_PATH_SLUG-$CI_COMMIT_REF_SLUG.$KUBE_INGRESS_BASE_DOMAIN
+  environment:
+    name: dev/$CI_COMMIT_REF_SLUG
+    action: prepare
+
+deploy prod:
+  <<: *deploy
+  stage: deploy prod
+  only:
+    - master
+    - master-ci
+  when: manual
+  allow_failure: false
+  variables:
+    HELM_RELEASE: proj-$CI_PROJECT_ID
+    HOST: $CI_PROJECT_PATH_SLUG.$KUBE_INGRESS_BASE_DOMAIN
+  except:
+    variables:
+      - $SKIP_STAGE_deploy_prod == "1" && $SKIP_BRANCH == $CI_COMMIT_REF_NAME
+  environment:
+    name: prod
+    url: https://$CI_PROJECT_PATH_SLUG.$KUBE_INGRESS_BASE_DOMAIN
+    kubernetes:
+      namespace: default

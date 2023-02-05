@@ -1,0 +1,51 @@
+image: sikalabs/ci
+
+stages:
+  - build
+  - deploy dev
+
+variables:
+  GIT_CLEAN_FLAGS: -ffdx -e .kaniko-cache
+
+  IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA-$CI_PIPELINE_ID
+  CACHE_IMAGE_PREFIX: $CI_REGISTRY_IMAGE/cache
+
+  BASE_DOMAIN: k8s.sikademo.com
+  DEV_HOST: $CI_PROJECT_PATH_SLUG-$CI_COMMIT_REF_SLUG.$BASE_DOMAIN
+
+build:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  script:
+    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor --context=$CI_PROJECT_DIR --dockerfile=$CI_PROJECT_DIR/Dockerfile --destination=$IMAGE --cache=true --cache-dir=$CI_PROJECT_DIR/.kaniko-cache --cache-repo=$CACHE_IMAGE_PREFIX
+
+deploy dev:
+  stage: deploy dev
+  environment:
+    name: dev/$CI_COMMIT_REF_SLUG
+    url: https://$DEV_HOST
+    on_stop: stop dev
+  script:
+    - helm upgrade --install
+        dev-$CI_COMMIT_REF_SLUG ./kubernetes/charts/$CHART_NAME
+        --namespace $CI_PROJECT_PATH_SLUG
+        --create-namespace
+        --values ./kubernetes/values/$CHART_NAME/ci.values.yml
+        --set image=$IMAGE
+        --set host=$DEV_HOST
+
+stop dev:
+  stage: deploy dev
+  when: manual
+  variables:
+    GIT_STRATEGY: none
+  environment:
+    name: dev/$CI_COMMIT_REF_SLUG
+    action: stop
+  script:
+    - helm uninstall
+        dev-$CI_COMMIT_REF_SLUG
+        --namespace $CI_PROJECT_PATH_SLUG

@@ -1,0 +1,45 @@
+image: sikalabs/ci
+
+stages:
+  - build
+  - tests
+  - deploy
+
+variables:
+  IMAGE_COUNTER: $CI_REGISTRY_IMAGE/counter:$CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA-$CI_PIPELINE_ID
+  IMAGE_REDIS: $CI_REGISTRY_IMAGE/redis-slow:$CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA-$CI_PIPELINE_ID
+
+build:
+  stage: build
+  script:
+    - docker login $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
+    - docker-compose build
+    - docker-compose push
+
+.tests:
+  stage: tests
+  variables:
+    COMPOSE_PROJECT_NAME: $CI_JOB_ID
+  script:
+    - make use-tests
+    - docker-compose pull
+    - docker-compose run tests
+  after_script:
+    - docker-compose down
+
+deploy:
+  stage: deploy
+  variables:
+    DOCKER_HOST: ssh://root@$SSH_HOST
+    HOST: $SSH_HOST
+  script:
+    - mkdir ~/.ssh
+    - ssh-keyscan -H $SSH_HOST >> ~/.ssh/known_hosts
+    - cp $SSH_KEY ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - docker-compose pull
+    - make use-external-traefik
+    - docker-compose up -d --no-build
+  environment:
+    name: prod
+    url: http://$SSH_HOST

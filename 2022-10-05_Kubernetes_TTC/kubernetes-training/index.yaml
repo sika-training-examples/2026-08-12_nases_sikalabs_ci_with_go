@@ -1,0 +1,30 @@
+apiVersion: v1
+entries:
+  counter:
+  - apiVersion: v2
+    created: "2022-10-06T12:08:48.5994779Z"
+    description: Example app for TTC training
+    digest: b440a3506da6fa33f86a5745dad8ea7ce4eaafd1a9dd3a6c4c1b64713f427cad
+    name: counter
+    type: application
+    urls:
+    - counter-2022.10.06.tgz
+    version: 2022.10.06
+  hello-world:
+  - apiVersion: v1
+    created: "2022-10-06T12:08:48.6020495Z"
+    description: Hello World example chart
+    digest: 9068a45164e6b56712e898affa06b258490ca16d831b713b0d95a385e39ee7bd
+    name: hello-world
+    urls:
+    - hello-world-0.4.0.tgz
+    version: 0.4.0
+  wordpress-mysql:
+  - apiVersion: v1
+    created: "2022-10-06T12:08:48.602481891Z"
+    digest: 2c947411159f11490b7d78af4ec6523fa642a8ad9a542c89845a93867e7b74c7
+    name: wordpress-mysql
+    urls:
+    - wordpress-mysql-0.1.0.tgz
+    version: 0.1.0
+generated: "2022-10-06T12:08:48.598558325Z"

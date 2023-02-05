@@ -1,0 +1,7 @@
+version: "3.9"
+name: example
+services:
+  app:
+    build: .
+    ports:
+      - 80:80

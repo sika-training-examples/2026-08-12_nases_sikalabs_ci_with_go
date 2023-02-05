@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-ak-example
+spec:
+  selector:
+    app: ak-example
+    release: {{ .Release.Name }}
+  ports:
+    - port: 80
+      targetPort: http

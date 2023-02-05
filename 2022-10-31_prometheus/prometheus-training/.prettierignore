@@ -1,0 +1,5 @@
+dashboards
+.terraform
+*.tfstate
+.infracost
+*.backup

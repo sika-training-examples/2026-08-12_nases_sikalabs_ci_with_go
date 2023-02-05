@@ -1,0 +1,15 @@
+filebeat.inputs:
+- type: filestream
+  paths:
+    - /tmp/example-log-text.log       
+
+output.elasticsearch:
+  hosts:
+    - https://es.k8s.sikademo.com:443
+  username: elastic
+  password: 7gnOYMA70kbZ71A8D8U62ER2
+
+  index: "bbb"
+
+setup.template.name: "bbb"
+setup.template.pattern: "bbb*"

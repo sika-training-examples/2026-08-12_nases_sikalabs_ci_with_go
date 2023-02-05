@@ -1,0 +1,56 @@
+global:
+  resolve_timeout: 10s
+  smtp_from: prom@maildev.sikademo.com
+  smtp_smarthost: smtp.ethereal.email:587
+  smtp_require_tls: true
+  smtp_auth_username: curtis.ledner@ethereal.email
+  smtp_auth_password: bRFfSqQ2zR4JVBdbzp
+
+route:
+  receiver: all-teams
+  group_by:
+    - env
+    - alertname
+    - app
+  group_wait: 10s
+  group_interval: 10s
+  repeat_interval: 1m
+
+  routes:
+    - receiver: "frontend-team"
+      match:
+        app: frontend
+    - receiver: "backend-team"
+      match:
+        app: backend
+    - receiver: "db-team"
+      match:
+        app: db
+
+inhibit_rules:
+  - source_match:
+      app: db
+    target_match:
+      app: backend
+  - source_match:
+      app: lb
+    target_match:
+      app: frontend
+
+receivers:
+  - name: all-teams
+    email_configs:
+      - send_resolved: true
+        to: alert@maildev.sikademo.com
+  - name: frontend-team
+    email_configs:
+      - send_resolved: true
+        to: alert-frontend@maildev.sikademo.com
+  - name: backend-team
+    email_configs:
+      - send_resolved: true
+        to: alert-backend@maildev.sikademo.com
+  - name: db-team
+    email_configs:
+      - send_resolved: true
+        to: alert-db@maildev.sikademo.com

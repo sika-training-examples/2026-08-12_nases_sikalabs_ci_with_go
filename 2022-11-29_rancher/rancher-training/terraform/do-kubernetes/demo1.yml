@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Config
+clusters:
+- name: "demo1"
+  cluster:
+    server: "https://rancher.do0.sikademo.com/k8s/clusters/c-m-kh6d6fmc"
+
+users:
+- name: "demo1"
+  user:
+    token: "kubeconfig-user-gtshkxk558:lcbspqgfqcmhgcgqvggvwhmqv4ljdwq2tg5ztslltn5qsrfpvcgkjs"
+
+
+contexts:
+- name: "demo1"
+  context:
+    user: "demo1"
+    cluster: "demo1"
+
+current-context: "demo1"
+

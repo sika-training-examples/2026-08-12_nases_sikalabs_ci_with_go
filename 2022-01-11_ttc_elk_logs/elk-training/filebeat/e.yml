@@ -1,0 +1,25 @@
+filebeat.inputs:
+  - type: filestream
+    paths:
+      - /tmp/test.log
+
+processors:
+  - decode_json_fields:
+      fields:
+        - message
+      max_depth: 1
+
+# output.console:
+#   pretty: true
+
+output.kafka:
+  hosts:
+    - 159.89.11.176:31638           
+    - 159.89.11.176:32701            
+    - 159.89.11.176:30710   
+  topic: "logs-all"
+  topics:
+    # - topic: "logs-%{[message.level]}"
+    - topic: "logs-developers"
+      when.equals:
+        message.level: "info|debug"

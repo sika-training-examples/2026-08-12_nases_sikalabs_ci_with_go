@@ -1,0 +1,31 @@
+image: sikalabs/ci
+
+stages:
+  - plan
+  - apply
+
+variables:
+  GIT_CLEAN_FLAGS: -ffdx -e .terraform
+
+before_script:
+  - make tf-init-state GITLAB_USERNAME=gitlab-ci-token GITLAB_TOKEN=$TF_VAR_gitlab_token
+
+plan:
+  stage: plan
+  script:
+    - terraform plan -out plan.tfplan
+    - terraform show --json plan.tfplan > plan.json
+    - slu gitlab-ci terraform-convert-report plan.json > gitlab-plan.json
+  artifacts:
+    paths:
+      - plan.tfplan
+    reports:
+      terraform: gitlab-plan.json
+
+apply:
+  stage: apply
+  allow_failure: false
+  only:
+    - master
+  script:
+    - terraform apply plan.tfplan

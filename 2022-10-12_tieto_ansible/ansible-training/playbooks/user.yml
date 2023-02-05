@@ -1,0 +1,22 @@
+---
+- name: User Example
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - user:
+        name: james
+        shell: /bin/bash
+        append: yes
+    - authorized_key:
+        user: james
+        key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDEVFtUVcWG36ps4bpZoT9CDlIpHoXQrQjwoJwLp0swxpsYqcHtGzPKfnoq6VcWWwSqC0GxLBUQwpQuajoNHnJa8NNmzjO5wuD9Dz//CG42QF9uuHD0J/iVISVOFSAdMKDCc3jzrk3akGXj07LCboJm75uKentVRnXswSjGY7TF0XCOP3ViqreMMCfIRa7RGODvZrdGGRV8gUkqnbrIqsyocjU+HROBBNVSlyDAUVmgEoGc+4rkzU46yOFE6qlMb64/Tm1jAJ9SJQ8eGy/E9SmB6xJFW22BkTuAaYvWglwsJHCtJ3d5ALpQ2mk1tzsIETCyUKHG5OAgSEFgUBIOPh3z
+    - authorized_key:
+        user: james
+        key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDEVFtUVcWG36ps4bpZoT9CDlIpHoXQrQjwoJwLp0swxpsYqcHtGzPKfnoq6VcWWwSqC0GxLBUQwpQuajoNHnJa8NNmzjO5wuD9Dz//CG42QF9uuHD0J/iVISVOFSAdMKDCc3jzrk3akGXj07LCboJm75uKentVRnXswSjGY7TF0XCOP3ViqreMMCfIRa7RGODvZrdGGRV8gUkqnbrIqsyocjU+HROBBNVSlyDAUVmgEoGc+4rkzU46yOFE6qlMb64/Tm1jAJ9SJQ8eGy/E9SmB6xJFW22BkTuAaYvWglwsJHCtJ3d5ALpQ2mk1tzsIETCyUKHG5OAgSEFgUBIOPh3z
+    - authorized_key:
+        user: james
+        key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDEVFtUVcWG36ps4bpZoT9CDlIpHoXQrQjwoJwLp0swxpsYqcHtGzPKfnoq6VcWWwSqC0GxLBUQwpQuajoNHnJa8NNmzjO5wuD9Dz//CG42QF9uuHD0J/iVISVOFSAdMKDCc3jzrk3akGXj07LCboJm75uKentVRnXswSjGY7TF0XCOP3ViqreMMCfIRa7RGODvZrdGGRV8gUkqnbrIqsyocjU+HROBBNVSlyDAUVmgEoGc+4rkzU46yOFE6qlMb64/Tm1jAJ9SJQ8eGy/E9SmB6xJFW22BkTuAaYvWglwsJHCtJ3d5ALpQ2mk1tzsIETCyUKHG5OAgSEFgUBIOPh3z
+    - authorized_key:
+        user: james
+        key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDEVFtUVcWG36ps4bpZoT9CDlIpHoXQrQjwoJwLp0swxpsYqcHtGzPKfnoq6VcWWwSqC0GxLBUQwpQuajoNHnJa8NNmzjO5wuD9Dz//CG42QF9uuHD0J/iVISVOFSAdMKDCc3jzrk3akGXj07LCboJm75uKentVRnXswSjGY7TF0XCOP3ViqreMMCfIRa7RGODvZrdGGRV8gUkqnbrIqsyocjU+HROBBNVSlyDAUVmgEoGc+4rkzU46yOFE6qlMb64/Tm1jAJ9SJQ8eGy/E9SmB6xJFW22BkTuAaYvWglwsJHCtJ3d5ALpQ2mk1tzsIETCyUKHG5OAgSEFgUBIOPh3z

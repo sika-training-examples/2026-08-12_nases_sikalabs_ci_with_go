@@ -1,0 +1,45 @@
+filebeat.inputs:
+  - type: filestream
+    paths:
+      - /tmp/example-log-json.log
+      - /tmp/example-log-text.log
+
+processors:
+  - decode_json_fields:
+      fields:
+        - message
+      target: "json"
+      add_error_key: true
+      when:
+        regexp:
+          message: "^{"
+
+  - add_fields:
+      target: ""
+      fields:
+        message_type: json
+      when:
+        regexp:
+          message: "^{"
+    
+  - dissect:
+      tokenizer: "%{prefix} %{date} %{time} %{level} %{message}"
+      target_prefix: "dissect"
+      field: "message"      
+      when:
+        regexp:
+          message: "^gen-"
+
+  - add_fields:
+      target: ""
+      fields:
+        message_type: text
+      when:
+        regexp:
+          message: "^gen-"
+
+output.elasticsearch:
+  hosts:
+    - https://es.k8s.sikademo.com:443
+  username: elastic
+  password: 7gnOYMA70kbZ71A8D8U62ER2

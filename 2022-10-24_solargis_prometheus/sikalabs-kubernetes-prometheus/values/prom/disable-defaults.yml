@@ -1,0 +1,61 @@
+# https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
+
+# Disable Default Prometheus Rules
+defaultRules:
+  create: false
+
+prometheus:
+  # Disable self monitor
+  serviceMonitor:
+    selfMonitor: false
+
+grafana:
+  # Disable default dashboards
+  defaultDashboardsEnabled: false
+
+  # Disable self monitor
+  serviceMonitor:
+    enabled: false
+
+alertmanager:
+  # Disable self monitor
+  serviceMonitor:
+    selfMonitor: false
+
+# Disable Scrapping of Kubernetes Components
+kubeApiServer:
+  enabled: false
+
+kubelet:
+  enabled: false
+
+kubeControllerManager:
+  enabled: false
+
+coreDns:
+  enabled: false
+
+kubeDns:
+  enabled: false
+
+kubeEtcd:
+  enabled: false
+
+kubeScheduler:
+  enabled: false
+
+kubeProxy:
+  enabled: false
+
+kubeStateMetrics:
+  enabled: false
+
+nodeExporter:
+  enabled: false
+
+# Deploy CRDs manually
+prometheusOperator:
+
+  # Disable self monitor
+  serviceMonitor:
+    selfMonitor: false

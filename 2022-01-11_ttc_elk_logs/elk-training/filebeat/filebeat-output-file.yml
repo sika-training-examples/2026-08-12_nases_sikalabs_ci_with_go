@@ -1,0 +1,6 @@
+filebeat.inputs:
+  - type: stdin
+
+output.file:
+  path: "/tmp/filebeat"
+  filename: default.jsonl

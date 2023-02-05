@@ -1,0 +1,24 @@
+{
+  "name": "jsemnela",
+  "version": "0.0.0",
+  "description": "Example site for LinuxDays 2019",
+  "repository": "https://github.com/ondrejsika/jsemnela",
+  "author": "Ondrej Sika <ondrej@ondrejsika.com>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "^4.6.0",
+    "next": "^10.0.8",
+    "next-images": "^1.7.0",
+    "now": "^16.3.1",
+    "react": "^17.0.1",
+    "react-bootstrap": "^1.5.2",
+    "react-dom": "^17.0.1"
+  },
+  "scripts": {
+    "dev": "next",
+    "static": "next build && next export",
+    "now-build": "yarn run static",
+    "deploy": "now"
+  }
+}

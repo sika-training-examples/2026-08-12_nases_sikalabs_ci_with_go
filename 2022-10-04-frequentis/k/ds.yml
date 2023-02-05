@@ -1,0 +1,279 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  annotations:
+    deprecated.daemonset.template.generation: "1"
+    meta.helm.sh/release-name: rke2-canal
+    meta.helm.sh/release-namespace: kube-system
+  creationTimestamp: "2022-10-04T07:40:53Z"
+  generation: 1
+  labels:
+    app.kubernetes.io/managed-by: Helm
+    k8s-app: canal
+  name: rke2-canal
+  namespace: kube-system
+  resourceVersion: "36386"
+  uid: 2d11abc7-7994-4b6f-9f1c-e153ba8e08ec
+spec:
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      k8s-app: canal
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        k8s-app: canal
+    spec:
+      containers:
+      - command:
+        - start_runit
+        env:
+        - name: DATASTORE_TYPE
+          value: kubernetes
+        - name: USE_POD_CIDR
+          value: "true"
+        - name: WAIT_FOR_DATASTORE
+          value: "true"
+        - name: NODENAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: spec.nodeName
+        - name: CALICO_CNI_SERVICE_ACCOUNT
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: spec.serviceAccountName
+        - name: CALICO_NETWORKING_BACKEND
+          value: none
+        - name: CLUSTER_TYPE
+          value: k8s,canal
+        - name: FELIX_IPTABLESREFRESHINTERVAL
+          value: "60"
+        - name: FELIX_IPTABLESBACKEND
+          value: auto
+        - name: CALICO_DISABLE_FILE_LOGGING
+          value: "true"
+        - name: FELIX_DEFAULTENDPOINTTOHOSTACTION
+          value: ACCEPT
+        - name: FELIX_IPV6SUPPORT
+          value: "false"
+        - name: FELIX_LOGSEVERITYSCREEN
+          value: info
+        - name: FELIX_HEALTHENABLED
+          value: "true"
+        - name: FELIX_PROMETHEUSMETRICSENABLED
+          value: "true"
+        - name: FELIX_XDPENABLED
+          value: "false"
+        - name: FELIX_FAILSAFEINBOUNDHOSTPORTS
+        - name: FELIX_FAILSAFEOUTBOUNDHOSTPORTS
+        - name: IP_AUTODETECTION_METHOD
+          value: first-found
+        image: rancher/hardened-calico:v3.23.3-build20220810
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - /bin/calico-node
+            - -felix-live
+          failureThreshold: 6
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: calico-node
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            host: localhost
+            path: /readiness
+            port: 9099
+            scheme: HTTP
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          requests:
+            cpu: 250m
+        securityContext:
+          privileged: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /lib/modules
+          name: lib-modules
+          readOnly: true
+        - mountPath: /run/xtables.lock
+          name: xtables-lock
+        - mountPath: /var/run/calico
+          name: var-run-calico
+        - mountPath: /var/lib/calico
+          name: var-lib-calico
+        - mountPath: /var/run/nodeagent
+          name: policysync
+      - command:
+        - /opt/bin/flanneld
+        - --ip-masq
+        - --kube-subnet-mgr
+        env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: FLANNELD_IFACE
+          valueFrom:
+            configMapKeyRef:
+              key: canal_iface
+              name: rke2-canal-config
+        - name: FLANNELD_IP_MASQ
+          valueFrom:
+            configMapKeyRef:
+              key: masquerade
+              name: rke2-canal-config
+        image: rancher/hardened-flannel:v0.19.1-build20220810
+        imagePullPolicy: IfNotPresent
+        name: kube-flannel
+        resources: {}
+        securityContext:
+          privileged: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /run/xtables.lock
+          name: xtables-lock
+        - mountPath: /etc/kube-flannel/
+          name: flannel-cfg
+      dnsPolicy: ClusterFirst
+      hostNetwork: true
+      initContainers:
+      - command:
+        - /opt/cni/bin/install
+        env:
+        - name: CALICO_CNI_SERVICE_ACCOUNT
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: spec.serviceAccountName
+        - name: CNI_CONF_NAME
+          value: 10-canal.conflist
+        - name: CNI_NETWORK_CONFIG
+          valueFrom:
+            configMapKeyRef:
+              key: cni_network_config
+              name: rke2-canal-config
+        - name: KUBERNETES_NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: spec.nodeName
+        - name: CNI_MTU
+          valueFrom:
+            configMapKeyRef:
+              key: veth_mtu
+              name: rke2-canal-config
+        - name: SLEEP
+          value: "false"
+        image: rancher/hardened-calico:v3.23.3-build20220810
+        imagePullPolicy: IfNotPresent
+        name: install-cni
+        resources: {}
+        securityContext:
+          privileged: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /host/opt/cni/bin
+          name: cni-bin-dir
+        - mountPath: /host/etc/cni/net.d
+          name: cni-net-dir
+      - command:
+        - /usr/local/bin/flexvol.sh
+        - -s
+        - /usr/local/bin/flexvol
+        - -i
+        - flexvoldriver
+        image: rancher/hardened-calico:v3.23.3-build20220810
+        imagePullPolicy: IfNotPresent
+        name: flexvol-driver
+        resources: {}
+        securityContext:
+          privileged: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /host/driver
+          name: flexvol-driver-host
+      nodeSelector:
+        kubernetes.io/os: linux
+      priorityClassName: system-node-critical
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: canal
+      serviceAccountName: canal
+      terminationGracePeriodSeconds: 0
+      tolerations:
+      - effect: NoSchedule
+        operator: Exists
+      - key: CriticalAddonsOnly
+        operator: Exists
+      - effect: NoExecute
+        operator: Exists
+      volumes:
+      - hostPath:
+          path: /lib/modules
+          type: ""
+        name: lib-modules
+      - hostPath:
+          path: /var/run/calico
+          type: ""
+        name: var-run-calico
+      - hostPath:
+          path: /var/lib/calico
+          type: ""
+        name: var-lib-calico
+      - hostPath:
+          path: /run/xtables.lock
+          type: FileOrCreate
+        name: xtables-lock
+      - configMap:
+          defaultMode: 420
+          name: rke2-canal-config
+        name: flannel-cfg
+      - hostPath:
+          path: /opt/cni/bin
+          type: ""
+        name: cni-bin-dir
+      - hostPath:
+          path: /etc/cni/net.d
+          type: ""
+        name: cni-net-dir
+      - hostPath:
+          path: /var/run/nodeagent
+          type: DirectoryOrCreate
+        name: policysync
+      - hostPath:
+          path: /var/lib/kubelet/volumeplugins/nodeagent~uds
+          type: DirectoryOrCreate
+        name: flexvol-driver-host
+  updateStrategy:
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+    type: RollingUpdate
+status:
+  currentNumberScheduled: 6
+  desiredNumberScheduled: 6
+  numberAvailable: 6
+  numberMisscheduled: 0
+  numberReady: 6
+  observedGeneration: 1
+  updatedNumberScheduled: 6

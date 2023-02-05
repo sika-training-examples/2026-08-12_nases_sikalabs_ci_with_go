@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prod-hello-world-go
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: prod-hello-world-go
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    repoURL: https://gitlab.sikademo.com/tacr/hello-world-go.git
+    targetRevision: d5736d18
+    path: kubernetes/charts/hello-world-go
+    helm:
+      releaseName: prod-hello-world-go
+      values: |
+        host: hello-world-go.k8s.sikademo.com
+        image: registry.sikademo.com/tacr/hello-world-go:master-d5736d18-6
+        replicas: 10
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true

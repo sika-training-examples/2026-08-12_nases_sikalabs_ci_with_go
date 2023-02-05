@@ -1,0 +1,13 @@
+filebeat.inputs:
+  - type: filestream
+    paths:
+      - /tmp/example-log-json.log
+      - /tmp/example-log-text.log
+      - /tmp/example-log-counter.log
+
+output.console:
+  pretty: true
+
+
+# filebeat:
+# 	filebeat -c $(pwd)/filebeat.yml | jq .message

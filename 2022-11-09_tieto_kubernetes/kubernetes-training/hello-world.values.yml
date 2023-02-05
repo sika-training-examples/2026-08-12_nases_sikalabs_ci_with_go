@@ -1,0 +1,2 @@
+host: hello-world.k8s.sikademo.com
+replicas: 3

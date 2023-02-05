@@ -1,0 +1,19 @@
+groups:
+  - name: up
+    rules:
+      - alert: Up
+        expr: up == 0
+        for: 20s
+        labels:
+          severity: warning
+        annotations:
+          summary: "Prometheus job {{ $labels.job }} with {{ $labels.instance }} instance is down"
+          description: "Job {{ $labels.job }} with {{ $labels.instance }} instance has been down for more than 20 seconds."
+      - alert: HighLoad
+        expr: max(node_load1) by (instance) / count(node_cpu_seconds_total{mode="idle"}) by (instance) > 0.9
+        for: 20s
+        labels:
+          severity: warning
+        annotations:
+          summary: "High load on {{ $labels.instance }}"
+          description: "High load on {{ $labels.instance }}"

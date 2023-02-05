@@ -1,0 +1,9 @@
+---
+- name: When Example
+  hosts: all
+
+  tasks:
+    - name: Install htop on Debian
+      debug:
+        var: ansible_local.getdate.date
+      when: '"getdate" in ansible_local'

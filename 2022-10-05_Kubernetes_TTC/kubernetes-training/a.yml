@@ -1,0 +1,101 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  annotations:
+    deprecated.daemonset.template.generation: "1"
+  creationTimestamp: "2022-10-05T06:39:05Z"
+  generation: 1
+  labels:
+    app: do-node-agent
+    c3.doks.digitalocean.com/component: do-node-agent
+    c3.doks.digitalocean.com/plane: data
+    doks.digitalocean.com/managed: "true"
+  name: do-node-agent
+  namespace: kube-system
+  resourceVersion: "1803"
+  uid: e8e126e7-2d1a-485e-b713-1e0f71653f21
+spec:
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: do-node-agent
+  template:
+    metadata:
+      annotations:
+        clusterlint.digitalocean.com/disabled-checks: hostpath-volume
+      creationTimestamp: null
+      labels:
+        app: do-node-agent
+    spec:
+      containers:
+      - args:
+        - --path.procfs=/host/proc
+        - --path.sysfs=/host/sys
+        - --k8s-metrics-path=http://kube-state-metrics.kube-system.svc.cluster.local:8080/metrics
+        - --additional-label=kubernetes_cluster_uuid:79b5735a-81c5-4208-9757-5daa77991c78
+        command:
+        - /bin/do-agent
+        image: docker.io/digitalocean/do-agent:3.11.0
+        imagePullPolicy: IfNotPresent
+        name: do-node-agent
+        resources:
+          limits:
+            cpu: 102m
+            memory: 300Mi
+          requests:
+            cpu: 102m
+            memory: 80Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /host/proc
+          name: proc
+          readOnly: true
+        - mountPath: /host/sys
+          name: sys
+          readOnly: true
+        - mountPath: /host/root
+          mountPropagation: HostToContainer
+          name: root
+          readOnly: true
+      dnsPolicy: ClusterFirstWithHostNet
+      hostNetwork: true
+      nodeSelector:
+        beta.kubernetes.io/os: linux
+      priorityClassName: system-node-critical
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65534
+      serviceAccount: do-agent
+      serviceAccountName: do-agent
+      terminationGracePeriodSeconds: 30
+      tolerations:
+      - operator: Exists
+      volumes:
+      - hostPath:
+          path: /proc
+          type: ""
+        name: proc
+      - hostPath:
+          path: /sys
+          type: ""
+        name: sys
+      - hostPath:
+          path: /
+          type: ""
+        name: root
+  updateStrategy:
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+    type: RollingUpdate
+status:
+  currentNumberScheduled: 3
+  desiredNumberScheduled: 3
+  numberAvailable: 3
+  numberMisscheduled: 0
+  numberReady: 3
+  observedGeneration: 1
+  updatedNumberScheduled: 3

@@ -1,0 +1,42 @@
+{
+	"ulid": "01GG9DTHD4XVJD8HVDZJG44FQJ",
+	"minTime": 1666762800566,
+	"maxTime": 1666763400000,
+	"stats": {
+		"numSamples": 600,
+		"numSeries": 5,
+		"numChunks": 5
+	},
+	"compaction": {
+		"level": 1,
+		"sources": [
+			"01GG9DTHD4XVJD8HVDZJG44FQJ"
+		]
+	},
+	"version": 1,
+	"thanos": {
+		"labels": {
+			"region": "eu"
+		},
+		"downsample": {
+			"resolution": 0
+		},
+		"source": "sidecar",
+		"segment_files": [
+			"000001"
+		],
+		"files": [
+			{
+				"rel_path": "chunks/000001",
+				"size_bytes": 1743
+			},
+			{
+				"rel_path": "index",
+				"size_bytes": 902
+			},
+			{
+				"rel_path": "meta.json"
+			}
+		]
+	}
+}

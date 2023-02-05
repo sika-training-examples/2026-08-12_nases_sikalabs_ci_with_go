@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: liveness2
+  labels:
+    app: liveness2
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: liveness2
+  template:
+    metadata:
+      labels:
+        app: liveness2
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+        - name: liveness
+          image: sikalabs/slu:v0.52.0
+          args:
+          - /bin/sh
+          - -c
+          - touch /tmp/healthy; slu example-server -p 80
+          ports:
+            - containerPort: 80
+          livenessProbe:
+            exec:
+              command:
+              - cat
+              - /tmp/healthyxxx
+            initialDelaySeconds: 1
+            periodSeconds: 1
+            failureThreshold: 1
+          resources:
+            requests:
+              memory: 10Mi
+              cpu: 10m
+            limits:
+              memory: 100Mi
+              cpu: 20m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: liveness2
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    app: liveness2

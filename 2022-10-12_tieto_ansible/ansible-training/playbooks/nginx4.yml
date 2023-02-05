@@ -1,0 +1,39 @@
+---
+- name: Setup Web Server
+  hosts: all
+  gather_facts: false
+  vars:
+    name: "ondrej"
+    jmeno:
+    simple_pets:
+      - Dog
+      - Cat
+      - Rat
+      - Bat
+    pets:
+      - kind: Dog
+        name: Dela
+      - kind: Cat
+        name: Micka
+    matrix:
+      - [0, 1, 2]
+      - [0, 1, 2]
+      - - 3
+        - 4
+        - 5
+      - - 6
+        - 7
+        - 8
+  tasks:
+    # - name: Install Nginx
+    #   apt:
+    #     name: nginx
+    #     update_cache: yes
+    #     state: present
+    - name: Copy index.html from template
+      template:
+        src: index4.html.j2
+        dest: /var/www/html/index.html
+        owner: root
+        group: root
+        mode: 0644

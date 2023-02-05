@@ -1,0 +1,10 @@
+---
+- name: Copy Example
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Copy message of the day
+      copy:
+        content: "Hello Tieto"
+        dest: /etc/motd

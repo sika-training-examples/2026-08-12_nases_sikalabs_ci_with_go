@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: hello-world-rs
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: hello-world-rs
+  template:
+    metadata:
+      labels:
+        app: hello-world-rs
+        svc: example
+    spec:
+      containers:
+        - name: hello-world
+          image: ondrejsika/training-example-o2
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: 10m
+              memory: 10Mi

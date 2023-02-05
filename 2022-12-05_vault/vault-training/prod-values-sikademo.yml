@@ -1,0 +1,10 @@
+server:
+  ingress:
+    tls:
+    - secretName: vault-tls
+      hosts:
+        - ondrej-vault.k8s.sikademo.com
+    hosts:
+    - host: ondrej-vault.k8s.sikademo.com
+      paths:
+        - /

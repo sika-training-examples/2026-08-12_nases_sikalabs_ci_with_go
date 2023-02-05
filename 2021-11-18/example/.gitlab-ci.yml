@@ -1,0 +1,12 @@
+tag:
+  image: sikalabs/ci
+  when: manual
+  script:
+    - git tag $TAG
+    - git remote set-url origin https://ondrejsika:asdfasdf@$CI_SERVER_HOST/$CI_PROJECT_PATH.git
+    - git push --tags
+
+deploy:
+  only:
+    - tags
+  script: echo deplpy

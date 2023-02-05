@@ -1,0 +1,11 @@
+---
+- name: Copy Example
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name:
+      amazon.aws.ec2_instance:
+        name: '{{ item }}'
+      loop:
+        - foo

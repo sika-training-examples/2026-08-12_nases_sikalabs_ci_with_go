@@ -1,0 +1,8 @@
+<h1>Hello
+
+{% if fname|default(None) or lname|default(None) %}
+    {{ fname | default("Unknown") }} {{ lname | default("Unknown") }}
+{% else %}
+    Unknown
+{% endif %}
+from Ansible!</h1>

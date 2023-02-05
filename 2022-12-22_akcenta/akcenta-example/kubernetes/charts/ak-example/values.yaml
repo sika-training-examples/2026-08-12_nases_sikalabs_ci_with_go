@@ -1,0 +1,7 @@
+# Required
+image:
+hostname:
+COUNTER_API_ORIGIN:
+
+# Optional
+replicas:

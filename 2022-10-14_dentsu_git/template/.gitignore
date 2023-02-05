@@ -1,0 +1,17 @@
+# Mac
+.DS_Store
+
+# Editor
+.vscode
+.idea
+
+# Generic
+*.log
+*.backup
+
+# NodeJS
+node_modules
+
+# Next.js
+.next
+out

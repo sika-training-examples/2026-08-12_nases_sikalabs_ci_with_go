@@ -1,0 +1,25 @@
+---
+- name: User Example
+  hosts: all
+  gather_facts: false
+  vars:
+    # ansible_become_password: asdfasdf2020
+    ansible_become_password: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          39623438386531636633653335363335316266316265346439333636363437316232313765353633
+          3765323733653131316535303934343730313538363632640a336432623735323938306238386536
+          35396137303937643637333162383662343862666464346466353939386135393832383032383665
+          3361393436366663660a303038336533376238613730333734646434343332613963633661623764
+          6337
+
+  tasks:
+    - copy:
+        content: "Hello James"
+        dest: /home/james/hello.txt
+
+    - copy:
+        content: "Hello Root from James"
+        dest: /root/hello.txt
+      become: true
+      become_method: su
+      become_flags: '-'

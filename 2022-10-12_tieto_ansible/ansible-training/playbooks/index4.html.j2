@@ -1,0 +1,27 @@
+<h1>Hello {{ name.capitalize() }}, how are you?</h1>
+<h1>Ahoj {{ jmeno }}, jak se mas?</h1>
+
+<h1>Hello {% if name %}{{ name }}{% else %}Unknown{% endif %}, how are you?</h1>
+<h1>Ahoj {% if jmeno %}{{ jmeno }}{% else %}Neznamy{% endif %}, jak se mas?</h1>
+
+<ul>
+{% for pet in simple_pets %}
+<li>{{ pet }}</li>
+{% endfor %}
+</ul>
+
+<ul>
+{% for pet in pets %}
+<li>{{ pet.kind }} {{ pet.name}}</li>
+{% endfor %}
+</ul>
+
+<table>
+{% for row in matrix %}
+  <tr>
+  {% for col in row %}
+    <td><h1>{{ col }}</h1></td>
+  {%endfor%}
+  </tr>
+{% endfor %}
+</table>
