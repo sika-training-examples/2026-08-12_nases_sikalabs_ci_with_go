@@ -1,0 +1,11 @@
+[
+  {
+    "timestamp": "2022-12-20T21:55:59Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T21:55:59Z",
+    "stage": "wait-for-bootstrap-complete",
+    "phase": "stage start"
+  }
+]

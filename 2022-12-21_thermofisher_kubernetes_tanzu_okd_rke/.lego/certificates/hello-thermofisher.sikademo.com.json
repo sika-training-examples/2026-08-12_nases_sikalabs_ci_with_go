@@ -1,0 +1,5 @@
+{
+	"domain": "hello-thermofisher.sikademo.com",
+	"certUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/0316a058e8b0d0a315c3c6ee610df65198ce",
+	"certStableUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/0316a058e8b0d0a315c3c6ee610df65198ce"
+}

@@ -1,0 +1,60 @@
+apiVersion: machine.openshift.io/v1beta1
+kind: Machine
+metadata:
+  creationTimestamp: null
+  labels:
+    machine.openshift.io/cluster-api-cluster: demo-gf2pd
+    machine.openshift.io/cluster-api-machine-role: master
+    machine.openshift.io/cluster-api-machine-type: master
+  name: demo-gf2pd-master-0
+  namespace: openshift-machine-api
+spec:
+  lifecycleHooks: {}
+  metadata: {}
+  providerSpec:
+    value:
+      ami:
+        id: ami-0f2fb62b5e1da79bd
+      apiVersion: machine.openshift.io/v1beta1
+      blockDevices:
+      - ebs:
+          encrypted: true
+          iops: 0
+          kmsKey:
+            arn: ""
+          volumeSize: 120
+          volumeType: gp3
+      credentialsSecret:
+        name: aws-cloud-credentials
+      deviceIndex: 0
+      iamInstanceProfile:
+        id: demo-gf2pd-master-profile
+      instanceType: m6i.xlarge
+      kind: AWSMachineProviderConfig
+      loadBalancers:
+      - name: demo-gf2pd-int
+        type: network
+      - name: demo-gf2pd-ext
+        type: network
+      metadata:
+        creationTimestamp: null
+      metadataServiceOptions: {}
+      placement:
+        availabilityZone: eu-central-1a
+        region: eu-central-1
+      securityGroups:
+      - filters:
+        - name: tag:Name
+          values:
+          - demo-gf2pd-master-sg
+      subnet:
+        filters:
+        - name: tag:Name
+          values:
+          - demo-gf2pd-private-eu-central-1a
+      tags:
+      - name: kubernetes.io/cluster/demo-gf2pd
+        value: owned
+      userDataSecret:
+        name: master-user-data
+status: {}

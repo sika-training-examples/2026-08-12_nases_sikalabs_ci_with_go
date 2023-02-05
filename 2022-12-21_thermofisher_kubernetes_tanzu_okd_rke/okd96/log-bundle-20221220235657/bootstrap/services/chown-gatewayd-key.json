@@ -1,0 +1,11 @@
+[
+  {
+    "timestamp": "2022-12-20T22:37:48Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:37:48Z",
+    "phase": "service end",
+    "result": "success"
+  }
+]

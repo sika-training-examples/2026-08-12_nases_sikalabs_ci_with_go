@@ -1,0 +1,16 @@
+# https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
+
+nameOverride: prom
+
+prometheus:
+  # Allow scrapping every ServiceMonitors in every namespace
+  prometheusSpec:
+    serviceMonitorSelectorNilUsesHelmValues: false
+    podMonitorSelectorNilUsesHelmValues: false
+    ruleSelectorNilUsesHelmValues: false
+
+grafana:
+  adminPassword: admin
+
+prometheusOperator:
+  createCustomResource: false

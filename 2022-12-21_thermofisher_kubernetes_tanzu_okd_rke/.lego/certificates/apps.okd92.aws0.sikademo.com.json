@@ -1,0 +1,5 @@
+{
+	"domain": "apps.okd92.aws0.sikademo.com",
+	"certUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/0318f6c4f4dcd833a34be9cefe674cce2cff",
+	"certStableUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/0318f6c4f4dcd833a34be9cefe674cce2cff"
+}

@@ -1,0 +1,27 @@
+{
+    "Vpc": {
+        "CidrBlock": "172.16.0.0/16",
+        "DhcpOptionsId": "dopt-09948fadb3c3748bf",
+        "State": "pending",
+        "VpcId": "vpc-01275cbd66715c75e",
+        "OwnerId": "203928547574",
+        "InstanceTenancy": "default",
+        "Ipv6CidrBlockAssociationSet": [],
+        "CidrBlockAssociationSet": [
+            {
+                "AssociationId": "vpc-cidr-assoc-05cb96b7a3c6bfe36",
+                "CidrBlock": "172.16.0.0/16",
+                "CidrBlockState": {
+                    "State": "associated"
+                }
+            }
+        ],
+        "IsDefault": false,
+        "Tags": [
+            {
+                "Key": "Name",
+                "Value": "TKGVPC"
+            }
+        ]
+    }
+}

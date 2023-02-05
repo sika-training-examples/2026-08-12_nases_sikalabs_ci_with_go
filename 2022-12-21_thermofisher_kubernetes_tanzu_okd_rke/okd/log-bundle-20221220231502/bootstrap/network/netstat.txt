@@ -1,0 +1,184 @@
+(Not all processes could be identified, non-owned process info
+ will not be shown, you would have to be root to see it all.)
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        0      0 0.0.0.0:111             0.0.0.0:*               LISTEN      -                   
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      -                   
+tcp        0      0 127.0.0.1:36987         0.0.0.0:*               LISTEN      -                   
+tcp        0      0 0.0.0.0:51679           0.0.0.0:*               LISTEN      -                   
+tcp        0      0 127.0.0.1:10248         0.0.0.0:*               LISTEN      -                   
+tcp        0      0 10.0.26.172:22          176.114.249.139:53579   ESTABLISHED -                   
+tcp6       0      0 :::10255                :::*                    LISTEN      -                   
+tcp6       0      0 :::111                  :::*                    LISTEN      -                   
+tcp6       0      0 :::22                   :::*                    LISTEN      -                   
+tcp6       0      0 :::53979                :::*                    LISTEN      -                   
+tcp6       0      0 :::9537                 :::*                    LISTEN      -                   
+tcp6       0      0 :::10250                :::*                    LISTEN      -                   
+tcp6       0      0 :::19531                :::*                    LISTEN      -                   
+udp        0      0 0.0.0.0:47344           0.0.0.0:*                           -                   
+udp        0      0 10.0.26.172:68          10.0.0.1:67             ESTABLISHED -                   
+udp        0      0 0.0.0.0:111             0.0.0.0:*                           -                   
+udp        0      0 127.0.0.1:323           0.0.0.0:*                           -                   
+udp        0      0 127.0.0.1:727           0.0.0.0:*                           -                   
+udp6       0      0 :::38190                :::*                                -                   
+udp6       0      0 :::111                  :::*                                -                   
+udp6       0      0 ::1:323                 :::*                                -                   
+raw6       0      0 :::58                   :::*                    7           -                   
+Active UNIX domain sockets (servers and established)
+Proto RefCnt Flags       Type       State         I-Node   PID/Program name     Path
+unix  2      [ ACC ]     STREAM     LISTENING     585983   103000/systemd       /run/user/1000/systemd/private
+unix  2      [ ACC ]     STREAM     LISTENING     585991   103000/systemd       /run/user/1000/gnupg/S.gpg-agent.browser
+unix  2      [ ACC ]     STREAM     LISTENING     585994   103000/systemd       /run/user/1000/bus
+unix  2      [ ACC ]     STREAM     LISTENING     585996   103000/systemd       /run/user/1000/gnupg/S.gpg-agent.ssh
+unix  2      [ ACC ]     STREAM     LISTENING     585998   103000/systemd       /run/user/1000/gnupg/S.dirmngr
+unix  8      [ ]         DGRAM                    15632    -                    /run/systemd/journal/dev-log
+unix  2      [ ACC ]     STREAM     LISTENING     586000   103000/systemd       /run/user/1000/podman/podman.sock
+unix  2      [ ACC ]     STREAM     LISTENING     586005   103000/systemd       /run/user/1000/gnupg/S.gpg-agent.extra
+unix  2      [ ACC ]     STREAM     LISTENING     586007   103000/systemd       /run/user/1000/gnupg/S.gpg-agent
+unix  2      [ ACC ]     STREAM     LISTENING     33950    -                    /var/lib/kubelet/pod-resources/4263685554
+unix  2      [ ACC ]     STREAM     LISTENING     31540    -                    /var/run/crio/crio.sock
+unix  2      [ ACC ]     STREAM     LISTENING     587831   -                    /tmp/ssh-7sq9jeJTuR/agent.103013
+unix  2      [ ACC ]     STREAM     LISTENING     28971    -                    @irqbalance1634.sock
+unix  2      [ ACC ]     STREAM     LISTENING     25911    -                    /run/systemd/private
+unix  2      [ ]         DGRAM                    29782    -                    /run/chrony/chronyd.sock
+unix  2      [ ]         DGRAM                    587823   103011/podman        @00cc9
+unix  2      [ ]         DGRAM                    586035   103012/podman        @00cc7
+unix  2      [ ]         DGRAM                    587911   103087/podman        @00ccd
+unix  2      [ ]         DGRAM                    586126   103040/podman        @00ccb
+unix  2      [ ACC ]     STREAM     LISTENING     23917    -                    /run/rpcbind.sock
+unix  2      [ ACC ]     STREAM     LISTENING     27272    -                    /var/lib/sss/pipes/nss
+unix  2      [ ACC ]     STREAM     LISTENING     28580    -                    /var/lib/sss/pipes/private/sbus-monitor
+unix  2      [ ACC ]     STREAM     LISTENING     27118    -                    /var/lib/sss/pipes/private/sbus-dp_implicit_files.1700
+unix  2      [ ACC ]     SEQPACKET  LISTENING     23940    -                    /run/udev/control
+unix  3      [ ]         DGRAM                    12678    -                    /run/systemd/notify
+unix  2      [ ]         DGRAM                    12680    -                    /run/systemd/cgroups-agent
+unix  2      [ ACC ]     STREAM     LISTENING     35951    -                    /var/lib/kubelet/device-plugins/kubelet.sock
+unix  2      [ ACC ]     STREAM     LISTENING     23950    -                    /run/lvm/lvmpolld.socket
+unix  2      [ ACC ]     SEQPACKET  LISTENING     19364    -                    /run/systemd/coredump
+unix  2      [ ACC ]     STREAM     LISTENING     28136    -                    /run/dbus/system_bus_socket
+unix  2      [ ACC ]     SEQPACKET  LISTENING     28141    -                    /run/bootupd.sock
+unix  2      [ ACC ]     STREAM     LISTENING     15598    -                    /run/systemd/journal/stdout
+unix  6      [ ]         DGRAM                    15602    -                    /run/systemd/journal/socket
+unix  2      [ ]         DGRAM                    32526    -                    @00025
+unix  2      [ ]         DGRAM                    585979   103000/systemd       /run/user/1000/systemd/notify
+unix  3      [ ]         DGRAM                    587838   103011/podman        
+unix  3      [ ]         STREAM     CONNECTED     24425    -                    
+unix  3      [ ]         STREAM     CONNECTED     28963    -                    
+unix  3      [ ]         STREAM     CONNECTED     27094    -                    /run/dbus/system_bus_socket
+unix  3      [ ]         STREAM     CONNECTED     26901    -                    /run/systemd/journal/stdout
+unix  2      [ ]         DGRAM                    585967   103000/systemd       
+unix  3      [ ]         DGRAM                    587839   103011/podman        
+unix  3      [ ]         STREAM     CONNECTED     586829   -                    /run/systemd/journal/stdout
+unix  3      [ ]         STREAM     CONNECTED     585963   -                    
+unix  3      [ ]         STREAM     CONNECTED     27273    -                    
+unix  3      [ ]         STREAM     CONNECTED     33968    -                    /run/dbus/system_bus_socket
+unix  3      [ ]         STREAM     CONNECTED     29434    -                    /run/systemd/journal/stdout
+unix  3      [ ]         STREAM     CONNECTED     588825   -                    /var/lib/sss/pipes/nss
+unix  3      [ ]         STREAM     CONNECTED     27038    -                    /run/systemd/journal/stdout
+unix  3      [ ]         STREAM     CONNECTED     33182    -                    /run/dbus/system_bus_socket
+unix  3      [ ]         STREAM     CONNECTED     586179   103128/dbus-daemon   
+unix  3      [ ]         STREAM     CONNECTED     28582    -                    /var/lib/sss/pipes/private/sbus-monitor
+unix  3      [ ]         STREAM     CONNECTED     586837   -                    
+unix  3      [ ]         STREAM     CONNECTED     27271    -                    /var/lib/sss/pipes/private/sbus-dp_implicit_files.1700
+unix  3      [ ]         STREAM     CONNECTED     586820   -                    /run/dbus/system_bus_socket
+unix  3      [ ]         STREAM     CONNECTED     29238    -                    
+unix  3      [ ]         STREAM     CONNECTED     29757    -                    
+unix  3      [ ]         DGRAM                    25442    -                    
+unix  3      [ ]         STREAM     CONNECTED     585923   -                    /var/lib/sss/pipes/nss
+unix  2      [ ]         DGRAM                    29928    -                    
+unix  3      [ ]         STREAM     CONNECTED     587949   103000/systemd       
+unix  3      [ ]         STREAM     CONNECTED     26973    -                    /run/systemd/journal/stdout
+unix  3      [ ]         STREAM     CONNECTED     587885   -                    /var/lib/sss/pipes/nss
+unix  3      [ ]         STREAM     CONNECTED     588933   -                    /run/systemd/journal/stdout
+unix  2      [ ]         DGRAM                    29764    -                    
+unix  3      [ ]         DGRAM                    25443    -                    
+unix  3      [ ]         STREAM     CONNECTED     586827   -                    /run/systemd/journal/stdout
+unix  2      [ ]         STREAM     CONNECTED     586763   -                    
+unix  3      [ ]         STREAM     CONNECTED     587805   103011/podman        
+unix  3      [ ]         DGRAM                    585982   103000/systemd       
+unix  2      [ ]         DGRAM                    30794    -                    
+unix  2      [ ]         STREAM     CONNECTED     34920    -                    
+unix  3      [ ]         STREAM     CONNECTED     29029    -                    
+unix  3      [ ]         STREAM     CONNECTED     27119    -                    
+unix  3      [ ]         STREAM     CONNECTED     27096    -                    /run/dbus/system_bus_socket
+unix  2      [ ]         STREAM     CONNECTED     31384    -                    
+unix  3      [ ]         STREAM     CONNECTED     585630   103000/systemd       
+unix  3      [ ]         STREAM     CONNECTED     33180    -                    
+unix  3      [ ]         STREAM     CONNECTED     30520    -                    
+unix  3      [ ]         STREAM     CONNECTED     32693    -                    
+unix  3      [ ]         STREAM     CONNECTED     29324    -                    /run/dbus/system_bus_socket
+unix  3      [ ]         STREAM     CONNECTED     30804    -                    
+unix  3      [ ]         STREAM     CONNECTED     29808    -                    
+unix  2      [ ]         STREAM     CONNECTED     29431    -                    
+unix  3      [ ]         STREAM     CONNECTED     586898   -                    /var/lib/sss/pipes/nss
+unix  3      [ ]         STREAM     CONNECTED     33054    -                    /var/run/crio/crio.sock
+unix  3      [ ]         STREAM     CONNECTED     586193   103128/dbus-daemon   
+unix  2      [ ]         DGRAM                    585964   -                    
+unix  2      [ ]         DGRAM                    25421    -                    
+unix  3      [ ]         STREAM     CONNECTED     32535    -                    
+unix  3      [ ]         STREAM     CONNECTED     34917    -                    
+unix  3      [ ]         STREAM     CONNECTED     588826   -                    /var/lib/sss/pipes/nss
+unix  3      [ ]         STREAM     CONNECTED     586944   103087/podman        
+unix  2      [ ]         DGRAM                    27101    -                    
+unix  3      [ ]         STREAM     CONNECTED     33926    -                    
+unix  3      [ ]         STREAM     CONNECTED     25415    -                    
+unix  2      [ ]         STREAM     CONNECTED     29509    -                    
+unix  3      [ ]         STREAM     CONNECTED     585635   -                    /var/lib/sss/pipes/nss
+unix  2      [ ]         STREAM     CONNECTED     31378    -                    
+unix  3      [ ]         STREAM     CONNECTED     30793    -                    
+unix  3      [ ]         STREAM     CONNECTED     27274    -                    /var/lib/sss/pipes/private/sbus-monitor
+unix  3      [ ]         STREAM     CONNECTED     586196   103128/dbus-daemon   /run/user/1000/bus
+unix  3      [ ]         STREAM     CONNECTED     33935    -                    /run/systemd/journal/stdout
+unix  3      [ ]         STREAM     CONNECTED     27283    -                    /run/dbus/system_bus_socket
+unix  3      [ ]         STREAM     CONNECTED     33181    -                    
+unix  3      [ ]         STREAM     CONNECTED     32694    -                    /run/systemd/journal/stdout
+unix  3      [ ]         DGRAM                    12683    -                    
+unix  3      [ ]         DGRAM                    586079   103012/podman        
+unix  3      [ ]         STREAM     CONNECTED     582512   -                    
+unix  3      [ ]         STREAM     CONNECTED     27120    -                    /var/lib/sss/pipes/private/sbus-dp_implicit_files.1700
+unix  2      [ ]         STREAM     CONNECTED     34835    -                    
+unix  2      [ ]         STREAM     CONNECTED     30524    -                    
+unix  3      [ ]         STREAM     CONNECTED     26920    -                    
+unix  3      [ ]         DGRAM                    12682    -                    
+unix  3      [ ]         STREAM     CONNECTED     586759   -                    
+unix  3      [ ]         STREAM     CONNECTED     24218    -                    /run/systemd/journal/stdout
+unix  3      [ ]         STREAM     CONNECTED     27418    -                    
+unix  3      [ ]         STREAM     CONNECTED     582589   -                    /run/systemd/journal/stdout
+unix  3      [ ]         STREAM     CONNECTED     29929    -                    
+unix  3      [ ]         STREAM     CONNECTED     32519    -                    /run/systemd/journal/stdout
+unix  2      [ ]         DGRAM                    25189    -                    
+unix  2      [ ]         DGRAM                    27117    -                    
+unix  2      [ ]         DGRAM                    29806    -                    
+unix  2      [ ]         DGRAM                    29506    -                    
+unix  3      [ ]         DGRAM                    585981   103000/systemd       
+unix  2      [ ]         DGRAM                    586833   -                    
+unix  3      [ ]         STREAM     CONNECTED     27280    -                    /run/systemd/journal/stdout
+unix  3      [ ]         STREAM     CONNECTED     29031    -                    /run/systemd/journal/stdout
+unix  3      [ ]         STREAM     CONNECTED     586024   103012/podman        
+unix  2      [ ]         DGRAM                    29807    -                    
+unix  3      [ ]         STREAM     CONNECTED     27623    -                    
+unix  3      [ ]         STREAM     CONNECTED     29963    -                    /run/systemd/journal/stdout
+unix  3      [ ]         STREAM     CONNECTED     586836   -                    
+unix  3      [ ]         STREAM     CONNECTED     28581    -                    
+unix  3      [ ]         STREAM     CONNECTED     27091    -                    
+unix  2      [ ]         DGRAM                    24424    -                    
+unix  3      [ ]         STREAM     CONNECTED     34832    -                    
+unix  3      [ ]         STREAM     CONNECTED     32340    -                    /run/systemd/journal/stdout
+unix  3      [ ]         STREAM     CONNECTED     29097    -                    
+unix  2      [ ]         DGRAM                    19367    -                    
+unix  3      [ ]         STREAM     CONNECTED     24426    -                    
+unix  3      [ ]         STREAM     CONNECTED     586194   103128/dbus-daemon   
+unix  3      [ ]         STREAM     CONNECTED     585912   -                    /var/lib/sss/pipes/nss
+unix  3      [ ]         STREAM     CONNECTED     587812   103011/podman        
+unix  3      [ ]         STREAM     CONNECTED     585985   103000/systemd       
+unix  3      [ ]         STREAM     CONNECTED     29919    -                    
+unix  3      [ ]         STREAM     CONNECTED     27092    -                    
+unix  3      [ ]         STREAM     CONNECTED     588811   103012/podman        
+unix  3      [ ]         STREAM     CONNECTED     34842    -                    /var/run/crio/crio.sock
+unix  3      [ ]         STREAM     CONNECTED     28644    -                    /var/lib/sss/pipes/private/sbus-monitor
+unix  3      [ ]         DGRAM                    586078   103012/podman        
+unix  2      [ ]         STREAM     CONNECTED     32698    -                    
+unix  3      [ ]         STREAM     CONNECTED     586067   103040/podman        
+Active Bluetooth connections (servers and established)
+Proto  Destination       Source            State         PSM DCID   SCID      IMTU    OMTU Security
+Proto  Destination       Source            State     Channel

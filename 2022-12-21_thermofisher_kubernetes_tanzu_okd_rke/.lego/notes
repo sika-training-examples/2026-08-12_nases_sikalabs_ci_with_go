@@ -1,0 +1,7 @@
+oc patch ingresscontroller.operator default \
+     --type=merge -p \
+     '{"spec":{"defaultCertificate": {"name": "le"}}}' \
+     -n openshift-ingress-operator
+
+
+     https://gitlab.sikademo.com/oauth/authorize?client_id=5a6e6d12e8459c7e21553a1f3e2d901b5aec86b726e821cb3d7333aa5bebad05&redirect_uri=https%3A%2F%2Foauth-openshift.apps.okd92.aws0.sikademo.com%2Foauth2callback%2Fgitlab&response_type=code&scope=openid&state=Y3NyZj16UkRCZGhuSExZb0lxUG11LUNrSjg4c1A2WFY5ZWhFbnBkcnFQX1ZNc1RRJnRoZW49JTJGb2F1dGglMkZhdXRob3JpemUlM0ZjbGllbnRfaWQlM0Rjb25zb2xlJTI2aWRwJTNEZ2l0bGFiJTI2cmVkaXJlY3RfdXJpJTNEaHR0cHMlMjUzQSUyNTJGJTI1MkZjb25zb2xlLW9wZW5zaGlmdC1jb25zb2xlLmFwcHMub2tkOTIuYXdzMC5zaWthZGVtby5jb20lMjUyRmF1dGglMjUyRmNhbGxiYWNrJTI2cmVzcG9uc2VfdHlwZSUzRGNvZGUlMjZzY29wZSUzRHVzZXIlMjUzQWZ1bGwlMjZzdGF0ZSUzRDc1Y2ZhMzVj

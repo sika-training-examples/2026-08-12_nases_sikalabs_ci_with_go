@@ -1,0 +1,60 @@
+apiVersion: machine.openshift.io/v1beta1
+kind: Machine
+metadata:
+  creationTimestamp: null
+  labels:
+    machine.openshift.io/cluster-api-cluster: okd94-8czw9
+    machine.openshift.io/cluster-api-machine-role: master
+    machine.openshift.io/cluster-api-machine-type: master
+  name: okd94-8czw9-master-0
+  namespace: openshift-machine-api
+spec:
+  lifecycleHooks: {}
+  metadata: {}
+  providerSpec:
+    value:
+      ami:
+        id: ami-0f2fb62b5e1da79bd
+      apiVersion: machine.openshift.io/v1beta1
+      blockDevices:
+      - ebs:
+          encrypted: true
+          iops: 0
+          kmsKey:
+            arn: ""
+          volumeSize: 120
+          volumeType: gp3
+      credentialsSecret:
+        name: aws-cloud-credentials
+      deviceIndex: 0
+      iamInstanceProfile:
+        id: okd94-8czw9-master-profile
+      instanceType: m6i.xlarge
+      kind: AWSMachineProviderConfig
+      loadBalancers:
+      - name: okd94-8czw9-int
+        type: network
+      - name: okd94-8czw9-ext
+        type: network
+      metadata:
+        creationTimestamp: null
+      metadataServiceOptions: {}
+      placement:
+        availabilityZone: eu-central-1a
+        region: eu-central-1
+      securityGroups:
+      - filters:
+        - name: tag:Name
+          values:
+          - okd94-8czw9-master-sg
+      subnet:
+        filters:
+        - name: tag:Name
+          values:
+          - okd94-8czw9-private-eu-central-1a
+      tags:
+      - name: kubernetes.io/cluster/okd94-8czw9
+        value: owned
+      userDataSecret:
+        name: master-user-data
+status: {}

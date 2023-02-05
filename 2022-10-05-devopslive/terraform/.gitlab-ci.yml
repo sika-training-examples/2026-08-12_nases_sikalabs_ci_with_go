@@ -1,0 +1,49 @@
+#!/bin/sh
+
+image: sikalabs/ci
+
+stages:
+  - publish
+
+.publish:
+  # variables:
+  #   TFM_NAME:
+  #   TFM_SYSTEM:
+  #   TFM_VERSION:
+  #   TFM_DIR:
+  stage: publish
+  script:
+    - tar -vczf ${TFM_NAME}-${TFM_SYSTEM}-${TFM_VERSION}.tgz -C ${TFM_DIR} .
+    - |
+      curl --location --header "JOB-TOKEN: ${CI_JOB_TOKEN}" \
+        --upload-file ${TFM_NAME}-${TFM_SYSTEM}-${TFM_VERSION}.tgz \
+        ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/terraform/modules/${TFM_NAME}/${TFM_SYSTEM}/${TFM_VERSION}/file
+  rules:
+    - if: $CI_COMMIT_TAG
+
+publish-vm-core-do:
+  extends:
+    - .publish
+  variables:
+    TFM_DIR: modules/vm-core/do
+    TFM_NAME: vm-core
+    TFM_SYSTEM: do
+    TFM_VERSION: $CI_COMMIT_TAG
+
+publish-vm-core-demo:
+  extends:
+    - .publish
+  variables:
+    TFM_DIR: modules/vm-demo/do
+    TFM_NAME: vm-demo
+    TFM_SYSTEM: do
+    TFM_VERSION: $CI_COMMIT_TAG
+
+publish-vm-core-basic:
+  extends:
+    - .publish
+  variables:
+    TFM_DIR: modules/vm-basic/do
+    TFM_NAME: vm-basic
+    TFM_SYSTEM: do
+    TFM_VERSION: $CI_COMMIT_TAG

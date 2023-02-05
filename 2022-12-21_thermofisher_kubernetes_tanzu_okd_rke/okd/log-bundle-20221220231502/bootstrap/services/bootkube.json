@@ -1,0 +1,2064 @@
+[
+  {
+    "timestamp": "2022-12-20T21:55:59Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T21:56:06Z",
+    "stage": "openshift-manifests",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T21:56:06Z",
+    "stage": "openshift-manifests",
+    "phase": "stage end",
+    "result": "success"
+  },
+  {
+    "timestamp": "2022-12-20T21:56:06Z",
+    "stage": "cvo-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T21:56:06Z",
+    "stage": "cvo-bootstrap",
+    "phase": "stage end",
+    "result": "success"
+  },
+  {
+    "timestamp": "2022-12-20T21:56:06Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T21:56:07Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T21:56:08Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T21:56:13Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T21:56:20Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T21:56:21Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T21:56:21Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T21:56:26Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T21:56:34Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T21:56:35Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T21:56:35Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T21:56:40Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T21:56:47Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T21:56:48Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T21:56:48Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T21:56:53Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T21:57:01Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T21:57:02Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T21:57:02Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T21:57:07Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T21:57:15Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T21:57:16Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T21:57:16Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T21:57:21Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T21:57:27Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T21:57:29Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T21:57:29Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T21:57:34Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T21:57:41Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T21:57:42Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T21:57:42Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T21:57:47Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T21:57:54Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T21:57:55Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T21:57:55Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T21:58:01Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T21:58:07Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T21:58:09Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T21:58:09Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T21:58:14Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T21:58:21Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T21:58:22Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T21:58:22Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T21:58:27Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T21:58:35Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T21:58:36Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T21:58:36Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T21:58:41Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T21:58:48Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T21:58:49Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T21:58:49Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T21:58:54Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T21:59:01Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T21:59:02Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T21:59:02Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T21:59:08Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T21:59:15Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T21:59:16Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T21:59:16Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T21:59:21Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T21:59:29Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T21:59:30Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T21:59:30Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T21:59:36Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T21:59:43Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T21:59:44Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T21:59:44Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T21:59:49Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T21:59:56Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T21:59:57Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T21:59:57Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:00:02Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:00:09Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:00:10Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:00:10Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:00:15Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:00:22Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:00:23Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:00:23Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:00:28Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:00:35Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:00:37Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:00:37Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:00:42Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:00:49Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:00:50Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:00:50Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:00:55Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:01:02Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:01:04Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:01:04Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:01:09Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:01:16Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:01:17Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:01:17Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:01:22Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:01:29Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:01:31Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:01:31Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:01:36Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:01:43Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:01:44Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:01:44Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:01:49Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:01:56Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:01:57Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:01:57Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:02:03Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:02:10Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:02:12Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:02:12Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:02:17Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:02:24Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:02:25Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:02:25Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:02:30Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:02:37Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:02:39Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:02:39Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:02:44Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:02:51Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:02:52Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:02:52Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:02:57Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:03:04Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:03:06Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:03:06Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:03:11Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:03:18Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:03:19Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:03:19Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:03:24Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:03:31Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:03:32Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:03:32Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:03:38Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:03:45Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:03:46Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:03:46Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:03:51Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:03:58Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:03:59Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:03:59Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:04:05Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:04:11Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:04:13Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:04:13Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:04:18Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:04:25Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:04:26Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:04:26Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:04:31Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:04:38Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:04:39Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:04:39Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:04:44Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:04:52Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:04:53Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:04:53Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:04:58Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:05:05Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:05:07Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:05:07Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:05:12Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:05:19Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:05:20Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:05:20Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:05:25Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:05:32Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:05:34Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:05:34Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:05:39Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:05:46Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:05:47Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:05:47Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:05:53Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:06:00Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:06:01Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:06:01Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:06:07Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:06:13Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:06:15Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:06:15Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:06:20Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:06:27Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:06:28Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:06:28Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:06:33Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:06:40Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:06:41Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:06:41Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:06:46Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:06:53Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:06:54Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:06:55Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:07:00Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:07:07Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:07:08Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:07:08Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:07:13Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:07:20Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:07:22Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:07:22Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:07:27Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:07:34Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:07:35Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:07:35Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:07:40Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:07:47Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:07:49Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:07:49Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:07:54Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:08:01Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:08:02Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:08:02Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:08:07Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:08:14Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:08:16Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:08:16Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:08:21Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:08:28Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:08:29Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:08:29Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:08:34Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:08:42Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:08:43Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:08:43Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:08:48Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:08:55Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:08:56Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:08:56Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:09:02Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:09:09Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:09:10Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:09:10Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:09:15Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:09:22Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:09:24Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:09:24Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:09:29Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:09:35Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:09:37Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:09:37Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:09:42Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:09:49Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:09:50Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:09:50Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:09:55Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:10:02Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:10:03Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:10:03Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:10:09Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:10:15Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:10:17Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:10:17Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:10:22Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:10:29Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:10:30Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:10:30Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:10:36Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:10:42Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:10:44Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:10:44Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:10:49Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:10:56Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:10:57Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:10:57Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:11:03Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:11:10Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:11:11Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:11:11Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:11:16Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:11:24Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:11:25Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:11:25Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:11:30Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:11:37Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:11:39Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:11:39Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:11:44Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:11:51Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:11:52Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:11:52Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:11:57Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:12:04Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:12:05Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:12:05Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:12:10Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:12:18Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:12:19Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:12:19Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:12:24Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:12:31Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:12:32Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:12:32Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:12:38Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:12:45Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:12:46Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:12:46Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:12:51Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:12:58Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:12:59Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:12:59Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:13:04Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:13:11Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:13:13Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:13:13Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:13:18Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:13:25Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:13:26Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:13:26Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:13:31Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:13:38Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:13:39Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:13:39Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:13:45Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:13:52Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:13:53Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:13:53Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:13:58Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:14:05Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:14:07Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:14:07Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:14:12Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:14:18Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:14:20Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:14:20Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:14:25Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:14:32Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:14:33Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:14:33Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:14:38Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:14:45Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:14:47Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:14:47Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:14:52Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:14:59Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:15:00Z",
+    "stage": "etcd-bootstrap",
+    "phase": "stage end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  },
+  {
+    "timestamp": "2022-12-20T22:15:00Z",
+    "phase": "service end",
+    "result": "failure",
+    "errorLine": "1 bootkube_podman_run /usr/local/bin/bootkube.sh",
+    "errorMessage": "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6ac6fca311193d6a987f2255769a8d7b93dc6435dccde51228dde19ab8ea45ad\nRendering CEO Manifests...\nError: initializing source docker://quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732: reading manifest sha256:47b9085a7cc7a69f788ae44ca968a6179f2df1354c1fb85cc0f5112f1b39c732 in quay.io/openshift-release-dev/ocp-v4.0-art-dev: unauthorized: access to the requested resource is not authorized"
+  }
+]

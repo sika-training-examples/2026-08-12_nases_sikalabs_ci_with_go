@@ -1,0 +1,23 @@
+apiVersion: config.openshift.io/v1
+kind: Infrastructure
+metadata:
+  creationTimestamp: null
+  name: cluster
+spec:
+  cloudConfig:
+    name: ""
+  platformSpec:
+    aws: {}
+    type: AWS
+status:
+  apiServerInternalURI: https://api-int.demo.aws0.sikademo.com:6443
+  apiServerURL: https://api.demo.aws0.sikademo.com:6443
+  controlPlaneTopology: HighlyAvailable
+  etcdDiscoveryDomain: ""
+  infrastructureName: demo-gf2pd
+  infrastructureTopology: HighlyAvailable
+  platform: AWS
+  platformStatus:
+    aws:
+      region: eu-central-1
+    type: AWS

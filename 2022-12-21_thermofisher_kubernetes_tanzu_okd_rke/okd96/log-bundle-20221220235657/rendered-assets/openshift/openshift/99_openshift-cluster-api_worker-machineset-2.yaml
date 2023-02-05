@@ -1,0 +1,67 @@
+apiVersion: machine.openshift.io/v1beta1
+kind: MachineSet
+metadata:
+  creationTimestamp: null
+  labels:
+    machine.openshift.io/cluster-api-cluster: okd94-8czw9
+  name: okd94-8czw9-worker-eu-central-1c
+  namespace: openshift-machine-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      machine.openshift.io/cluster-api-cluster: okd94-8czw9
+      machine.openshift.io/cluster-api-machineset: okd94-8czw9-worker-eu-central-1c
+  template:
+    metadata:
+      labels:
+        machine.openshift.io/cluster-api-cluster: okd94-8czw9
+        machine.openshift.io/cluster-api-machine-role: worker
+        machine.openshift.io/cluster-api-machine-type: worker
+        machine.openshift.io/cluster-api-machineset: okd94-8czw9-worker-eu-central-1c
+    spec:
+      lifecycleHooks: {}
+      metadata: {}
+      providerSpec:
+        value:
+          ami:
+            id: ami-0f2fb62b5e1da79bd
+          apiVersion: machine.openshift.io/v1beta1
+          blockDevices:
+          - ebs:
+              encrypted: true
+              iops: 0
+              kmsKey:
+                arn: ""
+              volumeSize: 120
+              volumeType: gp3
+          credentialsSecret:
+            name: aws-cloud-credentials
+          deviceIndex: 0
+          iamInstanceProfile:
+            id: okd94-8czw9-worker-profile
+          instanceType: m6i.xlarge
+          kind: AWSMachineProviderConfig
+          metadata:
+            creationTimestamp: null
+          metadataServiceOptions: {}
+          placement:
+            availabilityZone: eu-central-1c
+            region: eu-central-1
+          securityGroups:
+          - filters:
+            - name: tag:Name
+              values:
+              - okd94-8czw9-worker-sg
+          subnet:
+            filters:
+            - name: tag:Name
+              values:
+              - okd94-8czw9-private-eu-central-1c
+          tags:
+          - name: kubernetes.io/cluster/okd94-8czw9
+            value: owned
+          userDataSecret:
+            name: worker-user-data
+status:
+  replicas: 0

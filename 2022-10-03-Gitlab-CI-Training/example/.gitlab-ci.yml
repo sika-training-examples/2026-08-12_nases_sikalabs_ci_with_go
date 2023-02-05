@@ -1,0 +1,131 @@
+image: sikalabs/ci
+
+stages:
+  - lint
+  - build
+  - deploy dev
+  - test dev
+  - deploy prod
+  - test prod
+
+variables:
+  IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA-$CI_PIPELINE_ID
+  BASE_HOST: k8s.sikademo.com
+
+go:
+  stage: lint
+  image: golang
+  script:
+    - gofmt -d -l .
+  allow_failure: true
+
+build bin:
+  stage: build
+  image: golang
+  script:
+    - go build -o server-$GOOS-$GOARCH server.go
+  artifacts:
+    paths:
+      - ./server-*
+  rules:
+    - if: $CI_COMMIT_BEFORE_SHA != "0000000000000000000000000000000000000000"
+      changes:
+        - server.go
+  parallel:
+    matrix:
+      - GOOS:
+          - linux
+          - darwin
+          - windows
+        GOARCH:
+          - amd64
+          - arm64
+
+build docker:
+  stage: build
+  rules:
+    - if: $CI_COMMIT_BRANCH
+    - if: $CI_MERGE_REQUEST_ID
+    - if: $CI_COMMIT_TAG
+  script:
+    - docker login $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
+    - docker build -t $IMAGE .
+    - docker push $IMAGE
+
+.deploy:
+  script:
+    - helm upgrade --install $RELESE_NAME
+        one-image --repo https://helm.sikalabs.io
+        --set host=$HOST
+        --set image=$IMAGE
+    - slu wait-for tls -a $HOST:443
+
+.deploy dev:
+  stage: deploy dev
+  needs:
+    - build docker
+
+.test:
+  script:
+    - sleep 20
+    - curl -fsSL https://$HOST
+
+deploy dev:
+  extends:
+    - .deploy
+    - .deploy dev
+  variables:
+    HOST: dev.$BASE_HOST
+    RELESE_NAME: dev
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_TAG
+    - when: manual
+  allow_failure: false
+  environment:
+    name: dev
+    url: https://$HOST
+    on_stop: stop dev
+
+stop dev:
+  extends:
+    - .deploy dev
+  variables:
+    GIT_STRATEGY: none
+  when: manual
+  script:
+    - helm uninstall dev
+  environment:
+    name: dev
+    action: stop
+
+test dev:
+  stage: test dev
+  variables:
+    HOST: dev.$BASE_HOST
+  extends:
+    - .test
+
+deploy prod:
+  extends:
+    - .deploy
+  stage: deploy prod
+  variables:
+    HOST: prod.$BASE_HOST
+    RELESE_NAME: prod
+  rules:
+    - if: $CI_COMMIT_TAG
+  when: manual
+  allow_failure: false
+  environment:
+    name: prod
+    url: https://$HOST
+
+test prod:
+  stage: test prod
+  rules:
+    - if: $CI_COMMIT_TAG
+  variables:
+    HOST: prod.$BASE_HOST
+  extends:
+    - .test

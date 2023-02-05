@@ -1,0 +1,33 @@
+[
+  {
+    "timestamp": "2022-12-20T22:37:49Z",
+    "phase": "service start"
+  },
+  {
+    "timestamp": "2022-12-20T22:37:49Z",
+    "stage": "pull-release-image",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:38:00Z",
+    "stage": "pull-release-image",
+    "phase": "stage end",
+    "result": "success"
+  },
+  {
+    "timestamp": "2022-12-20T22:38:00Z",
+    "stage": "image-metadata-arches-match",
+    "phase": "stage start"
+  },
+  {
+    "timestamp": "2022-12-20T22:38:00Z",
+    "stage": "image-metadata-arches-match",
+    "phase": "stage end",
+    "result": "success"
+  },
+  {
+    "timestamp": "2022-12-20T22:38:00Z",
+    "phase": "service end",
+    "result": "success"
+  }
+]

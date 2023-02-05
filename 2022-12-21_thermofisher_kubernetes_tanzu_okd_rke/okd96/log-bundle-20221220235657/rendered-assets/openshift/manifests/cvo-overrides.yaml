@@ -1,0 +1,89 @@
+apiVersion: config.openshift.io/v1
+kind: ClusterVersion
+metadata:
+  name: version
+  namespace: openshift-cluster-version
+spec:
+  channel: stable-4.11
+  clusterID: de548791-9da3-4d04-96f1-37c0f2ec9b28
+  overrides:
+  - group: ""
+    kind: ConfigMap
+    name: cluster-config-v1
+    namespace: kube-system
+    unmanaged: true
+  - group: config.openshift.io
+    kind: DNS
+    name: cluster
+    namespace: ""
+    unmanaged: true
+  - group: config.openshift.io
+    kind: Infrastructure
+    name: cluster
+    namespace: ""
+    unmanaged: true
+  - group: config.openshift.io
+    kind: Ingress
+    name: cluster
+    namespace: ""
+    unmanaged: true
+  - group: apiextensions.k8s.io
+    kind: CustomResourceDefinition
+    name: networks.config.openshift.io
+    namespace: ""
+    unmanaged: true
+  - group: config.openshift.io
+    kind: Network
+    name: cluster
+    namespace: ""
+    unmanaged: true
+  - group: config.openshift.io
+    kind: Proxy
+    name: cluster
+    namespace: ""
+    unmanaged: true
+  - group: config.openshift.io
+    kind: Scheduler
+    name: cluster
+    namespace: ""
+    unmanaged: true
+  - group: ""
+    kind: Secret
+    name: kube-cloud-cfg
+    namespace: kube-system
+    unmanaged: true
+  - group: ""
+    kind: ConfigMap
+    name: root-ca
+    namespace: kube-system
+    unmanaged: true
+  - group: ""
+    kind: Secret
+    name: machine-config-server-tls
+    namespace: openshift-machine-config-operator
+    unmanaged: true
+  - group: ""
+    kind: Secret
+    name: pull-secret
+    namespace: openshift-config
+    unmanaged: true
+  - group: ""
+    kind: Secret
+    name: aws-creds
+    namespace: kube-system
+    unmanaged: true
+  - group: ""
+    kind: Secret
+    name: kubeadmin
+    namespace: kube-system
+    unmanaged: true
+  - group: rbac.authorization.k8s.io
+    kind: Role
+    name: aws-creds-secret-reader
+    namespace: kube-system
+    unmanaged: true
+  - group: ""
+    kind: ConfigMap
+    name: openshift-install-manifests
+    namespace: openshift-config
+    unmanaged: true

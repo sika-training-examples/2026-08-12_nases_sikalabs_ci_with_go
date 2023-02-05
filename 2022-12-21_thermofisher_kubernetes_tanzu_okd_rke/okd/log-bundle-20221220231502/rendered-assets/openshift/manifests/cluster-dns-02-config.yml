@@ -1,0 +1,14 @@
+apiVersion: config.openshift.io/v1
+kind: DNS
+metadata:
+  creationTimestamp: null
+  name: cluster
+spec:
+  baseDomain: demo.aws0.sikademo.com
+  privateZone:
+    tags:
+      Name: demo-gf2pd-int
+      kubernetes.io/cluster/demo-gf2pd: owned
+  publicZone:
+    id: Z03093231W3LZLT5QT1EP
+status: {}
