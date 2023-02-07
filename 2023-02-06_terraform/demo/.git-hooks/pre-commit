@@ -1,0 +1,4 @@
+#!/bin/sh
+
+make fmt-check
+make lint-check
