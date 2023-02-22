@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world
+spec:
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: hello-world-deploy
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: hello-world-deploy
+        svc: example
+    spec:
+      containers:
+        - name: hello-world
+          image: ondrejsika/not-existing-image
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: 10m
+              memory: 10Mi
+            limits:
+              memory: 20Mi
+              cpu: 20m
