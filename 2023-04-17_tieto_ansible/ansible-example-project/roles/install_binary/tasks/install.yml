@@ -1,0 +1,22 @@
+- name: Download the archive with binary
+  get_url:
+    url: "{{ install_binary_source_archive }}"
+    dest: /tmp/archive.tar.gz
+    mode: 0644
+- name: Ensure /tmp/archive directory exists
+  file:
+    path: /tmp/archive
+    state: directory
+- name: Extract archive.tar.gz into /tmp/archive
+  unarchive:
+    src: /tmp/archive.tar.gz
+    dest: /tmp/archive
+    remote_src: yes
+- name: Copy binary to /usr/local/bin
+  copy:
+    src: /tmp/archive/{{ install_binary_name }}
+    dest: /usr/local/bin/{{ install_binary_name }}
+    remote_src: yes
+    owner: root
+    group: root
+    mode: '0755'

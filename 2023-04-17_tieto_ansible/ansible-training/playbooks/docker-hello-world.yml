@@ -1,0 +1,12 @@
+---
+- name: Install Docker
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Run Hello World Example
+      docker_container:
+        name: hello
+        image: ondrejsika/training-example
+        published_ports:
+          - 80:80

@@ -1,0 +1,11 @@
+---
+- name: Stop hello-world-server systemd service
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Stop hello-world-server systemd service
+      systemd:
+        name: hello-world-server
+        state: stopped
+        enabled: false

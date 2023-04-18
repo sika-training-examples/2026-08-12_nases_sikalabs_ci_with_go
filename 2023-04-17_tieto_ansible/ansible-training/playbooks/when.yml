@@ -1,0 +1,14 @@
+---
+- name: When Debian vs Ubuntu Example
+  hosts: all
+
+  tasks:
+    - name: Get hostname on Debian
+      debug:
+        msg: "Debian {{ ansible_facts['hostname'] }}" 
+      when: ansible_facts['ansible_distribution'] == "Debian"
+
+    - name: Get hostname on Ubuntu
+      debug:
+        msg: "Ubuntu {{ ansible_facts['hostname'] }}" 
+      when: ansible_facts['ansible_distribution'] == "Ubuntu"

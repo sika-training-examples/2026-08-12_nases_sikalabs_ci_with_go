@@ -1,0 +1,6 @@
+#!/usr/bin/python3
+
+import random
+import json
+
+print(json.dumps({"random": random.randint(0, 100)}))

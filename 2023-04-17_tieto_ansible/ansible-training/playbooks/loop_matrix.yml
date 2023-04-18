@@ -1,0 +1,16 @@
+---
+- name: Loop Example
+  hosts: localhost
+  gather_facts: false
+  vars:
+    matrix:
+      - [a, b]
+      - [0, 1]
+
+  tasks:
+    - name: matrix
+      debug:
+        msg: "{{ item }}"
+      with_nested:
+        - "{{ matrix }}"
+        - "{{ matrix }}"

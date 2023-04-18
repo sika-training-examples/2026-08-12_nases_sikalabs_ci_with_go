@@ -1,0 +1,17 @@
+---
+- name: Register Example with Hostnames
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Get a hostname
+      command: cat /etc/hostname
+      register: content
+
+    - name: Print content variable
+      debug:
+        var: content
+
+    - name: Print the hostnames
+      debug:
+        msg: "{{ content.stdout }}"

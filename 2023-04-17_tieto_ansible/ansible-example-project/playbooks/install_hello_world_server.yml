@@ -1,0 +1,11 @@
+---
+- name: Install Hello World Server
+  hosts: all
+  gather_facts: false
+
+  vars:
+    install_binary_source_archive: https://github.com/sikalabs/hello-world-server/releases/download/v0.6.0/hello-world-server_v0.6.0_linux_amd64.tar.gz
+    install_binary_name: hello-world-server
+
+  roles:
+    - install_binary

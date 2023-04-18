@@ -1,0 +1,23 @@
+---
+- name: Set Facts Example
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - set_fact:
+        list: []
+
+    - command: ls /
+      register: ls
+
+    - set_fact:
+        list: "{{ list + [ls.stdout] }}"
+
+    - command: hostname
+      register: hostname
+
+    - set_fact:
+        list: "{{ list + [hostname.stdout] }}"
+
+    - debug:
+        msg: "{{ list }}"

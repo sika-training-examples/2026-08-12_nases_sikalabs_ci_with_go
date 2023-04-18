@@ -1,0 +1,14 @@
+---
+- name: Setup Web Server
+  hosts: all
+  gather_facts: false
+  # vars:
+  #   name: "Dela"
+  tasks:
+    - name: Copy index.html from template
+      template:
+        src: index.html.j2
+        dest: /etc/systemd/system/{{ }}
+        owner: root
+        group: root
+        mode: 0644

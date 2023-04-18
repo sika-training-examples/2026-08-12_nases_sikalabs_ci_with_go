@@ -1,0 +1,11 @@
+---
+- name: Stop and Disable UFW
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: x
+      systemd:
+        name: ufw
+        state: stopped
+        enabled: no

@@ -1,0 +1,27 @@
+---
+- name: Setup Web Server
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Install Nginx
+      apt:
+        name: nginx
+        update_cache: yes
+        state: present
+    - name: Start Nginx
+      service:
+        name: nginx
+        state: started
+    - name: Copy index.html
+      copy:
+        src: index.html
+        dest: /var/www/html
+        owner: www-data
+        group: www-data
+        mode: 0600
+    # - name: Allow port 80
+    #   community.general.ufw:
+    #     rule: allow
+    #     port: 80
+    #     proto: tcp

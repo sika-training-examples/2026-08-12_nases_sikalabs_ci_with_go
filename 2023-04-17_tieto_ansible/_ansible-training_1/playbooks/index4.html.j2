@@ -1,0 +1,41 @@
+<h1>Hello {{ name }}, how are you?</h1>
+<h1>Hello {{ name|capitalize }}, how are you?</h1>
+<h1>Hello {{ name|upper }}, how are you?</h1>
+<h1>Ahoj {{ jmeno }}, jak se mas?</h1>
+
+<h1>Hello {% if name %}{{ name }}{% else %}Unknown{% endif %}, how are you?</h1>
+<h1>Ahoj {% if jmeno %}{{ jmeno }}{% else %}Neznamy{% endif %}, jak se mas?</h1>
+
+<ul>
+{% for pet in pets %}
+<li>{{ pet }}</li>
+{% endfor %}
+</ul>
+
+<ul>
+{% for country, city in capitals.items() %}
+<li>{{country}}: {{ city }}</li>
+{% endfor %}
+</ul>
+
+<ul>
+{% for country in capitals.keys() %}
+<li>{{country}}</li>
+{% endfor %}
+</ul>
+
+<ul>
+{% for city in capitals.values() %}
+<li>{{ city }}</li>
+{% endfor %}
+</ul>
+
+<table border="1">
+{% for row in matrix %}
+  <tr>
+  {% for col in row %}
+    <td><h1>{{ col }}</h1></td>
+  {%endfor%}
+  </tr>
+{% endfor %}
+</table>

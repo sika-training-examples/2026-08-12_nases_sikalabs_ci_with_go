@@ -1,0 +1,15 @@
+---
+- name: Create a systemd service
+  hosts: all
+  gather_facts: false
+
+  vars:
+    systemd_service_name: hello-world-server
+    systemd_service_description: Hello World Server
+    systemd_service_exec_start: /usr/local/bin/hello-world-server
+    systemd_service_environment_variables:
+      PORT: 80
+      TEXT: "Hello Tietoevry"
+
+  roles:
+    - systemd_service

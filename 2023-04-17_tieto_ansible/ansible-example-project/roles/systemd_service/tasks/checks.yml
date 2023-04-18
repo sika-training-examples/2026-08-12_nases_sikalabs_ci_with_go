@@ -1,0 +1,16 @@
+- name: Check the systemd_service_name variable
+  fail:
+    msg: "The systemd_service_name variable is not defined"
+  when: not systemd_service_name
+- name: Check the systemd_service_description variable
+  fail:
+    msg: "The systemd_service_description variable is not defined"
+  when: not systemd_service_description
+- name: Check the install_binary_name variable
+  fail:
+    msg: "The systemd_service_exec_start variable is not defined"
+  when: not systemd_service_exec_start
+- name: Check the systemd_service_exec_start variable
+  fail:
+    msg: "The install_binary_name variable is not defined"
+  when: not systemd_service_environment_variables

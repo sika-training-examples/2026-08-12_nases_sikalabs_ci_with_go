@@ -1,0 +1,8 @@
+- name: Check the install_binary_source_archive variable
+  fail:
+    msg: "The install_binary_source_archive variable is not defined"
+  when: not install_binary_source_archive
+- name: Check the install_binary_name variable
+  fail:
+    msg: "The install_binary_name variable is not defined"
+  when: not install_binary_name

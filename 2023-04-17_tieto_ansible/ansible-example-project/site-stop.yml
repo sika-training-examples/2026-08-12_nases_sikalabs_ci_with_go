@@ -1,0 +1,2 @@
+---
+- import_playbook: playbooks/stop_systemd_service.yml

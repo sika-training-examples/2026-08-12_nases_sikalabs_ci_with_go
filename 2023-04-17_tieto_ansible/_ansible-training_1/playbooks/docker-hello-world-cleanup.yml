@@ -1,0 +1,10 @@
+---
+- name: Install Docker
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Remove Hello World Example
+      docker_container:
+        name: hello
+        state: absent

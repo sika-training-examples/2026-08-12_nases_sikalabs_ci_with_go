@@ -1,0 +1,19 @@
+[Unit]
+Description={{ systemd_service_description }}
+After=network.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+
+{% for key, val in systemd_service_environment_variables.items() %}
+Environment={{ key }}={{ val|quote }}
+{% endfor %}
+
+ExecStart={{ systemd_service_exec_start }}
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
