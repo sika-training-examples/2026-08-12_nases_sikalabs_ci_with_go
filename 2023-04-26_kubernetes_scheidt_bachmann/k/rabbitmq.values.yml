@@ -1,0 +1,14 @@
+# https://github.com/bitnami/charts/blob/master/bitnami/rabbitmq/values.yaml
+
+auth:
+  username: admin
+  password: admin
+replicaCount: 3
+ingress:
+  enabled: true
+  ingressClassName: nginx
+  hostname: rabbit.panda.k8s.sl.zone
+  # TLS
+  tls: true
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt

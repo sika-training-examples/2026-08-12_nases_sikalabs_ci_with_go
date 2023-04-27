@@ -1,0 +1,87 @@
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUMvakNDQWVhZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJek1EUXlOekExTWprd05Wb1hEVE16TURReU5EQTFNamt3TlZvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTEIwCmZwUTViL3M3Y29KUkphMFIrN2JtamFLbjJxc0I2cXRxN0NYOVpMYlVBcERqc3gzUlNyZ0EreXVtanBoMzNwTDgKak9JbW1vTllLWHBtKzhyUi9admpaam9pU3JBdFYrZTNFNXZqbmxybmc2OWZVRnN6RW5mN0RFVVE2L1JML0ljMwpLRmZHbklXTHNXMmh1Sm5zVVJvbW90K09BYTdHYmlyMzRSYkgrSjdCYWJnbWdGRzlTRk8yUjdXQm0xUmtHaFBLCkJEZEhMMGE5NjhwT1lyckFMa1JENXVCazlhSWh0Skl4TG9FdnlneEhwOE1IaXRaaVlQOWpLUlFtakV1VmtSMDEKTUQ0T2xSY2xSbmxlajU1dHpGRFcwVzFWYVpiaGZKV0p3WHJzOGJjSUI4eFpoQUlMZkF2OGpHL1ZyYStxYUQ4Rwp3ZUNHQ1IybEgvZVcyWGhjQlZVQ0F3RUFBYU5aTUZjd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZEcTZLTEFtTWZKTXB0SnNaL0pmSWRGMVF4N3hNQlVHQTFVZEVRUU8KTUF5Q0NtdDFZbVZ5Ym1WMFpYTXdEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBQ3E2b0IyeVJqdzRJM3JTU1JxSQpZTzZ3ODJYR2lDT25hTmdBR2hWOHh2VnZtKzM4bHNmWVJaVlBoQTlHVG1wU2wyUlVETzFiNTh6dCs1YzlZRk5UCkFsRFQrWWJJdUt0TXcyU2pFWDZBOTdzWGJwc25zQ3krc1loK2NpVk5HV3VUZkhjcGVTOExLTXRpYWwybXcvc0IKT2h2a2hmUDVHZ2lqcHBCYnFRSUJJb0c0OGI1M0kvUEN2eTVETVRwWXJQeWdzb3BpUVkxQnV5Rm83N3RrNlAvbwpXUmF6aGc4UjVNWkZKNWpabFVpQ3hJK2tIbUJQSFFncXBTRmUxa2E2Rll3WnViVExaa1lmd2lNWG9WS2djUGdwClU1S295WC9TTWRQS2JQSzlKdUNMODkvc0ozYXB0d095Tk0wVEQ0elNiZ3huRWhKeFQxcGhzWFBJWTFocVBMUDYKMmJvPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+    server: https://D585D022CBF5C9C73E310CD1975A4189.gr7.eu-west-1.eks.amazonaws.com
+  name: arn:aws:eks:eu-west-1:203928547574:cluster/example
+- cluster:
+    certificate-authority: /Users/ondrej/.minikube/ca.crt
+    extensions:
+    - extension:
+        last-update: Wed, 26 Apr 2023 09:45:10 CEST
+        provider: minikube.sigs.k8s.io
+        version: v1.30.1
+      name: cluster_info
+    server: https://127.0.0.1:50541
+  name: minikube
+contexts:
+- context:
+    cluster: minikube
+    user: admin
+  name: admin
+- context:
+    cluster: minikube
+    namespace: devel
+    user: devel
+  name: devel
+- context:
+    cluster: arn:aws:eks:eu-west-1:203928547574:cluster/example
+    namespace: training
+    user: arn:aws:eks:eu-west-1:203928547574:cluster/example
+  name: eks
+- context:
+    cluster: minikube
+    user: metrics
+  name: metrics
+- context:
+    cluster: minikube
+    extensions:
+    - extension:
+        last-update: Wed, 26 Apr 2023 09:45:10 CEST
+        provider: minikube.sigs.k8s.io
+        version: v1.30.1
+      name: context_info
+    namespace: default
+    user: minikube
+  name: minikube
+- context:
+    cluster: minikube
+    user: read
+  name: read
+current-context: admin
+kind: Config
+preferences: {}
+users:
+- name: admin
+  user:
+    token: eyJhbGciOiJSUzI1NiIsImtpZCI6IkVKOVVVc0VaWjN6QVloY3gwSF85ZkFZMXhKNWdkREMzcGhYUGhEYk5WZjgifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJhZG1pbi11c2VyIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6ImFkbWluLXVzZXIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiIwMTFhY2RiMy01YzA4LTQwYmMtYjc2OS1iNTJjMTUzYzYwMjciLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6a3ViZS1zeXN0ZW06YWRtaW4tdXNlciJ9.R3AG6zIIXULnDrdvaYWG0L9gyuj8q1SmcVBTp29W815bsGt7wEeUIp0-VDF1n9jj1Jt1ZXWI1mfRxVamVY7hL1hkKte1QpxkWKWoioCQdPFXhiaD-4k08-CykkWFdvn26whLwD40gJhxnE5IQT8p_xTOFaQajp4mzBXaRY-3KwYuKN7m_UomVhF-izeOz-letLzimKdB2pwqVrL2sKsEm6MWwYpym9NSCrjdAaXqAaEfzVZ9gDSbkZGgXVTkRjM7xnT3_xX1v8qtksnoBZKYaLktsICNMSiUTVjeUiyeWuOebChXnZx7xJvPvauP6RN6JxiqTaMruym6umL5yhn-4Q
+- name: arn:aws:eks:eu-west-1:203928547574:cluster/example
+  user:
+    exec:
+      apiVersion: client.authentication.k8s.io/v1beta1
+      args:
+      - --region
+      - eu-west-1
+      - eks
+      - get-token
+      - --cluster-name
+      - example
+      - --output
+      - json
+      command: aws
+      env: null
+      interactiveMode: IfAvailable
+      provideClusterInfo: false
+- name: devel
+  user:
+    token: eyJhbGciOiJSUzI1NiIsImtpZCI6IkVKOVVVc0VaWjN6QVloY3gwSF85ZkFZMXhKNWdkREMzcGhYUGhEYk5WZjgifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZXZlbCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJkZXZlbC11c2VyIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6ImRldmVsLXVzZXIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiJlMTA2ZDlmYy1iNDQ0LTRhMGEtOGVlOS1jNTNjNzA4YmI0NWEiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6ZGV2ZWw6ZGV2ZWwtdXNlciJ9.ncmIzbLgVSfUUiMDPpmtr20lmXBtvVgOpKNX9qg8FO5r3nkx_d8kJPVfiL0xU-XBwQlN7AEGhURt5jH6VoQAnkEF5fDEI35KVoLbyECEDPD__QRtRssibeIjQtfuTNmnGsD-clAHw5agcaYvpuYhGW6kjtNVH2ND20YjF6x5Aw7v_9D1zkZpHtXPhAM8W8wnixJ4O5fuHe4gjlePRLWBk_lkZ0bCKFQWw1fbqELQnVVulQhL01NkJpthlioRPEOIyoNl7764TglW6yEjNXCAOGdJmh7_rRKP3vMyCEU9lQ9tShPsfzuVXfBgaE25axS6nvFyzMR3FahYpg8KMHIIKA
+- name: metrics
+  user:
+    token: eyJhbGciOiJSUzI1NiIsImtpZCI6IkVKOVVVc0VaWjN6QVloY3gwSF85ZkFZMXhKNWdkREMzcGhYUGhEYk5WZjgifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJtZXRyaWNzLXVzZXIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoibWV0cmljcy11c2VyIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQudWlkIjoiMTNhZThmZDYtNjRjNy00ODdlLWIzNDMtYWMwYWM5ZGQ4ODk2Iiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50Omt1YmUtc3lzdGVtOm1ldHJpY3MtdXNlciJ9.HQRKHWLJNXWBnbuMxqrD89VLD9Ub8SAPLouzyp2pYPArTqRmbuWaPU9HJlt-nTz05irt943ofaUjJhZLSybHklepSJF6bnoOcfdUsP3qaqnrRcLuHDZ2goWHBEEqffzmIetCNkOxYn58o4S02zld0UpRYtwNkZlcK76kwcovyu9OMOqvYG-msnvkJ-YP2cYJ_fN0uvkmcodZp9GJQDvwMoToQAexfYDjQPZa201Cf3MQ2mKwpQJn3N5SM46GuuDhmDixFejULxV_mFgCqIsyH4ZqyLgeF9abMEB8mOpdp65GPNBufWMD4mKQtwtiDThmr23ZY1KvToLVvlObE9xC7w
+- name: minikube
+  user:
+    client-certificate: /Users/ondrej/.minikube/profiles/minikube/client.crt
+    client-key: /Users/ondrej/.minikube/profiles/minikube/client.key
+- name: read
+  user:
+    token: eyJhbGciOiJSUzI1NiIsImtpZCI6IkVKOVVVc0VaWjN6QVloY3gwSF85ZkFZMXhKNWdkREMzcGhYUGhEYk5WZjgifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJyZWFkLXVzZXIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoicmVhZC11c2VyIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQudWlkIjoiZTM4ODU1ZTgtNjFlZC00ZWM1LTg2NjUtYmI0Y2RiOTBjYmMxIiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50Omt1YmUtc3lzdGVtOnJlYWQtdXNlciJ9.FcVuAmQLde8Xhv6inJwM3BjAK3bIq96oFQyl3KkhAeGI-P8RLV0g3HZyGzgoYkpmMzgyvYK8HeSVyDBa4oWfGARMlsNHGDpwGQmNU6twprw3KZZQOn_05U5DcejWU6TACedvogys9J6gaIqQhdIVMtVK3fzh3rZaZLG69-Oy-1hI3SBH-gYhNCDwSqYzHVNnt4lwg6_N94IqakG3GE2Ei-DhX639WAv7h8tLfzoRsOqUrQb8_Q2dsTKBnqNjZfw6uK2TmfXdn7BAQEoA7mcPHmRx60HCHXOUyeNzhRQ5iz6MVdTr8j0EiNlfeygaU147rEQgJNWHTEYhFk7t-8bLxA

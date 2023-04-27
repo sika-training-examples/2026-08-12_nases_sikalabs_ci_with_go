@@ -1,0 +1,5 @@
+apiVersion: v2
+name: counter
+description: Example Helm Chart for S&B Training
+type: application
+version: 2023.04.27

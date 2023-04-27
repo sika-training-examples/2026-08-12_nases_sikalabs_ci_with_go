@@ -1,0 +1,6 @@
+# Requrired
+host:
+
+# Optional
+replicas: 2
+token: xxx

@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name}}-counter
+  annotations:
+    app.openshift.io/connects-to: |
+      [{"apiVersion":"apps/v1","kind":"StatefulSet","name":"redis"}]
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: counter
+  template:
+    metadata:
+      labels:
+        app: counter
+        release: {{ .Release.Name}}
+    spec:
+      serviceAccountName: {{ .Release.Name}}-job-read
+      initContainers:
+        - name: wait-for-migrations
+          image: sikalabs/kubectl
+          command:
+            - "/bin/sh"
+            - "-c"
+            - "sleep 2 && kubectl wait --for=condition=complete --timeout=600s job/{{ .Release.Name }}-migrations-{{ .Release.Revision }}"
+      containers:
+        - name: main
+          image: ondrejsika/counter
+          resources:
+            requests:
+              cpu: 50m
+              memory: 50Mi
+            limits:
+              cpu: 200m
+              memory: 200Mi
+          env:
+            - name: REDIS
+              value: {{ .Release.Name}}-redis
+            - name: TOKEN
+              value: {{ .Values.token }}
+          ports:
+            - containerPort: 80
+          startupProbe:
+            httpGet:
+              path: /
+              port: 80
