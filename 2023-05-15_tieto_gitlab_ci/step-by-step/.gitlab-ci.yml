@@ -1,0 +1,9 @@
+build:
+  script: echo build ...
+
+deploy:
+  script: echo Test deploy ...
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: never
+    - if: $CI_PIPELINE_SOURCE
