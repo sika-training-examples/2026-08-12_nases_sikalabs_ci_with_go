@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: example-okd
+spec:
+  rules:
+    - host: example-ingress.apps.okd0.aws0.sikademo.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: clusterip
+                port:
+                  number: 80

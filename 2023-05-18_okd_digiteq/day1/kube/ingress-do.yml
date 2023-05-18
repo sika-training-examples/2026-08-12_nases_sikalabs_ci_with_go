@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: example-okd-tls
+spec:
+  tls:
+    - secretName: example-okd-tls
+  rules:
+    - host: example-ingress.apps.okd0.aws0.sikademo.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: clusterip
+                port:
+                  number: 80
