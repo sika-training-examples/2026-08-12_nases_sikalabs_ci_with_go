@@ -1,0 +1,14 @@
+{
+  "service": {
+    "ID": "panda-1",
+    "Name": "panda",
+    "Address": "panda.k8s.sl.zone",
+    "Port": 80,
+    "Tags": ["k8s", "v1.24"],
+    "Check": {
+      "HTTP": "http://panda.k8s.sl.zone",
+      "Interval": "1s",
+      "Timeout": "1s"
+    }
+  }
+}

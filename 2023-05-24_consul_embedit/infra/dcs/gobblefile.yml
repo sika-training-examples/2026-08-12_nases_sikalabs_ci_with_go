@@ -1,0 +1,125 @@
+meta:
+  schema_version: 3
+hosts:
+  reg1:
+    - ssh_target: root@reg1.sikademo.com
+      vars:
+        ip: 209.38.250.100
+  reg2:
+    - ssh_target: root@reg2.sikademo.com
+      vars:
+        ip: 46.101.147.225
+plays:
+  - name:  Setup systemd service c-fra-{1,2,3}
+    hosts: [reg1, reg2]
+    tasks:
+      - name: Stop and disable ufw
+        command:
+          cmd: systemctl stop ufw && systemctl disable ufw
+      - name: Install consul
+        command:
+          cmd: slu ib consul || true
+      - name: Mkdirs
+        command:
+          cmd: |
+            rm -rf /etc/consul && \
+            rm -rf /var/lib/consul && \
+            mkdir -p /etc/consul && \
+            mkdir -p /var/lib/consul
+      - name: Systemd service
+        template:
+          path: /etc/systemd/system/consul.service
+          template: |
+            [Unit]
+            ConditionPathExists=/var/lib/consul
+            After=network.target
+
+            [Service]
+            Type=simple
+            User=root
+            Group=root
+            WorkingDirectory=/var/lib/consul
+
+            ExecStart=consul agent -config-dir=/etc/consul
+            Restart=on-failure
+            RestartSec=10
+
+            [Install]
+            WantedBy=multi-user.target
+      - name: Add systemd service
+        command:
+          cmd: systemctl daemon-reload && systemctl enable consul
+  - name:  Setup consul reg1
+    hosts: [reg1]
+    tags: [consul]
+    tasks:
+      - name: Config
+        template:
+          path: /etc/consul/consul.hcl
+          template: |
+            server = true
+            bind_addr = "{{ .Vars.ip }}"
+            bootstrap_expect = 1
+            ui_config = {
+              enabled = true
+            }
+            client_addr = "0.0.0.0"
+            datacenter = "reg1"
+            data_dir = "/var/lib/consul"
+            retry_join = []
+            retry_join_wan = [
+              "reg2.sikademo.com",
+              "c-lon-1.sikademo.com",
+              "c-fra-1.sikademo.com",
+            ]
+            services = [
+              {
+                name = "foo"
+                port = 8000
+              },
+              {
+                name = "bar"
+                port = 8001
+              },
+            ]
+  - name:  Setup consul reg2
+    hosts: [reg2]
+    tags: [consul]
+    tasks:
+      - name: Config
+        template:
+          path: /etc/consul/consul.hcl
+          template: |
+            server = true
+            bind_addr = "{{ .Vars.ip }}"
+            bootstrap_expect = 1
+            ui_config = {
+              enabled = true
+            }
+            client_addr = "0.0.0.0"
+            datacenter = "reg2"
+            data_dir = "/var/lib/consul"
+            retry_join = []
+            retry_join_wan = [
+              "reg1.sikademo.com",
+              "c-lon-1.sikademo.com",
+              "c-fra-1.sikademo.com",
+            ]
+            services = [
+              {
+                name = "foo"
+                port = 8000
+              },
+              {
+                name = "baz"
+                port = 8002
+              },
+            ]
+  - name: Restart consul
+    hosts: [reg1, reg2]
+    tags: [consul]
+    tasks:
+      - name: Restart consul
+        command:
+          cmd: systemctl restart consul
+          # cmd: consul reload

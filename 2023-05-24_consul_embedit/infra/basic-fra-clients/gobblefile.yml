@@ -1,0 +1,98 @@
+meta:
+  schema_version: 3
+hosts:
+  all:
+    - ssh_target: root@c-fra-www-1.sikademo.com
+      vars:
+        i: 1
+        ip: 209.38.235.34
+        service: www
+    - ssh_target: root@c-fra-www-2.sikademo.com
+      vars:
+        i: 2
+        ip: 157.230.24.35
+        service: www
+    - ssh_target: root@c-fra-db-1.sikademo.com
+      vars:
+        i: 1
+        ip: 165.227.140.251
+        service: db
+plays:
+  - name:  Setup systemd service
+    hosts: [all]
+    tasks:
+      - name: Mkdirs
+        command:
+          cmd: |
+            rm -rf /etc/consul && \
+            rm -rf /var/lib/consul && \
+            mkdir -p /etc/consul && \
+            mkdir -p /var/lib/consul
+      - name: Systemd service
+        template:
+          path: /etc/systemd/system/consul.service
+          template: |
+            [Unit]
+            ConditionPathExists=/var/lib/consul
+            After=network.target
+
+            [Service]
+            Type=simple
+            User=root
+            Group=root
+            WorkingDirectory=/var/lib/consul
+
+            ExecStart=consul agent -config-dir=/etc/consul
+            Restart=on-failure
+            RestartSec=10
+
+            [Install]
+            WantedBy=multi-user.target
+      - name: Add systemd service
+        command:
+          cmd: systemctl daemon-reload && systemctl enable consul
+      - name: Start docker service
+        command:
+          cmd: docker run -d -p 80:8000 --name {{ .Vars.service }}-{{ .Vars.i }} -e TEXT={{ .Vars.service }}-{{ .Vars.i }} sikalabs/hello-world-server:v0.6.0 || true
+  - name:  Setup consul
+    hosts: [all]
+    tags: [consul]
+    tasks:
+      - name: Config
+        template:
+          path: /etc/consul/consul.hcl
+          template: |
+            datacenter = "fra"
+            data_dir = "/var/lib/consul"
+            client_addr = "0.0.0.0"
+            bind_addr = "{{ .Vars.ip }}"
+            retry_join = [
+              "c-fra-1.sikademo.com",
+              "c-fra-2.sikademo.com",
+              "c-fra-3.sikademo.com",
+            ]
+            services = [
+              {
+                name = "{{ .Vars.service }}"
+                port = 80
+                tags = ["web"]
+                check = {
+                  HTTP = "http://127.0.0.1:80"
+                  interval = "10s"
+                  timeout = "1s"
+                }
+              },
+              {
+                name = "node-exporter"
+                port = 9100
+                tags = ["prometheus"]
+                check = {
+                  HTTP = "http://127.0.0.1:9100"
+                  interval = "10s"
+                  timeout = "1s"
+                }
+              }
+            ]
+      - name: Restart consul
+        command:
+          cmd: systemctl restart consul

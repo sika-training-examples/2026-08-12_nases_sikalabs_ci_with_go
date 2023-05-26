@@ -1,0 +1,38 @@
+# https://github.com/hashicorp/consul-k8s/blob/main/charts/consul/values.yaml
+# https://developer.hashicorp.com/consul/docs/k8s/helm
+global:
+  name: consul
+
+server:
+  replicas: 3
+  bootstrapExpect: 3
+
+controller:
+  enabled: true
+
+connectInject:
+  enabled: true
+  transparentProxy:
+    defaultEnabled: true
+
+ui:
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    hosts:
+      - host: consul.k8s.sikademo.com
+        paths:
+          - /
+    tls:
+      - hosts:
+        - consul.k8s.sikademo.com
+        secretName: consul-k8s-sikademo-com-tls
+    annotations: |
+      cert-manager.io/cluster-issuer: letsencrypt
+
+ingressGateways:
+  enabled: true
+  gateways:
+    - name: ingress-gateway
+      service:
+        type: LoadBalancer

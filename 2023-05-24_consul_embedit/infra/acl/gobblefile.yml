@@ -1,0 +1,163 @@
+meta:
+  schema_version: 3
+hosts:
+  acl1:
+    - ssh_target: root@acl1.sikademo.com
+      vars:
+        ip: 139.59.156.247
+  acl2:
+    - ssh_target: root@acl2.sikademo.com
+      vars:
+        ip: 159.89.101.175
+global:
+  vars:
+    token: cec5fdb2-5d45-4e9e-5d23-25c2ceae9a41
+plays:
+  - name:  Setup systemd service c-fra-{1,2,3}
+    hosts: [acl1, acl2]
+    tasks:
+      - name: Stop and disable ufw
+        command:
+          cmd: systemctl stop ufw && systemctl disable ufw
+      - name: Install consul
+        command:
+          cmd: slu ib consul || true
+      - name: Mkdirs
+        command:
+          cmd: |
+            rm -rf /etc/consul && \
+            rm -rf /var/lib/consul && \
+            mkdir -p /etc/consul && \
+            mkdir -p /var/lib/consul
+      - name: Systemd service
+        template:
+          path: /etc/systemd/system/consul.service
+          template: |
+            [Unit]
+            ConditionPathExists=/var/lib/consul
+            After=network.target
+
+            [Service]
+            Type=simple
+            User=root
+            Group=root
+            WorkingDirectory=/var/lib/consul
+
+            ExecStart=consul agent -config-dir=/etc/consul
+            Restart=on-failure
+            RestartSec=10
+
+            [Install]
+            WantedBy=multi-user.target
+      - name: Add systemd service
+        command:
+          cmd: systemctl daemon-reload && systemctl enable consul
+
+  - name:  Setup docker acl1
+    hosts: [acl1]
+    tasks:
+      - name: redis
+        command:
+          cmd: docker run --name redis -d -p 127.0.0.1:6379:6379 redis || true
+  - name:  Setup consul acl1
+    hosts: [acl1]
+    tags: [consul]
+    tasks:
+      - name: Config
+        template:
+          path: /etc/consul/consul.hcl
+          template: |
+            server = true
+            acl = {
+              enabled = true
+              default_policy = "deny"
+              enable_token_persistence = true
+            }
+            acl_token = "{{ .Vars.token }}"
+            bind_addr = "{{ .Vars.ip }}"
+            bootstrap_expect = 1
+            ui_config = {
+              enabled = true
+            }
+            client_addr = "0.0.0.0"
+            datacenter = "acl"
+            data_dir = "/var/lib/consul"
+            retry_join = [ ]
+            services = [
+              {
+                name = "redis"
+                port = 6379
+                check = {
+                  tcp =  "127.0.0.1:6379"
+                  interval = "10s"
+                  timeout = "1s"
+                }
+                connect = {
+                  sidecar_service = {
+                  }
+                }
+              }
+            ]
+      - name: proxy
+        command:
+          cmd: docker rm -f consul || true
+      - name: proxy
+        command:
+          cmd: docker run --name consul -d --net host -e CONSUL_HTTP_TOKEN={{.Vars.token}} consul consul connect proxy --sidecar-for redis || true
+  - name:  Setup consul acl2
+    hosts: [acl2]
+    tasks:
+      - name: counter
+        command:
+          cmd: docker run --name counter -d --net host -e REDIS=127.0.0.1 ondrejsika/counter || true
+  - name:  Setup consul acl2
+    hosts: [acl2]
+    tags: [consul]
+    tasks:
+      - name: Config
+        template:
+          path: /etc/consul/consul.hcl
+          template: |
+            bind_addr = "{{ .Vars.ip }}"
+            client_addr = "0.0.0.0"
+            datacenter = "acl"
+            acl = {
+              enabled = true
+              default_policy = "deny"
+              enable_token_persistence = true
+            }
+            acl_token = "{{.Vars.token}}"
+            data_dir = "/var/lib/consul"
+            retry_join = [ "acl1.sikademo.com" ]
+            services = [
+              {
+                name = "counter"
+                port = 80
+                connect = {
+                  "sidecar_service" = {
+                    "proxy" = {
+                      "upstreams" = [
+                        {
+                          "destination_name" = "redis"
+                          "local_bind_port" = 6379
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+            ]
+      - name: proxy
+        command:
+          cmd: docker rm -f consul || true
+      - name: proxy
+        command:
+          cmd: docker run --name consul -d --net host -e CONSUL_HTTP_TOKEN={{.Vars.token}} consul consul connect proxy --sidecar-for counter || true
+
+  - name: Restart consul
+    hosts: [acl1, acl2]
+    tags: [consul]
+    tasks:
+      - name: Restart consul
+        command:
+          cmd: systemctl restart consul

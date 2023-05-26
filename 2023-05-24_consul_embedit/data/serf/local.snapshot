@@ -1,0 +1,13 @@
+alive: sika-mac.local 127.0.0.1:8301
+alive: c-fra-www-1 209.38.235.34:8301
+alive: c-fra-www-2 157.230.24.35:8301
+alive: c-fra-3 164.90.175.228:8301
+alive: c-fra-1 209.38.216.164:8301
+alive: c-fra-db-1 165.227.140.251:8301
+alive: c-fra-2 209.38.216.187:8301
+clock: 6
+clock: 7
+not-alive: c-fra-2
+alive: c-fra-2 209.38.216.187:8301
+leave
+clock: 8

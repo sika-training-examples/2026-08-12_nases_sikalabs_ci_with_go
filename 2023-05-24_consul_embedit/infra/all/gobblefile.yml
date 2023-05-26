@@ -1,0 +1,38 @@
+meta:
+  schema_version: 3
+hosts:
+  all:
+    - ssh_target: root@c-1.sikademo.com
+    - ssh_target: root@c-2.sikademo.com
+    - ssh_target: root@c-3.sikademo.com
+    - ssh_target: root@c-fra-1.sikademo.com
+    - ssh_target: root@c-fra-2.sikademo.com
+    - ssh_target: root@c-fra-3.sikademo.com
+    - ssh_target: root@c-fra-www-1.sikademo.com
+    - ssh_target: root@c-fra-www-2.sikademo.com
+    - ssh_target: root@c-fra-db-1.sikademo.com
+    - ssh_target: root@c-lon-1.sikademo.com
+    - ssh_target: root@c-lon-2.sikademo.com
+    - ssh_target: root@c-lon-3.sikademo.com
+    - ssh_target: root@c-lon-www-1.sikademo.com
+    - ssh_target: root@c-lon-www-2.sikademo.com
+    - ssh_target: root@c-lon-db-1.sikademo.com
+plays:
+  - name:  Setup
+    hosts: [all]
+    tasks:
+      - name: Stop & Disable UFW
+        command:
+          cmd: systemctl stop ufw && systemctl disable ufw
+      - name: Install Consul
+        command:
+          cmd: slu install-bin consul || true
+      - name: Install node-exporter
+        command:
+          cmd: |
+            docker run -d \
+              --net="host" \
+              --pid="host" \
+              -v "/:/host:ro,rslave" \
+              quay.io/prometheus/node-exporter:latest \
+              --path.rootfs=/host || true

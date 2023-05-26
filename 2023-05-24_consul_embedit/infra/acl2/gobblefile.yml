@@ -1,0 +1,151 @@
+meta:
+  schema_version: 3
+hosts:
+  acl1:
+    - ssh_target: root@acl21.sikademo.com
+      vars:
+        ip: 209.38.250.77
+        token: 1c752465-459a-7549-88bd-6b8662d4ac54
+  acl2:
+    - ssh_target: root@acl22.sikademo.com
+      vars:
+        ip: 209.38.230.36
+        token: 61c3844d-8ad0-4cbe-adc1-d6d920a5bee5
+  acl3:
+    - ssh_target: root@acl23.sikademo.com
+      vars:
+        ip: 159.65.115.169
+        token: 65762879-8852-6ebb-17a6-65b66c32545a
+global:
+  vars:
+    acl: "true"
+plays:
+  - name:  Setup systemd service c-fra-{1,2,3}
+    hosts: [acl1, acl2, acl3]
+    tasks:
+      - name: Stop and disable ufw
+        command:
+          cmd: systemctl stop ufw && systemctl disable ufw
+      - name: Install consul
+        command:
+          cmd: slu ib consul || true
+      - name: Mkdirs
+        command:
+          cmd: |
+            rm -rf /etc/consul && \
+            rm -rf /var/lib/consul && \
+            mkdir -p /etc/consul && \
+            mkdir -p /var/lib/consul
+      - name: Systemd service
+        template:
+          path: /etc/systemd/system/consul.service
+          template: |
+            [Unit]
+            ConditionPathExists=/var/lib/consul
+            After=network.target
+
+            [Service]
+            Type=simple
+            User=root
+            Group=root
+            WorkingDirectory=/var/lib/consul
+
+            ExecStart=consul agent -config-dir=/etc/consul
+            Restart=on-failure
+            RestartSec=10
+
+            [Install]
+            WantedBy=multi-user.target
+      - name: Add systemd service
+        command:
+          cmd: systemctl daemon-reload && systemctl enable consul
+
+  - name:  Setup consul acl1
+    hosts: [acl1]
+    tags: [consul]
+    tasks:
+      - name: Config
+        template:
+          path: /etc/consul/consul.hcl
+          template: |
+            server = true
+            acl = {
+              enabled = {{ .Vars.acl }}
+              default_policy = "deny"
+              enable_token_persistence = true
+            }
+            acl_token = "{{ .Vars.token }}"
+            bind_addr = "{{ .Vars.ip }}"
+            bootstrap_expect = 1
+            ui_config = {
+              enabled = true
+            }
+            client_addr = "0.0.0.0"
+            datacenter = "acl2"
+            data_dir = "/var/lib/consul"
+            retry_join = [ ]
+            services = [ ]
+  - name:  Setup consul acl2
+    hosts: [acl2]
+    tags: [consul]
+    tasks:
+      - name: Config
+        template:
+          path: /etc/consul/consul.hcl
+          template: |
+            bind_addr = "{{ .Vars.ip }}"
+            client_addr = "0.0.0.0"
+            datacenter = "acl2"
+            acl = {
+              enabled = {{ .Vars.acl }}
+              default_policy = "deny"
+              enable_token_persistence = true
+            }
+            acl_token = "{{.Vars.token}}"
+            data_dir = "/var/lib/consul"
+            retry_join = [ "acl21.sikademo.com" ]
+            services = [
+              {
+                name = "demo"
+                port = 80
+              },
+            ]
+      - name:
+        command:
+          cmd: docker run --name www -d -p 80:80 ondrejsika/training-example:green || true
+  - name:  Setup consul acl3
+    hosts: [acl3]
+    tags: [consul]
+    tasks:
+      - name: Config
+        template:
+          path: /etc/consul/consul.hcl
+          template: |
+            bind_addr = "{{ .Vars.ip }}"
+            client_addr = "0.0.0.0"
+            datacenter = "acl2"
+            acl = {
+              enabled = {{ .Vars.acl }}
+              default_policy = "deny"
+              enable_token_persistence = true
+            }
+            acl_token = "{{.Vars.token}}"
+            data_dir = "/var/lib/consul"
+            retry_join = [ "acl21.sikademo.com" ]
+            services = [
+              {
+                name = "demo"
+                port = 80
+              },
+            ]
+      - name:
+        command:
+          cmd: docker run --name www -d -p 80:80 ondrejsika/training-example:red || true
+  - name: Restart consul
+    # hosts: [acl1, acl2, acl3]
+    hosts: [acl1]
+    tags: [consul]
+    tasks:
+      - name: Restart consul
+        command:
+          cmd: systemctl restart consul

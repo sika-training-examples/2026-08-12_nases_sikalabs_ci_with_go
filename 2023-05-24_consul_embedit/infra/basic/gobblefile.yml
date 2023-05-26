@@ -1,0 +1,78 @@
+meta:
+  schema_version: 3
+hosts:
+  all:
+    - ssh_target: root@c-1.sikademo.com
+      vars:
+        i: 1
+        ip: 209.38.217.60
+    - ssh_target: root@c-2.sikademo.com
+      vars:
+        i: 2
+        ip: 209.38.217.62
+    - ssh_target: root@c-3.sikademo.com
+      vars:
+        i: 3
+        ip: 164.92.192.170
+plays:
+  - name:  Setup systemd service c-{1,2,3}
+    hosts: [all]
+    tasks:
+      - name: Mkdirs
+        command:
+          cmd: mkdir -p /etc/consul && mkdir -p /var/lib/consul
+      - name: Systemd service
+        template:
+          path: /etc/systemd/system/consul.service
+          template: |
+            [Unit]
+            ConditionPathExists=/var/lib/consul
+            After=network.target
+
+            [Service]
+            Type=simple
+            User=root
+            Group=root
+            WorkingDirectory=/var/lib/consul
+
+            ExecStart=consul agent -config-dir=/etc/consul
+            Restart=on-failure
+            RestartSec=10
+
+            [Install]
+            WantedBy=multi-user.target
+      - name: Add systemd service
+        command:
+          cmd: systemctl daemon-reload && systemctl enable consul
+  - name:  Setup consul
+    hosts: [all]
+    tags: [consul]
+    tasks:
+      - name: Config
+        template:
+          path: /etc/consul/consul.hcl
+          template: |
+            {
+              "bootstrap_expect": 3,
+              "ui_config": {
+                "enabled": true,
+              },
+              "client_addr": "0.0.0.0",
+              "datacenter": "dc1",
+              "data_dir": "/var/lib/consul",
+              "domain": "consul",
+              "enable_script_checks": true,
+              "dns_config": {
+                "enable_truncate": true,
+                "only_passing": true
+              },
+              "leave_on_terminate": true,
+              "rejoin_after_leave": true,
+              "server": true,
+              "node_name": "c-{{ .Vars.i }}",
+              "bind_addr": "{{ .Vars.ip }}",
+              "retry_join": ["209.38.217.60", "209.38.217.62", "164.92.192.170"]
+            }
+      - name: Restart consul
+        command:
+          cmd: systemctl restart consul

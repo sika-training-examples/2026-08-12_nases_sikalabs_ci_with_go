@@ -1,0 +1,105 @@
+meta:
+  schema_version: 3
+hosts:
+  all:
+    - ssh_target: root@c-fra-1.sikademo.com
+      vars:
+        i: 1
+        ip: 209.38.216.164
+    - ssh_target: root@c-fra-2.sikademo.com
+      vars:
+        i: 2
+        ip: 209.38.216.187
+    - ssh_target: root@c-fra-3.sikademo.com
+      vars:
+        i: 3
+        ip: 164.90.175.228
+plays:
+  - name:  Setup systemd service c-fra-{1,2,3}
+    hosts: [all]
+    tasks:
+      - name: Mkdirs
+        command:
+          cmd: |
+            rm -rf /etc/consul && \
+            rm -rf /var/lib/consul && \
+            mkdir -p /etc/consul && \
+            mkdir -p /var/lib/consul
+      - name: Systemd service
+        template:
+          path: /etc/systemd/system/consul.service
+          template: |
+            [Unit]
+            ConditionPathExists=/var/lib/consul
+            After=network.target
+
+            [Service]
+            Type=simple
+            User=root
+            Group=root
+            WorkingDirectory=/var/lib/consul
+
+            ExecStart=consul agent -config-dir=/etc/consul
+            Restart=on-failure
+            RestartSec=10
+
+            [Install]
+            WantedBy=multi-user.target
+      - name: Add systemd service
+        command:
+          cmd: systemctl daemon-reload && systemctl enable consul
+  - name:  Setup consul
+    hosts: [all]
+    tags: [consul]
+    tasks:
+      - name: Config
+        template:
+          path: /etc/consul/consul.hcl
+          template: |
+            telemetry = {
+              prometheus_retention_time = "480h"
+              disable_hostname = true
+            }
+            server = true
+            bind_addr = "{{ .Vars.ip }}"
+            bootstrap_expect = 3
+            ui_config = {
+              enabled = true
+            }
+            client_addr = "0.0.0.0"
+            datacenter = "fra"
+            data_dir = "/var/lib/consul"
+            enable_script_checks = true
+            dns_config = {
+              enable_truncate = true
+              only_passing = true
+            }
+            rejoin_after_leave = true
+            retry_join = [
+              "c-fra-1.sikademo.com",
+              "c-fra-2.sikademo.com",
+              "c-fra-3.sikademo.com",
+            ]
+            retry_join_wan = [
+              "c-lon-1.sikademo.com",
+              "c-lon-2.sikademo.com",
+              "c-lon-3.sikademo.com",
+              "reg1.sikademo.com",
+              "reg2.sikademo.com",
+            ]
+            services = [
+              {
+                name = "node-exporter"
+                port = 9100
+                tags = ["prometheus"]
+                check = {
+                  HTTP = "http://127.0.0.1:9100"
+                  interval = "10s"
+                  timeout = "1s"
+                }
+              }
+            ]
+      - name: Restart consul
+        command:
+          # cmd: systemctl restart consul
+          cmd: consul reload

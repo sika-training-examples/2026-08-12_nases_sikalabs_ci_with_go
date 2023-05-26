@@ -1,0 +1,16 @@
+{
+  "services": [
+    {
+      "ID": "joh-1",
+      "Name": "joh",
+      "Address": "joh.k8s.sl.zone",
+      "Port": 80,
+      "Tags": ["k8s", "v1.25"],
+      "Check": {
+        "HTTP": "http://joh.k8s.sl.zone",
+        "Interval": "1s",
+        "Timeout": "1s"
+      }
+    }
+  ]
+}

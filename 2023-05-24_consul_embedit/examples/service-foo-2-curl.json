@@ -1,0 +1,12 @@
+{
+  "ID": "foo-2",
+  "Name": "foo",
+  "Address": "127.0.0.1",
+  "Port": 29001,
+  "Tags": ["web", "prometheus"],
+  "Check": {
+    "HTTP": "http://127.0.0.1:29001/health",
+    "Interval": "10s",
+    "Timeout": "1s"
+  }
+}

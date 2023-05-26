@@ -1,0 +1,92 @@
+meta:
+  schema_version: 3
+hosts:
+  all:
+    - ssh_target: root@c-fra-www-1.sikademo.com
+      vars:
+        i: 1
+        ip: 104.248.139.249
+        service: www
+    - ssh_target: root@c-fra-www-2.sikademo.com
+      vars:
+        i: 2
+        ip: 159.89.100.75
+        service: www
+    - ssh_target: root@c-fra-db-1.sikademo.com
+      vars:
+        i: 1
+        ip: 138.68.111.122
+        service: db
+plays:
+  - name:  Setup systemd service
+    hosts: [all]
+    tasks:
+      - name: Mkdirs
+        command:
+          cmd: |
+            rm -rf /etc/consul && \
+            rm -rf /var/lib/consul && \
+            mkdir -p /etc/consul && \
+            mkdir -p /var/lib/consul
+      - name: Systemd service
+        template:
+          path: /etc/systemd/system/consul-ondrejsika.service
+          template: |
+            [Unit]
+            ConditionPathExists=/var/lib/consul-ondrejsika
+            After=network.target
+
+            [Service]
+            Type=simple
+            User=root
+            Group=root
+            WorkingDirectory=/var/lib/consul-ondrejsika
+
+            ExecStart=consul agent -config-dir=/etc/consul-ondrejsika
+            Restart=on-failure
+            RestartSec=10
+
+            [Install]
+            WantedBy=multi-user.target
+      - name: Add systemd service
+        command:
+          cmd: systemctl daemon-reload && systemctl enable consul-ondrejsika
+  - name:  Setup consul
+    hosts: [all]
+    tags: [consul]
+    tasks:
+      - name: Config
+        template:
+          path: /etc/consul/consul.hcl
+          template: |
+            datacenter = "fra"
+            data_dir = "/var/lib/consul-ondrejsika"
+            client_addr = "0.0.0.0"
+            # node_name = "c-{{ .Vars.service }}-{{ .Vars.i }}"
+            bind_addr = "{{ .Vars.ip }}"
+            retry_join = ["lab0.sikademo.com"]
+            services = [
+              {
+                name = "{{ .Vars.service }}"
+                port = 80
+                tags = ["web"]
+                check = {
+                  HTTP = "http://127.0.0.1:80"
+                  interval = "10s"
+                  timeout = "1s"
+                }
+              },
+              {
+                name = "node-exporter"
+                port = 9100
+                tags = ["prometheus"]
+                check = {
+                  HTTP = "http://127.0.0.1:9100"
+                  interval = "10s"
+                  timeout = "1s"
+                }
+              }
+            ]
+      - name: Restart consul
+        command:
+          cmd: systemctl restart consul

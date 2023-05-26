@@ -1,0 +1,2 @@
+all:
+	gobble run

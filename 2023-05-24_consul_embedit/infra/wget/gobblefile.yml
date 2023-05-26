@@ -1,0 +1,82 @@
+meta:
+  schema_version: 3
+hosts:
+  all:
+    - ssh_target: root@wget.sikademo.com
+      vars:
+        ip: 159.89.18.46
+plays:
+  - name:  Setup systemd service
+    hosts: [all]
+    tasks:
+      - name: Mkdirs
+        command:
+          cmd: |
+            rm -rf /etc/consul && \
+            rm -rf /var/lib/consul && \
+            mkdir -p /etc/consul && \
+            mkdir -p /var/lib/consul
+      - name: Systemd service
+        template:
+          path: /etc/systemd/system/consul.service
+          template: |
+            [Unit]
+            ConditionPathExists=/var/lib/consul
+            After=network.target
+
+            [Service]
+            Type=simple
+            User=root
+            Group=root
+            WorkingDirectory=/var/lib/consul
+
+            ExecStart=consul agent -config-dir=/etc/consul
+            Restart=on-failure
+            RestartSec=10
+
+            [Install]
+            WantedBy=multi-user.target
+  - name:  Setup consul
+    hosts: [all]
+    tags: [consul]
+    tasks:
+      - name: Config
+        template:
+          path: /etc/consul/consul.hcl
+          template: |
+            datacenter = "fra"
+            data_dir = "/var/lib/consul"
+            client_addr = "0.0.0.0"
+            bind_addr = "{{ .Vars.ip }}"
+            retry_join = [
+              "c-fra-1.sikademo.com",
+              "c-fra-2.sikademo.com",
+              "c-fra-3.sikademo.com",
+            ]
+            services = [
+              {
+                name = "wget"
+                port = 80
+                connect = {
+                  "sidecar_service" = {
+                    "proxy" = {
+                      "upstreams" = [
+                        {
+                          "destination_name" = "counter"
+                          "local_bind_port" = 8000
+                          destination_peer = "mesh"
+                        },
+                        {
+                          "destination_name" = "redis"
+                          "local_bind_port" = 6379
+                          destination_peer = "mesh"
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+            ]
+      - name: Restart consul
+        command:
+          cmd: systemctl restart consul
