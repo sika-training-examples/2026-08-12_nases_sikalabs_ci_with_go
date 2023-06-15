@@ -1,0 +1,7 @@
+host: t-mobile.k8s.sikademo.com
+image: sikalabs/hello-world-server:v0.6.0
+containerPort: 8000
+containerEnv:
+  - name: TEXT
+    value: "Hello T-Mobile!"
+replicas: 10

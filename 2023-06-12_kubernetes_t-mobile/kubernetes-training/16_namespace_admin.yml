@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ondrejsika
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: ondrejsika-user
+  namespace: ondrejsika
+secrets:
+  - name: ondrejsika-user
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ondrejsika-user
+  namespace: ondrejsika
+  annotations:
+    kubernetes.io/service-account.name: ondrejsika-user
+type: kubernetes.io/service-account-token
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: ondrejsika-user-full-access
+  namespace: ondrejsika
+rules:
+  - apiGroups: ["*"]
+    resources: ["*"]
+    verbs: ["*"]
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: ondrejsika-user-role-binding
+  namespace: ondrejsika
+subjects:
+  - kind: ServiceAccount
+    name: ondrejsika-user
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: ondrejsika-user-full-access
