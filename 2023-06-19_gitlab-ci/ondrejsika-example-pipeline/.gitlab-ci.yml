@@ -1,0 +1,86 @@
+image: sikalabs/ci
+
+stages:
+  - build
+  - test
+  - deploy dev
+  - deploy prod
+
+variables:
+  IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA-$CI_PIPELINE_ID
+  HOST: $CI_COMMIT_REF_SLUG.ci.physt.uk
+
+build:
+  stage: build
+  script:
+    - docker login $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
+    - docker build -t $IMAGE .
+    - docker push $IMAGE
+
+.test:
+  image: golang:1.20
+  stage: test
+  needs: []
+
+lint:
+  extends: .test
+  script:
+    - go fmt $(go list ./... | grep -v /vendor/)
+    - go vet $(go list ./... | grep -v /vendor/)
+
+test:
+  extends: .test
+  script:
+    - go test -race $(go list ./... | grep -v /vendor/)
+
+deploy dev:
+  stage: deploy dev
+  needs:
+    - test
+    - build
+  script:
+    - helm upgrade --install $CI_ENVIRONMENT_SLUG
+      one-image --repo https://helm.sikalabs.io
+      --set image=$IMAGE
+      --set host=$HOST
+      --set containerPort=8000
+    - slu wait-for tls -a $HOST:443
+  environment:
+    name: dev-$CI_COMMIT_REF_SLUG
+    url: https://$HOST
+    on_stop: stop dev
+
+stop dev:
+  needs:
+    - test
+    - build
+  stage: deploy dev
+  variables:
+    GIT_STRATEGY: none
+  script:
+    - helm uninstall $CI_ENVIRONMENT_SLUG
+  when: manual
+  environment:
+    name: dev-$CI_COMMIT_REF_SLUG
+    action: stop
+
+deploy prod:
+  stage: deploy prod
+  needs:
+    - test
+    - build
+    - deploy dev
+  when: manual
+  rules:
+    - if: $CI_COMMIT_TAG
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  script:
+    - helm upgrade --install $CI_ENVIRONMENT_SLUG
+      one-image --repo https://helm.sikalabs.io
+      --set image=$IMAGE
+      --set host=ci.physt.uk
+      --set containerPort=8000
+    - slu wait-for tls -a ci.physt.uk:443
+  environment:
+    name: prod
+    url: https://ci.physt.uk

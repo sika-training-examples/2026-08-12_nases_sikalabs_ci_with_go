@@ -1,0 +1,21 @@
+# .gitlab-ci.yml
+
+variables:
+  BASE_HOST: dev.company.com
+  HOST: $CI_PROJECT_PATH_SLUG-$CI_COMMIT_REF_SLUG.$BASE_HOST
+
+deploy:
+  script: echo 'Deploy!!!!'
+  environment:
+    name: dev/$CI_COMMIT_REF_SLUG
+    url: https://$HOST
+    on_stop: foo
+
+foo:
+  # variables:
+  #   GIT_STRATEGY: none
+  script: echo Stop!
+  when: manual
+  environment:
+    name: dev/$CI_COMMIT_REF_SLUG
+    action: stop
