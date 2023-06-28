@@ -1,0 +1,2 @@
+FROM scratch
+COPY example2 /usr/local/bin/

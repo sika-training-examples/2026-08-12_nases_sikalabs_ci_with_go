@@ -1,0 +1,3 @@
+FROM scratch
+COPY hello-world-os /usr/local/bin/
+CMD ["hello-world-os"]

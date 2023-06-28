@@ -1,0 +1,84 @@
+project_name: example2
+
+before:
+  hooks:
+    - rm -rf dist
+    - go mod tidy
+    - git push
+    - git push --tags
+
+builds:
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
+    flags:
+      - -trimpath
+    ldflags:
+      - -s
+      - -w
+      - -X github.com/golang-training-examples/example2/version.Version=v{{.Version}}
+      - -X github.com/golang-training-examples/example2/version.GitCommit={{.FullCommit}}
+      - -X github.com/golang-training-examples/example2/version.DateOfBuild={{.Date}}
+
+snapshot:
+  name_template: "{{ incminor .Version }}-dev-{{.ShortCommit}}-{{.Timestamp}}"
+
+archives:
+  - format: tar.gz
+    name_template: "{{ .ProjectName }}_v{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    format_overrides:
+      - goos: windows
+        format: zip
+
+checksum:
+  name_template: "{{ .ProjectName }}_checksums.txt"
+  algorithm: sha256
+
+brews:
+  - name: example2
+    tap:
+      owner: ondrejsikademo
+      name: homebrew-tap
+    skip_upload: auto
+    homepage: https://github.com/golang-training-examples/example2
+    url_template: "https://github.com/golang-training-examples/example2/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
+    folder: Formula
+    caveats: "How to use this binary: https://github.com/golang-training-examples/example2"
+    description: "Example for Golang Training"
+    install: |
+      bin.install "example2"
+    test: |
+      system "#{bin}/example2"
+
+scoop:
+  bucket:
+    owner: ondrejsikademo
+    name: scoop-bucket
+  homepage:  https://github.com/golang-training-examples/example2
+  description: "Example for Golang Training"
+  license: MIT
+
+dockers:
+  - goos: linux
+    goarch: amd64
+    image_templates:
+      - "ghcr.io/golang-training-examples/example2:{{ .Tag }}"
+    dockerfile: Dockerfile.goreleaser
+    ids:
+      - example2
+    build_flag_templates:
+      - "--platform=linux/amd64"
+      - "--label=org.opencontainers.image.created={{.Date}}"
+      - "--label=org.opencontainers.image.title={{.ProjectName}}"
+      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+      - "--label=org.opencontainers.image.version={{.Version}}"
+      - "--label=org.opencontainers.image.source=https://github.com/golang-training-examples/example2"
+      - "--label=org.label-schema.schema-version=1.0"
+      - "--label=org.label-schema.version={{.Version}}"
+      - "--label=org.label-schema.name={{.ProjectName}}"
+      - "--label=com.github.actions.name={{.ProjectName}}"
+      - "--label=repository=https://github.com/golang-training-examples/example2"
+      - "--label=maintainer=SikaLabs <opensource@sikalabs.com>"

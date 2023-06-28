@@ -1,0 +1,15 @@
+# Global
+.DS_Store
+
+# Editor
+.vscode
+
+# General
+*.local.sh
+
+# Go
+/hello-world-os
+/hello-world-os.exe
+/dist
+/coverage.out
+/coverage.html

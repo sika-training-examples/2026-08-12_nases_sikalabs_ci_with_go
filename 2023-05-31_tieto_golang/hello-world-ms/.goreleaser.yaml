@@ -1,0 +1,39 @@
+project_name: hello-world-ms
+
+gitlab_urls:
+  api: https://gitlab.sikalabs.com/api/v4/
+  download: https://gitlab.sikalabs.com
+
+before:
+  hooks:
+    - rm -rf dist
+    - go mod tidy
+    - git push
+    - git push --tags
+
+builds:
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
+    flags:
+      - -trimpath
+    ldflags:
+      - -s
+      - -w
+
+snapshot:
+  name_template: "{{ incminor .Version }}-dev-{{ .ShortCommit }}-{{ .Timestamp }}"
+
+archives:
+  - format: tar.gz
+    name_template: "{{ .ProjectName }}_v{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    format_overrides:
+      - goos: windows
+        format: zip
+
+checksum:
+  name_template: "{{ .ProjectName }}_checksums.txt"
+  algorithm: sha256

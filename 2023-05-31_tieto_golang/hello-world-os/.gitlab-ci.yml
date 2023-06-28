@@ -1,0 +1,21 @@
+stages:
+  - test
+
+tests:
+  stage: test
+  image: golang:1.20
+  script:
+    - go install
+    - go get github.com/jstemmer/go-junit-report
+    - go get github.com/boumenot/gocover-cobertura
+    - go get gotest.tools/gotestsum
+    - go test ./... -coverprofile=coverage.txt -covermode count | tee report.txt
+    # - go run github.com/jstemmer/go-junit-report < report.txt > report.xml
+    - go run gotest.tools/gotestsum --junitfile report.xml --format testname
+    - go run github.com/boumenot/gocover-cobertura < coverage.txt > coverage.xml
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage.xml
+      junit: report.xml

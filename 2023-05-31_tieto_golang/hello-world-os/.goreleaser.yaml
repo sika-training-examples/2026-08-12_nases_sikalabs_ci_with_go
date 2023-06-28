@@ -1,0 +1,65 @@
+project_name: hello-world-os
+
+gitlab_urls:
+  api: https://gitlab.sikalabs.com/api/v4/
+  download: https://gitlab.sikalabs.com
+
+before:
+  hooks:
+    - rm -rf dist
+    - go mod tidy
+    - git push
+    - git push --tags
+
+builds:
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
+    flags:
+      - -trimpath
+    ldflags:
+      - -s
+      - -w
+
+snapshot:
+  name_template: "{{ incminor .Version }}-dev-{{.ShortCommit}}-{{.Timestamp}}"
+
+archives:
+  - format: tar.gz
+    name_template: "{{ .ProjectName }}_v{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    format_overrides:
+      - goos: windows
+        format: zip
+
+release:
+  extra_files:
+    - glob: ./dist/hello-world-os_windows_amd64_v1/hello-world-os.exe
+
+checksum:
+  name_template: "{{ .ProjectName }}_checksums.txt"
+  algorithm: sha256
+
+dockers:
+  - goos: linux
+    goarch: amd64
+    image_templates:
+      - "reg.istry.cz/golang-training-examples/hello-world-os:{{ .Tag }}"
+    dockerfile: Dockerfile.goreleaser
+    ids:
+      - hello-world-os
+    build_flag_templates:
+      - "--platform=linux/amd64"
+      - "--label=org.opencontainers.image.created={{.Date}}"
+      - "--label=org.opencontainers.image.title={{.ProjectName}}"
+      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+      - "--label=org.opencontainers.image.version={{.Version}}"
+      - "--label=org.opencontainers.image.source=https://gitlab.sikalabs.com/golang-training-brno/hello-world-os"
+      - "--label=org.label-schema.schema-version=1.0"
+      - "--label=org.label-schema.version={{.Version}}"
+      - "--label=org.label-schema.name={{.ProjectName}}"
+      - "--label=com.github.actions.name={{.ProjectName}}"
+      - "--label=repository=https://gitlab.sikalabs.com/golang-training-brno/hello-world-os"
+      - "--label=maintainer=SikaLabs <opensource@sikalabs.com>"
