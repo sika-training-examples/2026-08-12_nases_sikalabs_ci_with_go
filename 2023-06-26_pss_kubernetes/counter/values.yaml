@@ -1,0 +1,6 @@
+# === Required Values ===
+host:
+
+# === Optional Values ===
+replicas: 2
+storage: false

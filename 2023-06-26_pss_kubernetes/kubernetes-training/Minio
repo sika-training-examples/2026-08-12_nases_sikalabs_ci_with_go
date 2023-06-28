@@ -1,0 +1,10 @@
+helm upgrade --install \
+  --namespace minio-operator \
+  --create-namespace \
+  minio-operator operator --repo https://operator.min.io/
+
+helm upgrade --install \
+  --namespace minio \
+  --create-namespace \
+  tenant tenant --repo https://operator.min.io/ \
+  --values ./minio.values.yml

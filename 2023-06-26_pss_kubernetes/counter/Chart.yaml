@@ -1,0 +1,5 @@
+apiVersion: v2
+name: counter
+description: An example for PSS.sk training
+type: application
+version: 2023.06.27
