@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-rbac-cm
+  namespace: argocd
+data:
+  policy.csv: |
+    g, argocd-admin, role:admin
+    g, argocd-readonly, role:readonly
+
+    p, argocd-foo, projects, get, foo, allow
+    p, argocd-foo, projects, update, foo, allow
+    p, argocd-foo, applications, get, foo/*, allow
+    p, argocd-foo, applications, create, foo/*, allow
+    p, argocd-foo, applications, update, foo/*, allow
+    p, argocd-foo, applications, delete, foo/*, allow
+
+  policy.default: ""
+  scopes: '[groups]'

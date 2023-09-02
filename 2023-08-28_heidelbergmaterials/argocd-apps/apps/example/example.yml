@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: example
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: example
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://gitlab.sikalabs.com/ondrej/example-1.git
+    targetRevision: HEAD
+    path: .
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: repo-ondrejsika-private
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/secret-type: repository
+stringData:
+  project: default
+  type: git
+  url: https://gitlab.sikalabs.com/ondrej/example-1.git
+  username: token
+  password: glpat-pJ7jRLkvjYvNv3y-of5X
+

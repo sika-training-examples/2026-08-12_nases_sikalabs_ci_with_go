@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: foo
+  namespace: argocd
+spec:
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  destinations:
+  - namespace: foo
+    server: https://kubernetes.default.svc
+  sourceRepos:
+  - 'https://gitlab.sikalabs.com/**'
+  roles:
+  - name: foo
+    policies:
+    - p, proj:foo:admin, projects, get, foo, allow
+    - p, proj:foo:admin, projects, update, foo, allow
+    - p, proj:foo:admin, applications, get, foo/*, allow
+    - p, proj:foo:admin, applications, create, foo/*, allow
+    - p, proj:foo:admin, applications, update, foo/*, allow
+    - p, proj:foo:admin, applications, delete, foo/*, allow
+    groups:
+    - argocd-foo

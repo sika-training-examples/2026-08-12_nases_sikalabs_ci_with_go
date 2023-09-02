@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: zerossl-example
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: zerossl-example
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    repoURL: https://github.com/sikalabs/charts.git
+    targetRevision: HEAD
+    path: charts/one-image
+    helm:
+      releaseName: zerossl-example
+      values: |
+        host: zerossl-example.ondrejsika.sikademo.com
+        image: ondrejsika/training-example
+        clusterIssuer: zerossl
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

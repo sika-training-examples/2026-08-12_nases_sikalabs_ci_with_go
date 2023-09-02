@@ -1,0 +1,9 @@
+dependencies:
+- name: hello-world
+  repository: https://helm.sikalabs.io
+  version: 0.6.0
+- name: one-image
+  repository: https://helm.sikalabs.io
+  version: 1.17.0
+digest: sha256:46781716a83fe088ab5da858b89edd27944bd513c254bbbdbb52fc95aa794963
+generated: "2023-08-31T15:49:33.267344+02:00"

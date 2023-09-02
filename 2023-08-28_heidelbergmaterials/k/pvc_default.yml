@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: default-pvc
+spec:
+  storageClassName: azurefile-csi-retain
+  volumeName: pvc-bfb2be00-bf89-4f85-9e6e-b1a18aa86474
+  accessModes:
+    # - ReadWriteOnce
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi

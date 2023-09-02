@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: loadbalancer-aks
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-resource-group: MC_example_example_westeurope
+spec:
+  type: LoadBalancer
+  loadBalancerIP: 4.180.93.131
+  selector:
+    app: example
+  ports:
+    - port: 80

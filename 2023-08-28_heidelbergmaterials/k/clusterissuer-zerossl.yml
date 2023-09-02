@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: zerossl-eab
+  namespace: cert-manager
+stringData:
+  secret: CbnDKMCa8Lf8LkfaX9Jbms6n7BktaA1pBQcjXgN8CgcR6rUibuJNB3foE_D69eD5_YtbbzMb-1RF1f4fw0lgdw
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: zerossl
+spec:
+  acme:
+    server: https://acme.zerossl.com/v2/DV90
+    email: zerossl-demo-1@ondrejsikamail.com
+    privateKeySecretRef:
+      name: zerossl
+    externalAccountBinding:
+      keyID: be8uYcNqxe-bxlLfTj18tA
+      keySecretRef:
+        name: zerossl-eab
+        key: secret
+    solvers:
+      - http01:
+          ingress:
+            class: nginx

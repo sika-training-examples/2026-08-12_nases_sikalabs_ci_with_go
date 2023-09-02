@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-of-apps
+  namespace: argocd
+spec:
+  destination:
+    namespace: default
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: ./apps
+    repoURL: https://gitlab.sikalabs.com/ondrej/argocd-apps.git
+    directory:
+      recurse: true
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: repo-ondrej-argocd-apps
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/secret-type: repository
+stringData:
+  project: default
+  type: git
+  url: https://gitlab.sikalabs.com/ondrej/argocd-apps.git
+  username: token
+  password: glpat-hP4NWQsR4Jr79MZVEHr1

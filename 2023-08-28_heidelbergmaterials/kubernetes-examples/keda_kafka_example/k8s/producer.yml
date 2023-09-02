@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: producer
+spec:
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: producer
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: producer
+    spec:
+      containers:
+        - name: main
+          image: ondrejsika/example-keda-producer
+          env:
+            - name: KAFKA_BROKER_ADDRESS
+              value: kafka-kafka-bootstrap.kafka.svc:9092
+            - name: KAFKA_TOPIC
+              value: example
+          resources:
+            limits:
+              cpu: 200m
+              memory: 200Mi

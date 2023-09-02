@@ -1,0 +1,6 @@
+hello-world:
+  replicas: 3
+  host: hhh.os2.oxs.cz
+one-image:
+  host: ooo.os2.oxs.cz
+  image: ondrejsika/training-example

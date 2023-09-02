@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: counter2
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: foo
+  destination:
+    namespace: foo
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://gitlab.sikalabs.com/ondrej/2023-08-31_counter_helm.git
+    targetRevision: HEAD
+    path: .
+    helm:
+      releaseName: counter2
+      values: |
+        replicas: 3
+        host: counter2.os2.oxs.cz
