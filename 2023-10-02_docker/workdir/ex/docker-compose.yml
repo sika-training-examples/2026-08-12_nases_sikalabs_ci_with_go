@@ -1,0 +1,15 @@
+version: "3.8"
+name: counter
+services:
+  app:
+    build: .
+    image: ttl.sh/ondrej/counter
+    ports:
+      - 80:80
+  redis:
+    image: redis
+    volumes:
+      - redis-data:/data
+
+volumes:
+  redis-data:

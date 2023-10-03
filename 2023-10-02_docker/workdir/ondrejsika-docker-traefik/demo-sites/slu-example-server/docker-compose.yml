@@ -1,0 +1,11 @@
+version: "3.8"
+services:
+  slu-example-server:
+    image: sikalabs/slu:v0.70.0
+    command: ["slu", "example-server"]
+    networks:
+      - traefik
+
+networks:
+  traefik:
+    name: traefik

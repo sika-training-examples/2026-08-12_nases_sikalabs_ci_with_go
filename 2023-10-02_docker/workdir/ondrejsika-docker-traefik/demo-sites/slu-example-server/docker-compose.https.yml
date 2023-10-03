@@ -1,0 +1,10 @@
+version: "3.8"
+services:
+  slu-example-server:
+    labels:
+      # For Docker Compose Traefik Deployment (single node)
+      - traefik.enable=true
+      - traefik.http.services.slu-example-server.loadbalancer.server.port=8000
+      - traefik.http.routers.slu-example-server.rule=Host(`${HOST:-slu-example-server-127-0-0-1.nip.io}`)
+      - traefik.http.routers.slu-example-server.entrypoints=http,https
+      - traefik.http.routers.slu-example-server.tls.certresolver=le

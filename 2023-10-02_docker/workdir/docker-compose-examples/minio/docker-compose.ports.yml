@@ -1,0 +1,6 @@
+version: "3.9"
+services:
+  minio:
+    ports:
+      - ${PORT_9000:-9000}:9000
+      - ${PORT_9001:-9001}:9001

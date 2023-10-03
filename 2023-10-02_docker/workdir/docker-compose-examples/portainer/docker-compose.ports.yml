@@ -1,0 +1,5 @@
+version: "3.9"
+services:
+  portainer:
+    ports:
+      - ${PORT:-9000}:9000
