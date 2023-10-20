@@ -1,0 +1,38 @@
+version: "3.8"
+name: counter
+services:
+  counter:
+    build: .
+    image: ttl.sh/counter
+    labels:
+      traefik.enable: true
+      traefik.http.routers.counter.rule: Host(`localhost`)
+      traefik.http.routers.counter.entrypoints: http
+    environment:
+      REDIS: redis
+    depends_on:
+      - redis
+    deploy:
+      replicas: 4
+  redis:
+    image: redis
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+  traefik:
+    image: traefik:v2.10
+    command:
+      - --metrics.prometheus=true
+      - --api.insecure=true
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --entrypoints.http.address=:80
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+volumes:
+  redis-data:

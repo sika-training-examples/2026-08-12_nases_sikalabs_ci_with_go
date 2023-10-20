@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: counter
+spec:
+  revisionHistoryLimit: 0
+  replicas: 4
+  selector:
+    matchLabels:
+      app: counter
+  template:
+    metadata:
+      labels:
+        app: counter
+    spec:
+      containers:
+        - name: main
+          image: ttl.sh/counter
+          ports:
+            - containerPort: 80
+          env:
+            - name: REDIS
+              value: redis
+          resources:
+            requests:
+              cpu: 40m
+              memory: 20Mi
+            limits:
+              cpu: 80m
+              memory: 40Mi

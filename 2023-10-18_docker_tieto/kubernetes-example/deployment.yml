@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tieto
+spec:
+  revisionHistoryLimit: 0
+  replicas: 4
+  selector:
+    matchLabels:
+      app: tieto
+  template:
+    metadata:
+      labels:
+        app: tieto
+    spec:
+      containers:
+        - name: main
+          image: sikalabs/hello-world-server:tietoevry
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              cpu: 40m
+              memory: 20Mi
+            limits:
+              cpu: 80m
+              memory: 40Mi
