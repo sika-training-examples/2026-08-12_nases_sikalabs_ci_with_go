@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-of-apps-root
+  namespace: argocd
+spec:
+  destination:
+    namespace: argocd
+    server: https://kubernetes.default.svc
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+  source:
+    repoURL: https://gitlab.sikalabs.com/examples/eon-argocd/argocd-apps-root.git
+    targetRevision: HEAD
+    path: apps
+    directory:
+      recurse: true

@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-of-apps-bar
+  namespace: argocd
+spec:
+  destination:
+    namespace: argocd
+    server: https://kubernetes.default.svc
+  project: bar
+  syncPolicy:
+    automated:
+      prune: true
+  source:
+    repoURL: https://gitlab.sikalabs.com/examples/eon-argocd/argocd-apps-bar.git
+    targetRevision: HEAD
+    path: apps
+    directory:
+      recurse: true

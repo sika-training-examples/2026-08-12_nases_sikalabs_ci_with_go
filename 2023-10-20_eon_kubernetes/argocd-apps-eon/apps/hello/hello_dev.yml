@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hello-dev
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: a-hello
+    server: https://ce33c247-bdf0-4c31-a9f0-ea97e40d000d.k8s.ondigitalocean.com
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://github.com/sikalabs/charts.git
+    targetRevision: HEAD
+    path: charts/hello-world
+    helm:
+      releaseName: hello-dev
+      valuesObject:
+        host: a-hello-dev.k8s.sikademo.com
+        replicas: 2
+        TEXT: "[DEV] Hello EON from ArgoCD!"
+        image: sikalabs/hello-world-server:eon

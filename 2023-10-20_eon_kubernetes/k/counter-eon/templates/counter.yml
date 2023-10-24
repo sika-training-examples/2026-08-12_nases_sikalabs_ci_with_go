@@ -1,0 +1,100 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{.Release.Name}}-redis
+spec:
+  serviceName: {{.Release.Name}}-redis
+  selector:
+    matchLabels:
+      app: {{.Release.Name}}-redis
+  template:
+    metadata:
+      labels:
+        app: {{.Release.Name}}-redis
+    spec:
+      containers:
+        - name: main
+          image: redis
+          resources:
+            requests:
+              cpu: 30m
+              memory: 50Mi
+            limits:
+              cpu: 50m
+              memory: 80Mi
+          ports:
+            - containerPort: 6379
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{.Release.Name}}-redis
+spec:
+  selector:
+    app: {{.Release.Name}}-redis
+  ports:
+    - port: 6379
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{.Release.Name}}-counter
+spec:
+  selector:
+    matchLabels:
+      app: {{.Release.Name}}-counter
+  replicas: {{ .Values.replicas }}
+  template:
+    metadata:
+      labels:
+        app: {{.Release.Name}}-counter
+    spec:
+      containers:
+        - name: main
+          image: ondrejsika/counter
+          resources:
+            requests:
+              cpu: 20m
+              memory: 30Mi
+            limits:
+              cpu: 50m
+              memory: 60Mi
+          env:
+            - name: REDIS
+              value: {{.Release.Name}}-redis
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{.Release.Name}}-counter
+spec:
+  selector:
+    app: {{.Release.Name}}-counter
+  ports:
+    - port: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{.Release.Name}}-counter
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - {{ .Values.host }}
+      secretName: {{ .Values.host }}-tls
+  rules:
+    - host: {{ required ".Values.host is required" .Values.host }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{.Release.Name}}-counter
+                port:
+                  number: 80

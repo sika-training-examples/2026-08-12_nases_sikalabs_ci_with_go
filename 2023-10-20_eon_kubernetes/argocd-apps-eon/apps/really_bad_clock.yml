@@ -1,0 +1,45 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: really-bad-clock
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: 1=registry.sikalabs.com/random/really-bad-clock-private:latest
+    argocd-image-updater.argoproj.io/1.helm.image-spec: image
+    argocd-image-updater.argoproj.io/1.update-strategy: digest
+    argocd-image-updater.argoproj.io/1.force-update: 'true'
+    argocd-image-updater.argoproj.io/1.platforms: linux/amd64
+    argocd-image-updater.argoproj.io/1.pull-secret: pullsecret:argocd/really-bad-clock-pull-secret
+spec:
+  destination:
+    namespace: default
+    server: https://kubernetes.default.svc
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+  source:
+    repoURL: https://github.com/sikalabs/charts
+    targetRevision: HEAD
+    path: charts/one-image
+    helm:
+      releaseName: really-bad-clock
+      values: |
+        dockerRegistry: registry.sikalabs.com
+        dockerRegistryAuth: b25kcmVqc2lrYTpnbHBhdC1SdEJuMlNMVWJjeGV3d2U3dl8zcw==
+        image: registry.sikalabs.com/random/really-bad-clock-private
+        host: really-bad-clock.eon.sikademo.com
+---
+apiVersion: v1
+kind: Secret
+type: kubernetes.io/dockerconfigjson
+metadata:
+  name: really-bad-clock-pull-secret
+  namespace: argocd
+stringData:
+  .dockerconfigjson: '{"auths": {"registry.sikalabs.com": {"auth": "b25kcmVqc2lrYTpnbHBhdC1SdEJuMlNMVWJjeGV3d2U3dl8zcw=="}}}'

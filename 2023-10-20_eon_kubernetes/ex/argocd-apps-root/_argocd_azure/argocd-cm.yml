@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-cm
+  namespace: argocd
+data:
+  url: https://argocd.eon.sikademo.com/
+  exec.enabled: "true"
+  oidc.config: |
+    name: Azure
+    issuer: https://login.microsoftonline.com/373c75ef-cf99-490c-a905-4a1934945e40/v2.0
+    clientID: 0bd8dc90-a832-4769-9027-460c6a28f678
+    clientSecret: NMQ8Q~n1IMbtcn_D4pIqBFrLHqfsI6p2TEOfRbWi
+    requestedIDTokenClaims:
+      groups:
+          essential: true
+    requestedScopes:
+      - openid
+      - profile
+      - email

@@ -1,0 +1,5 @@
+apiVersion: v2
+name: counter-eon
+description: Example app for EON training
+type: application
+version: 2023.10.23

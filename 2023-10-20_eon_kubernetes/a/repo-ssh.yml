@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-priv-ssh
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/secret-type: repository
+stringData:
+  project: default
+  type: git
+  url: git@gitlab.sikademo.com:eon/ondrej3.git
+  username: ondrejsika
+  sshPrivateKey: |
+    -----BEGIN OPENSSH PRIVATE KEY-----
+    b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAABFwAAAAdzc2gtcn
+    NhAAAAAwEAAQAAAQEA535WGoK8xYuFdIB+LyWBGqZH6FRJkFdPmPp1+B6yAU8/7zZTWR5Z
+    EM6RBxG2nOqrbWP5I6pt01crCIdyvdkUYYXePpWRabFi1zHMKlOTVep6V+bjTc7MpZoA/W
+    BsRV0a3sxEIFXBbDUtdYYBtw6WGcvFu95rcs/5gtuOnfkSR/ELs/4QmmF+Iln80jalcuO7
+    A2HRD2sswYwFOSOm2793lWTSS2ai+OnviGtxD3zmHI2fvVGXqjkPzezbY9cnBQPu6n0UvQ
+    MK5LNoC2irogKowIJNiaKS1Rk7vJHL42U/iLZhfAZCuAfK3o/BR27MfoH7dz/1AB3ksiSd
+    2ue5xO4kjwAAA7j46FNV+OhTVQAAAAdzc2gtcnNhAAABAQDnflYagrzFi4V0gH4vJYEapk
+    foVEmQV0+Y+nX4HrIBTz/vNlNZHlkQzpEHEbac6qttY/kjqm3TVysIh3K92RRhhd4+lZFp
+    sWLXMcwqU5NV6npX5uNNzsylmgD9YGxFXRrezEQgVcFsNS11hgG3DpYZy8W73mtyz/mC24
+    6d+RJH8Quz/hCaYX4iWfzSNqVy47sDYdEPayzBjAU5I6bbv3eVZNJLZqL46e+Ia3EPfOYc
+    jZ+9UZeqOQ/N7Ntj1ycFA+7qfRS9Awrks2gLaKuiAqjAgk2JopLVGTu8kcvjZT+ItmF8Bk
+    K4B8rej8FHbsx+gft3P/UAHeSyJJ3a57nE7iSPAAAAAwEAAQAAAQEA2O/j8OQj01x0rEDd
+    /4C+BCNfr7GNXt7zkQDmHKdnWSLTX3Ehmpp+DOoHrwBCibrA+7p8d5f3Y96ETXHhbVhJaT
+    rykuPHaaz6W4AnPGMl55XdIRMWYIwz69zuoIQD8tzVmYUDMuoqYSVUfJYgdVQOBg6YNv6w
+    4t9Ti/YFKLWJFDBf1LdxXzJmhv7uvpvOEb2xbXLVIVi3gQor0h2n4CoLe3uUO0GFs6lV0e
+    QukkATDHzwG52MeCVBhC9ZoFLObnPkNhsuCArwpS7sC306MhQHDKwWIID4k8dRtYF7JsS6
+    prlBGUG/0GA9nlc/kQ4dUmFH7YwBQ0jezl/f+ccij2aawQAAAIB9OQsoLdGcfXZOt6a9sg
+    JWfZDXzNS8uI0WiogyLvqWvjK3204CrDxV2BjrmTjIYZPBg0n5OvLzv47hL/BB1mPzEmJb
+    hNHz+Fl9CC158U+oSizJ2jO9Uu0mLZDoFomLQ2Sw3PwhzK7vJ7P9cLobsqpjPDQMrBaM2+
+    2U+ZWYpvo/1AAAAIEA+CzRaeYXIMMqMlueWFQGtos5AeZOh0JvzoMN/nETrLjqkv6lPgN2
+    yJ9e11Wn5xNPokzb56IJcprIUifsQ4xZSHcJY/cZMFPiJg1jdpqtAqC1yKrQ508yU2IOkm
+    g4tU+AF5KlZvtUjZx43qvn9xtVivtDsvEoBJOgfhCiWcYN6a0AAACBAO7K3tyym4GDcdwD
+    gYofDDkCmII/GJum6zUo0sG8VAr/INjMSAJ3I0gChHqNuG3+Z5ZL9IltL1ciENZmHZSJB6
+    zpbxJMOoQICE64dFw2qROqAalVCR7ZKxP73MG7u6gWYdb9V0iSHdsgMG/tmgw9dvV5d8+u
+    8og4qkd/rcw17QarAAAAAAEC
+    -----END OPENSSH PRIVATE KEY-----
+  # insecure: "true"

@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hello-stage
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: a-hello
+    server: https://kubernetes.default.svc
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://github.com/sikalabs/charts.git
+    targetRevision: HEAD
+    path: charts/hello-world
+    helm:
+      releaseName: hello-stage
+      valuesObject:
+        host: a-hello-stage.eon.sikademo.com
+        replicas: 2
+        TEXT: "[STAGE] Hello EON from ArgoCD!"
+        image: sikalabs/hello-world-server:eon

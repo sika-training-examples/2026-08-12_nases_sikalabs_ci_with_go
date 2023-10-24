@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-ssh-known-hosts-cm
+  namespace: argocd
+data:
+  ssh_known_hosts: |
+    gitlab.sikademo.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDsAFx4nimN1NFLkwza0NuKdMgNACyZGKWxs/Y/2RuFW2z75nH/QuX4T3/ppuYdyDQmXOWRFdwxXr3/2UqtvyJ5UXTHxzlfFT7fbWj0Jv45zMRsl/Ul9+/sIViMucB5bhpD/bViwmZUJ3HUbnFuk8P5t5+apG3Ja+BTDoLltj1PC3nRW6Jdc3sQ0WuU1LlfyPBf9EkQ4BByYw7s3/e1kcrkiewzFFaouNrD4yY1wkrMtcAZUhPIWcwmj1A16y31Dwd/OlytyKL5qe1sSV8i2CES7d/JJs6c7u2Jwgu9al7W9lK+ieHAcymFyKi5lb2qp4glGTMwO2RA/w2Rj0unYXdVQf4TaGzKuLxj4+iRgq6JhM79ib9hksaxtlQ6rWlub4ucnoLaEguL1iI8bpGA/u++xSTVCXZiPbyenGe1o758P3DZfJ5lImW0Y5HM+A547aKQXc7fwRkYb9ZGlwALNS2n5iElDrjjySLyEIVNGHoaaN+zlm8W9b53r9p+nF+bPeE=
+    gitlab.sikademo.com ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBA+A+CgQkks2EH7DW39HWz7FBXsYvpph9ewV2gYNTE+FQnIeVdNRoK43MD5WsBOhzMBmmbrsQnX1FqTtYbkM0hI=
+    gitlab.sikademo.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBLMsdzPN664axtGS3e7PSc2dCiPvwrxWqorr+PBpdhT

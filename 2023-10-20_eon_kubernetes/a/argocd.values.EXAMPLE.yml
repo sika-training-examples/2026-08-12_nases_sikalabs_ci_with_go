@@ -1,0 +1,14 @@
+# https://github.com/argoproj/argo-helm/blob/master/charts/argo-cd/values.yaml
+server:
+  ingress:
+    enabled: true
+    hosts:
+      - argocd.k8s.sikademo.com
+    ingressClassName: nginx
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+      nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    tls:
+      - hosts:
+        - argocd.k8s.sikademo.com
+        secretName: argocd-tls

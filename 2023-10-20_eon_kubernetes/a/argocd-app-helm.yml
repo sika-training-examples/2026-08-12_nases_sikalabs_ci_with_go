@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hello-world-helm
+  namespace: argocd
+spec:
+  destination:
+    namespace: a4
+    server: https://kubernetes.default.svc
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://raw.githubusercontent.com/ondrejsika/helm-repo-sikademo/master/repo
+    chart: counter-eon
+    targetRevision: 2023.10.23
+    helm:
+      releaseName: counter
+      valuesObject:
+        host: counter-from-argocd.eon.sikademo.com
+        replicas: 5
