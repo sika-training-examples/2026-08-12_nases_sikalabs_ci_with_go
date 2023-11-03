@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  counter:
+    build: .
+    image: ttl.sh/counter:24h
+    ports:
+      - ${PORT:-80}:80
+    depends_on:
+      - redis
+  redis:
+    image: redis
+    volumes:
+      - redis-data:/data
+
+volumes:
+  redis-data:

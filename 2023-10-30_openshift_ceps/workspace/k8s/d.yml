@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: hello-world-server
+  name: hello-world-server
+  namespace: ondrej
+spec:
+  replicas: 2
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: hello-world-server
+  template:
+    metadata:
+      labels:
+        app: hello-world-server
+    spec:
+      containers:
+      - image: sikalabs/hello-world-server
+        name: main

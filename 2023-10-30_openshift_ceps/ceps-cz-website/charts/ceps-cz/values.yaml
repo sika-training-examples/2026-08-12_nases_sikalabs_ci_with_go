@@ -1,0 +1,6 @@
+# Required
+host:
+
+# Optional
+image: ttl.sh/ceps-cz:24h
+replicas: 2

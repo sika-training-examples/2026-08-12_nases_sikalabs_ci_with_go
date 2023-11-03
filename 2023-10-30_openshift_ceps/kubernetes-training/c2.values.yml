@@ -1,0 +1,2 @@
+host: counter-2.apps.okd.aws.sikademo.com
+counterReplicas: 7

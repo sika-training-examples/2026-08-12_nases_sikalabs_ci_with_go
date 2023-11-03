@@ -1,0 +1,56 @@
+apiVersion: config.openshift.io/v1
+kind: OAuth
+metadata:
+  name: cluster
+spec:
+  identityProviders:
+    - mappingMethod: claim
+      name: SikaLabs_SSO
+      type: OpenID
+      openID:
+        claims:
+          email:
+            - email
+          name:
+            - name
+          preferredUsername:
+            - email
+        clientID: okd-training
+        clientSecret:
+          name: openid-client-secret-sikalabs-sso
+        extraScopes: []
+        issuer: 'https://sso.sikalabs.com/realms/sikalabs'
+    - mappingMethod: claim
+      name: SikaDemo_SSO
+      type: OpenID
+      openID:
+        claims:
+          email:
+            - email
+          name:
+            - name
+          preferredUsername:
+            - email
+        clientID: okd
+        clientSecret:
+          name: openid-client-secret-sikademo-sso
+        extraScopes: []
+        issuer: 'https://sso.sikademo.com/realms/sikademo'
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: openid-client-secret-sikalabs-sso
+  namespace: openshift-config
+type: Opaque
+stringData:
+  clientSecret: okd-training
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: openid-client-secret-sikademo-sso
+  namespace: openshift-config
+type: Opaque
+stringData:
+  clientSecret: okd

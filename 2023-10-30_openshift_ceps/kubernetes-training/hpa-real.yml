@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hpa
+spec:
+  selector:
+    matchLabels:
+      app: hpa
+  replicas: 10
+  template:
+    metadata:
+      labels:
+        app: hpa
+    spec:
+      containers:
+        - name: main
+          image: ghcr.io/sikalabs/slu:v0.71.0
+          command:
+            - slu
+            - example-server
+          ports:
+            - containerPort: 8000
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8000
+          resources:
+            requests:
+              cpu: 40m
+              memory: 30Mi
+            limits:
+              cpu: 80m
+              memory: 50Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hpa
+spec:
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 8000
+  selector:
+    app: hpa
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: hpa
+  minReplicas: 10
+  maxReplicas: 30
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 0
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          averageUtilization: 90
+          type: Utilization

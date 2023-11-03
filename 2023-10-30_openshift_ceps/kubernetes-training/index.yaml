@@ -1,0 +1,13 @@
+apiVersion: v1
+entries:
+  counter:
+  - apiVersion: v2
+    created: "2023-11-02T14:34:28.653909+01:00"
+    description: Example app for OpenShift training @ CEPS
+    digest: 94c2284e6b073597c7da0e8f1fbc0b506425736c6661b253beb82f87bdeed30e
+    name: counter
+    type: application
+    urls:
+    - counter-2023.11.02.tgz
+    version: 2023.11.02
+generated: "2023-11-02T14:34:28.653622+01:00"

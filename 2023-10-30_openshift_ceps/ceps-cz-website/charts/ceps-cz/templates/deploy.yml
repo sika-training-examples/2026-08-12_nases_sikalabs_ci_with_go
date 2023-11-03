@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  replicas: {{ .Values.replicas }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: main
+          image: {{ .Values.image }}
+          resources:
+            requests:
+              cpu: 20m
+              memory: 30Mi
+            limits:
+              cpu: 50m
+              memory: 60Mi
+          ports:
+            - containerPort: 8000

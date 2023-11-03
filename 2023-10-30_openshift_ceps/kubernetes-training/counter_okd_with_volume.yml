@@ -1,0 +1,116 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Release.Name }}-redis
+spec:
+  serviceName: {{ .Release.Name }}-redis
+  persistentVolumeClaimRetentionPolicy:
+    whenDeleted: Retain
+    whenScaled: Delete
+  volumeClaimTemplates:
+    - metadata:
+        name: redis
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-redis
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-redis
+    spec:
+      containers:
+        - name: main
+          image: {{ .Values.redisImage }}
+          resources:
+            requests:
+              cpu: 30m
+              memory: 50Mi
+            limits:
+              cpu: 50m
+              memory: 80Mi
+          ports:
+            - containerPort: 6379
+          volumeMounts:
+            - mountPath: /data
+              name: redis
+      volumes:
+        - name: redis
+          persistentVolumeClaim:
+            claimName: redis
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-redis
+spec:
+  selector:
+    app: {{ .Release.Name }}-redis
+  ports:
+    - port: 6379
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-counter
+  annotations:
+    app.openshift.io/connects-to: |
+      [{"apiVersion":"apps/v1","kind":"StatefulSet","name":"{{ .Release.Name }}-redis"}]
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-counter
+  replicas: {{ .Values.counterReplicas }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-counter
+    spec:
+      containers:
+        - name: main
+          image: {{ .Values.counterImage }}}
+          resources:
+            requests:
+              cpu: 20m
+              memory: 30Mi
+            limits:
+              cpu: 50m
+              memory: 60Mi
+          env:
+            - name: REDIS
+              value: {{ .Release.Name }}-redis
+          ports:
+            - containerPort: 8000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-counter
+spec:
+  selector:
+    app: {{ .Release.Name }}-counter
+  ports:
+    - port: 80
+      targetPort: 8000
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-counter
+spec:
+  rules:
+    - host: {{ required ".Values.host is required" .Values.host }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Release.Name }}-counter
+                port:
+                  number: 80

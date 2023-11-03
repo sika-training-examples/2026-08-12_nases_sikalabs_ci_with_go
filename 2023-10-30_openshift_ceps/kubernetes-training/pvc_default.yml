@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: default-pvc
+spec:
+  storageClassName: gp3-csi-retain
+  volumeName: pvc-3eb1431c-76b5-45d4-847b-231c0c0a0f58
+  accessModes:
+    - ReadWriteOnce
+    # - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi

@@ -1,0 +1,5 @@
+apiVersion: v2
+name: ceps-cz
+description: Another example project for CEPS
+type: application
+version: 0.1.0

@@ -1,0 +1,14 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: aaa
+spec:
+  host: aaa.ceps.aws.sikademo.com
+  to:
+    kind: Service
+    name: hello-world-clusterip
+  port:
+    targetPort: http
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect

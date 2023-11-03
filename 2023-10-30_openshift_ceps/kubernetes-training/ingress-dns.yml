@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dns
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-dns
+spec:
+  tls:
+    - hosts:
+        - dns.ceps.sikademo.com
+        - this-is-an-example-whatever.sikademo.com
+      secretName: dns.ceps.sikademo.com-tls
+  rules:
+    - host: dns.ceps.sikademo.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: example-okd
+                port:
+                  number: 80

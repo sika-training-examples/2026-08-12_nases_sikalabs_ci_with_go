@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-world-nodeport
+spec:
+  type: NodePort
+  externalTrafficPolicy: Cluster
+  # externalTrafficPolicy: Local
+  selector:
+    app: example-okd
+  ports:
+    - port: 80
+      targetPort: http
+      # nodePort is optional (30000-32767)
+      nodePort: 31001

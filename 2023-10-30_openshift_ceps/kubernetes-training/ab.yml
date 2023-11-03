@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ab
+spec:
+  completions: 1
+  parallelism: 3
+  template:
+    metadata:
+      name: ab
+    spec:
+      containers:
+        - name: ab
+          image: ttl.sh/sikalabs/dev:24h
+          command: ["/bin/sh", "-c"]
+          args: ["ab -c 2 -n 100000000 http://hpa/"]
+      restartPolicy: Never
