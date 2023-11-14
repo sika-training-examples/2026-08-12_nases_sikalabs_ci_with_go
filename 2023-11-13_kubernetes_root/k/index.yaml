@@ -1,0 +1,13 @@
+apiVersion: v1
+entries:
+  counter:
+  - apiVersion: v2
+    created: "2023-11-14T15:33:33.5408+01:00"
+    description: Example for Kubernetes Training
+    digest: baab7513cda382fcc19cec908a6f7322d407537e14d899070af54e92b16121ce
+    name: counter
+    type: application
+    urls:
+    - counter-2023.11.14.tgz
+    version: 2023.11.14
+generated: "2023-11-14T15:33:33.539133+01:00"
