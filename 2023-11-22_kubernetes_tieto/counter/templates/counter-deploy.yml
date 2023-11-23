@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-counter
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-counter
+  replicas: {{ .Values.counterReplicas }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-counter
+    spec:
+      containers:
+        - name: main
+          image: {{ .Values.counterImage }}
+          resources:
+            requests:
+              cpu: 20m
+              memory: 30Mi
+            limits:
+              cpu: 50m
+              memory: 60Mi
+          env:
+            - name: REDIS
+              value: {{ .Release.Name }}-redis
+          ports:
+            - containerPort: 80

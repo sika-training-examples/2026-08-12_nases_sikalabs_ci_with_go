@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-tieto
+spec:
+  revisionHistoryLimit: 0
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hello-tieto
+  template:
+    metadata:
+      labels:
+        app: hello-tieto
+    spec:
+      volumes:
+        - name: www
+          configMap:
+            name: hello-tieto
+      containers:
+        - name: main
+          image: nginx
+          ports:
+            - name: http
+              containerPort: 80
+          resources:
+            requests:
+              cpu: 40m
+              memory: 40Mi
+            limits:
+              cpu: 80m
+              memory: 80Mi
+          volumeMounts:
+            - name: www
+              mountPath: /usr/share/nginx/html

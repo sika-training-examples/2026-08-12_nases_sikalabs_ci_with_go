@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: caddy-nip-io
+spec:
+  rules:
+    - host: caddy.64.227.123.251.nip.io
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: caddy
+                port:
+                  number: 80
