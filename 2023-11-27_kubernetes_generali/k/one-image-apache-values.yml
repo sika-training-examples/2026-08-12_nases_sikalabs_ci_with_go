@@ -1,0 +1,2 @@
+image: httpd:alpine
+host: apache.k8sdb.cpas.cz

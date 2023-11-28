@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: metrics-example
+  namespace: cattle-monitoring-system
+  labels:
+    prometheus: k8s
+    role: alert-rules
+spec:
+  groups:
+    - name: metrics-example.rules
+      rules:
+        - alert: ExampleAlert
+          annotations:
+            message: |
+              High request rate detected for {{ $labels.instance }}.
+          expr: rate(example_requests[1m]) > 4
+          labels:
+            severity: none

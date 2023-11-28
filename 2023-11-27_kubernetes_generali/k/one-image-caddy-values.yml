@@ -1,0 +1,2 @@
+image: caddy:alpine
+host: caddy.k8sdb.cpas.cz
