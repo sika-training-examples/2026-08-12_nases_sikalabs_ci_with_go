@@ -1,0 +1,28 @@
+---
+- name: Loop Example
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - debug:
+        msg: "item {{i+1}}={{ item }}"
+      loop: [a, b, c]
+      loop_control:
+        index_var: i
+
+    # - debug:
+    #     msg: "item {{ item }} index {{ index }}"
+    #   loop: [0, 2, 4, 6, 8, 10]
+    #   loop_control:
+    #     index_var: index
+
+    # - debug:
+    #     msg: "item {{ item }}"
+    #   loop: [0, 2, 4, 6, 8, 10]
+    #   when: item > 5
+
+    # - debug:
+    #     msg: "item {{ item }}"
+    #   loop: [0, 2, 4, 6, 8, 10]
+    #   loop_control:
+    #     pause: 3

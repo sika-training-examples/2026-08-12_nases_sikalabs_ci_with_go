@@ -1,0 +1,10 @@
+---
+- name: Loop Example
+  hosts: vm0a.sikademo.com
+  gather_facts: false
+
+  tasks:
+    - include_tasks: tasks.yml
+      loop:
+        - a
+        - b

@@ -1,0 +1,8 @@
+---
+- hosts: all
+  gather_facts: false
+
+  tasks:
+    - file: 
+        path: /foo/bar/baz
+        mode: 600

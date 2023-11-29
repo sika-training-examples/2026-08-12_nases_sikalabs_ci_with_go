@@ -1,0 +1,17 @@
+---
+- name: Setup Web Server
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - import_tasks: install_nginx_tasks.yml
+    - name: Copy index.html
+      copy:
+        src: index.html
+        dest: /var/www/html
+        owner: root
+        group: root
+        mode: 0644
+    - name: See
+      debug:
+        msg: "See: http://{{ ansible_host }}"

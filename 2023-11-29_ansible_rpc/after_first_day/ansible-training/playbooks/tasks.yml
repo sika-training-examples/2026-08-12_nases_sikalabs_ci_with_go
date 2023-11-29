@@ -1,0 +1,5 @@
+- debug: 
+    msg: "Hello"
+- debug: 
+    msg: "{{ item }}"
+    

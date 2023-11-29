@@ -1,0 +1,9 @@
+---
+- name: Debug Example with facts
+  hosts: all
+  gather_facts: true
+
+  tasks:
+    - name: Print message
+      ansible.builtin.debug:
+        var: ansible_facts

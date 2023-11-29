@@ -1,0 +1,30 @@
+---
+- name: Setup Web Server
+  hosts: all
+  gather_facts: false
+  vars:
+    name: "Ondrej"
+    pets:
+      - Dog
+      - Cat
+      - Rat
+      - Bat
+    capitals:
+      cz: prague
+      de: berlin
+      ch: bern
+      sk: bratislava2
+    matrix:
+      - [0, 1, 2]
+      - [3, 4, 5]
+      - - 6
+        - 7
+        - 8
+  tasks:
+    - name: Copy index.html from template
+      template:
+        src: index4.html
+        dest: /var/www/html/index.html
+        owner: root
+        group: root
+        mode: 0644

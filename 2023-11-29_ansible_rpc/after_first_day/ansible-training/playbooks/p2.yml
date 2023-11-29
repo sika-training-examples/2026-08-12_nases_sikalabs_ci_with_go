@@ -1,0 +1,8 @@
+---
+- hosts: all
+  # gather_facts: false
+
+  tasks:
+    # - gather_facts:
+    - debug:
+        var: ansible_facts

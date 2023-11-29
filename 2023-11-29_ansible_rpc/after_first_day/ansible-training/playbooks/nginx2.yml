@@ -1,0 +1,14 @@
+---
+- name: Setup Web Server
+  hosts: all
+  gather_facts: false
+  vars:
+    your_name: "Ondrej"
+  tasks:
+    - name: Copy index.html from template
+      template:
+        src: index.html.j2
+        dest: /var/www/html/index.html
+        owner: root
+        group: root
+        mode: 0644

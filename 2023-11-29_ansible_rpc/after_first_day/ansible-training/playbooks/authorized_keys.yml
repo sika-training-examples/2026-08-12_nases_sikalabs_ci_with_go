@@ -1,0 +1,14 @@
+---
+- name: Add SSH keys to authorized_keys
+  hosts: all
+  gather_facts: false
+  vars:
+    keys:
+        - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDWUKywCYJL60WYcPznHf+BYIqwCMmKhzIh/TC1U5pMuKv9/Q4whaTH5C5K4BSyaJZ/c5kl1YEjjB9XLP6xIcRKixE5xoKLu9bpeokZfrqvW9M+r2inA2pYwwVdId8BHsIkQyZ2yoX9zQVIhWHbpd32J1gQ1zme6Ip0G0Q/ihWd+ZxEW4JySJr0JT/tb3cm2+gLoDzn1D9j4yB6bXa7s4ivPdQtwqLrGerWI1GJvmunQUAozc1L6JrpvfXdwzKH8koSsfaBldrME3pEY2sHcpE2ZSI9i1JtRD01wl/QK2a4aXWYbaYDW/7rX5abhzOttDNen6YwNvFIq8iwVjItrHIp
+        - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDtGYWP1uHRFzi6wFS1BEW5/rXITtlm7Db7ZxAGHTmy82B+C3OHTlitIFhBjiyFwyjObq+O7DQu3FWyjme2briElAVdT0B3o5doYJHiRFcans4ndvvX/0Ol00UPGR8wqZcSw0Tis5rskHRndKnDoXssMp25lMGbuGB9G6trOnCIXyLdD4UcVZBqGgVL5rx+EmC3CvQha9JSakLpNpgmFnXOwgvw5j5HWG5a90Oai0U3sjks2jOGAfLDbPlzeI/+h7vHfZZQrt76I/bG//yrZdvwggT4oXuN/z8myVYoLgO04H5mr4M6NmfbMir5ggLqbLsy+LjrdJzFr7a4badcc2R22XVSTsyLB3vvXQQsFWfpxFJrTMITOFS6PEDLw9v+YNL/FFYa6N8OzkfD5ZjY15/Ms/IG/l/jvsKahcVBWcMN3UrCCysxbx6cDT1ZtlBKA3hAyyD8EKeFWsMMIr+IGgNLnVAo7VqRrl0njn92TJkWYdKnJ3yXOipsxa/g0RC+NP0= root@533ffb74aaea
+
+  tasks:
+    - authorized_key :
+        user: root
+        key: "{{ item }}"
+      loop: "{{ keys }}"

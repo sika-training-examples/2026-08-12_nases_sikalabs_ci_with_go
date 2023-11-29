@@ -1,0 +1,33 @@
+.vscode
+.DS_Store
+
+# Terraform
+.terraform
+terraform.tfvars
+*.auto.tfvars
+!*.EXAMPLE.tfvars
+*.tfplan
+*.tfstate
+*.tfstate*backup
+*.log
+.terraform.tfstate.lock.info
+override.tf
+
+# Infracost
+.infracost
+
+# Ansible
+/Pipfile
+/Pipfile.lock
+
+/terraform/ansible/tmp/**
+/terraform/ansible/tmp/.keep
+
+# Node
+node_modules
+
+# Course content
+/secrets.yml
+
+# Python (Ansible)
+__pycache__

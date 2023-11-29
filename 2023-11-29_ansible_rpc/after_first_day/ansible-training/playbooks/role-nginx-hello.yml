@@ -1,0 +1,15 @@
+---
+- name: Setup vm0
+  hosts: vm0.sikademo.com
+
+  vars:
+    name: Ondrej
+
+  roles:
+    - nginx-hello
+
+- name: Setup vm1
+  hosts: vm1.sikademo.com
+
+  roles:
+    - nginx-hello

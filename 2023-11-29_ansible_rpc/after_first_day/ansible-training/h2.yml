@@ -1,0 +1,12 @@
+web:
+  hosts:
+    app1.sikademo.com:
+    app2.sikademo.com:
+  vars:
+    type: app-x
+
+db:
+  hosts:
+    db.sikademo.com:
+  vars:
+    type: db-x
