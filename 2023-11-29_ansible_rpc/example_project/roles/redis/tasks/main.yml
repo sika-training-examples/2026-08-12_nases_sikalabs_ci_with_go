@@ -1,0 +1,16 @@
+- name: Install Redis
+  apt:
+    name: redis-server
+    state: present
+- name: Bind all interfaces
+  ansible.builtin.lineinfile:
+    path: /etc/redis/redis.conf
+    regexp: '^bind'
+    line: bind {{ redis_bind }}
+  notify: Restart Redis
+- name: Disable Protected mode
+  ansible.builtin.lineinfile:
+    path: /etc/redis/redis.conf
+    regexp: '^protected-mode'
+    line: protected-mode {{ redis_protected_mode }}
+  notify: Restart Redis

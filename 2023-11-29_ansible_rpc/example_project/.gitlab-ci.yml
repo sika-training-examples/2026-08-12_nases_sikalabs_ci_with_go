@@ -1,0 +1,24 @@
+stages:
+  - check
+  - run
+
+check dev:
+  stage: check
+  script:
+    - ansible-playbook -i inventories/dev.ini site.yml --check
+
+check prod:
+  stage: check
+  script:
+    - ansible-playbook -i inventories/prod.ini site.yml --check
+
+run dev:
+  stage: run
+  script:
+    - ansible-playbook -i inventories/dev.ini site.yml
+
+run prod:
+  when: manual
+  stage: run
+  script:
+    - ansible-playbook -i inventories/prod.ini site.yml

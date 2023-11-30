@@ -1,0 +1,8 @@
+---
+- name: Setup Counter
+  hosts: app
+  gather_facts: false
+  vars:
+    counter_redis_host: '{{ groups["db"][0] }}'
+  roles:
+    - counter

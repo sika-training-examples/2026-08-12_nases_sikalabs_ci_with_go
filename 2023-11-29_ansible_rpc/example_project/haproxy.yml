@@ -1,0 +1,8 @@
+---
+- name: Setup HAProxy for Counter
+  hosts: proxy
+  gather_facts: false
+  vars:
+    haproxy_backends: '{{ groups["app"] }}'
+  roles:
+    - haproxy

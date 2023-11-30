@@ -1,0 +1,20 @@
+- name: Dowload counter
+  ansible.builtin.get_url:
+    url: https://github.com/ondrejsika/counter/releases/download/{{ counter_version }}/counter_{{ counter_version }}_linux_amd64.tar.gz
+    dest: /tmp/counter_{{ counter_version }}_linux_amd64.tar.gz
+- name: Unpack counter
+  ansible.builtin.unarchive:
+    src: /tmp/counter_{{ counter_version }}_linux_amd64.tar.gz
+    dest: /usr/local/bin
+    remote_src: yes
+- name: Create systemd service for counter
+  template:
+    src: counter.service.j2
+    dest: /etc/systemd/system/counter.service
+  notify:
+    - systemd counter restarted
+- name: Start counter
+  ansible.builtin.service:
+    name: counter.service
+    enabled: true
+    state: started

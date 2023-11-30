@@ -1,0 +1,16 @@
+defaults
+  mode tcp
+  timeout client 60s
+  timeout connect 1s
+  timeout server 60s
+  timeout http-request 60s
+
+frontend http
+  bind 0.0.0.0:80
+  default_backend http
+
+backend http
+  {% for backend in haproxy_backends %}
+  server backend-{{ loop.index }} {{ backend }}:80 check port 80
+  {% endfor %}
+

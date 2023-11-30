@@ -1,0 +1,3 @@
+counter_version: 'v0.2.0'
+counter_port: '80'
+counter_redis_host: '127.0.0.1'

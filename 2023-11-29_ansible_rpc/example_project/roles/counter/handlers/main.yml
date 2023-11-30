@@ -1,0 +1,6 @@
+- name: systemd counter restarted
+  ansible.builtin.service:
+    name: counter.service
+    enabled: true
+    state: restarted
+    daemon_reload: yes

@@ -1,0 +1,4 @@
+---
+- import_playbook: redis.yml
+- import_playbook: counter.yml
+- import_playbook: haproxy.yml

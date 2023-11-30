@@ -1,0 +1,17 @@
+---
+- name: Remove Nginx
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Stop Nginx Service
+      service:
+        name: nginx
+        state: stopped
+    - name: Uninstall Nginx package
+      apt:
+        name: nginx
+        state: absent
+    - name: Remove www dir
+      file:
+        path: /var/www
+        state: absent

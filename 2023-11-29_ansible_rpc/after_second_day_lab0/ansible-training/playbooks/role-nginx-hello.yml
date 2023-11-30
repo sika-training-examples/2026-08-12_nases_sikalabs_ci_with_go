@@ -1,0 +1,16 @@
+---
+- name: Setup vm0a
+  hosts: vm0a.sikademo.com
+  gather_facts: false
+
+  vars:
+    your_name: Ondrej
+
+  roles:
+    - nginx-hello
+
+- name: Setup vm0b
+  hosts: vm0b.sikademo.com
+
+  roles:
+    - nginx-hello
