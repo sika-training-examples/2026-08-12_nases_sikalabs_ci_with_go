@@ -1,0 +1,23 @@
+controller:
+  service:
+    type: ClusterIP
+  ingressClassResource:
+    default: true
+  kind: DaemonSet
+  hostPort:
+    enabled: true
+  metrics:
+    enabled: true
+defaultBackend:
+  enabled: true
+  image:
+    registry: docker.io
+    image: sikalabs/sikalabs-kubernetes-ingress-default-page
+    tag: latest
+    pullPolicy: Always
+  extraEnvs:
+    - name: CLUSTER
+      value: "k8s1.sikademo.com"
+    - name: DOMAIN
+      value: "k8s1.sikademo.com"
+  port: 8000

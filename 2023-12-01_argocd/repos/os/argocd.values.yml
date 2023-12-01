@@ -1,0 +1,55 @@
+# https://github.com/argoproj/argo-helm/blob/master/charts/argo-cd/values.yaml
+# https://artifacthub.io/packages/helm/argo/argo-cd?modal=values
+server:
+  ingress:
+    enabled: true
+    hosts:
+      - argocd.k8s.sikademo.com
+    ingressClassName: nginx
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+      nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    tls:
+      - hosts:
+        - argocd.k8s.sikademo.com
+        secretName: argocd-tls
+configs:
+  cm:
+    url: https://argocd.k8s.sikademo.com
+    admin.enabled: "true"
+    exec.enabled: "true"
+    oidc.config: |
+      name: SSO
+      issuer: https://sso.sikademo.com/realms/sikademo
+      clientID: argocd
+      clientSecret: argocd
+      requestedScopes: ["openid", "profile", "email", "groups"]
+      logoutURL: "https://sso.sikademo.com/realms/sikademo/protocol/openid-connect/logout?client_id=argocd&id_token_hint={{token}}&post_logout_redirect_uri=https://argocd.k8s.sikademo.com"
+    oidc.tls.insecure.skip.verify: "true"
+    server.rbac.log.enforce.enable: "false"
+    timeout.hard.reconciliation: 0s
+    timeout.reconciliation: 20s
+  rbac:
+      policy.default: ""
+      scopes: '[groups]'
+      policy.csv: |
+        g, argocd-admin, role:admin
+        g, argocd-readonly, role:readonly
+       
+        g, argocd-foo, role:argocd-foo
+
+        p, role:argocd-foo, projects, get, foo, allow
+        p, role:argocd-foo, projects, update, foo, allow
+        p, role:argocd-foo, applications, get, foo/*, allow
+        p, role:argocd-foo, applications, create, foo/*, allow
+        p, role:argocd-foo, applications, update, foo/*, allow
+        p, role:argocd-foo, applications, delete, foo/*, allow
+
+configs:
+  clusterCredentials:
+    - name: k8s1
+      server: https://24ea97b4-cd3a-4333-b48e-707b5b3dece0.k8s.ondigitalocean.com
+      config:
+        bearerToken: dop_v1_45bfceb396471cc7a2bdb94739d820126f0be0d20d8a5b93d7ba5a0533b68c41
+        tlsClientConfig:
+          insecure: true

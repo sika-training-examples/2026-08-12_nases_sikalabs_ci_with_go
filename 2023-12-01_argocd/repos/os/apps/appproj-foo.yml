@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: foo
+  namespace: argocd
+spec:
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  destinations:
+  - namespace: 'default'
+    server: '*'
+  sourceRepos:
+  - 'https://gitlab.sikademo.com/*'
+  - https://github.com/sika-training-examples/2023-11-28_counter_helm_chart.git

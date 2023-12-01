@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: iceland1
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: default
+    server: https://24ea97b4-cd3a-4333-b48e-707b5b3dece0.k8s.ondigitalocean.com
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://github.com/sikalabs/charts
+    path: ./charts/one-image
+    helm:
+      releaseName: iceland
+      valuesObject:
+        host: iceland.k8s1.sikademo.com
+        image: ondrejsika/iceland-3
