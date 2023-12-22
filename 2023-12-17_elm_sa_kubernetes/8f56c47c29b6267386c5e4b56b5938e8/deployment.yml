@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: medina
+spec:
+  revisionHistoryLimit: 0
+  replicas: 2
+  selector:
+    matchLabels:
+      app: medina
+  template:
+    metadata:
+      labels:
+        app: medina
+    spec:
+      containers:
+        - name: main
+          image: ondrejsika/medina
+          env:
+            - name: API_URL
+              value: http://counter-counter.mecca/api/counter
+          ports:
+            - name: http
+              containerPort: 8080
+          resources:
+            requests:
+              cpu: 100m
+              memory: 200Mi
+            limits:
+              cpu: 400m
+              memory: 400Mi

@@ -1,0 +1,6 @@
+# Mandatory
+host:
+
+# Optional
+replicas: 4
+maxReplicas: 4

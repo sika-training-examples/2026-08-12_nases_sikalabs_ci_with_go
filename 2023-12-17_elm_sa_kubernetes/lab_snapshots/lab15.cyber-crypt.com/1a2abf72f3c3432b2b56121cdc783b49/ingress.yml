@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hello-elm-emad
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - hello-elm-emad.jeddah15.sikademo.com
+      secretName: hello-elm-emad.jeddah15.sikademo.com-tls
+  rules:
+    - host: hello-elm-emad.jeddah15.sikademo.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: hello-elm-emad
+                port:
+                  number: 80

@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-ammar
+spec:
+  revisionHistoryLimit: 0
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hello-ammar
+  template:
+    metadata:
+      labels:
+        app: hello-ammar
+    spec:
+      containers:
+        - name: main
+          image: ghcr.io/cybercryptio/training-example
+          env:
+            - name: PORT
+              value: '8080'
+            - name: TEXT
+              value: Hello Ammar
+            - name: COLOR
+              value: '#818285'
+          ports:
+            - name: http
+              containerPort: 8080
+          resources:
+            requests:
+              cpu: 20m
+              memory: 20Mi
+            limits:
+              cpu: 40m
+              memory: 40Mi

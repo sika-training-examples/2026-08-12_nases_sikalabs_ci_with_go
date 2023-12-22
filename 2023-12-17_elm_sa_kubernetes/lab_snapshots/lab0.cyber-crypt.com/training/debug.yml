@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: debug
+spec:
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: debug
+  template:
+    metadata:
+      labels:
+        app: debug
+    spec:
+      nodeName: wo6
+      containers:
+        - name: main
+          image: ghcr.io/cybercryptio/slu:v0.71.0
+          command:  
+            - sleep
+            - infinity

@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hello-elm
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - hello-elm.jeddah19.sikademo.com
+      secretName: hello-elm.jeddah19.sikademo.com-tls  # if not exitse will run only on port 80 
+  rules:
+    - host: hello-elm.jeddah19.sikademo.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: hello-elm
+                port:
+                  number: 80

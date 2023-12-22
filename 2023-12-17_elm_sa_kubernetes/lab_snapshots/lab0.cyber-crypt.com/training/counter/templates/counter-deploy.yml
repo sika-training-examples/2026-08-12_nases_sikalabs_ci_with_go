@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-counter
+spec:
+  revisionHistoryLimit: 0
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-counter
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-counter
+    spec:
+      containers:
+        - name: main
+          image: ondrejsika/counter
+          env:
+            - name: REDIS
+              value: {{ .Release.Name }}-redis
+          envFrom:
+            - configMapRef:
+                name: {{ .Release.Name }}-counter
+          ports:
+            - name: http
+              containerPort: 80
+          startupProbe:
+            httpGet:
+              path: /readyz
+              port: 80
+          livenessProbe:
+            httpGet:
+              path: /livez
+              port: 80
+          resources:
+            requests:
+              cpu: 50m
+              memory: 50Mi
+            limits:
+              cpu: 100m
+              memory: 150Mi

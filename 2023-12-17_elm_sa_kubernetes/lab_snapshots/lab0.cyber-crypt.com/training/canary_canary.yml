@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: canary-canary
+spec:
+  selector:
+    matchLabels:
+      app: canary
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: canary
+        canary: "true"
+    spec:
+      nodeName: wo0
+      containers:
+        - name: hello-world
+          image: ghcr.io/cybercryptio/training-example
+          env:
+            - name: BACKGROUND_COLOR
+              value: yellow
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: 10m
+              memory: 10Mi
+            limits:
+              memory: 20Mi
+              cpu: 20m

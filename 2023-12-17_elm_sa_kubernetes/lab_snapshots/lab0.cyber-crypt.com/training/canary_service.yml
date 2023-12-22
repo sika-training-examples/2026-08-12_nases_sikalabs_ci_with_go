@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: canary
+spec:
+  selector:
+    app: canary
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: canary-blue
+spec:
+  selector:
+    app: canary
+    canary: "false"
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: canary-yellow
+spec:
+  selector:
+    app: canary
+    canary: "true"
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 80

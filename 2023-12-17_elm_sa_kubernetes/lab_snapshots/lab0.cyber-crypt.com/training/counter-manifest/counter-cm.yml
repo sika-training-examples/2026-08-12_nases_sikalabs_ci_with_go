@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: counter
+data:
+  EXTRA_TEXT: 'Hello ELM'
+  SLOW_START: '15'

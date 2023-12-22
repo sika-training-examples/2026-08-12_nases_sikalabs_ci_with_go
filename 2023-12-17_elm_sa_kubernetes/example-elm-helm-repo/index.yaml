@@ -1,0 +1,50 @@
+apiVersion: v1
+entries:
+  counter:
+  - apiVersion: v2
+    created: "2023-12-21T16:15:01.192397+03:00"
+    description: An Example for ELM Training
+    digest: ca09ae84b31022bdfc38a4e34150670700b26cb04646f585beb8c8fac44405fb
+    name: counter
+    type: application
+    urls:
+    - counter-2023.12.20.tgz
+    version: 2023.12.20
+  example-elm-app:
+  - apiVersion: v2
+    created: "2023-12-21T16:15:01.19316+03:00"
+    description: Example ELM App for Kubernetes Training
+    digest: 026dff9733762312cedaaf57518ddde3da97af81c35e84d1897d040188a32611
+    name: example-elm-app
+    type: application
+    urls:
+    - example-elm-app-0.3.0.tgz
+    version: 0.3.0
+  - apiVersion: v2
+    created: "2023-12-21T16:15:01.19303+03:00"
+    description: Example ELM App for Kubernetes Training
+    digest: ad4961816b1d4e950f63ae80c5c38a52e57cd46b91511348f7f97d0a66c2fead
+    name: example-elm-app
+    type: application
+    urls:
+    - example-elm-app-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
+    created: "2023-12-21T16:15:01.192768+03:00"
+    description: Example ELM App for Kubernetes Training
+    digest: 8fa85ce0ff803a14de36680a8302845c5086264b3f62fb8b550f76d4778eb664
+    name: example-elm-app
+    type: application
+    urls:
+    - example-elm-app-0.1.0.tgz
+    version: 0.1.0
+  hello-elm:
+  - apiVersion: v1
+    created: "2023-12-21T16:15:01.193526+03:00"
+    description: Hello ELM
+    digest: b10bee3796fed8790ef4199fb6be46af39d1c8617fa658bd2e539694038493c4
+    name: hello-elm
+    urls:
+    - hello-elm-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-12-21T16:15:01.191929+03:00"

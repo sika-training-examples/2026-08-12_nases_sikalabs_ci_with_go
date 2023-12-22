@@ -1,0 +1,3 @@
+host: counter.jeddah0.sikademo.com
+replicas: 20
+maxReplicas: 50

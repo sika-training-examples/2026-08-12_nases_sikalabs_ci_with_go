@@ -1,0 +1,10 @@
+# Required
+host:
+
+# Optional
+clusterIssuer: letsencrypt
+frontendImage: ttl.sh/ondrejsika/frontend2
+frontendReplicas: 2
+
+backendImage: ttl.sh/ondrejsika/backend2
+backendReplicas: 2

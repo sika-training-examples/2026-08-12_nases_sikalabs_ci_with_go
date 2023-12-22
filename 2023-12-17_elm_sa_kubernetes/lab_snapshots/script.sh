@@ -1,0 +1,20 @@
+rsync -av --exclude '.*' --exclude 'Downloads' root@lab0.cyber-crypt.com:/root/ lab0.cyber-crypt.com/
+rsync -av --exclude '.*' --exclude 'Downloads' root@lab1.cyber-crypt.com:/root/ lab1.cyber-crypt.com/
+rsync -av --exclude '.*' --exclude 'Downloads' root@lab2.cyber-crypt.com:/root/ lab2.cyber-crypt.com/
+rsync -av --exclude '.*' --exclude 'Downloads' root@lab3.cyber-crypt.com:/root/ lab3.cyber-crypt.com/
+rsync -av --exclude '.*' --exclude 'Downloads' root@lab4.cyber-crypt.com:/root/ lab4.cyber-crypt.com/
+rsync -av --exclude '.*' --exclude 'Downloads' root@lab5.cyber-crypt.com:/root/ lab5.cyber-crypt.com/
+rsync -av --exclude '.*' --exclude 'Downloads' root@lab5.cyber-crypt.com:/root/ lab5.cyber-crypt.com/
+rsync -av --exclude '.*' --exclude 'Downloads' root@lab7.cyber-crypt.com:/root/ lab7.cyber-crypt.com/
+rsync -av --exclude '.*' --exclude 'Downloads' root@lab8.cyber-crypt.com:/root/ lab8.cyber-crypt.com/
+rsync -av --exclude '.*' --exclude 'Downloads' root@lab9.cyber-crypt.com:/root/ lab9.cyber-crypt.com/
+rsync -av --exclude '.*' --exclude 'Downloads' root@lab10.cyber-crypt.com:/root/ lab10.cyber-crypt.com/
+rsync -av --exclude '.*' --exclude 'Downloads' root@lab11.cyber-crypt.com:/root/ lab11.cyber-crypt.com/
+rsync -av --exclude '.*' --exclude 'Downloads' root@lab12.cyber-crypt.com:/root/ lab12.cyber-crypt.com/
+rsync -av --exclude '.*' --exclude 'Downloads' root@lab13.cyber-crypt.com:/root/ lab13.cyber-crypt.com/
+rsync -av --exclude '.*' --exclude 'Downloads' root@lab14.cyber-crypt.com:/root/ lab14.cyber-crypt.com/
+rsync -av --exclude '.*' --exclude 'Downloads' root@lab15.cyber-crypt.com:/root/ lab15.cyber-crypt.com/
+rsync -av --exclude '.*' --exclude 'Downloads' root@lab16.cyber-crypt.com:/root/ lab16.cyber-crypt.com/
+rsync -av --exclude '.*' --exclude 'Downloads' root@lab17.cyber-crypt.com:/root/ lab17.cyber-crypt.com/
+rsync -av --exclude '.*' --exclude 'Downloads' root@lab18.cyber-crypt.com:/root/ lab18.cyber-crypt.com/
+

@@ -1,0 +1,43 @@
+meta:
+  schema_version: 3
+hosts:
+  all:
+      - ssh_target: training@lab0.cyber-crypt.com
+      - ssh_target: training@lab1.cyber-crypt.com
+      - ssh_target: training@lab2.cyber-crypt.com
+      - ssh_target: training@lab3.cyber-crypt.com
+      - ssh_target: training@lab4.cyber-crypt.com
+      - ssh_target: training@lab5.cyber-crypt.com
+      - ssh_target: training@lab5.cyber-crypt.com
+      - ssh_target: training@lab7.cyber-crypt.com
+      - ssh_target: training@lab8.cyber-crypt.com
+      - ssh_target: training@lab9.cyber-crypt.com
+      - ssh_target: training@lab10.cyber-crypt.com
+      - ssh_target: training@lab11.cyber-crypt.com
+      - ssh_target: training@lab12.cyber-crypt.com
+      - ssh_target: training@lab13.cyber-crypt.com
+      - ssh_target: training@lab14.cyber-crypt.com
+      - ssh_target: training@lab15.cyber-crypt.com
+      - ssh_target: training@lab16.cyber-crypt.com
+      - ssh_target: training@lab17.cyber-crypt.com
+      - ssh_target: training@lab18.cyber-crypt.com
+      # - ssh_target: training@lab19.cyber-crypt.com
+
+plays:
+  - name: Add SSH Key
+    hosts: [all]
+    sudo: true
+    tasks:
+      # - name:  Add SSH Key
+      #   template:
+      #     path: /tmp/a.sh
+      #     template: |
+      #       echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCslNKgLyoOrGDerz9pA4a4Mc+EquVzX52AkJZz+ecFCYZ4XQjcg2BK1P9xYfWzzl33fHow6pV/C6QC3Fgjw7txUeH7iQ5FjRVIlxiltfYJH4RvvtXcjqjk8uVDhEcw7bINVKVIS856Qn9jPwnHIhJtRJe9emE7YsJRmNSOtggYk/MaV2Ayx+9mcYnA/9SBy45FPHjMlxntoOkKqBThWE7Tjym44UNf44G8fd+kmNYzGw9T5IKpH1E1wMR+32QJBobX6d7k39jJe8lgHdsUYMbeJOFPKgbWlnx9VbkZh+seMSjhroTgniHjUl8wBFgw0YnhJ/90MgJJL4BToxu9PVnH ondrejsika" > /root/.ssh/authorized_keys
+      # - name:  Add SSH Key
+      #   command:
+      #     cmd: sh /tmp/a.sh
+      - name:  Add SSH Key
+        command:
+          cmd: apt-get install -y rsync
+
+

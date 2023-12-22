@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    release: {{ .Release.Name }}
+spec:
+  replicas: 2
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: main
+          image: sikalabs/hello-world-server
+          ports:
+            - name: http
+              containerPort: 8000
+          env:
+            - name: "TEXT"
+              value: "Hello ELM!"
+            - name: "COLOR"
+              value: "#818285"

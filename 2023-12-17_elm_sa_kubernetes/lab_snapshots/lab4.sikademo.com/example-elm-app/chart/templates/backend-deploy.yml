@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{.Release.Name}}-backend
+spec:
+  revisionHistoryLimit: 0
+  replicas: {{ .Values.backendReplicas }}
+  selector:
+    matchLabels:
+      app: {{.Release.Name}}-backend
+  template:
+    metadata:
+      labels:
+        app: {{.Release.Name}}-backend
+    spec:
+      containers:
+        - name: main
+          image:  {{ .Values.backendImage }}
+          env:
+            - name: REDIS
+              value: {{.Release.Name}}-redis
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: 50m
+              memory: 50Mi
+            limits:
+              cpu: 100m
+              memory: 100Mi

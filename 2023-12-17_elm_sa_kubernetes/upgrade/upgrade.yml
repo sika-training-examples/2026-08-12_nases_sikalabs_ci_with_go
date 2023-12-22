@@ -1,0 +1,14 @@
+---
+- name: RKE2 Upgrade
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Install 
+      command: 'curl -sfL https://get.rke2.io -o /tmp/upgrage.sh'
+      
+    - name: Install 
+      command: sh -c "INSTALL_RKE2_TYPE=agent INSTALL_RKE2_VERSION=v1.27.8+rke2r1 sh /tmp/upgrage.sh"
+
+    - name: Restart RKE2
+      command: systemctl restart rke2-agentx

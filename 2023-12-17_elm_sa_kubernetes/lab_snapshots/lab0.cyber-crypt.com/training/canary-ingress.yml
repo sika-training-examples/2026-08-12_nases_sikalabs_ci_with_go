@@ -1,0 +1,45 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: canary
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - canary.jeddah0.sikademo.com
+        - canary-blue.jeddah0.sikademo.com
+        - canary-yellow.jeddah0.sikademo.com
+      secretName: canary-tls
+  rules:
+    - host: canary.jeddah0.sikademo.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: canary
+                port:
+                  number: 80
+    - host: canary-blue.jeddah0.sikademo.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: canary-blue
+                port:
+                  number: 80
+    - host: canary-yellow.jeddah0.sikademo.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: canary-yellow
+                port:
+                  number: 80
