@@ -1,0 +1,13 @@
+# Required
+host:
+
+# Optional
+EXTRA_TEXT:
+FONT_COLOR:
+BACKGROUND_COLOR:
+
+replicas: 4
+minReplicas: 2
+maxReplicas: 20
+clusterIssuer: letsencrypt
+ingressClassName: nginx

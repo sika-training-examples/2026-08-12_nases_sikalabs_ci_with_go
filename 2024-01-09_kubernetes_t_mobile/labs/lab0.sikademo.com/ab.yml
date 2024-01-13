@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ab
+spec:
+  completions: 10
+  parallelism: 3
+  template:
+    metadata:
+      name: ab
+    spec:
+      containers:
+        - name: ab
+          image: ondrejsika/ab
+          command: ["/bin/sh", "-c"]
+          args: ["ab -c 4 -n 1000 http://hello-world.hello-world/"]
+      restartPolicy: Never

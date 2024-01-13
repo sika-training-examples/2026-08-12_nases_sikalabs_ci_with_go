@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: counter
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: counter
+    server: https://kubernetes.default.svc
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://github.com/sika-training-examples/2024-01-12-counter-helm-example
+    path: .
+    helm:
+      releaseName: counter
+      valuesObject:
+        host: counter.t-mobile.sikademo.com
+        EXTRA_TEXT: "T-Mobile"
+        FONT_COLOR: "#ffffff"
+        BACKGROUND_COLOR: "#e20074"
+  ignoreDifferences:
+    - group: apps
+      kind: Deployment
+      name: counter-backend
+      jsonPointers:
+        - /spec/replicas
+    - group: apps
+      kind: Deployment
+      name: counter-frontend
+      jsonPointers:
+        - /spec/replicas

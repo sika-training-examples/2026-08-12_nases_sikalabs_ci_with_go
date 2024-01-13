@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: flux-hello-world-from-git
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: hello-world-from-git
+  namespace: flux-hello-world-from-git
+spec:
+  interval: 1m
+  chart:
+    spec:
+      sourceRef:
+        kind: GitRepository
+        name: sikalabs
+        namespace: flux-system
+      chart: ./charts/hello-world
+      interval: 1m
+  values:
+    host: flux-hello-world-from-git.t-mobile.sikademo.com
+    TEXT: Hello T-Mobile from FluxCD from Git
+    image: sikalabs/hello-world-server:t-mobile
+    replicas: 2
