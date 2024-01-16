@@ -1,0 +1,2 @@
+https://github.com/sika-training-examples/2024-01-16-counter-helm-example
+https://github.com/sika-training-examples/2024-01-15-counter-manifests-example

@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ab
+spec:
+  completions: 10
+  parallelism: 2
+  template:
+    metadata:
+      name: ab
+    spec:
+      containers:
+        - name: ab
+          image: ondrejsika/ab
+          command: ["/bin/sh", "-c"]
+          args: ["ab -c 1 -n 1000000000 http://frontend/"]
+      restartPolicy: OnFailure

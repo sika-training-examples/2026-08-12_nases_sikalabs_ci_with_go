@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bar
+spec:
+  revisionHistoryLimit: 0
+  replicas: 3
+  selector:
+    matchLabels:
+      app: bar
+  template:
+    metadata:
+      labels:
+        app: bar
+        svc: example
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - bar
+                      - foo
+              topologyKey: kubernetes.io/hostname
+      containers:
+        - name: main
+          image: ondrejsika/training-example
+          env:
+            - name: TEXT
+              value: "Bar!"
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: 10m
+              memory: 10Mi
+            limits:
+              memory: 20Mi
+              cpu: 20m

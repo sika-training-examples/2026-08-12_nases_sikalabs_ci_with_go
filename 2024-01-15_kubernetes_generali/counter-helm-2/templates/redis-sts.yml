@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{.Release.Name}}-redis
+spec:
+  serviceName: {{.Release.Name}}-redis
+  selector:
+    matchLabels:
+      app: {{.Release.Name}}-redis
+  template:
+    metadata:
+      labels:
+        app: {{.Release.Name}}-redis
+    spec:
+      containers:
+        - name: main
+          image: harbor.k8ssb.cpas.cz/ondrejsika/redis-alpine
+          # image: harbor.k8ssb.cpas.cz/docker-hub/library/redis:alpine
+          # image: ttl.sh/redis-alpine
+          ports:
+            - containerPort: 6379
+          resources:
+            requests:
+              cpu: 50m
+              memory: 50Mi
+            limits:
+              cpu: 100m
+              memory: 100Mi

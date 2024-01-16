@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{.Release.Name}}-frontend
+spec:
+  revisionHistoryLimit: 0
+  replicas: 4
+  selector:
+    matchLabels:
+      app: {{.Release.Name}}-frontend
+  template:
+    metadata:
+      annotations:
+        checksum/frontend-cm: {{include (print $.Template.BasePath "/frontend-cm.yml") . | sha256sum}}
+      labels:
+        app: {{.Release.Name}}-frontend
+    spec:
+      initContainers:
+        - name: wait-for-counter
+          image: ghcr.io/sikalabs/slu:v0.71.0
+          args:
+            - /bin/sh
+            - -c
+            - slu wait-for tcp -a {{.Release.Name}}-counter:80
+      containers:
+        - name: main
+          image: harbor.k8ssb.cpas.cz/ondrejsika/counter-frontend
+          ports:
+            - containerPort: 3000
+          env:
+            - name: API_ORIGIN
+              value: http://{{.Release.Name}}-counter
+          envFrom:
+            - configMapRef:
+                name: {{.Release.Name}}-frontend
+          startupProbe:
+            httpGet:
+              path: /api/livez
+              port: 3000
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: 300m
+              memory: 1000Mi

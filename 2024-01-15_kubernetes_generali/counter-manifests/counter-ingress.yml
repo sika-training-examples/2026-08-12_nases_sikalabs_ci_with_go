@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: counter
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: ondrejsika-counter.k8s.sikademo.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: counter
+                port:
+                  number: 80

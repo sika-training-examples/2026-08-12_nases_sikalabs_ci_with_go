@@ -1,0 +1,9 @@
+# Optional
+frontendHost: null
+backendHost: null
+
+EXTRA_TEXT_HELLO: 'Hello Generali!'
+EXTRA_TEXT_VERSION: ''
+SLOW_START: 1
+BACKGROUND_COLOR: '#C21B18'
+FONT_COLOR: '#FFFFFF'

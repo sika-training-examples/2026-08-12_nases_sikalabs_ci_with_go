@@ -1,0 +1,5 @@
+counter:
+  frontendHost: counter2-dev.k8sdb.cpas.cz
+  backendHost: counter2-dev-be.k8sdb.cpas.cz
+  EXTRA_TEXT_VERSION: '(v0.1.0-dev)'
+  SLOW_START: 1

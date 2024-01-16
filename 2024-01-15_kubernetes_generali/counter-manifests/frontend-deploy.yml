@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  revisionHistoryLimit: 0
+  replicas: 4
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      initContainers:
+        - name: wait-for-counter
+          image: ghcr.io/sikalabs/slu:v0.71.0
+          args:
+            - /bin/sh
+            - -c
+            - slu wait-for tcp -a counter:80
+      containers:
+        - name: main
+          image: ghcr.io/ondrejsika/counter-frontend
+          ports:
+            - containerPort: 3000
+          env:
+            - name: API_ORIGIN
+              value: http://counter
+          envFrom:
+            - configMapRef:
+                name: frontend
+          startupProbe:
+            httpGet:
+              path: /api/livez
+              port: 3000
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: 300m
+              memory: 1000Mi

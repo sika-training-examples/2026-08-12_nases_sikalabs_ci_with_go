@@ -1,0 +1,7 @@
+apiVersion: v2
+name: counter
+version: 2024.1.16
+dependencies:
+  - name: counter
+    version: "2024.1.17"
+    repository: "oci://harbor.k8ssb.cpas.cz/base"

@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{.Release.Name}}-frontend
+data:
+  BACKGROUND_COLOR: {{ .Values.BACKGROUND_COLOR }}
+  FONT_COLOR: {{ .Values.FONT_COLOR }}

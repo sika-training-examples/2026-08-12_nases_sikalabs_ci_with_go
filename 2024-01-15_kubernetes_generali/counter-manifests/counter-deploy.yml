@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: counter
+spec:
+  revisionHistoryLimit: 0
+  replicas: 4
+  selector:
+    matchLabels:
+      app: counter
+  template:
+    metadata:
+      labels:
+        app: counter
+    spec:
+      initContainers:
+        - name: wait-for-redis
+          image: ghcr.io/sikalabs/slu:v0.71.0
+          args:
+            - /bin/sh
+            - -c
+            - slu wait-for tcp -a redis:6379
+      containers:
+        - name: main
+          image: ondrejsika/counter
+          ports:
+            - containerPort: 80
+          startupProbe:
+            httpGet:
+              path: /livez
+              port: 80
+          env:
+            - name: REDIS
+              value: redis
+          envFrom:
+            - configMapRef:
+                name: counter
+          resources:
+            requests:
+              cpu: 40m
+              memory: 100Mi
+            limits:
+              cpu: 100m
+              memory: 1000Mi

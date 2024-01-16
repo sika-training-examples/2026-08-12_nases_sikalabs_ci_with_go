@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: foo
+spec:
+  revisionHistoryLimit: 0
+  replicas: 3
+  selector:
+    matchLabels:
+      app: foo
+  template:
+    metadata:
+      labels:
+        app: foo
+        svc: example
+    spec:
+      containers:
+        - name: main
+          image: ondrejsika/training-example
+          env:
+            - name: TEXT
+              value: "Foo!"
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: 10m
+              memory: 10Mi
+            limits:
+              memory: 20Mi
+              cpu: 20m

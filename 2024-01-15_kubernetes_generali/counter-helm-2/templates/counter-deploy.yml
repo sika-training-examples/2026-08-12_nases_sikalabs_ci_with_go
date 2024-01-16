@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{.Release.Name}}-counter
+spec:
+  revisionHistoryLimit: 0
+  replicas: 4
+  selector:
+    matchLabels:
+      app: {{.Release.Name}}-counter
+  template:
+    metadata:
+      annotations:
+        checksum/counter-cm: {{include (print $.Template.BasePath "/counter-cm.yml") . | sha256sum}}
+      labels:
+        app: {{.Release.Name}}-counter
+    spec:
+      initContainers:
+        - name: wait-for-redis
+          image: ghcr.io/sikalabs/slu:v0.71.0
+          args:
+            - /bin/sh
+            - -c
+            - slu wait-for tcp -a {{.Release.Name}}-redis:6379
+      containers:
+        - name: main
+          image: ondrejsika/counter
+          ports:
+            - containerPort: 80
+          startupProbe:
+            httpGet:
+              path: /livez
+              port: 80
+          env:
+            - name: REDIS
+              value: {{.Release.Name}}-redis
+          envFrom:
+            - configMapRef:
+                name: {{.Release.Name}}-counter
+          resources:
+            requests:
+              cpu: 40m
+              memory: 100Mi
+            limits:
+              cpu: 100m
+              memory: 1000Mi

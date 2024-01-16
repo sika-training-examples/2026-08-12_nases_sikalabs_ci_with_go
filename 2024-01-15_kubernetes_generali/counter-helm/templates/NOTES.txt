@@ -1,0 +1,3 @@
+See:
+- https://{{ if .Values.frontendHost}}{{ .Values.frontendHost }}{{ else }}counter-frontend-{{.Release.Namespace}}-{{.Release.Name}}.k8sdb.cpas.cz{{ end }}
+- https://{{ if .Values.backendHost}}{{ .Values.backendHost }}{{ else }}counter-backend-{{.Release.Namespace}}-{{.Release.Name}}.k8sdb.cpas.cz{{ end }}
