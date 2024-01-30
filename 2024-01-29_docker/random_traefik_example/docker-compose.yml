@@ -1,0 +1,76 @@
+version: "3.8"
+name: counter
+services:
+  traefik:
+    image: traefik:v2.9
+    command:
+      - --metrics.prometheus=true
+      - --api.insecure=true
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --entrypoints.http.address=:80
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  app:
+    build: .
+    image: ttl.sh/ondrejsika/counter
+    platform: linux/amd64
+    environment:
+      REDIS: redis
+    depends_on:
+      redis:
+        condition: service_healthy
+    deploy:
+      replicas: 2
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.${TRAEFIK_ROUTER:-counter}.rule=Host(`${HOST:-127.0.0.1}`)
+
+  redis:
+    image: redis
+    # command:
+    #   - sh
+    #   - -c
+    #   - sleep 3 && redis-server
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 2s
+      timeout: 1s
+      retries: 10
+
+  caddy:
+    image: caddy
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.caddy.rule=Host(`caddy.127-0-0-1.uk`)
+
+  nginx:
+    image: nginx
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.nginx.rule=Host(`nginx.127.0.0.1.nip.io`)
+
+  nginx2:
+    image: nginx
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.nginx2.rule=PathPrefix(`/nginx`)
+
+  slu-example-server:
+    image: sikalabs/slu:v0.72.0
+    command:
+      - slu
+      - example-server
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.slu.loadbalancer.server.port=8000
+      - traefik.http.routers.slu.rule=PathPrefix(`/slu`)
+
+volumes:
+  redis-data:
+

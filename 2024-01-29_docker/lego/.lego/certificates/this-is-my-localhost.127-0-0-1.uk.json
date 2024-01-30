@@ -1,0 +1,5 @@
+{
+	"domain": "this-is-my-localhost.127-0-0-1.uk",
+	"certUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/04d6a4979dd09a7b9ad18c78d4bb6ed984b7",
+	"certStableUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/04d6a4979dd09a7b9ad18c78d4bb6ed984b7"
+}

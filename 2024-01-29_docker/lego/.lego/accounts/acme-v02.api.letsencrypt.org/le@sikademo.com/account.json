@@ -1,0 +1,12 @@
+{
+	"email": "le@sikademo.com",
+	"registration": {
+		"body": {
+			"status": "valid",
+			"contact": [
+				"mailto:le@sikademo.com"
+			]
+		},
+		"uri": "https://acme-v02.api.letsencrypt.org/acme/acct/1544302026"
+	}
+}

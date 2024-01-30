@@ -1,0 +1,7 @@
+version: "3.8"
+name: aaa
+services:
+  hello:
+    image: ondrejsika/log-rotation
+    deploy:
+      replicas: 2

@@ -1,0 +1,29 @@
+version: "3.8"
+name: counter
+services:
+  counter:
+    build: ./counter
+    image: ttl.sh/ondrejsika/counter
+    platform: linux/amd64
+    environment:
+      REDIS: redis
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.counter.rule: Host(`${HOST:-127.0.0.1}`)
+      traefik.http.routers.counter.entrypoints: http,https
+      traefik.http.routers.counter.tls.certresolver: le
+    depends_on:
+      redis:
+        condition: service_healthy
+  redis:
+    image: redis
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 2s
+      timeout: 1s
+      retries: 10
+
+volumes:
+  redis-data:
