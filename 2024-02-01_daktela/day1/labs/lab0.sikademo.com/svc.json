@@ -1,0 +1,14 @@
+{
+  "service": {
+    "ID": "cadvisor-2",
+    "Name": "cadvisor",
+    "Address": "lab2.sikademo.com",
+    "Port": 9338,
+    "Tags": ["prometheus"],
+    "Check": {
+      "HTTP": "http://lab2.sikademo.com:9338",
+      "Interval": "10s",
+      "Timeout": "1s"
+    }
+  }
+}

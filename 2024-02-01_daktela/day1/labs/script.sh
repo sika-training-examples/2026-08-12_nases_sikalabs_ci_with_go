@@ -1,0 +1,11 @@
+rsync -av --exclude '.*' --exclude 'data' root@lab0.sikademo.com:/training/ lab0.sikademo.com/
+rsync -av --exclude '.*' --exclude 'data' root@lab1.sikademo.com:/training/ lab1.sikademo.com/
+rsync -av --exclude '.*' --exclude 'data' root@lab2.sikademo.com:/training/ lab2.sikademo.com/
+rsync -av --exclude '.*' --exclude 'data' root@lab3.sikademo.com:/training/ lab3.sikademo.com/
+rsync -av --exclude '.*' --exclude 'data' root@lab4.sikademo.com:/training/ lab4.sikademo.com/
+rsync -av --exclude '.*' --exclude 'data' root@lab5.sikademo.com:/training/ lab5.sikademo.com/
+rsync -av --exclude '.*' --exclude 'data' root@lab5.sikademo.com:/training/ lab5.sikademo.com/
+rsync -av --exclude '.*' --exclude 'data' root@lab7.sikademo.com:/training/ lab7a.sikademo.com/
+rsync -av --exclude '.*' --exclude 'data' root@lab8.sikademo.com:/training/ lab8a.sikademo.com/
+rsync -av --exclude '.*' --exclude 'data' root@lab9.sikademo.com:/training/ lab9.sikademo.com/
+rsync -av --exclude '.*' --exclude 'data' root@lab10.sikademo.com:/training/ lab10a.sikademo.com/

@@ -1,0 +1,59 @@
+global:
+  resolve_timeout: 10s
+  smtp_from: prom@maildev.sikademo.com
+  smtp_smarthost: maildev.sikademo.com:25
+  smtp_require_tls: false
+  # Example for https://ethereal.email
+  # smtp_smarthost: smtp.ethereal.email:587
+  # smtp_require_tls: true
+  # smtp_auth_username: xxx.xxx@ethereal.email
+  # smtp_auth_password: xxx
+
+route:
+  receiver: all-teams
+  group_by:
+    - env
+    - alertname
+    - app
+  group_wait: 10s
+  group_interval: 10s
+  repeat_interval: 10m
+
+  routes:
+    - receiver: "frontend-team"
+      match:
+        app: frontend
+    - receiver: "backend-team"
+      match:
+        app: backend
+    - receiver: "db-team"
+      match:
+        app: db
+
+inhibit_rules:
+  - source_match:
+      app: db
+    target_match:
+      app: backend
+  - source_match:
+      app: lb
+    target_match:
+      app: frontend
+
+receivers:
+  - name: all-teams
+    email_configs:
+      - send_resolved: true
+        to: alert@maildev.sikademo.com
+  - name: frontend-team
+    email_configs:
+      - send_resolved: true
+        to: alert-frontend@maildev.sikademo.com
+  - name: backend-team
+    email_configs:
+      - send_resolved: true
+        to: alert-backend@maildev.sikademo.com
+  - name: db-team
+    email_configs:
+      - send_resolved: true
+        to: alert-db@maildev.sikademo.com

@@ -1,0 +1,88 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: grafana
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: spcss-loki
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://grafana.github.io/helm-charts
+    chart: grafana
+    targetRevision: 6.60.1
+    helm:
+      # https://artifacthub.io/packages/helm/grafana/grafana?modal=values
+      releaseName: grafana
+      valuesObject:
+        adminPassword: admin
+        ingress:
+          enabled: true
+          ingressClassName: nginx
+          annotations:
+            cert-manager.io/cluster-issuer: letsencrypt
+          hosts:
+            - grafana.k8s.sikademo.com
+          tls:
+            - hosts:
+                - grafana.k8s.sikademo.com
+              secretName: k8s.sikademo.com-tls
+        grafana.ini:
+          server:
+            root_url: https://grafana.k8s.sikademo.com
+          auth.basic:
+            enabled: true
+          auth:
+            disable_login_form: false
+          auth.generic_oauth:
+            enabled: true
+            name: SikaLabs SSO
+            allow_sign_up: true
+            scopes: "openid profile email"
+            auth_url: https://sso.sikalabs.com/realms/sikalabs/protocol/openid-connect/auth
+            token_url: https://sso.sikalabs.com/realms/sikalabs/protocol/openid-connect/token
+            api_url: https://sso.sikalabs.com/realms/sikalabs/protocol/openid-connect/userinfo
+            client_id: argocd
+            client_secret: "argocd-client-secret"
+            role_attribute_path: contains(groups[*], 'argocd-admin') && 'Admin' || contains(groups[*], 'grafana-viewer') && 'Viewer'
+        datasources:
+          datasources.yaml:
+            apiVersion: 1
+            datasources:
+              - name: prometheus
+                uid: prometheus
+                orgId: 1
+                url: http://lab0.sikademo.com:9090
+                access: proxy
+                isEnabled: true
+                type: prometheus
+                isDefault: true
+        dashboardProviders:
+          dashboardproviders.yaml:
+            apiVersion: 1
+            providers:
+              - name: 'default'
+                orgId: 1
+                folder: ''
+                type: file
+                disableDeletion: false
+                editable: true
+                options:
+                  path: /var/lib/grafana/dashboards/default
+        dashboards:
+          default:
+            mydashboard:
+              gnetId: 1234
+              revision: 1
+              datasource: Prometheus
+              json: |
+                {"annotations":{"list":[{"builtIn":1,"datasource":{"type":"grafana","uid":"-- Grafana --"},"enable":true,"hide":true,"iconColor":"rgba(0, 211, 255, 1)","name":"Annotations & Alerts","type":"dashboard"}]},"editable":true,"fiscalYearStartMonth":0,"graphTooltip":0,"links":[],"liveNow":false,"panels":[{"datasource":{"type":"prometheus","uid":"prometheus"},"description":"","fieldConfig":{"defaults":{"color":{"mode":"palette-classic"},"custom":{"axisCenteredZero":false,"axisColorMode":"text","axisLabel":"CPU Usage (%)","axisPlacement":"auto","barAlignment":0,"drawStyle":"line","fillOpacity":0,"gradientMode":"none","hideFrom":{"legend":false,"tooltip":false,"viz":false},"insertNulls":false,"lineInterpolation":"linear","lineWidth":1,"pointSize":5,"scaleDistribution":{"type":"linear"},"showPoints":"auto","spanNulls":false,"stacking":{"group":"A","mode":"none"},"thresholdsStyle":{"mode":"off"}},"mappings":[],"thresholds":{"mode":"absolute","steps":[{"color":"green","value":null},{"color":"red","value":80}]}},"overrides":[]},"gridPos":{"h":8,"w":12,"x":0,"y":0},"id":1,"options":{"legend":{"calcs":[],"displayMode":"list","placement":"bottom","showLegend":true},"tooltip":{"mode":"single","sort":"none"}},"targets":[{"datasource":{"type":"prometheus","uid":"prometheus"},"editorMode":"code","expr":"cpu_usage_perc","instant":false,"interval":"","legendFormat":"{{ instance }}","range":true,"refId":"A"}],"title":"CPU Usage %","type":"timeseries"},{"datasource":{"type":"prometheus","uid":"prometheus"},"description":"","fieldConfig":{"defaults":{"color":{"mode":"thresholds"},"mappings":[],"max":100,"min":-2,"thresholds":{"mode":"absolute","steps":[{"color":"green","value":null},{"color":"#EAB839","value":60},{"color":"red","value":80}]}},"overrides":[]},"gridPos":{"h":8,"w":12,"x":12,"y":0},"id":2,"options":{"minVizHeight":75,"minVizWidth":75,"orientation":"auto","reduceOptions":{"calcs":["lastNotNull"],"fields":"","values":false},"showThresholdLabels":false,"showThresholdMarkers":true,"sizing":"auto"},"pluginVersion":"10.1.2","targets":[{"datasource":{"type":"prometheus","uid":"prometheus"},"editorMode":"code","expr":"cpu_usage_perc","instant":false,"interval":"","legendFormat":"{{ instance }}","range":true,"refId":"A"}],"title":"CPU Usage %","type":"gauge"},{"datasource":{"type":"prometheus","uid":"prometheus"},"fieldConfig":{"defaults":{"color":{"mode":"palette-classic"},"custom":{"axisCenteredZero":false,"axisColorMode":"text","axisLabel":"","axisPlacement":"auto","barAlignment":0,"drawStyle":"line","fillOpacity":0,"gradientMode":"none","hideFrom":{"legend":false,"tooltip":false,"viz":false},"insertNulls":false,"lineInterpolation":"linear","lineWidth":1,"pointSize":5,"scaleDistribution":{"type":"linear"},"showPoints":"auto","spanNulls":false,"stacking":{"group":"A","mode":"none"},"thresholdsStyle":{"mode":"off"}},"mappings":[],"thresholds":{"mode":"absolute","steps":[{"color":"green","value":null},{"color":"red","value":80}]},"unit":"binBps"},"overrides":[]},"gridPos":{"h":8,"w":12,"x":0,"y":8},"id":5,"options":{"legend":{"calcs":[],"displayMode":"list","placement":"bottom","showLegend":true},"tooltip":{"mode":"single","sort":"none"}},"targets":[{"datasource":{"type":"prometheus","uid":"prometheus"},"editorMode":"code","expr":"irate(node_network_receive_bytes_total{device=~\"eth0\"}[1m])*8","instant":false,"legendFormat":"{{ instance }}","range":true,"refId":"A"}],"title":"Network","type":"timeseries"},{"datasource":{"type":"prometheus","uid":"prometheus"},"description":"","fieldConfig":{"defaults":{"color":{"mode":"thresholds"},"mappings":[],"max":100,"min":-2,"thresholds":{"mode":"absolute","steps":[{"color":"green","value":null}]},"unit":"bytes"},"overrides":[]},"gridPos":{"h":8,"w":12,"x":12,"y":8},"id":4,"options":{"colorMode":"value","graphMode":"area","justifyMode":"auto","orientation":"auto","reduceOptions":{"calcs":["lastNotNull"],"fields":"","values":false},"showPercentChange":false,"textMode":"auto","wideLayout":true},"pluginVersion":"10.1.2","targets":[{"datasource":{"type":"prometheus","uid":"prometheus"},"editorMode":"code","expr":"node_memory_Active_bytes\n","format":"time_series","instant":false,"interval":"","legendFormat":"{{ instance }}","range":true,"refId":"A"}],"title":"Memory Usage %","type":"stat"},{"datasource":{"type":"prometheus","uid":"prometheus"},"gridPos":{"h":9,"w":24,"x":0,"y":16},"id":3,"options":{"alertInstanceLabelFilter":"","alertName":"","dashboardAlerts":false,"groupBy":[],"groupMode":"default","maxItems":20,"sortOrder":1,"stateFilter":{"error":true,"firing":true,"noData":false,"normal":false,"pending":true},"viewMode":"list"},"title":"Alerts","type":"alertlist"}],"refresh":"","schemaVersion":38,"style":"dark","tags":[],"templating":{"list":[]},"time":{"from":"now-1h","to":"now"},"timepicker":{},"timezone":"","title":"Custom Dashboard","uid":"custom","version":1,"weekStart":""}

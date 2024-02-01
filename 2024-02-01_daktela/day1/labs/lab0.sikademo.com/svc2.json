@@ -1,0 +1,14 @@
+{
+  "service": {
+    "ID": "ne-8",
+    "Name": "ne",
+    "Address": "lab8.sikademo.com",
+    "Port": 9100,
+    "Tags": ["prometheus"],
+    "Check": {
+      "HTTP": "http://lab8.sikademo.com:9100",
+      "Interval": "10s",
+      "Timeout": "1s"
+    }
+  }
+}
