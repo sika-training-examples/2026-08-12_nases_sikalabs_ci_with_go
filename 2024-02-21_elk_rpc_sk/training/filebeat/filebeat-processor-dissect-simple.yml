@@ -1,0 +1,14 @@
+filebeat.inputs:
+  - type: filestream
+    paths:
+      - /tmp/example-log-text.log
+
+processors:
+  - dissect:
+      tokenizer: "%{prefix} %{date} %{time} %{level} %{message} (i=%{i|integer})"
+      field: "message"
+      target_prefix: "dissect"
+
+output.elasticsearch:
+  hosts:
+    - "localhost:9200"

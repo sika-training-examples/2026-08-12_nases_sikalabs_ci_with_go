@@ -1,0 +1,13 @@
+filebeat.inputs:
+  - type: stdin
+
+output.elasticsearch:
+  hosts:
+    - https://es2.k8s.sikademo.com:443
+  username: elastic
+  password: rZ2jy82J4iYg6ll5c00I9uz5
+
+  index: "foo"
+
+setup.template.name: "foo"
+setup.template.pattern: "foo*"

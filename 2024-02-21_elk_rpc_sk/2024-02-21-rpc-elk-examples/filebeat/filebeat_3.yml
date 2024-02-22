@@ -1,0 +1,38 @@
+filebeat.inputs:
+  - type: stdin
+
+processors:
+  - drop_fields:
+      fields:
+        - agent
+        - log
+        - input
+        - ecs
+        - host
+
+  - decode_json_fields:
+      fields:
+        - message
+      target: ""
+      overwrite_keys: true
+      add_error_key: true
+
+  - timestamp:
+      field: time
+      layouts:
+        - '2006-01-02T15:04:05Z'
+
+  - drop_event:
+      when:
+        or:
+          - equals:
+              level: "debug"
+          - equals:
+              level: "info"
+
+  - drop_fields:
+      fields:
+        - time
+
+output.console:
+  pretty: true

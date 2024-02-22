@@ -1,0 +1,1 @@
+{"level":"warn","prefix":"loggen","i":1,"time":"2024-02-01T00:39:04Z","message":"WARN A warning that should be ignored is usually at this level and should be actionable."}

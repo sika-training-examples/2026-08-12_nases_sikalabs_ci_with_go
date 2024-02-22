@@ -1,0 +1,11 @@
+filebeat.inputs:
+  - type: stdin
+
+processors:
+  - dissect:
+      tokenizer: "%{prefix} %{date} %{time} %{level} %{message} (i=%{i|integer})"
+      field: "message"
+      target_prefix: "dissect"
+
+output.console:
+  pretty: true

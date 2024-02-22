@@ -1,0 +1,22 @@
+.vscode
+.env
+.DS_Store
+*.log
+*.deb
+*.backup
+.tmp
+*.local.txt
+
+ca.crt
+
+# Terraform
+.terraform
+*.tfstate
+.terraform.tfstate.lock.info
+*.tfvars
+!*.EXAMPLE.tfvars
+override.tf
+
+# Infracost
+.infracost
+.infracost-reports

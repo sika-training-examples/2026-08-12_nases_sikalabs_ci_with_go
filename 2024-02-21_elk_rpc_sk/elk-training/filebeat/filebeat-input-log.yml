@@ -1,0 +1,8 @@
+filebeat.inputs:
+  - type: log
+    paths:
+      - /tmp/default.log
+
+output.elasticsearch:
+  hosts:
+    - "localhost:9200"

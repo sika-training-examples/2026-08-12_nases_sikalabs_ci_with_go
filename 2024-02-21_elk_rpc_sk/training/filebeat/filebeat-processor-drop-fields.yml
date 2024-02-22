@@ -1,0 +1,20 @@
+filebeat.inputs:
+  - type: stdin
+
+processors:
+  - drop_fields:
+      fields:
+        - agent
+        - log
+        - input
+        - ecs
+        - host
+
+output.console:
+  pretty: true
+
+# output.elasticsearch:
+#   hosts:
+#     - https://es.k8s.sikademo.com:443
+#   username: elastic
+#   password: Mc48Y45YXva5PUv5jyf5P738

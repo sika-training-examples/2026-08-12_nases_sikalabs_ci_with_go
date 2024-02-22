@@ -1,0 +1,47 @@
+filebeat.inputs:
+  - type: stdin
+
+processors:
+  - drop_fields:
+      fields:
+        - agent
+        - log
+        - input
+        - ecs
+        - host
+
+  - dissect:
+      tokenizer: "%{prefix} %{date} %{time} %{level} %{message} (i=%{i|integer})"
+      field: "message"
+      target_prefix: ""
+      overwrite_keys: true
+      add_error_key: true
+  - drop_event:
+      when:
+        or:
+          - equals:
+              level: "debug"
+          - equals:
+              level: "info"
+
+  - script:
+      lang: javascript
+      source: |
+        function process(event) {
+            event.Put("timestamp", event.Get("date")+"T"+event.Get("time")+"Z")
+            event.Put("level", event.Get("level").toLowerCase())
+            event.Delete("date")
+            event.Delete("time")
+        }
+
+  - timestamp:
+      field: timestamp
+      layouts:
+        - '2006/01/02T15:04:05Z'
+
+  - drop_fields:
+      fields:
+        - timestamp
+
+output.console:
+  pretty: true

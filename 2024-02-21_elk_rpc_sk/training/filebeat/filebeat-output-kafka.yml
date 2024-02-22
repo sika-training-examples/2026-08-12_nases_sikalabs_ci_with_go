@@ -1,0 +1,13 @@
+filebeat.inputs:
+  - type: stdin
+
+output.kafka:
+  hosts:
+    - 159.223.23.79:32555
+
+  topic: 'logs'
+  partition.round_robin:
+    reachable_only: false
+
+  required_acks: 1
+  max_message_bytes: 1000000

@@ -1,0 +1,9 @@
+filebeat.inputs:
+  - type: stdin
+    multiline:
+      pattern: ^[[:space:]]
+      negate: false
+      match: after
+
+output.console:
+  pretty: true

@@ -1,0 +1,23 @@
+filebeat.inputs:
+  - id: py
+    type: filestream
+    paths:
+      - /py.log
+    parsers:
+    - multiline:
+        pattern: ^[[:space:]]
+        negate: false
+        match: after
+
+  - id: java
+    type: filestream
+    paths:
+      - /java.log
+    parsers:
+    - multiline:
+        pattern: "^[[:space:]]|^Caused by:"
+        negate: false
+        match: after
+
+output.console:
+  pretty: true
