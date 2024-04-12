@@ -1,0 +1,6 @@
+FROM nginx
+LABEL org.opencontainers.image.source https://github.com/sika-training-examples/cro-php-example
+WORKDIR /app
+COPY index.php .
+COPY nginx-site.conf /etc/nginx/conf.d/default.conf
+EXPOSE 80

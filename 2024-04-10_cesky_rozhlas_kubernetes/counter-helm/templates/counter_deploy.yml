@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name}}-counter
+spec:
+  revisionHistoryLimit: 0
+  replicas: 2
+  selector:
+    matchLabels:
+      app: {{ .Release.Name}}-counter
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name}}-counter
+    spec:
+      initContainers:
+        - name: wait-for-redis
+          image: sikalabs/slu:v0.71.0
+          args:
+            - /bin/sh
+            - -c
+            - slu wait-for tcp -a {{ .Release.Name}}-redis:6379
+      containers:
+        - name: main
+          image: ondrejsika/counter
+          ports:
+            - containerPort: 80
+          startupProbe:
+            httpGet:
+              path: /
+              port: 80
+            periodSeconds: 1
+            failureThreshold: 30
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            periodSeconds: 5
+            failureThreshold: 3
+          env:
+            - name: REDIS
+              value: {{ .Release.Name}}-redis
+            - name: SLOW_START
+              value: "1"
+          resources:
+            requests:
+              cpu: 50m
+              memory: 50Mi
+            limits:
+              memory: 100Mi
+              cpu: 100m
