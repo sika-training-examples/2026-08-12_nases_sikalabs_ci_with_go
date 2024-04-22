@@ -1,0 +1,3 @@
+hello-world:
+  host: hello-world.k8s.sikademo.com
+  TEXT: Hello from ArgoCD

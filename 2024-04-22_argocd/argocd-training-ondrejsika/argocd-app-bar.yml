@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: os-bar
+  namespace: argocd
+spec:
+  destination:
+    namespace: os-bar
+    server: https://kubernetes.default.svc
+  project: os-bar
+  source:
+    path: examples/manifests
+    repoURL: https://gitlab.sikademo.com/argocd/os.git
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

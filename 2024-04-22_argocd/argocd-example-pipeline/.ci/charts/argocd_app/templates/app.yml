@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ .Release.Name }}
+  namespace: argocd
+  annotations:
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: {{ .Release.Namespace }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    path: ./chart
+    repoURL: https://gitlab.sikademo.com/argocd/argocd-example-pipeline.git
+    targetRevision: master
+    helm:
+      valuesObject:
+        host: {{ .Values.host }}
+        image: {{ .Values.image }}

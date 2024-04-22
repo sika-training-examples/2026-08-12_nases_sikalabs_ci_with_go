@@ -1,0 +1,40 @@
+image: sikalabs/ci
+
+stages:
+  - build
+  - deploy
+
+variables:
+  TAG: $CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA-$CI_PIPELINE_ID
+  IMAGE: $CI_REGISTRY_IMAGE:$TAG
+
+build:
+  stage: build
+  script:
+    - docker login $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
+    - docker build -t $IMAGE .
+    - docker push $IMAGE
+
+deploy:
+  stage: deploy
+  script:
+    - |
+      helm upgrade --install --wait \
+      --set image=$IMAGE \
+      --set host=example-$CI_COMMIT_REF_SLUG.k8s.sikademo.com \
+      example-$CI_COMMIT_REF_SLUG .ci/charts/argocd_app
+  environment:
+    name: $CI_COMMIT_REF_SLUG
+    url: http://example-$CI_COMMIT_REF_SLUG.k8s.sikademo.com
+    on_stop: deploy stop
+
+deploy stop:
+  stage: deploy
+  script:
+    - helm uninstall example-$CI_COMMIT_REF_SLUG
+  when: manual
+  environment:
+    name: $CI_COMMIT_REF_SLUG
+    action: stop
+  variables:
+    GIT_STRATEGY: none
