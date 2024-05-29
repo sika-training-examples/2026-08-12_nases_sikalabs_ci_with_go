@@ -1,0 +1,10 @@
+version: "3.8"
+services:
+  counter:
+    build: counter
+    image: ttl.sh/dte/startup-order/counter
+    depends_on:
+      - redis
+  redis:
+    build: redis
+    image: ttl.sh/dte/startup-order/redis

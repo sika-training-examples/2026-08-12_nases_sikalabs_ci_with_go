@@ -1,0 +1,11 @@
+FROM debian:12-slim
+WORKDIR /app
+RUN \
+    apt-get update && \
+    apt-get install -y --no-install-recommends python3 python3-pip && \
+    rm -rf /var/lib/apt/lists/*
+COPY requirements.txt .
+RUN pip3 install -r requirements.txt --break-system-packages
+COPY . .
+CMD ["python3", "app.py"]
+EXPOSE 80
