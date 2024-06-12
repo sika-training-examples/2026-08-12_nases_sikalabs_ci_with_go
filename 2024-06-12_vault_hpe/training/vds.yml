@@ -1,0 +1,21 @@
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultDynamicSecret
+metadata:
+  name: db
+  namespace: default
+spec:
+  vaultAuthRef: auth
+
+  mount: database
+
+  # Path to the secret
+  path: creds/readonly
+
+  destination:
+    create: true
+    name: db
+
+  # Restart these pods when secrets rotated
+  rolloutRestartTargets:
+  - kind: Deployment
+    name: example

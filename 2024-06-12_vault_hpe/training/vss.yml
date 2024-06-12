@@ -1,0 +1,20 @@
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultStaticSecret
+metadata:
+  name: color
+  namespace: default
+spec:
+  vaultAuthRef: auth
+  refreshAfter: 30s
+
+  type: kv-v2
+  mount: test
+  path: color
+
+  destination:
+    name: color
+    create: true
+
+  rolloutRestartTargets:
+  - kind: Deployment
+    name: example
