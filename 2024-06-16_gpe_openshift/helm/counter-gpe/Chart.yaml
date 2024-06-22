@@ -1,0 +1,5 @@
+apiVersion: v2
+name: counter-gpe
+description: A Helm chart for GPE Training
+type: application
+version: 0.3.0

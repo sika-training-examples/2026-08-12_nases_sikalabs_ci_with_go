@@ -1,0 +1,7 @@
+# Required
+host:
+
+# Optional
+backendReplicas: 2
+frontendReplicas: 2
+ingressClassName: openshift-default

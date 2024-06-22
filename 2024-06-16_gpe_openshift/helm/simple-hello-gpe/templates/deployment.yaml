@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-hello-gpe
+spec:
+  revisionHistoryLimit: 0
+  replicas: 4
+  selector:
+    matchLabels:
+      app: simple-hello-gpe
+  template:
+    metadata:
+      labels:
+        app: simple-hello-gpe
+    spec:
+      containers:
+        - name: main
+          image: {{ required ".Values.image is required" .Values.image }}
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              cpu: 20m
+              memory: 20Mi
+            limits:
+              memory: 40Mi
+              cpu: 40m
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault

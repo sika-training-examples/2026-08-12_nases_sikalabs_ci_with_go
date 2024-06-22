@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: frontend
+spec:
+  ingressClassName: openshift-default
+  tls:
+    - hosts:
+        - gpe.sikademo.com
+      secretName: letsencrypt
+  rules:
+  - host: gpe.sikademo.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: frontend
+            port:
+              number: 80
+

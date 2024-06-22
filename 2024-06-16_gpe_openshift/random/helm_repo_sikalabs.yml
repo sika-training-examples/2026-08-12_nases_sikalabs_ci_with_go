@@ -1,0 +1,9 @@
+apiVersion: helm.openshift.io/v1beta1
+kind: HelmChartRepository
+metadata:
+  name: sikalabs-helm-charts
+spec:
+  connectionConfig:
+    url: 'https://helm.sikalabs.io'
+  name: SikaLabs Helm Charts
+  description: Helm Charts from SikaLabs

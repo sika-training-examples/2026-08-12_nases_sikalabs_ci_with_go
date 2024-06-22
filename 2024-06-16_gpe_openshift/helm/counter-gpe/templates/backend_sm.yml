@@ -1,0 +1,11 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: backend
+spec:
+  jobLabel: backend
+  selector:
+    matchLabels:
+      app: backend
+  endpoints:
+    - port: "8000"

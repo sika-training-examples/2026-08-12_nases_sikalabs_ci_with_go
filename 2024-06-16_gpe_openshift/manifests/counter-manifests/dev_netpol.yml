@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: dev
+spec:
+  policyTypes:
+    - Egress
+  podSelector:
+    matchLabels:
+      aaa: bbb
+  egress:
+    - ports:
+        - protocol: UDP
+          port: 53
+    - ports:
+        - protocol: TCP
+          port: 53

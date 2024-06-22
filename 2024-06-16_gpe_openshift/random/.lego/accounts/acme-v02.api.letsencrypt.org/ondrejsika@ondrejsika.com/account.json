@@ -1,0 +1,12 @@
+{
+	"email": "ondrejsika@ondrejsika.com",
+	"registration": {
+		"body": {
+			"status": "valid",
+			"contact": [
+				"mailto:ondrejsika@ondrejsika.com"
+			]
+		},
+		"uri": "https://acme-v02.api.letsencrypt.org/acme/acct/1789227607"
+	}
+}

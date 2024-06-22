@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  annotations:
+    app.openshift.io/connects-to: '[{"apiVersion":"apps/v1","kind":"StatefulSet","name":"redis"}]'
+spec:
+  replicas: {{ .Values.backendReplicas }}
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: main
+          image: ondrejsika/counter
+          env:
+            - name: REDIS
+              value: redis
+            - name: PORT
+              value: "8000"
+            - name: SLOW_START
+              value: "20"
+          ports:
+            - containerPort: 8000
+          startupProbe:
+            httpGet:
+              path: /
+              port: 8000
+          livenessProbe:
+            httpGet:
+              path: /livez
+              port: 8000
+          resources:
+            requests:
+              cpu: 20m
+              memory: 20Mi
+            limits:
+              cpu: 60m
+              memory: 60Mi

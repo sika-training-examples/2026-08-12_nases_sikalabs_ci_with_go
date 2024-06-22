@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: simple-hello-gpe
+spec:
+  ingressClassName: openshift-default
+  rules:
+    - host: simple-hello-gpe.apps.okd0.sikademo.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: simple-hello-gpe
+                port:
+                  number: 80

@@ -1,0 +1,5 @@
+{
+	"domain": "gpe.sikademo.com",
+	"certUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/04edf18f2a057020e9b0ac001a88dd71862c",
+	"certStableUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/04edf18f2a057020e9b0ac001a88dd71862c"
+}
