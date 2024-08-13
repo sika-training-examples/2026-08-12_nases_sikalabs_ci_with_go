@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{.Release.Name}}-backend
+spec:
+  revisionHistoryLimit: 0
+  replicas: {{ .Values.backendReplicas }}
+  selector:
+    matchLabels:
+      app: {{.Release.Name}}-backend
+  template:
+    metadata:
+      labels:
+        app: {{.Release.Name}}-backend
+    spec:
+      containers:
+        - name: main
+          image: {{ .Values.backendImage }}
+          env:
+            - name: REDIS
+              value: {{.Release.Name}}-redis
+            - name: SLOW_START
+              value: '{{ .Values.backend_SLOW_START }}'
+            - name: EXTRA_TEXT
+              value: {{ .Values.backend_EXTRA_TEXT | quote }}
+          ports:
+            - name: http
+              containerPort: 80
+          startupProbe:
+            httpGet:
+              path: /readyz
+              port: http
+          livenessProbe:
+            httpGet:
+              path: /livez
+              port: 80
+          resources:
+            requests:
+              cpu: 50m
+              memory: 20Mi
+            limits:
+              cpu: 100m
+              memory: 40Mi

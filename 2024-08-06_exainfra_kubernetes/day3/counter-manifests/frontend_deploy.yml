@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  revisionHistoryLimit: 0
+  replicas: 4
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: main
+          image: ghcr.io/ondrejsika/counter-frontend
+          env:
+            - name: API_ORIGIN
+              value: http://backend
+            - name: FONT_COLOR
+              value: 'green'
+            - name: BACKGROUND_COLOR
+              value: '#3A5D87'
+          ports:
+            - name: http
+              containerPort: 3000
+          startupProbe:
+            httpGet:
+              path: /api/livez
+              port: http
+          livenessProbe:
+            httpGet:
+              path: /api/livez
+              port: 3000
+          resources:
+            requests:
+              cpu: 200m
+              memory: 200Mi
+            limits:
+              cpu: 600m
+              memory: 400Mi

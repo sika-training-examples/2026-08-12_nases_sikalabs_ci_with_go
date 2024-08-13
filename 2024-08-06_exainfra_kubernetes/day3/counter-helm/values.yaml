@@ -1,0 +1,14 @@
+# Required
+host:
+
+# Optional
+backendReplicas: 4
+backendImage: ondrejsika/counter
+backend_SLOW_START: 5
+backend_EXTRA_TEXT: 'Hello EXA!'
+
+frontendReplicas: 4
+frontendImage: ghcr.io/ondrejsika/counter-frontend
+
+frontend_FONT_COLOR: 'white'
+frontend_BACKGROUND_COLOR: '#3A5D87'

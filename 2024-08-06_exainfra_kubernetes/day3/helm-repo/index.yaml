@@ -1,0 +1,49 @@
+apiVersion: v1
+entries:
+  counter-exa:
+  - apiVersion: v2
+    created: "2024-08-13T10:20:39.238614775Z"
+    description: Example app for EXA Infra training
+    digest: 31d442993d8d81944c06d88978b011aee6de8a78ab85512b0f0fd9b2856e9298
+    name: counter-exa
+    type: application
+    urls:
+    - counter-exa-0.4.1.tgz
+    version: 0.4.1
+  - apiVersion: v2
+    created: "2024-08-13T10:20:39.237022903Z"
+    description: Example app for EXA Infra training
+    digest: 5af42421df9558c386bd808d9e777667613f00efc28a8ce57965dcecc11df250
+    name: counter-exa
+    type: application
+    urls:
+    - counter-exa-0.4.0.tgz
+    version: 0.4.0
+  - apiVersion: v2
+    created: "2024-08-13T10:20:39.236230007Z"
+    description: Example app for EXA Infra training
+    digest: 5f7c2c307e441bf185748d9ed1d609f1fbd104acd5db66ceccadff7fd7a1e1aa
+    name: counter-exa
+    type: application
+    urls:
+    - counter-exa-0.3.0.tgz
+    version: 0.3.0
+  - apiVersion: v2
+    created: "2024-08-13T10:20:39.235610259Z"
+    description: Example app for EXA Infra training
+    digest: 46f5aa423f6e8a0ebea3f46505dc60f3af611cca57d813f7fe3abc958934b12a
+    name: counter-exa
+    type: application
+    urls:
+    - counter-exa-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
+    created: "2024-08-13T10:20:39.235107848Z"
+    description: Example app for EXA Infra training
+    digest: ac3a69e07069a03c81887f07e60a2fbdf6d999952241e26715aff34f03554213
+    name: counter-exa
+    type: application
+    urls:
+    - counter-exa-0.1.0.tgz
+    version: 0.1.0
+generated: "2024-08-13T10:20:39.234412781Z"

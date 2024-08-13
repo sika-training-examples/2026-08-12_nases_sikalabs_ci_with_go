@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ondrej-counter1
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: ondrej
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://github.com/sika-training-examples/2024-08-13-exainfra-counter-helm-example.git
+    path: .
+    helm:
+      valuesObject:
+        host: ondrej-counter1.k8s.sikademo.com
+        frontend_FONT_COLOR: 'blue'
+        frontend_BACKGROUND_COLOR: 'yellow'

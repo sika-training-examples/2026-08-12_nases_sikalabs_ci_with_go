@@ -1,0 +1,1 @@
+# exainfra-counter-manifests-example
