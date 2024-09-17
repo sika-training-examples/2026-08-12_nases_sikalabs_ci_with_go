@@ -1,0 +1,6 @@
+.DS_Store
+
+.vscode
+
+/argocd.values.yml
+/argocd.sso.values.yml

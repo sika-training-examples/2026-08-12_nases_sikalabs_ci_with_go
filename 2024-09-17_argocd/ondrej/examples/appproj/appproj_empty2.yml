@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: empty
+  namespace: argocd
+spec:
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  destinations:
+  - namespace: bar
+    server: https://kubernetes.default.svc
+  sourceRepos:
+  - https://github.com/argocd-training/example-1.git

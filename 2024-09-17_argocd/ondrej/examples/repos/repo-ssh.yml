@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-priv-ssh
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/secret-type: repository
+stringData:
+  project: default
+  type: git
+  url: git@gitlab.sikademo.com:training/ondrej.git
+  username: ondrejsika
+  sshPrivateKey: |
+    -----BEGIN OPENSSH PRIVATE KEY-----
+    b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAABFwAAAAdzc2gtcn
+    NhAAAAAwEAAQAAAQEArLJago8RtyBgR3x37L3DrV0iKqZIs7g8o4uHrtpssX6A4DPDlGpf
+    967EFN9oTFlMUv62nT4qGHy8cCcqzScYPcLvjmFHnuBBmw/BWRZnoibMBRJn33+/vBcE9V
+    jRLe1p55kRb8ui3zdBf1CK4b8wKSgF3lvF+2l5qrNcDBLBYjbYzmxkNu0aKCds9EVdED04
+    tXlrmK6Hd5IxOVObn9Ipea3Rwx/WYvp7LtrAh1gobusqSIELKrgby7/U0isQZAeJjaYep3
+    KS4f0iOQhDylOC0MHuJhB01dSPN8u9DWoXDaa6+9QGgdz6Nahtk8FDfJUilE+DB7MqiN9h
+    lsTQU4i1gQAAA7iCF8gaghfIGgAAAAdzc2gtcnNhAAABAQCsslqCjxG3IGBHfHfsvcOtXS
+    IqpkizuDyji4eu2myxfoDgM8OUal/3rsQU32hMWUxS/radPioYfLxwJyrNJxg9wu+OYUee
+    4EGbD8FZFmeiJswFEmfff7+8FwT1WNEt7WnnmRFvy6LfN0F/UIrhvzApKAXeW8X7aXmqs1
+    wMEsFiNtjObGQ27RooJ2z0RV0QPTi1eWuYrod3kjE5U5uf0il5rdHDH9Zi+nsu2sCHWChu
+    6ypIgQsquBvLv9TSKxBkB4mNph6ncpLh/SI5CEPKU4LQwe4mEHTV1I83y70NahcNprr71A
+    aB3Po1qG2TwUN8lSKUT4MHsyqI32GWxNBTiLWBAAAAAwEAAQAAAQBDO2Q1M9Gnw3j4G6Ls
+    jawiUAG/LOFc5jrlSKrYDb0HFMLDhiN8IjWeTXGU1qzaHGG0ZeleKhdlVRpfZ0AogjHTyZ
+    JNkd26IoAoB+gz8J8D56rBxrqdrjRM24FYqu00vhreyR6asWKFGBPtpsOKw03Sl/xA5uWa
+    zSNKq20IXjzfKOqGTJmhg7DFDMVydl+77s1kdr4tfHYtZM9DSvKCudQiD0rDw05tRVVwFG
+    ChChDIpHQpYnjMA0tDr3vWR0qASN6DhTTXDUpaagBfTK3xGutqLFm/hN8toQrlLHaLwEv7
+    HgleXIMgbt2LMH1j/hLT9tcAqsLRDQaUVWpDxxcdyKSpAAAAgBf1uQH5G0I3JbruchfaEn
+    PbEwBe/nxaYNIZ2HGDMz6XIFTLOUlYbnWRYBnZ5MHV2zOTAKtpBeKBlKcBqElfTPftW1vg
+    2Q/n4okyfQfqqqFcTNP662JSjKplLwsIhef6+/ADGpUyHFAb4ovukfjT/Kq54imNugfhQm
+    PARQ3gW/PaAAAAgQC9vDWHPUmeIKfnLseUytLYX0w6JWSjQXiwuBUsiIyFHzSav831zwax
+    lTtX5HfMNBe1GG85wBRek/fObFPHR6zE5BjZiogbtOuvnBMqTf+VyT2NftWwwnR85jQxxe
+    RneAiU98TalopYbFJ8U11vnnO6zNtjjmgKoKS0/SEAOqRZXwAAAIEA6QLFbDw6pkOGPXnr
+    VA7EPrYEY8HOVvpzCUNk3XHkoKReE1KQufuFyngIHQcvuooeuPokYOntIgbZd+bIaGZuAT
+    3u389fw/odCe2tlj82w0ITf8dznCLyBD/RlPMhWfuUguJEVdSgaduoLD6wiX9a/TnhYAhV
+    55B0Ume9G+IR/R8AAAAAAQID
+    -----END OPENSSH PRIVATE KEY-----
+  # pubic key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCsslqCjxG3IGBHfHfsvcOtXSIqpkizuDyji4eu2myxfoDgM8OUal/3rsQU32hMWUxS/radPioYfLxwJyrNJxg9wu+OYUee4EGbD8FZFmeiJswFEmfff7+8FwT1WNEt7WnnmRFvy6LfN0F/UIrhvzApKAXeW8X7aXmqs1wMEsFiNtjObGQ27RooJ2z0RV0QPTi1eWuYrod3kjE5U5uf0il5rdHDH9Zi+nsu2sCHWChu6ypIgQsquBvLv9TSKxBkB4mNph6ncpLh/SI5CEPKU4LQwe4mEHTV1I83y70NahcNprr71AaB3Po1qG2TwUN8lSKUT4MHsyqI32GWxNBTiLWB 
+  # insecure: "true"

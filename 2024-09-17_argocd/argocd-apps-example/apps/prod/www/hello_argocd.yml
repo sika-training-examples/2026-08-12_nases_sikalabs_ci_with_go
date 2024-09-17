@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hello-argocd
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: www
+  destination:
+    namespace: www
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://gitlab.sikademo.com/training/argocd-apps-example.git
+    path: charts/hello-argocd
+    helm:
+      valuesObject:
+        host: hello-argocd.k8s.sikademo.com

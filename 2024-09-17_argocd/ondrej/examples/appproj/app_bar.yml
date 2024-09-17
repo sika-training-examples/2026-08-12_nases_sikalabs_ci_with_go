@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: bar
+  namespace: argocd
+spec:
+  project: bar
+  destination:
+    namespace: bar
+    server: https://kubernetes.default.svc
+  source:
+    path: examples/manifests/
+    repoURL: https://gitlab.sikademo.com/training/ondrej.git
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

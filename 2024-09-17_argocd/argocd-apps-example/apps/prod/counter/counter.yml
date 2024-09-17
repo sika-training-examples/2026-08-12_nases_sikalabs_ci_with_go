@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: counter
+  namespace: argocd
+spec:
+  generators:
+  - list:
+      elements:
+      - name: foo
+      - name: bar
+  template:
+    metadata:
+      name: 'counter-{{name}}'
+      namespace: argocd
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io
+    spec:
+      project: counter
+      destination:
+        namespace: 'counter'
+        server: https://kubernetes.default.svc
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+      sources:
+      - repoURL: https://github.com/ondrejsika/counter.git
+        path: charts/counter
+        helm:
+          valueFiles:
+          - $values/values.yaml
+          - $values/values-prod.yaml
+      - repoURL: 'https://gitlab.sikademo.com/training/counter-{{name}}.git'
+        targetRevision: main
+        ref: values

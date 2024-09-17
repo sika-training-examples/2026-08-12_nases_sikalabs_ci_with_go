@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ondrej-helm-from-git
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: ondrej
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: git@gitlab.sikademo.com:training/ondrej.git
+    path: examples/helm
+    helm:
+      releaseName: example
+      valuesObject:
+        replicas: 2
+        host: example-2-ondrej.k8s.sikademo.com

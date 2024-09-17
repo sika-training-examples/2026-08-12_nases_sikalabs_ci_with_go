@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: appset
+  namespace: argocd
+spec:
+  generators:
+  - list:
+      elements:
+      - name: ex1
+        repo: https://gitlab.sikademo.com/training/ondrej.git
+        path: examples/helm_with_dependencies
+        namespace: ex1
+      - name: ex2
+        repo: https://github.com/ondrejsika/argocd-training.git
+        path: examples/helm_with_dependencies
+        namespace: ex2
+      - name: ex3
+        repo: https://github.com/argocd-training/example-1.git
+        path: .
+        namespace: ex3
+  template:
+    metadata:
+      name: '{{name}}'
+      namespace: argocd
+    spec:
+      project: default
+      destination:
+        namespace: '{{namespace}}'
+        server: https://kubernetes.default.svc
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+      source:
+        repoURL: '{{repo}}'
+        path: '{{path}}'
