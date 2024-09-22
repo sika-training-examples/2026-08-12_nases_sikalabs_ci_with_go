@@ -1,0 +1,3 @@
+vaultAuthRef: counter
+vaultSecretMount: secret
+vaultSecretPath: dev/counter/mongodb/root-password

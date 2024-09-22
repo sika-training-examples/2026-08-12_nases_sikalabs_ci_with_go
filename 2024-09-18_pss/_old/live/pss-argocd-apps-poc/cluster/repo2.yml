@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: repo2
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/secret-type: repository
+stringData:
+  project: default
+  insecure: "true"
+  type: git
+  url: ssh://git@git.pss.sk:2222/k8s/training/pss-argocd-apps-poc.git
+  username: ondrejsika
+  sshPrivateKey: |
+    -----BEGIN OPENSSH PRIVATE KEY-----
+    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
+    -----END OPENSSH PRIVATE KEY-----

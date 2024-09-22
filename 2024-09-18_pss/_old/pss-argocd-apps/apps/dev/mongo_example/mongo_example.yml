@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mongo-example
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: mongo-example
+  destination:
+    namespace: mongo-example
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+  sources:
+    - repoURL: https://charts.bitnami.com/bitnami
+      targetRevision: 15.6.24
+      chart: mongodb
+      helm:
+        valueFiles:
+          - '$values/apps/dev/mongo_example/mongo_example.values.yml'
+    - repoURL: https://gitlab.sikalabs.com/clients-public/pss/pss-argocd-apps.git
+      ref: values

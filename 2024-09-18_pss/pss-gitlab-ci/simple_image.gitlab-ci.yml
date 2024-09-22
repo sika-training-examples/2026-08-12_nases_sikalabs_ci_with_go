@@ -1,0 +1,62 @@
+# Required VARIABLES:
+#
+# - ARGOCD_COMMITTER_TOKEN
+# - ARGOCD_APPS_PROJECT_ID
+# - ARGOCD_APPS_BRANCH
+# - IMAGE_VALUES_FILE_DEV
+# - IMAGE_VALUES_FILE_PROD
+
+image: sikalabs/ci
+
+variables:
+  TAG: $CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA-$CI_PIPELINE_ID
+  IMAGE: $CI_REGISTRY_IMAGE:$TAG
+
+stages:
+  - build
+  - deploy dev
+  - deploy prod
+
+build:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:v1.19.2-debug
+    entrypoint: [""]
+  script:
+    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor
+      --context .
+      --dockerfile ./Dockerfile
+      --destination $IMAGE
+
+deploy dev:
+  stage: deploy dev
+  when: manual
+  script:
+    - |
+      slr gitlab-update-file \
+        --gitlab-url https://gitlab.sikalabs.com \
+        --token $ARGOCD_COMMITTER_TOKEN \
+        --project-id $ARGOCD_APPS_PROJECT_ID \
+        --branch $ARGOCD_APPS_BRANCH \
+        --file $IMAGE_VALUES_FILE_DEV \
+        --content "image: $IMAGE" \
+        --committer-email "pss-ci-bot@gitlab.sikalabs.io" \
+        --committer-name "[bot] pss-ci-bot" \
+        --commit-message "[auto] feat: Update image using CI in $IMAGE_VALUES_FILE_DEV"
+
+deploy prod:
+  stage: deploy prod
+  when: manual
+  script:
+    - |
+      slr gitlab-update-file \
+        --gitlab-url https://gitlab.sikalabs.com \
+        --token $ARGOCD_COMMITTER_TOKEN \
+        --project-id $ARGOCD_APPS_PROJECT_ID \
+        --branch $ARGOCD_APPS_BRANCH \
+        --file $IMAGE_VALUES_FILE_PROD \
+        --content "image: $IMAGE" \
+        --committer-email "pss-ci-bot@gitlab.sikalabs.io" \
+        --committer-name "[bot] pss-ci-bot" \
+        --commit-message "[auto] feat: Update image using CI in $IMAGE_VALUES_FILE_PROD"

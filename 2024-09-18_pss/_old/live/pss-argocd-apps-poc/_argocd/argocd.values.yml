@@ -1,0 +1,27 @@
+# https://github.com/argoproj/argo-helm/blob/master/charts/argo-cd/values.yaml
+# https://artifacthub.io/packages/helm/argo/argo-cd?modal=values
+server:
+  ingress:
+    enabled: true
+
+    tls: true
+    ingressClassName: nginx
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+      
+configs:
+  cm:
+    url: https://argocd.pss-poc.sikademo.com
+
+
+server:
+  basehref: "/argocd"
+  ingress:
+    enabled: true
+    hosts:
+      - apps-k8s-poc.pss.sk
+    path: /argocd
+    pathType: Prefix
+    annotations:
+      nginx.ingress.kubernetes.io/rewrite-target: /$2
+      nginx.ingress.kubernetes.io/use-regex: "true"

@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: account360-backend
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: account360
+  destination:
+    namespace: account360
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+  sources:
+  - repoURL: https://gitlab.sikalabs.com/clients-public/pss/pss-charts.git
+    path: charts/pss-app
+    helm:
+      valueFiles:
+      - '$values/apps/account360/account360_backend.values.yml'
+  - repoURL: https://gitlab.sikalabs.com/clients-public/pss/pss-argocd-apps-poc.git
+    ref: values

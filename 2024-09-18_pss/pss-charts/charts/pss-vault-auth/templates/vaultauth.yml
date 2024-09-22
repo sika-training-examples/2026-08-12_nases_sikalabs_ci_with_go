@@ -1,0 +1,12 @@
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultAuth
+metadata:
+  name: {{ .Release.Name }}
+spec:
+  method: kubernetes
+  mount: {{ .Values.mount }}
+  kubernetes:
+    role: {{ required ".Values.role" .Values.role }}
+    serviceAccount: {{ .Values.serviceAccount }}
+    audiences:
+      - vault

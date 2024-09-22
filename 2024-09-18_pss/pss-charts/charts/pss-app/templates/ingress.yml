@@ -1,0 +1,30 @@
+{{- if .Values.host }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}
+  annotations:
+    cert-manager.io/cluster-issuer: {{ .Values.clusterIssuer }}
+    {{ if .Values.rewriteTarget }}
+    nginx.ingress.kubernetes.io/rewrite-target: "/$2"
+    {{ end }}
+spec:
+  ingressClassName: {{ .Values.ingressClassName }}
+  {{ if .Values.tls }}
+  tls:
+    - hosts:
+        - {{ .Values.host }}
+      secretName: {{ .Release.Name }}-tls
+  {{ end }}
+  rules:
+    - host: {{ .Values.host }}
+      http:
+        paths:
+          - path: {{ .Values.path }}{{- if .Values.rewriteTarget }}(/|$)(.*){{- end }}
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Release.Name }}
+                port:
+                  number: {{ .Values.port }}
+{{ end }}

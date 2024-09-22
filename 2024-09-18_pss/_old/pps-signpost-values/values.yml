@@ -1,0 +1,18 @@
+host: signpost.k8s.sikademo.com
+signpost_yaml:
+  SiteHeading: PSS.sk Demo Signpost
+  CompanyName: PSS.sk
+  CompanyDomain: pss.sk
+  CompanyURL: https://pss.sk
+  Rows:
+  - Cols:
+    - Blocks:
+      - Heading: Gitlab
+        Links:
+        - Title: Group
+          URL: https://gitlab.sikalabs.com/clients-public/pss/pps-signpost-values
+    - Blocks:
+      - Heading: Kubernetes
+        Links:
+        - Title: ArgoCD
+          URL: https://argocd.k8s.sikademo.com

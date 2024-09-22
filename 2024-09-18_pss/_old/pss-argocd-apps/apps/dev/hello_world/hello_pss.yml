@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hello-world
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: hello-world
+  destination:
+    namespace: hello-world
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+  sources:
+  - repoURL: https://github.com/sikalabs/charts.git
+    path: charts/hello-world
+    helm:
+      valueFiles:
+      - '$values/apps/dev/hello_world/hello_world.values.yml'
+  - repoURL: https://gitlab.sikalabs.com/clients-public/pss/pss-argocd-apps.git
+    ref: values

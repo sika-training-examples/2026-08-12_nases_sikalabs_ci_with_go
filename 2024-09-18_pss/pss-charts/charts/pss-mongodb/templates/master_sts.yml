@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Release.Name }}-master
+spec:
+  serviceName: {{ .Release.Name }}-master
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: {{ .Values.storage }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-master
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-master
+    spec:
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data
+      initContainers:
+        - name: chown-data
+          image: debian:12-slim
+          command: ['sh', '-c', 'chown -R 1001:1001 /bitnami/mongodb']
+          volumeMounts:
+            - mountPath: /bitnami/mongodb
+              name: data
+      containers:
+        - name: main
+          image: {{ .Values.image }}
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - mountPath: /bitnami/mongodb
+              name: data
+          env:
+            - name: MONGODB_REPLICA_SET_MODE
+              value: primary
+            - name: MONGODB_ADVERTISED_HOSTNAME
+              value: {{ .Release.Name }}-master.{{ .Release.Namespace }}
+            - name: MONGODB_REPLICA_SET_KEY
+              value: replicasetkey
+            - name: MONGODB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-root-password
+                  key: MONGODB_ROOT_PASSWORD

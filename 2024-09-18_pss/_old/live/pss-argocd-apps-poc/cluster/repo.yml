@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: repo-pss-argocd-apps-poc
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/secret-type: repository
+stringData:
+  project: default
+  type: git
+  url: https://gitlab.sikalabs.com/clients/pss/pss-argocd-apps-poc.git
+  username: token
+  password: glpat-YL4kygfQsxMDdizb244c
+  insecure: "true"

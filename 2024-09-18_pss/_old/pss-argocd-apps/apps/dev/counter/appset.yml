@@ -1,0 +1,40 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: counter
+  namespace: argocd
+spec:
+  generators:
+  - list:
+      elements:
+      - name: mongodb
+        chart: pss-mongodb
+      - name: backend
+        chart: pss-app
+      - name: frontend
+        chart: pss-app
+  template:
+    metadata:
+      name: 'counter-{{name}}'
+      namespace: argocd
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io
+    spec:
+      project: counter
+      destination:
+        namespace: counter
+        server: https://kubernetes.default.svc
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+      sources:
+      - repoURL: https://gitlab.sikalabs.com/clients-public/pss/pss-charts.git
+        path: charts/{{chart}}
+        helm:
+          valueFiles:
+          - '$values/apps/dev/counter/{{name}}.values.yml'
+      - repoURL: 'https://gitlab.sikalabs.com/clients-public/pss/pss-argocd-apps.git'
+        ref: values

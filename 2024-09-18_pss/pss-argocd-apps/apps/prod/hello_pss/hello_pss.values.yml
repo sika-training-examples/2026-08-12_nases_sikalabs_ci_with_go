@@ -1,0 +1,6 @@
+host: apps-k8s-poc.pss.sk
+path: /hello-pss
+tls: false
+port: 80
+containerPort: 8000
+replicas: 4

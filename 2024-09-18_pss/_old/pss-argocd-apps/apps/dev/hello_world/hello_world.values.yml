@@ -1,0 +1,2 @@
+host: apps.k8s.sikademo.com
+path: /hello-world

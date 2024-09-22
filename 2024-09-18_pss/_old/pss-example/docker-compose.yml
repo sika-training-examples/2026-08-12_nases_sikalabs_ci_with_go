@@ -1,0 +1,16 @@
+services:
+  redis:
+    image: redis
+  backend:
+    image: ondrejsika/counter
+    environment:
+      REDIS: redis
+      PORT: 8000
+      EXTRA_TEXT: PSS
+      SLOW_START: 10
+  frontend:
+    image: ghcr.io/ondrejsika/counter-frontend
+    environment:
+      API_ORIGIN: http://backend:8000
+    ports:
+      - 3000:3000

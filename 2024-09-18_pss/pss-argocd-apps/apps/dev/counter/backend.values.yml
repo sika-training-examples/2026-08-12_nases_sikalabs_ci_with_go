@@ -1,0 +1,12 @@
+image: ondrejsika/counter
+host: counter-backend.k8s.sikademo.com
+port: 80
+containerPort: 8000
+replicas: 2
+env:
+  PORT: 8000
+  BACKEND: mongodb
+
+vaultAuthRef: counter
+vaultSecretMount: secret
+vaultSecretPath: dev/counter/backend/env

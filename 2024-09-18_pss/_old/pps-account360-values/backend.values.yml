@@ -1,0 +1,10 @@
+# Required
+image: registry.sikalabs.com/clients/pss/image-registry/backend:1
+containerPort: 
+port:
+
+# Optional
+host: apps.k8s.sikademo.com
+path: /account360-micro
+tls: true
+env: {}

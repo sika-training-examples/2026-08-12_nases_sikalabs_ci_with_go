@@ -1,0 +1,6 @@
+# Required
+role:
+
+# Optional
+mount: kubernetes
+serviceAccount: default

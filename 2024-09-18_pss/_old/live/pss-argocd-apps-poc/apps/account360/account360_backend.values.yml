@@ -1,0 +1,12 @@
+# Required
+image: registry.pss.sk/docker/kweria3/account360:2.1.0-7a325d5a
+containerPort: 8080
+port: 8080
+
+# Optional
+host: apps.pss-poc.sikademo.com
+path: /account360/api/v1
+rewriteTarget: true
+tls: true
+env:
+  SPRING_PROFILES_ACTIVE: dev

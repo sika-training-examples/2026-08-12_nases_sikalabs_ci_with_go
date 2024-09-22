@@ -1,0 +1,42 @@
+Meta:
+  SchemaVersion: 3
+Telemetry:
+  CollectBackupLog: true
+  CollectHostData: true
+Backups:
+  - ID: mongo
+    Source:
+      Mongo:
+        Host: 127.0.0.1
+        Port: 27017
+        User: root
+        Password: asdfasdf
+    Targets:
+      - ID: filepath
+        FilePath:
+          Path: tmp/mongo.dump
+      - ID: s3
+        S3:
+          AccessKey: admin
+          SecretKey: asdfasdf
+          Endpoint: http://127.0.0.1:9000
+          BucketName: tergum-backups
+          Prefix: mongo
+          Suffix: dump
+  - ID: vault
+    Source:
+      Vault:
+        Addr: https://vault.k8s.sikademo.com
+        Token: hvs.1QIEbjmfpKT9AoCc63xAxhIJ
+    Targets:
+      - ID: filepath
+        FilePath:
+          Path: tmp/vault.snap
+      - ID: s3
+        S3:
+          AccessKey: admin
+          SecretKey: asdfasdf
+          Endpoint: http://127.0.0.1:9000
+          BucketName: tergum-backups
+          Prefix: vault
+          Suffix: snap

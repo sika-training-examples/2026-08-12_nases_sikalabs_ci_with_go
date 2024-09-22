@@ -1,0 +1,12 @@
+image: sikalabs/ci
+
+test:
+  when: manual
+  script:
+    - |
+      curl --request PUT \
+        --header 'PRIVATE-TOKEN: glpat-kG1MJKH7LygJMb9hXiYY' \
+        --header "Content-Type: application/json" \
+        --data '{"branch": "master", "author_email": "pss-ci-bot@gitlab.sikalabs.io", "author_name": "[bot] pss-ci-bot",
+            "content": "asdf", "commit_message": "xxx"}' \
+        --url "https://gitlab.sikalabs.com/api/v4/projects/619/repository/files/values.yml"

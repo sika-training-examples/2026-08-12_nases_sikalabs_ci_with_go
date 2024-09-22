@@ -1,0 +1,8 @@
+# Required
+vaultAuthRef:
+vaultSecretMount:
+vaultSecretPath:
+
+# Optional
+image: bitnami/mongodb
+storage: 1Gi
