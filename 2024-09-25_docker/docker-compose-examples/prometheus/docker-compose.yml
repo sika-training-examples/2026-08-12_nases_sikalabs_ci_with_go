@@ -1,0 +1,12 @@
+version: "3.9"
+name: prometheus
+services:
+  prometheus:
+    image: prom/prometheus
+    restart: always
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+
+volumes:
+  prometheus_data:

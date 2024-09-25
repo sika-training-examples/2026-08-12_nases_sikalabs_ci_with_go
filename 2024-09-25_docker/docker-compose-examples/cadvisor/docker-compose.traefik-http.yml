@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  cadvisor:
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.cadvisor.loadbalancer.server.port=8080
+      - traefik.http.routers.cadvisor.rule=Host(`${HOST:-cadvisor-127-0-0-1.nip.io}`)
+    networks:
+      - traefik
+
+networks:
+  traefik:
+    name: traefik

@@ -1,0 +1,5 @@
+version: "3.9"
+services:
+  prometheus:
+    ports:
+      - ${PORT:-3000}:3000

@@ -1,0 +1,5 @@
+name: ex
+
+services:
+  app:
+    image: hello-world

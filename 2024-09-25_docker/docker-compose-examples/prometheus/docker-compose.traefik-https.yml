@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  prometheus:
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.prometheus.loadbalancer.server.port=9090
+      - traefik.http.routers.prometheus.rule=Host(`${HOST:-prometheus-127-0-0-1.nip.io}`)
+      - traefik.http.routers.prometheus.entrypoints=http,https
+      - traefik.http.routers.prometheus.tls.certresolver=le
+    networks:
+      - traefik
+
+networks:
+  traefik:
+    name: traefik

@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+  loki:
+    image: grafana/loki:2.9.10
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+    networks:
+      - traefik
+
+  promtail:
+    image: grafana/promtail:2.9.10
+    volumes:
+      - /var/log:/var/log
+      - /var/lib/docker/containers:/var/lib/docker/containers
+      - ./promtail.yml:/promtail.yml
+    command: -config.file=/promtail.yml -config.expand-env=true
+    networks:
+      - traefik
+
+networks:
+  traefik:
+    name: traefik

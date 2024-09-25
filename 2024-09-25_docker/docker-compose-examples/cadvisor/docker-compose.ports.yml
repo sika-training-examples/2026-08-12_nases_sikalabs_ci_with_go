@@ -1,0 +1,5 @@
+version: "3.9"
+services:
+  cadvisor:
+    ports:
+      - ${PORT:-8080}:8080

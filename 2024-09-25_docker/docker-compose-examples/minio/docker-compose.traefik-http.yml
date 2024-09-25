@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  minio:
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.minio.loadbalancer.server.port=9000
+      - traefik.http.routers.minio.rule=Host(`${HOST:-minio-127-0-0-1.nip.io}`)
+      - traefik.http.routers.minio.service=minio
+      - traefik.http.services.minio2.loadbalancer.server.port=9001
+      - traefik.http.routers.minio2.rule=Host(`${HOST_CONSOLE:-console-minio-127-0-0-1.nip.io}`)
+      - traefik.http.routers.minio2.service=minio2
+    networks:
+      - traefik
+    environment:
+      MINIO_BROWSER_REDIRECT_URL: http://${HOST_CONSOLE:-console-minio-127-0-0-1.nip.io}
+
+networks:
+  traefik:
+    name: traefik

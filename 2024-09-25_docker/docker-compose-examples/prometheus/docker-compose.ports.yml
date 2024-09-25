@@ -1,0 +1,5 @@
+version: "3.9"
+services:
+  prometheus:
+    ports:
+      - ${PORT:-9090}:9090
