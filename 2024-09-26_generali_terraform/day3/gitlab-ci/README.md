@@ -1,0 +1,1 @@
+# generali-gitlab-ci-example

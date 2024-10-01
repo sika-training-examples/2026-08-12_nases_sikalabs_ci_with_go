@@ -1,0 +1,3 @@
+include:
+  - project: generali/gitlab-ci
+    file: /terraform.gitlab-ci.yml
