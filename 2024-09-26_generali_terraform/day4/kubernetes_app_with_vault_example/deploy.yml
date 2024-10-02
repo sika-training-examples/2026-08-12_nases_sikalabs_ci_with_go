@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example
+spec:
+  revisionHistoryLimit: 0
+  replicas: 4
+  selector:
+    matchLabels:
+      app: example
+  template:
+    metadata:
+      labels:
+        app: example
+    spec:
+      imagePullSecrets:
+        - name: harbor-robot
+      containers:
+        - name: main
+          # image: harbor.k8s.sikademo.com/bar/hello
+          image: ondrejsika/counter
+          ports:
+            - containerPort: 8000
+          env:
+            - name: PORT
+              value: "8000"
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: example2
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: example2
+                  key: password
+          envFrom:
+            - secretRef:
+                name: example
+          resources:
+            requests:
+              cpu: 20m
+              memory: 20Mi
+            limits:
+              memory: 40Mi
+              cpu: 40m

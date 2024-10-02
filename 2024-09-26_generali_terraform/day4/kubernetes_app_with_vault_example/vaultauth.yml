@@ -1,0 +1,12 @@
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultAuth
+metadata:
+  name: auth
+spec:
+  method: kubernetes
+  mount: kubernetes
+  kubernetes:
+    role: read-secrets
+    serviceAccount: default
+    audiences:
+      - vault
