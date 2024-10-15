@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: devel-lab0
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: devel-lab0-user
+  namespace: devel-lab0
+secrets:
+  - name: devel-lab0-user
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: devel-lab0-user-full-access
+  namespace: devel-lab0
+rules:
+  - apiGroups: ["*"]
+    resources: ["*"]
+    verbs: ["*"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: devel-lab0-user-role-binding
+  namespace: devel-lab0
+subjects:
+  - kind: ServiceAccount
+    name: devel-lab0-user
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: devel-lab0-user-full-access
+
+# kubectl config set-credentials devel --token=$(kubectl create token -n devel-lab0 devel-lab0-user --duration 720h)

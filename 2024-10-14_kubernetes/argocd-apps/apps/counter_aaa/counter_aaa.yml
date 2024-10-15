@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: counter-aaa
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: counter-aaa
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  sources:
+    - repoURL: https://github.com/sika-training-examples/2024-10-15_helm-counter-example.git
+      path: .
+      helm:
+        valueFiles:
+          - $values/apps/counter_aaa/counter_aaa.values.yml
+          - $values/apps/counter_aaa/counter_aaa.image_be.values.yml
+    - repoURL: https://gitlab.sikalabs.com/examples/training-2024-10-14/argocd-apps.git
+      ref: values

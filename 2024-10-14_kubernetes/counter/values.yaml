@@ -1,0 +1,9 @@
+# Required
+host:
+
+# Optional
+frontendImage: ghcr.io/ondrejsika/counter-frontend
+backendImage: ghcr.io/ondrejsika/counter
+backendReplicas: 2
+frontendReplicas: 2
+frontendEnvSecret: null

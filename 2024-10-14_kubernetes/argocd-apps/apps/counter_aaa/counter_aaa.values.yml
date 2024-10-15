@@ -1,0 +1,4 @@
+host: counter-aaa.demo.sikalabs.io
+backendReplicas: 4
+frontendReplicas: 2
+frontendEnvSecret: counter-aaa-frontend-env

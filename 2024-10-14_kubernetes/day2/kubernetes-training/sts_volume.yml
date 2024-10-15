@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: sts-volume
+spec:
+  replicas: 3
+  serviceName: sts-volume
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        storageClassName: longhorn
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
+  selector:
+    matchLabels:
+      app: sts-volume
+  template:
+    metadata:
+      labels:
+        app: sts-volume
+    spec:
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data
+      containers:
+        - name: main
+          image: sikalabs/nginx-public
+          resources:
+            requests:
+              cpu: 50m
+              memory: 50Mi
+            limits:
+              cpu: 50m
+              memory: 50Mi
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - mountPath: /usr/share/nginx/html
+              name: data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sts-volume
+spec:
+  selector:
+    app: sts-volume
+  ports:
+    - port: 80

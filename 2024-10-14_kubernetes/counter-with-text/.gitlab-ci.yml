@@ -1,0 +1,36 @@
+image: sikalabs/ci
+
+variables:
+  TAG: $CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA-$CI_PIPELINE_ID
+  IMAGE: $CI_REGISTRY_IMAGE:$TAG
+
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:v1.19.2-debug
+    entrypoint: [""]
+  script:
+    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor
+      --context .
+      --dockerfile ./Dockerfile
+      --destination $IMAGE
+
+deploy dev:
+  stage: deploy
+  script:
+    - |
+      slu gitlab update-file \
+        --gitlab-url https://gitlab.sikalabs.com \
+        --token glpat-hDA9RfwKskn4MsxDw9P_ \
+        --project-id 640  \
+        --branch master \
+        --file apps/counter_aaa/counter_aaa.image_be.values.yml \
+        --content "backendImage: $IMAGE" \
+        --committer-email "ci-bot@sikalabs.io" \
+        --committer-name "[bot] SikaLabs CI Bot" \
+        --commit-message "[auto] feat(counter_aaa): Update backend image using CI"
