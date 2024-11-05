@@ -1,0 +1,24 @@
+prometheus:
+  url: http://monitoring-prometheus.monitoring.svc.cluster.local
+
+rules:
+  custom:
+    - seriesQuery: '{__name__=~"^container_memory_.*"}'
+      resources:
+        overrides:
+          namespace: {resource: "namespace"}
+          pod: {resource: "pod"}
+      name:
+        matches: "^container_(.*)_bytes$"
+        as: "container_\\1"
+      metricsQuery: 'avg_over_time({__name__=~"^container_memory_usage_bytes$"}[5m])'
+
+    - seriesQuery: '{__name__=~"^container_cpu_usage_seconds_total$"}'
+      resources:
+        overrides:
+          namespace: {resource: "namespace"}
+          pod: {resource: "pod"}
+      name:
+        matches: "^container_(.*)_seconds_total$"
+        as: "container_\\1"
+      metricsQuery: 'rate(container_cpu_usage_seconds_total[5m])'

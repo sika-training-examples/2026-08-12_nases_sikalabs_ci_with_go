@@ -1,0 +1,22 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: foo
+  labels:
+    alertmanager: config
+spec:
+  route:
+    receiver: "foo"
+    routes:
+      - receiver: 'foo'
+        matchers:
+          - name: namespace
+            value: "foo"
+            matchType: '='
+
+  receivers:
+    - name: "foo"
+      emailConfigs:
+        - to: foo@exa.com
+          sendResolved: true
+          html: '[foo]<br><hr><br>{{ template "email.default.html" . }}'

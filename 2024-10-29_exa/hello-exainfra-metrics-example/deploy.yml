@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-exainfra
+spec:
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: hello-exainfra
+  replicas: 4
+  template:
+    metadata:
+      labels:
+        app: hello-exainfra
+    spec:
+      containers:
+        - name: hello-exainfra
+          image: sikalabs/hello-world-server:exainfra
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 8000
+            - name: metrics
+              containerPort: 8001
+          resources:
+            requests:
+              cpu: 40m
+              memory: 40Mi
+            limits:
+              cpu: 100m
+              memory: 100Mi

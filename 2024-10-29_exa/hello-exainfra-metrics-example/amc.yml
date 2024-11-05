@@ -1,0 +1,36 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: hello-exainfra
+  labels:
+    alertmanager: config
+spec:
+  route:
+    receiver: exa-all
+    routes:
+      - receiver: exa-a
+        matchers:
+          - name: alertname
+            value: "HelloExainfraHighRequestRateAlert"
+            # matchType: '='
+      - receiver: exa-b
+        matchers:
+          - name: alertname
+            value: "HelloExainfraHighGlobalRequestRateAlert"
+            # matchType: '='
+  receivers:
+    - name: exa-all
+      emailConfigs:
+        - to: exa-all@exa.com
+          sendResolved: true
+          html: '[exa-all]<br><hr><br>{{ template "email.default.html" . }}'
+    - name: exa-a
+      emailConfigs:
+        - to: exa-a@exa.com
+          sendResolved: true
+          html: '[exa-a]<br><hr><br>{{ template "email.default.html" . }}'
+    - name: exa-b
+      emailConfigs:
+        - to: exa-b@exa.com
+          sendResolved: true
+          html: '[exa-b]<br><hr><br>{{ template "email.default.html" . }}'

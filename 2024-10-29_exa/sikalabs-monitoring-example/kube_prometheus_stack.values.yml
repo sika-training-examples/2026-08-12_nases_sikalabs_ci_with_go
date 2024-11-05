@@ -1,0 +1,227 @@
+# https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack?modal=values
+
+fullnameOverride: monitoring
+cleanPrometheusOperatorObjectNames: true
+
+kubeProxy:
+  enabled: false
+
+kubeScheduler:
+  enabled: false
+
+kubeControllerManager:
+  enabled: false
+
+kube-state-metrics:
+  fullnameOverride: kube-state-metrics
+
+prometheus:
+  fullname: prometheus
+
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+    hosts:
+      - prometheus.k8s.sikademo.com
+    tls:
+      - hosts:
+          - prometheus.k8s.sikademo.com
+        secretName: prometheus.k8s.sikademo.com-tls
+
+  prometheusSpec:
+    serviceMonitorSelectorNilUsesHelmValues: false
+    podMonitorSelectorNilUsesHelmValues: false
+    ruleSelectorNilUsesHelmValues: false
+    retention: 5d
+    retentionSize: 7.8GB
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: do-block-storage-retain
+          accessModes: [ "ReadWriteOnce" ]
+          resources:
+            requests:
+              storage: 8Gi
+
+    serviceMonitor:
+      selfMonitor: true
+
+    enableRemoteWriteReceiver: true
+    enableFeatures:
+      - exemplar-storage
+
+prometheus-node-exporter:
+  fullnameOverride: node-exporter
+  tolerations:
+    - effect: NoSchedule
+      operator: Exists
+    - effect: NoExecute
+      operator: Exists
+
+grafana:
+  enabled: true
+  fullnameOverride: grafana
+
+  assertNoLeakedSecrets: false
+
+  extraObjects:
+    - apiVersion: v1
+      kind: Secret
+      metadata:
+        name: grafana-admin
+        namespace: monitoring
+      stringData:
+        admin-user: admin
+        admin-password: admin
+
+  admin:
+    existingSecret: grafana-admin
+
+  defaultDashboardsEnabled: true
+  serviceMonitor:
+    selfMonitor: true
+
+  sidecar:
+    datasources:
+      enabled: true
+      defaultDatasourceEnabled: false
+    dashboards:
+      enabled: true
+
+  additionalDataSources:
+    - name: Alertmanager
+      uid: alertmanager
+      type: alertmanager
+      url: http://alertmanager-operated.monitoring:9093
+      access: proxy
+      jsonData:
+        implementation: prometheus
+        handleGrafanaManagedAlerts: true
+
+    - name: Loki
+      uid: loki
+      type: loki
+      orgId: 1
+      url: http://loki-gateway.logging
+      editable: true
+      access: proxy
+
+    - name: Prometheus
+      uid: prometheus
+      type: prometheus
+      url: http://prometheus-operated.monitoring:9090
+      access: proxy
+      isDefault: true
+      jsonData:
+        httpMethod: POST
+
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+    hosts:
+      - grafana.k8s.sikademo.com
+    tls:
+      - hosts:
+          - grafana.k8s.sikademo.com
+        secretName: grafana.k8s.sikademo.com-tls
+  grafana.ini:
+    server:
+      root_url: https://grafana.k8s.sikademo.com
+    users:
+      viewers_can_edit: true
+    auth.basic:
+      enabled: true
+    auth:
+      disable_login_form: false
+    auth.generic_oauth:
+      enabled: true
+      name: SSO
+      allow_sign_up: true
+      scopes: "openid profile email"
+      auth_url: https://sso.sikalabs.com/realms/sikademo/protocol/openid-connect/auth
+      token_url: https://sso.sikalabs.com/realms/sikademo/protocol/openid-connect/token
+      api_url: https://sso.sikalabs.com/realms/sikademo/protocol/openid-connect/userinfo
+      client_id: default
+      client_secret: default
+      role_attribute_path: contains(groups[*], 'grafana-admin') && 'Admin' || 'Admin'
+      groups_attribute_path: groups
+    smtp:
+      enabled: false
+
+alertmanager:
+  enabled: true
+  fullname: alertmanager
+
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+    hosts:
+      - alertmanager.k8s.sikademo.com
+    tls:
+      - hosts:
+          - alertmanager.k8s.sikademo.com
+        secretName: alertmanager.k8s.sikademo.com-tls
+
+  alertmanagerSpec:
+    alertmanagerConfigSelector:
+      matchLabels:
+        alertmanager: config
+
+  config:
+    global:
+      resolve_timeout: 10s
+      smtp_smarthost: maildev-smtp.maildev:25
+      smtp_from: monitoring@exa.com
+      smtp_hello: alertmanager
+      smtp_require_tls: false
+    inhibit_rules:
+      - source_matchers:
+          - 'severity = critical'
+        target_matchers:
+          - 'severity =~ warning|info'
+        equal:
+          - 'namespace'
+          - 'alertname'
+      - source_matchers:
+          - 'severity = warning'
+        target_matchers:
+          - 'severity = info'
+        equal:
+          - 'namespace'
+          - 'alertname'
+      - source_matchers:
+          - 'alertname = InfoInhibitor'
+        target_matchers:
+          - 'severity = info'
+        equal:
+          - 'namespace'
+    route:
+      group_by:
+        - alertname
+        - 'namespace'
+      group_wait: 30s
+      group_interval: 5m
+      repeat_interval: 4h
+      receiver: 'null'
+      routes:
+        - receiver: 'null'
+          matchers:
+            - alertname =~ "InfoInhibitor|Watchdog"
+    receivers:
+      - name: 'null'
+      - name: "mail-all"
+        email_configs:
+          - to: all@exa.com
+            send_resolved: true
+            headers:
+              Subject: '[sikademo]{{ template "email.default.subject" . }}'
+              To: all@exa.com
+            html: '[sikademo]<br><hr><br>{{ template "email.default.html" . }}'
+            tls_config:
+              insecure_skip_verify: true

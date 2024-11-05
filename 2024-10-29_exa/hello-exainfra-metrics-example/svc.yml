@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-exainfra
+  labels:
+    app: hello-exainfra
+spec:
+  ports:
+    - port: 80
+      name: http
+      targetPort: http
+    - port: 8001
+      name: metrics
+      targetPort: metrics
+  selector:
+    app: hello-exainfra
