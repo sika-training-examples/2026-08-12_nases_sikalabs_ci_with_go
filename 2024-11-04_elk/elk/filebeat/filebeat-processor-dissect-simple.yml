@@ -1,0 +1,14 @@
+filebeat.inputs:
+  - type: stdin
+
+processors:
+  - dissect:
+      tokenizer: "%{prefix} %{date} %{time} %{level} %{message} (i=%{i|integer})"
+      field: "message"
+      target_prefix: "dissect"
+
+output.elasticsearch:
+  hosts:
+    - https://es.k8s.sikademo.com:443
+  username: elastic
+  password: q3fv4NT1YB7L0yL4X27M30WI

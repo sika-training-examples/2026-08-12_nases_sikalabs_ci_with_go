@@ -1,0 +1,10 @@
+  - type: log
+    paths:
+      - /tmp/json.log
+
+output.elasticsearch:
+  hosts:
+    - https://es.k8s.sikademo.com:443
+  username: elastic
+  password: q3fv4NT1YB7L0yL4X27M30WI
+

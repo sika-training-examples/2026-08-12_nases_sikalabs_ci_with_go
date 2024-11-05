@@ -1,0 +1,51 @@
+filebeat.inputs:
+  - type: filestream
+    paths:
+      - /tmp/example-log-json.log
+      - /tmp/example-log-text.log
+      - /tmp/example-log-counter.log
+
+processors:
+  - add_tags:
+      tags:
+        - training-example
+  - if:
+      regexp:
+        message: "^loggen"
+    then:
+      - add_labels:
+          labels:
+            message_type: loggen-text
+      - dissect:
+          tokenizer: "%{module} %{date} %{time} %{level} %{message} (i=%{i|integer})"
+          field: "message"
+          target_prefix: "dissect.loggen"
+  - if:
+      regexp:
+        message: "^{"
+    then:
+      - add_labels:
+          labels:
+            message_type: loggen-json
+      - decode_json_fields:
+          fields:
+            - message
+          target: "json"
+          add_error_key: true
+  - if:
+      regexp:
+        message: "^\\d+"
+    then:
+      - add_labels:
+          labels:
+            message_type: counter
+      - dissect:
+          tokenizer: "%{counter|integer}"
+          field: "message"
+          target_prefix: "dissect.counter"
+
+output.elasticsearch:
+  hosts:
+    - https://es.k8s.sikademo.com:443
+  username: elastic
+  password: q3fv4NT1YB7L0yL4X27M30WI

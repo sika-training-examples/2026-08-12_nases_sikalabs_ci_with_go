@@ -1,0 +1,8 @@
+filebeat.inputs:
+  - type: stdin
+
+output.elasticsearch:
+  hosts:
+    - https://es.k8s.sikademo.com:443
+  username: elastic
+  password: ${ELASTIC_PASSWORD:?Environment variable ELASTIC_PASSWORD is required}

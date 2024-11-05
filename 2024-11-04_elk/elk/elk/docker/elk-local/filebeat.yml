@@ -1,0 +1,6 @@
+filebeat.inputs:
+  - type: stdin
+
+output.elasticsearch:
+  hosts:
+    - "127.0.0.1:9200"

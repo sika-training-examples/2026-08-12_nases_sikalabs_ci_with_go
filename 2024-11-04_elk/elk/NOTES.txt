@@ -1,0 +1,40 @@
+kZtVL=EweJXA5rJ0Yga6
+
+curl -k https://elastic:kZtVL=EweJXA5rJ0Yga6@lab0.sikademo.com:9200
+
+curl -k https://elastic:kZtVL=EweJXA5rJ0Yga6@localhost:9200
+
+
+export TOKEN=eyJ2ZXIiOiI4LjE0LjAiLCJhZHIiOlsiNjQuMjI3LjEyNy4xMTY6OTIwMCJdLCJmZ3IiOiJhMWY5YTk5M2QyZWZiZjgxYjI4Y2MxOWVlMTUxNzkzNWMyNmMyZmQwYjgxYmU1NDJjZTUwNWFlMzU2OWFmMWI5Iiwia2V5IjoiWkE1WDlwSUJTTWJDQnFTQVpZSDk6N291YUthMTNTcS1CTUd5bk5tNDczQSJ9
+
+export TOKEN=eyJ2ZXIiOiI4LjE0LjAiLCJhZHIiOlsiNjQuMjI3LjEyNy4xMTY6OTIwMCJdLCJmZ3IiOiJhMWY5YTk5M2QyZWZiZjgxYjI4Y2MxOWVlMTUxNzkzNWMyNmMyZmQwYjgxYmU1NDJjZTUwNWFlMzU2OWFmMWI5Iiwia2V5IjoiWmc1ajlwSUJTTWJDQnFTQWlvRWM6OTZWSzVJZ1lRVENrRzJwZWpDWmtEdyJ9
+
+
+curl -sfL https://get.rke2.io | sh -
+mkdir -p /etc/rancher/rke2/
+cat << EOF > /etc/rancher/rke2/config.yaml
+token: supersecuretoken
+tls-san:
+    - k8s1.sikademo.com
+    - k8s2.sikademo.com
+    - k8s3.sikademo.com
+node-taint:
+    - "CriticalAddonsOnly=true:NoExecute"
+EOF
+systemctl enable rke2-server.service
+systemctl start rke2-server.service
+
+curl -sfL https://get.rke2.io | sh -
+mkdir -p /etc/rancher/rke2/
+cat << EOF > /etc/rancher/rke2/config.yaml
+server: https://k8s1.sikademo.com:9345
+token: supersecuretoken
+tls-san:
+    - k8s1.sikademo.com
+    - k8s2.sikademo.com
+    - k8s3.sikademo.com
+node-taint:
+    - "CriticalAddonsOnly=true:NoExecute"
+EOF
+systemctl enable rke2-server.service
+systemctl start rke2-server.service

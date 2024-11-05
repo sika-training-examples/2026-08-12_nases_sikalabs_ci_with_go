@@ -1,0 +1,16 @@
+filebeat.inputs:
+  - type: container
+    paths:
+      - "/var/lib/docker/containers/*/*.log"
+    processors:
+      - add_docker_metadata: ~
+
+output.elasticsearch:
+  hosts:
+    - https://es.k8s.sikademo.com:443
+  username: elastic
+  password: q3fv4NT1YB7L0yL4X27M30WI
+  index: "xxx3-%{[container.name]}-%{[agent.version]}-%{+yyyy.MM.dd}"
+
+setup.template.name: "xxx3"
+setup.template.pattern: "xxx3-*"

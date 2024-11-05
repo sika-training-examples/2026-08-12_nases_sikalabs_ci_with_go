@@ -1,0 +1,16 @@
+filebeat.inputs:
+  - type: stdin
+
+processors:
+  - add_labels:
+      labels:
+        l-foo: bar
+        l-hello: world
+
+  - add_tags:
+      tags:
+        - t-foo
+        - t-bar
+
+output.console:
+  pretty: true

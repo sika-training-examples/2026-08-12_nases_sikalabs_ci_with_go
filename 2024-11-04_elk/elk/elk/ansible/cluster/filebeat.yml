@@ -1,0 +1,11 @@
+filebeat.inputs:
+  - type: stdin
+
+output.elasticsearch:
+  hosts:
+    - ${ELASTIC_IP:?Environment variable ELASTIC_IP is required}:9200
+  protocol: https
+  username: elastic
+  password: ${ELASTIC_PASSWORD:?Environment variable ELASTIC_PASSWORD is required}
+  ssl.certificate_authorities:
+    - ./ca.crt

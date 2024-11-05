@@ -1,0 +1,27 @@
+filebeat.inputs:
+  - type: filestream
+    paths:
+      - /tmp/java.log
+    parsers:
+      - multiline:
+          pattern: '^\s+|^Caused by:'  # Matches lines starting with whitespace or "Caused by:"
+          negate: false
+          match: after  
+
+# processors:
+#   - drop_fields:
+#       fields:
+#         - agent
+#         - log
+#         - input
+#         - ecs
+#         - host
+
+# output.console:
+#   pretty: true
+
+output.elasticsearch:
+  hosts:
+    - https://es.k8s.sikademo.com:443
+  username: elastic
+  password: q3fv4NT1YB7L0yL4X27M30WI

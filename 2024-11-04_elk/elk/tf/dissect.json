@@ -1,0 +1,6 @@
+{
+    "dissect": {
+      "field": "message",
+      "pattern": "%{prefix} %{date} %{time} %{level} %{message} (i=%{i|integer})"
+    }
+}

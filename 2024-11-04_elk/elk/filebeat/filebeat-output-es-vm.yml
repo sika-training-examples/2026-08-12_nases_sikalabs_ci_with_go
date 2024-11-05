@@ -1,0 +1,11 @@
+filebeat.inputs:
+  - type: stdin
+
+output.elasticsearch:
+  hosts:
+    - https://lab0.sikademo.com:9200
+    - https://vm-1.sikademo.com:9200
+    - https://vm-2.sikademo.com:9200
+  ssl.verification_mode: none
+  username: elastic
+  password: ${ELASTIC_PASSWORD:?Environment variable ELASTIC_PASSWORD is required}
