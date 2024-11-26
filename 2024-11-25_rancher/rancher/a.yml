@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Config
+clusters:
+- name: "k3d"
+  cluster:
+    server: "https://rancher0.sikademo.com/k8s/clusters/c-m-m8rbh7kq"
+
+users:
+- name: "k3d"
+  user:
+    token: "kubeconfig-user-2ddjndbtlz:rqx4tpblfgcmmhntsxg99qlvbgcgtcf5vshgn52g9wr729jt2nrsld"
+
+
+contexts:
+- name: "k3d"
+  context:
+    user: "k3d"
+    cluster: "k3d"
+
+current-context: "k3d"
+

@@ -1,0 +1,16 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: do-token
+  namespace: cattle-global-data
+spec:
+  encryptedData:
+    digitaloceancredentialConfig-accessToken: AgBkImF4k1E5JfzQzwc7lmgVj5CQ4acN/NK8VKeS6IfkntHs4CXa+hL6Yi8vauO9asbDNHuDWYBwP9Rt0H8DHU5l86S3qn9Nzr/UarAPyVpzz2nCCw2Nq3d/U4sgDk6AygTvxCBxaPw8LKOIDK0o3asbiY1YZjInBPHILQ+87JVY2SMEoKFEoN22cPxj8NokLePO+SgNcavlGHnT1xUMGGD6CIhNIZz2pcTrs36124YaZYt/DBypMHZDc437bi0vT1mcOCGeE8MWmmDCdRqtvBOsqn4Vcnz2CMAFA4O6L9koF914f+ETvimwMbD5u0ULHA777NPsk9vP+/T5P5m7fFDgRpS7cVq8yM/cgdZKLihv/v4ENWhEacpnPl2F4IS9EypP6iMPXIvNeG1c9mEbsNY0EdV268tw2CUuEzPv328uGlTBfUsuLZpb+1NtjDnR11L2ntbasFT/rVVz2oObdTidf3G9/RxpTZkn8srcTsNNddiGR2R9Vf62gzaZxfPLtlLeoNQ4m8eZnZtwILj0Z8JY/VLyJGQL6DpO3YiVbHSIEPLp2lP9Be/vzTDb4X1BgRnI/B2+fzvW3Z32rBzkaqaBYOg3iSNO5qM1dAsdjr2JQW7ZzfgL9bD/zlzDpNNqFg083OWfdTd56EKmXQ7198CPcxbM5f9/pxRHIBV/vfG7POd1BljqRt1HgrauQbrWDBWCStjCIb1w3i5ZfeEX8Sfz2ANrsBeReLlnkEtVR4J4iQ+YEM8mP+bbhLBNNGhNrnZ+5y+YHK8fn9rjtfK57vLgWlqcMrBtBA==
+  template:
+    metadata:
+      creationTimestamp: null
+      name: do-token
+      namespace: cattle-global-data
+    type: Opaque

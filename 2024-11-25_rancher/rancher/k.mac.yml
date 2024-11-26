@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Config
+clusters:
+- name: "mac"
+  cluster:
+    server: "https://rancher0.sikademo.com/k8s/clusters/c-m-z44cxg77"
+
+users:
+- name: "mac"
+  user:
+    token: "kubeconfig-user-2ddjnnk4mb:66v6mz7xmsfcl2wrd4kj5cgmkrlqnvj2ccsg9cxf5cgwvl8hhs4982"
+
+
+contexts:
+- name: "mac"
+  context:
+    user: "mac"
+    cluster: "mac"
+
+current-context: "mac"

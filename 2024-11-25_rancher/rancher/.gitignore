@@ -1,0 +1,24 @@
+.DS_Store
+*.backup
+
+# Editor
+.vscode
+
+# Terraform
+.terraform
+*.tfstate*
+*.tfvars
+*.tfplan
+!*.example.tfvars
+
+# Infracost
+.infracost
+
+# Kubernetes
+kubeconfig
+kubeconfig.yml
+
+# RKE
+cluster.yml
+cluster.rkestate
+kube_config_cluster.yml

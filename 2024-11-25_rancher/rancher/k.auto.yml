@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Config
+clusters:
+- name: "auto"
+  cluster:
+    server: "https://rancher0.sikademo.com/k8s/clusters/c-m-zwj8xqw5"
+
+users:
+- name: "auto"
+  user:
+    token: "kubeconfig-user-2ddjn2q222:rd8jxxnm2jdhk9v4gqpfrx945wbdz2bnzsz595wjlj5lk27m2rgxb2"
+
+
+contexts:
+- name: "auto"
+  context:
+    user: "auto"
+    cluster: "auto"
+
+current-context: "auto"

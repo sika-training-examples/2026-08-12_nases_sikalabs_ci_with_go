@@ -1,0 +1,26 @@
+apiVersion: provisioning.cattle.io/v1
+kind: Cluster
+metadata:
+  name: kube01
+  namespace: fleet-default
+spec:
+  kubernetesVersion: v1.30.6+rke2r1
+  rkeConfig:
+    machinePools:
+      - cloudCredentialSecretName: cattle-global-data:do-token
+        controlPlaneRole: true
+        displayName: ma
+        etcdRole: true
+        machineConfigRef:
+          kind: DigitaloceanConfig
+          name: ma
+        name: ma
+        quantity: 1
+      - cloudCredentialSecretName: cattle-global-data:do-token
+        displayName: wo
+        machineConfigRef:
+          kind: DigitaloceanConfig
+          name: wo
+        name: wo
+        quantity: 3
+        workerRole: true
