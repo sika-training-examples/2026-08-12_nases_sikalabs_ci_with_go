@@ -1,0 +1,22 @@
+filebeat.inputs:
+- type: kafka
+  hosts:
+    - 138.68.69.94:30424
+    - 64.226.123.212:30424
+  topics:
+    - logs
+  group_id: filebeat
+
+processors:
+  - decode_json_fields:
+      fields:
+        - message
+      max_depth: 1
+      target: ""
+
+output.elasticsearch:
+  hosts:
+    - https://es.k8s.sikademo.com:443
+  ssl.verification_mode: none
+  username: elastic
+  password: 6HH1pK139l5Lnw448ZXKg9RV

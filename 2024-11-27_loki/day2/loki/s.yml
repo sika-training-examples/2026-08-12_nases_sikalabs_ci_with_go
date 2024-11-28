@@ -1,0 +1,9 @@
+ingress:
+  enabled: true
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+  hostname: sentry.k8s.sikademo.com
+  tls:
+  - secretName: ing-tls
+    hosts:
+      - sentry.k8s.sikademo.com

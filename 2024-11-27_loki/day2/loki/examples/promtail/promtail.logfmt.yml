@@ -1,0 +1,31 @@
+server:
+  http_listen_port: 9001
+  grpc_listen_port: 9002
+
+positions:
+  filename: /tmp/promtail_logfmt_positions.yaml
+
+clients:
+  - url: http://localhost:3100/loki/api/v1/push
+    external_labels:
+      promtail_source: logfmt
+
+scrape_configs:
+  - job_name: logfmt
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: logfmt
+          __path__: /tmp/logfmt.log
+
+    pipeline_stages:
+      - logfmt:
+          mapping:
+            body: 
+            method: 
+            path:
+      # - labels:
+      #     body: body
+      #     method: method
+      #     path: path
