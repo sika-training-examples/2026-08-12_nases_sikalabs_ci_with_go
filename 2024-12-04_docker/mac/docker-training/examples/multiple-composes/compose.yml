@@ -1,0 +1,20 @@
+name: counter
+services:
+  counter:
+    build: .
+    image: ttl.sh/dte/multiple-composes/counter
+    platform: linux/amd64
+    depends_on:
+      - redis
+    environment:
+      REDIS: redis
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.counter.rule: Host(`${HOST:-127.0.0.1}`)
+  redis:
+    image: redis
+    volumes:
+      - redis-data:/data
+
+volumes:
+  redis-data:

@@ -1,0 +1,36 @@
+name: counter-py
+services:
+  counter:
+    build: .
+    image: ttl.sh/ondrej-counter
+    environment:
+      REDIS: redis
+    labels:
+      traefik.enable: 'true'
+      traefik.http.services.counter.loadbalancer.server.port: 80
+      traefik.http.routers.counter.rule: Host(`counter.docker.sikademo.com`)
+      traefik.http.routers.counter.entrypoints: http,https
+      traefik.http.routers.counter.tls.certresolver: le
+    deploy:
+      replicas: 4
+    networks:
+      - fe
+      - be
+      - traefik
+
+  redis:
+    image: redis
+    volumes:
+      - redis_data:/data
+    networks:
+      - be
+
+networks:
+  fe:
+  be:
+  traefik:
+    name: traefik
+    external: true
+
+volumes:
+  redis_data:
