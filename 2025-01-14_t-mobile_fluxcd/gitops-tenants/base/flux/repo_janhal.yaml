@@ -1,0 +1,22 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: janhal
+  namespace: flux-system
+spec:
+  url: https://gitlab.sikademo.com/t-mobile/janhal/gitops.git
+  interval: 1m0s
+  ref:
+    branch: master
+  secretRef:
+    name: janhal-git-repo
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: janhal-git-repo
+  namespace: flux-system
+type: Opaque
+stringData:
+  username: token
+  password: tHsoZJ2abyDLDxSdkHo_

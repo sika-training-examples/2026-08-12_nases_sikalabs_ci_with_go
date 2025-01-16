@@ -1,0 +1,23 @@
+apiVersion: v1
+entries:
+  counter:
+  - apiVersion: v2
+    created: "2025-01-14T23:26:10.83549+01:00"
+    description: Simple counter app with Redis backend
+    digest: 4652e8d683b4c85cf6a7488c6fad8e959186a1edeeb325d6b5159bcd9f33a71e
+    name: counter
+    type: application
+    urls:
+    - counter-1.0.0.tgz
+    version: 1.0.0
+  counter-frontend:
+  - apiVersion: v2
+    created: "2025-01-14T23:26:10.835611+01:00"
+    description: Next.js Frontend for ondrejsika/counter
+    digest: faecc31c4c66ff2cd1873aa82cc51c5102a1bd20f921c825a312eefc06d99158
+    name: counter-frontend
+    type: application
+    urls:
+    - counter-frontend-1.0.0.tgz
+    version: 1.0.0
+generated: "2025-01-14T23:26:10.83499+01:00"

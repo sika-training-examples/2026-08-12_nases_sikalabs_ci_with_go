@@ -1,0 +1,12 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: hello-eu-helm
+  namespace: flux-system
+spec:
+  interval: 1m0s
+  path: ./hello_eu_helm
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: example

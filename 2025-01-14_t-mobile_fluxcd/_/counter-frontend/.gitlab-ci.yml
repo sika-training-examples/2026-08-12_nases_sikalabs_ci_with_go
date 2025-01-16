@@ -1,0 +1,35 @@
+# required variables:
+#
+#  ARTIFACTORY: "artifactory.sikademo.com"
+#  ARTIFACTORY_USER: "admin"
+#  ARTIFACTORY_PASSWORD: "password"
+#  ARTIFACTORY_DOCKER_PREFIX: "artifactory.sikademo.com/demo-docker"
+
+image: sikalabs/ci
+
+stages:
+  - build
+
+build-branch:
+  stage: build
+  only:
+    - branches
+  variables:
+    TAG: $CI_COMMIT_REF_NAME-$CI_COMMIT_SHA
+    IMAGE: $ARTIFACTORY_DOCKER_PREFIX/counter-frontend:$TAG
+  script:
+    - docker login $ARTIFACTORY -u $ARTIFACTORY_USER -p $ARTIFACTORY_PASSWORD
+    - docker build -t $IMAGE .
+    - docker push $IMAGE
+
+build-tag:
+  stage: build
+  only:
+    - tags
+  variables:
+    TAG: $CI_COMMIT_TAG
+    IMAGE: $ARTIFACTORY_DOCKER_PREFIX/counter-frontend:$TAG
+  script:
+    - docker login $ARTIFACTORY -u $ARTIFACTORY_USER -p $ARTIFACTORY_PASSWORD
+    - docker build -t $IMAGE .
+    - docker push $IMAGE

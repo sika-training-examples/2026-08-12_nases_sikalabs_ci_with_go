@@ -1,0 +1,32 @@
+# required variables:
+#
+#  ARTIFACTORY_USER: "admin"
+#  ARTIFACTORY_PASSWORD: "password"
+#  ARTIFACTORY_FILE_URL: "https://artifactory.sikademo.com/artifactory/demo-helm"
+
+image: sikalabs/ci
+
+stages:
+  - package
+
+package-branch:
+  stage: package
+  only:
+    - branches
+  variables:
+    VERSION: 0.0.0-$CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA
+    PACKAGE: counter-frontend-$VERSION.tgz
+  script:
+    - helm package . --version $VERSION
+    - curl -u $ARTIFACTORY_USER:$ARTIFACTORY_PASSWORD -T $PACKAGE $ARTIFACTORY_FILE_URL/$PACKAGE
+
+package-tag:
+  stage: package
+  only:
+    - tags
+  variables:
+    VERSION: $CI_COMMIT_TAG
+    PACKAGE: counter-frontend-$VERSION.tgz
+  script:
+    - helm package . --version $VERSION
+    - curl -u $ARTIFACTORY_USER:$ARTIFACTORY_PASSWORD -T $PACKAGE $ARTIFACTORY_FILE_URL/$PACKAGE

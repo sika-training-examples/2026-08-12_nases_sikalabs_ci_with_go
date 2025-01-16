@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- repo_tenats.yaml
+- repo_example.yaml
+- repo_ondrejsika.yaml
+- repo_yourname.yaml
+- repo_cibulkaj.yaml
+- repo_eugen.yaml
+- repo_janhal.yaml
+- repo_pp.yaml
+- repo_pk.yaml
+- repo_rx.yaml

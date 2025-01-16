@@ -1,0 +1,19 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: backend
+  namespace: example
+spec:
+  releaseName: backend
+  chart:
+    spec:
+      chart: counter-backend
+      sourceRef:
+        kind: HelmRepository
+        name: example
+        namespace: flux-system
+      version: "0.2.0"
+  interval: 1m
+  values:
+    host: example-backend.k8s.sikademo.com
+    replicas: 2

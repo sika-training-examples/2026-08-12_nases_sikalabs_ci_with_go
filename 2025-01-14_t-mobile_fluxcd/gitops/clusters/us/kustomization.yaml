@@ -1,0 +1,17 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ../../base
+
+configMapGenerator:
+  - name: backend-values
+    namespace: ondrejsika
+    files:
+      - values.yaml=backend_values.yaml
+  - name: frontend-values
+    namespace: ondrejsika
+    files:
+      - values.yaml=frontend_values.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true

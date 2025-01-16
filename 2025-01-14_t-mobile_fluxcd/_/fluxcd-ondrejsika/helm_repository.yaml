@@ -1,0 +1,20 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: example
+  namespace: flux-system
+spec:
+  url: https://artifactory.sikademo.com/artifactory/demo-helm
+  interval: 1m
+  secretRef:
+    name: example-credentials
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-credentials
+  namespace: flux-system
+type: Opaque
+stringData:
+  username: admin
+  password: DtIA_KN2H_Jg8U_Fy5p

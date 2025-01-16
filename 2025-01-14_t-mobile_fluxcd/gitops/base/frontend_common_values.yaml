@@ -1,0 +1,5 @@
+API_ORIGIN: http://backend-counter
+replicas: 2
+image: artifactory.sikademo.com/ondrejsika-docker/counter-frontend:master-ab7713bc-130
+BACKGROUND_COLOR: "#131480"
+FONT_COLOR: white

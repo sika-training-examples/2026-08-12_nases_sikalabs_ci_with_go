@@ -1,0 +1,3 @@
+image: sikalabs/hello-world-server:t-mobile
+TEXT: 'Ahoj T-Mobile from FluxCD!'
+replicas: 2

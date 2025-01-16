@@ -1,0 +1,21 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: backend
+  namespace: ondrejsika
+spec:
+  releaseName: backend
+  chart:
+    spec:
+      chart: counter-backend
+      sourceRef:
+        kind: HelmRepository
+        name: ondrejsika
+        namespace: flux-system
+      version: "0.0.0-master-72405f3b"
+  interval: 1m
+  valuesFrom:
+    - kind: ConfigMap
+      name: backend-common-values
+    - kind: ConfigMap
+      name: backend-values

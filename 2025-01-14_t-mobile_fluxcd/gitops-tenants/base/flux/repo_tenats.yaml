@@ -1,0 +1,22 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: tenants
+  namespace: flux-system
+spec:
+  url: https://gitlab.sikademo.com/t-mobile/gitops-tenants.git
+  interval: 1m0s
+  ref:
+    branch: master
+  secretRef:
+    name: tenants
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: tenants
+  namespace: flux-system
+type: Opaque
+stringData:
+  username: token
+  password: tHsoZJ2abyDLDxSdkHo_

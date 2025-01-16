@@ -1,0 +1,35 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: example
+  namespace: flux-system
+spec:
+  url: https://gitlab.sikademo.com/example/counter-gitops.git
+  interval: 1m0s
+  ref:
+    branch: master
+  secretRef:
+    name: example
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example
+  namespace: flux-system
+type: Opaque
+stringData:
+  username: token
+  password: BhJpwjYJkmbYR35abSc8
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: example
+  namespace: flux-system
+spec:
+  interval: 10m0s
+  path: .
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: example

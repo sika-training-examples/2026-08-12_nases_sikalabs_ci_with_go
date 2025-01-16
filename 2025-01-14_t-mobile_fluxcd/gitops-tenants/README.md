@@ -1,0 +1,3 @@
+# gitops-tenants
+
+Global configuraration for FluxCD repositories, ...

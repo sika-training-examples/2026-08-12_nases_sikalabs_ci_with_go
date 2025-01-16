@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- namespace.yaml
+- artifactory.yaml
+- backend_release.yaml
+- frontend_release.yaml
+
+configMapGenerator:
+  - name: backend-common-values
+    namespace: ondrejsika
+    files:
+      - values.yaml=backend_common_values.yaml
+  - name: frontend-common-values
+    namespace: ondrejsika
+    files:
+      - values.yaml=frontend_common_values.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true

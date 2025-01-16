@@ -1,0 +1,2 @@
+replicas: 2
+image: artifactory.sikademo.com/ondrejsika-docker/counter-backend:0.2.0

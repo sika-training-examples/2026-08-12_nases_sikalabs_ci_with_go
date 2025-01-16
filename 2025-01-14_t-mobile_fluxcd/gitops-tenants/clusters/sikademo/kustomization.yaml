@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ../../base/flux
+- kustomization_tenants.yaml
+- kustomization_simple01.yaml
+- kustomization_simple02.yaml
+- kustomization_ondrejsika.yaml
+- kustomization_yourname.yaml
+- kustomization_cibulkaj.yaml
+- kustomization_eugen.yaml
+- kustomization_janhal.yaml
+- kustomization_pp.yaml
+- kustomization_pk.yaml
+- kustomization_rx.yaml

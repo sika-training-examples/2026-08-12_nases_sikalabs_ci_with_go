@@ -1,0 +1,20 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: ondrejsika
+  namespace: flux-system
+spec:
+  url: https://artifactory.sikademo.com/artifactory/ondrejsika-helm/
+  interval: 1m
+  secretRef:
+    name: ondrejsika-credentials
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ondrejsika-credentials
+  namespace: flux-system
+type: Opaque
+stringData:
+  username: admin
+  password: DtIA_KN2H_Jg8U_Fy5p

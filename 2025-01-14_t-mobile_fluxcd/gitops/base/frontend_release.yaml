@@ -1,0 +1,21 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: frontend
+  namespace: ondrejsika
+spec:
+  releaseName: frontend
+  chart:
+    spec:
+      chart: counter-frontend
+      sourceRef:
+        kind: HelmRepository
+        name: ondrejsika
+        namespace: flux-system
+      version: "0.3.0"
+  interval: 1m
+  valuesFrom:
+    - kind: ConfigMap
+      name: frontend-common-values
+    - kind: ConfigMap
+      name: frontend-values
