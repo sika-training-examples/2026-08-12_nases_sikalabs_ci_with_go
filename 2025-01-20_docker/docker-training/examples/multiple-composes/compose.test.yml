@@ -1,0 +1,6 @@
+services:
+  test:
+    build: ./test
+    depends_on:
+      counter:
+        condition: service_healthy

@@ -1,0 +1,104 @@
+stages:
+  - build
+  - test
+  - deploy
+
+variables:
+  TAG: $CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA
+  IMAGE_TESTS: $CI_REGISTRY_IMAGE/tests:$TAG
+  IMAGE_BACKEND: $CI_REGISTRY_IMAGE/backend:$TAG
+  IMAGE_FRONTEND: $CI_REGISTRY_IMAGE/frontend:$TAG
+
+before_script:
+  - docker login $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
+
+build:
+  stage: build
+  variables:
+    COMPOSE_FILE: compose.yml:compose.tests.yml
+  script:
+    - docker compose build
+    - docker compose push
+
+test:
+  stage: test
+  variables:
+    COMPOSE_FILE: compose.yml:compose.tests.yml
+    COMPOSE_PROJECT_NAME: proj$CI_PIPELINE_ID
+  script:
+    - docker compose up -d --no-build
+    - docker compose run tests
+  after_script:
+    - docker compose down
+
+deploy-feature:
+  stage: deploy
+  except:
+    - master
+  variables:
+    COMPOSE_PROJECT_NAME: counter-mongo-$CI_COMMIT_REF_SLUG
+    COMPOSE_FILE: compose.yml:compose.traefik.yml
+    DOCKER_HOST: ssh://root@docker.sikademo.com
+    HOST: counter-mongo-feat-$CI_COMMIT_REF_SLUG.docker.sikademo.com
+    TRAEFIK_NAME: counter-mongo-$CI_COMMIT_REF_SLUG
+  script:
+    - apk add --no-cache openssh-client
+    - mkdir -p ~/.ssh
+    - cp $SSH_PRIVATE_KEY ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - ssh-keyscan docker.sikademo.com >> ~/.ssh/known_hosts
+    - docker compose up -d --no-build
+  after_script:
+    - rm -rf ~/.ssh
+  environment:
+    name: feature/$CI_COMMIT_REF_NAME
+    url: https://counter-mongo-feat-$CI_COMMIT_REF_SLUG.docker.sikademo.com
+    on_stop: stop-feature
+
+stop-feature:
+  stage: deploy
+  when: manual
+  except:
+    - master
+  variables:
+    GIT_STRATEGY: none
+    COMPOSE_PROJECT_NAME: counter-mongo-$CI_COMMIT_REF_SLUG
+    COMPOSE_FILE: compose.yml:compose.traefik.yml
+    DOCKER_HOST: ssh://root@docker.sikademo.com
+    HOST: counter-mongo-feat-$CI_COMMIT_REF_SLUG.docker.sikademo.com
+    TRAEFIK_NAME: counter-mongo-$CI_COMMIT_REF_SLUG
+  script:
+    - apk add --no-cache openssh-client
+    - mkdir -p ~/.ssh
+    - cp $SSH_PRIVATE_KEY ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - ssh-keyscan docker.sikademo.com >> ~/.ssh/known_hosts
+    - docker compose down
+  after_script:
+    - rm -rf ~/.ssh
+  environment:
+    name: feature/$CI_COMMIT_REF_NAME
+    action: stop
+
+deploy-prod:
+  stage: deploy
+  only:
+    - master
+  variables:
+    COMPOSE_PROJECT_NAME: counter-mongo-prod
+    COMPOSE_FILE: compose.yml:compose.traefik.yml
+    DOCKER_HOST: ssh://root@docker.sikademo.com
+    HOST: counter-mongo-prod.docker.sikademo.com
+    TRAEFIK_NAME: counter-mongo-prod
+  script:
+    - apk add --no-cache openssh-client
+    - mkdir -p ~/.ssh
+    - cp $SSH_PRIVATE_KEY ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - ssh-keyscan docker.sikademo.com >> ~/.ssh/known_hosts
+    - docker compose up -d --no-build
+  after_script:
+    - rm -rf ~/.ssh
+  environment:
+    name: production
+    url: https://counter-mongo-prod.docker.sikademo.com

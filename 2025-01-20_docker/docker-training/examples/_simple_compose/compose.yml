@@ -1,0 +1,28 @@
+name: simple
+services:
+  redis:
+    image: redis:7
+    command:
+      - /bin/sh
+      - -c
+      - sleep 10 && redis-server
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: redis-cli ping
+      interval: 2s
+      retries: 10
+  app:
+    build: .
+    image: ttl.sh/ondrej/counter-py
+    environment:
+      REDIS: redis
+    ports:
+      - 80:80
+    depends_on:
+      redis:
+        condition: service_healthy
+
+volumes:
+  redis_data:
+

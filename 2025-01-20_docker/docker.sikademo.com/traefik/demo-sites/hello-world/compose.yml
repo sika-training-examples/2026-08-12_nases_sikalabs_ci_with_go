@@ -1,0 +1,17 @@
+services:
+  hello-world:
+    image: sikalabs/hello-world-server:v0.10.0
+    labels:
+      # For Docker Compose Traefik Deployment (single node)
+      - traefik.enable=true
+      - traefik.http.services.hello-world.loadbalancer.server.port=8000
+      - traefik.http.routers.hello-world.rule=Host(`${HOST:-hello-127-0-0-1.nip.io}`)
+      - traefik.http.routers.hello-world.tls.certresolver=le
+    networks:
+      - traefik
+    deploy:
+      replicas: 4
+
+networks:
+  traefik:
+    name: traefik

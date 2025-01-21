@@ -1,0 +1,33 @@
+name: counter
+services:
+  counter:
+    build: .
+    image: ttl.sh/dte/multiple-composes/counter
+    platform: linux/amd64
+    depends_on:
+      redis:
+        condition: service_healthy
+    environment:
+      REDIS: redis
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.counter.rule: Host(`${HOST:-127.0.0.1}`)
+    healthcheck:
+      test: curl http://127.0.0.1/healthz
+      interval: 2s
+      retries: 10
+  redis:
+    image: redis:7
+    command:
+      - /bin/sh
+      - -c
+      - sleep 5 && redis-server
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: redis-cli ping
+      interval: 2s
+      retries: 10
+
+volumes:
+  redis_data:

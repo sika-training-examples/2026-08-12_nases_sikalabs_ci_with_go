@@ -1,0 +1,9 @@
+services:
+  nginx:
+    image: nginx
+    networks:
+      - traefik
+
+networks:
+  traefik:
+    name: traefik
