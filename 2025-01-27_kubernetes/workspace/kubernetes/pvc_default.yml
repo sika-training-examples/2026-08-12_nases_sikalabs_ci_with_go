@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: default-pvc
+spec:
+  storageClassName: do-block-storage-retain
+  volumeName: pvc-d5e306b5-1f1f-4caa-af2c-5b776a585d23
+  accessModes:
+    - ReadWriteOnce
+    # - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
