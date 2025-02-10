@@ -1,0 +1,35 @@
+# Mac
+.DS_Store
+
+# Editor
+.vscode
+.idea
+
+# Generic
+*.log
+*.backup
+*.local.sh
+*.local.yml
+*.local.yaml
+*.local.json
+*.local.txt
+.env
+
+# Terraform
+.terraform
+*.tfstate
+.terraform.tfstate.lock.info
+*.tfvars
+!*.EXAMPLE.tfvars
+override.tf
+
+# Infracost
+.infracost
+.infracost-reports
+
+# NodeJS
+node_modules
+
+# NodeJS
+.next
+out
