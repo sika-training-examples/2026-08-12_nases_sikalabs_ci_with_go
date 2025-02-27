@@ -1,0 +1,1 @@
+keycloak_url = "https://kc0.k8s.sikademo.com"

@@ -1,0 +1,9 @@
+NAME=kc0
+helm upgrade --install \
+  $NAME \
+  oci://registry-1.docker.io/bitnamicharts/keycloak \
+  --version 24.4.10 \
+  --namespace $NAME \
+  --create-namespace \
+  --values examples/helm-values/keycloak-k8s-sikademo-com.yaml \
+  --set ingress.hostname=$NAME.k8s.sikademo.com
