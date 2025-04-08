@@ -1,0 +1,13 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: node
+    static_configs:
+      - targets:
+          - lab0.sikademo.com:9100
+          - lab1.sikademo.com:9100
+          - lab2.sikademo.com:9100
+          - lab3.sikademo.com:9100
+          - lab4.sikademo.com:9100

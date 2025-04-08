@@ -1,0 +1,26 @@
+.DS_Store
+data
+
+# Private notes
+private.txt
+
+# Terraform
+.terraform
+terraform.tfvars
+*.tfstate
+*.tfstate*backup
+*.log
+.terraform.tfstate.lock.info
+
+# Infracost
+.infracost
+
+# Kubernetes
+/kubernetes/*/charts
+
+/prometheus.yml
+/prometheus.rules.yml
+/service-discovery-file.yml
+
+# Nodejs
+node_modules

@@ -1,0 +1,6 @@
+dashboards
+.terraform
+*.tfstate
+.infracost
+*.backup
+**/data/**/*.json

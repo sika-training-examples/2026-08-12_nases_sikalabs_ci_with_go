@@ -1,0 +1,70 @@
+global:
+  resolve_timeout: 10s
+  # smtp_from: prom-demo@sikamail.eu
+  # smtp_hello: alertmanager
+  # smtp_smarthost: mail.sikamail.eu:587
+  # smtp_auth_username: prom-demo@sikamail.eu
+  # smtp_auth_password: somesecretpassword
+  # smtp_auth_identity: prom-demo@sikamail.eu
+  # smtp_require_tls: true
+  smtp_from: monitoring@google.com
+  smtp_smarthost: lab0.sikademo.com:1025
+  smtp_require_tls: false
+
+
+route:
+  receiver: all-teams
+  group_by:
+    - env
+    - alertname
+    - app
+  group_wait: 10s
+  group_interval: 10s
+  repeat_interval: 10m
+
+  routes:
+    - match:
+        app: frontend
+      receiver: "frontend-team-slack"
+      continue: true
+    - match:
+        app: frontend
+      receiver: "frontend-team-mail"
+    - match:
+        app: backend
+      receiver: "backend-team"
+    - match:
+        app: db
+      receiver: "db-team"
+
+inhibit_rules:
+  - source_match:
+      app: db
+    target_match:
+      app: backend
+  - source_match:
+      app: lb
+    target_match:
+      app: frontend
+
+receivers:
+  - name: all-teams
+    email_configs:
+      - send_resolved: true
+        to: alert@corp.com
+  - name: frontend-team-mail
+    email_configs:
+      - send_resolved: true
+        to: alert-frontend@corp.com
+  - name: frontend-team-slack
+    email_configs:
+      - send_resolved: true
+        to: alert-frontend-slack@corp.com
+  - name: backend-team
+    email_configs:
+      - send_resolved: true
+        to: alert-backend@corp.com
+  - name: db-team
+    email_configs:
+      - send_resolved: true
+        to: alert-db@corp.com
