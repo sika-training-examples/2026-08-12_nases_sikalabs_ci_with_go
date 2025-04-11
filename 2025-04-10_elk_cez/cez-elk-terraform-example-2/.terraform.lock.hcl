@@ -1,0 +1,23 @@
+# This file is maintained automatically by "terraform init".
+# Manual edits may be lost in future updates.
+
+provider "registry.terraform.io/elastic/elasticstack" {
+  version = "0.11.14"
+  hashes = [
+    "h1:dh+U/mTEDgRK5CGAPLJzrWEd8mTlONhgytzIjX90YR4=",
+    "zh:01ca89708785755050ae7d2e9ee2cc1873f421729a3facd077ef62a157b86071",
+    "zh:05d8fa15a141088c200281fe27bdfcffa468d9bcfcd6a654b107c876228eb995",
+    "zh:3d8ea3e9bfc648e18d150437ab78bf7e10929028497263ceda2a84b62569bbe2",
+    "zh:3f5decbb3e8937e07525c6159f4b0c47293427eb550268be672b6607dfcb3a41",
+    "zh:4f0c38135b21ad782de42174b719ab9956a922f11ec0092d4dfd0caf3bb83b7b",
+    "zh:6b8fc7b0265dc731be5f668a56be1915606aabef1c283a23e0f0b4951ffae811",
+    "zh:7682e8cdbf6346f116a822ff135f8f846decf95dbfad459c02b6bcd518bd2984",
+    "zh:7e3549b9e46bcadc254fc7b55f7d6a544fbdc631f6181f60fd334f81abd621fc",
+    "zh:89d0248f001ed724630579bffef34110ec2c37a765dee4b433b44c05f349bceb",
+    "zh:927230aee05e369e8c2f681939a68dbf6a24c8c1b2eb789c1413ec324f8f852d",
+    "zh:a23e7b168de9b38d0c937089422d083128a2d758a477969793c1359d955a23e7",
+    "zh:a539cba7d7479ac78503aa5c85591049b6a6d02e2a721208be80082b2a816ea7",
+    "zh:bda28828a9804c9520c830891db9e029591272c2fab24b323536bd35446d101e",
+    "zh:ea35bcd3cc4bc005d92580e1cb6f0a181dd715a0d77fb5e65df1c9a48cedb723",
+  ]
+}

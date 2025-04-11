@@ -1,0 +1,75 @@
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  name: elk
+  annotations:
+    eck.k8s.elastic.co/license: basic
+spec:
+  version: 8.17.4
+  nodeSets:
+    - name: master
+      count: 3
+      config:
+        node.roles:
+          - master
+        node.store.allow_mmap: false
+      volumeClaimTemplates:
+        - metadata:
+            name: elasticsearch-data # Do not change this name
+          spec:
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: 20Gi
+    - name: hot
+      count: 2
+      config:
+        node.roles:
+          - ingest
+          - data_hot
+          - data_content
+        node.store.allow_mmap: false
+      volumeClaimTemplates:
+        - metadata:
+            name: elasticsearch-data # Do not change this name
+          spec:
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: 20Gi
+    - name: warm
+      count: 2
+      config:
+        node.roles:
+          - data_warm
+        node.store.allow_mmap: false
+      volumeClaimTemplates:
+        - metadata:
+            name: elasticsearch-data # Do not change this name
+          spec:
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: 20Gi
+    - name: cold
+      count: 2
+      config:
+        node.roles:
+          - data_warm
+        node.store.allow_mmap: false
+      volumeClaimTemplates:
+        - metadata:
+            name: elasticsearch-data # Do not change this name
+          spec:
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: 20Gi
+  http:
+    tls:
+      selfSignedCertificate:
+        disabled: true

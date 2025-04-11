@@ -1,0 +1,286 @@
+deploymentMode: SimpleScalable
+
+# global:
+#   dnsService: kube-dns
+
+loki:
+  auth_enabled: false
+  server:
+    http_server_write_timeout: 310s
+    http_server_read_timeout: 310s
+    grpc_server_max_recv_msg_size: 104857600  # 100 Mb
+    grpc_server_max_send_msg_size: 104857600  # 100 Mb
+  ingester:
+    chunk_encoding: snappy
+    chunk_idle_period: 2h
+    chunk_target_size: 1536000 # 1.5 Mb
+    max_chunk_age: 2h
+  limits_config:
+    max_query_parallelism: 24
+    ingestion_rate_mb: 20
+    ingestion_burst_size_mb: 30
+    per_stream_rate_limit: "3MB"
+    per_stream_rate_limit_burst: "10MB"
+    query_timeout: 300s
+    max_query_series: 5000
+    max_entries_limit_per_query: 200000
+    retention_period: 336h
+  compactor:
+    working_directory: /var/loki/retention
+    compaction_interval: 10m
+    retention_enabled: true
+    retention_delete_delay: 2h
+    retention_delete_worker_count: 150
+    delete_request_store: s3
+  query_scheduler:
+    max_outstanding_requests_per_tenant: 2048
+    grpc_client_config:
+      max_recv_msg_size: 104857600  # 100 Mb
+      max_send_msg_size: 104857600  # 100 Mb
+  query_range:
+    parallelise_shardable_queries: false
+    align_queries_with_step: true
+    max_retries: 5
+    cache_results: true
+  querier:
+    max_concurrent: 8
+    engine:
+      max_look_back_period: 300s
+  commonConfig:
+    replication_factor: 1
+  storage:
+    bucketNames:
+      chunks: loki-chunks
+      ruler: loki-ruler
+      admin: loki-admin
+    type: 's3'
+    s3:
+      endpoint: http://minio.minio:9000
+      accessKeyId: ${ACCESS_KEY_ID}
+      secretAccessKey: ${SECRET_ACCESS_KEY}
+      s3ForcePathStyle: true
+      insecure: false
+  schemaConfig:
+    configs:
+      - from: 2024-01-11
+        store: tsdb
+        object_store: s3
+        schema: v13
+        index:
+          prefix: loki_index_
+          period: 24h
+  rulerConfig:
+    ring:
+      kvstore:
+        store: inmemory
+    enable_sharding: true
+    remote_write:
+      enabled: false
+      # add_org_id_header: false
+      # clients:
+      #   prom_monitoring:
+      #     url: http://prometheus-operated.monitoring:9090/api/v1/write
+    storage:
+      type: local
+      local:
+        directory: /var/loki/rules
+
+chunksCache:
+  enabled: true
+  # Allocated memory for the cache in MB.
+  allocatedMemory: 2000
+
+backend:
+  replicas: 1
+  autoscaling:
+    enabled: true
+    minReplicas: 1
+    maxReplicas: 3
+    targetCPUUtilizationPercentage: 800
+    targetMemoryUtilizationPercentage: 800
+    behavior:
+      scaleUp:
+        stabilizationWindowSeconds: 300
+        policies:
+          - type: Pods
+            value: 1
+            periodSeconds: 60
+      scaleDown:
+        stabilizationWindowSeconds: 300
+        policies:
+          - type: Pods
+            value: 1
+            periodSeconds: 180
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 1000m
+      memory: 1280Mi
+  persistence:
+    size: 1Gi
+    # storageClass: default
+  extraArgs:
+    - "-config.expand-env=true"
+  extraEnv:
+    - name: ACCESS_KEY_ID
+      value: admin
+      # valueFrom:
+      #   secretKeyRef:
+      #     name: loki-minio-creds
+      #     key: rootUser
+    - name: SECRET_ACCESS_KEY
+      value: asdfasdf
+      # valueFrom:
+      #   secretKeyRef:
+      #     name: loki-minio-creds
+      #     key: rootPassword
+
+read:
+  replicas: 1
+  autoscaling:
+    enabled: true
+    minReplicas: 1
+    maxReplicas: 3
+    targetCPUUtilizationPercentage: 800
+    targetMemoryUtilizationPercentage: 800
+    behavior:
+      scaleUp:
+        stabilizationWindowSeconds: 300
+        policies:
+          - type: Pods
+            value: 1
+            periodSeconds: 60
+      scaleDown:
+        stabilizationWindowSeconds: 300
+        policies:
+          - type: Pods
+            value: 1
+            periodSeconds: 180
+  resources:
+    requests:
+      cpu: 200m
+      memory: 350Mi
+    limits:
+      cpu: 2000m
+      memory: 3500Mi
+  persistence:
+    size: 1Gi
+    # storageClass: default
+  extraArgs:
+    - "-config.expand-env=true"
+  extraEnv:
+    - name: ACCESS_KEY_ID
+      value: admin
+      # valueFrom:
+      #   secretKeyRef:
+      #     name: loki-minio-creds
+      #     key: rootUser
+    - name: SECRET_ACCESS_KEY
+      value: asdfasdf
+      # valueFrom:
+      #   secretKeyRef:
+      #     name: loki-minio-creds
+      #     key: rootPassword
+
+write:
+  replicas: 1
+  autoscaling:
+    enabled: true
+    minReplicas: 1
+    maxReplicas: 3
+    targetCPUUtilizationPercentage: 800
+    targetMemoryUtilizationPercentage: 800
+    behavior:
+      scaleUp:
+        policies:
+          - type: Pods
+            value: 1
+            periodSeconds: 900
+      scaleDown:
+        policies:
+          - type: Pods
+            value: 1
+            periodSeconds: 1800
+        stabilizationWindowSeconds: 3600
+  resources:
+    requests:
+      cpu: 150m
+      memory: 150Mi
+    limits:
+      cpu: 1500m
+      memory: 1500Mi
+  persistence:
+    size: 2Gi
+    # storageClass: default
+  extraArgs:
+    - "-config.expand-env=true"
+  extraEnv:
+    - name: ACCESS_KEY_ID
+      value: admin
+      # valueFrom:
+      #   secretKeyRef:
+      #     name: loki-minio-creds
+      #     key: rootUser
+    - name: SECRET_ACCESS_KEY
+      value: asdfasdf
+      # valueFrom:
+      #   secretKeyRef:
+      #     name: loki-minio-creds
+      #     key: rootPassword
+
+gateway:
+  replicas: 1
+  service:
+    labels:
+      prometheus.io/service-monitor: "false"
+  autoscaling:
+    enabled: true
+    minReplicas: 1
+    maxReplicas: 3
+    targetCPUUtilizationPercentage: 800
+    targetMemoryUtilizationPercentage: 800
+    behavior:
+      scaleUp:
+        stabilizationWindowSeconds: 300
+        policies:
+          - type: Pods
+            value: 1
+            periodSeconds: 60
+      scaleDown:
+        stabilizationWindowSeconds: 300
+        policies:
+          - type: Pods
+            value: 1
+            periodSeconds: 180
+  resources:
+    requests:
+      cpu: 50m
+      memory: 50Mi
+    limits:
+      cpu: 500m
+      memory: 500Mi
+
+lokiCanary:
+  enabled: true
+  resources:
+    requests:
+      cpu: 50m
+      memory: 100Mi
+    limits:
+      cpu: 100m
+      memory: 200Mi
+
+sidecar:
+  rules:
+    # When loki.auth_enabled: false, then only FAKE tenant is allowed
+    folder: /var/loki/rules/fake
+    searchNamespace: ALL
+  resources:
+    requests:
+      cpu: 50m
+      memory: 50Mi
+    limits:
+      cpu: 100m
+      memory: 100Mi

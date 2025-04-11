@@ -1,0 +1,55 @@
+# https://github.com/minio/minio/blob/master/helm/minio/values.yaml
+ingress:
+  enabled: true
+  hosts:
+    - minio.cez3.sikademo.com
+  tls:
+    - secretName: minio.cez3.sikademo.com-tls
+      hosts:
+        - minio.cez3.sikademo.com
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+
+consoleIngress:
+  enabled: true
+  hosts:
+    - minio-console.cez3.sikademo.com
+  tls:
+    - secretName: minio-console.cez3.sikademo.com-tls
+      hosts:
+        - minio-console.cez3.sikademo.com
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+
+existingSecret: minio-creds
+
+buckets:
+  - name: loki-chunks
+    policy: none
+    purge: false
+  - name: loki-ruler
+    policy: none
+    purge: false
+  - name: loki-admin
+    policy: none
+    purge: false
+
+replicas: 2
+drivesPerNode: 1
+
+metrics:
+  serviceMonitor:
+    enabled: false
+    includeNode: true
+
+persistence:
+  enabled: true
+  size: 20Gi
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 2500m
+    memory: 3500Mi

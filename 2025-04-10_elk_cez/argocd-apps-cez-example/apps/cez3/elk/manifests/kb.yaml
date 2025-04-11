@@ -1,0 +1,29 @@
+apiVersion: kibana.k8s.elastic.co/v1
+kind: Kibana
+metadata:
+  name: elk
+spec:
+  version: 8.17.4
+  count: 2
+  elasticsearchRef:
+    name: elk
+  config:
+    server.publicBaseUrl: https://kb.k8s3.sikademo.com
+  http:
+    tls:
+      selfSignedCertificate:
+        disabled: true
+  podTemplate:
+    spec:
+      containers:
+      - name: kibana
+        env:
+          - name: NODE_OPTIONS
+            value: "--max-old-space-size=2048"
+        resources:
+          requests:
+            memory: 2Gi
+            cpu: 1
+          limits:
+            memory: 2.5Gi
+            cpu: 4

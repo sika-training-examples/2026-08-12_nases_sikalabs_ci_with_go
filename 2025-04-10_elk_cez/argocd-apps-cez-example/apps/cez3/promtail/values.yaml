@@ -1,0 +1,93 @@
+# Disable the DaemonSet
+daemonset:
+  enabled: false
+
+deployment:
+  enabled: true
+  replicas: 1
+  strategy:
+    type: Recreate
+
+config:
+  clients:
+    - url: http://loki-gateway.logging/loki/api/v1/push
+      tenant_id: 1
+
+
+  snippets:
+    scrapeConfigs: |
+      - job_name: kafka
+        kafka:
+          brokers:
+          - 161.35.17.199:32366
+          topics:
+          - logs
+          labels:
+            job: kafka
+            host: promtail
+        relabel_configs:
+            - action: replace
+              source_labels:
+                - __meta_kafka_topic
+              target_label: topic
+            - action: replace
+              source_labels:
+                - __meta_kafka_partition
+              target_label: partition
+            - action: replace
+              source_labels:
+                - __meta_kafka_group_id
+              target_label: group
+        pipeline_stages:
+          - json:
+              expressions:
+                output: message
+                stream: stream
+                timestamp: '"@timestamp"'
+                kubernetes: kubernetes
+          - json:
+              source: kubernetes
+              expressions:
+                node: node
+                namespace: namespace
+                pod: pod
+                container: container
+          - json:
+              source: node
+              expressions:
+                hostname: hostname
+          - json:
+              source: pod
+              expressions:
+                pod_name: name
+          - json:
+              source: container
+              expressions:
+                container_name: name
+          - labels:
+                hostname: hostname
+                host: hostname
+                namespace: namespace
+                pod_name: pod_name
+                container_name: container_name
+          - output:
+              source: output
+          # - json:
+          #     expressions:
+          #       log_message: message  # extract to a temp variable
+          # - output:
+          #     source: log_message
+          # # - json:
+          # #     expressions:
+          # #       output: message
+          # #       stream: stream
+          # #       timestamp: '"@timestamp"'
+          # #       kubernetes:
+          # # - json:
+          # #     source: kubernetes
+          # #     expressions:
+          # #       node: node
+          # # - json:
+          # #     source: node
+          # #     expressions:
+          # #       hostname: hostname

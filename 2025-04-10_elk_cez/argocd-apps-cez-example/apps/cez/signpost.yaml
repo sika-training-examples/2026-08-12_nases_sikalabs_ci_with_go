@@ -1,0 +1,80 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: signpost
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: signpost
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+  source:
+    repoURL: https://github.com/sikalabs/charts.git
+    path: charts/signpost
+    helm:
+      valuesObject:
+        host: signpost.cez.sikademo.com
+        signpost_yaml:
+          SiteHeading: CEZ Signpost
+          CompanyName: CEZ
+          CompanyDomain: cez.cz
+          CompanyUrl: https://cez.cz
+          CompanyLogo:
+          HtmlHeadExtra: <link rel="icon" type="image/png" href="https://www.cez.cz/webpublic/cezw/img/icons/favicon-32x32.png" />
+          Rows:
+            - Cols:
+              - Blocks:
+                - Heading: Global
+                  Links:
+                    - Title: Gitlab (gitlab.corp.cez.cz)
+                      URL: https://gitlab.sikademo.com
+                    - Title: SSO (sso.cez.cz)
+                      URL: https://sso.sikademo.com/admin
+                - Heading: Monitoring
+                  Links:
+                    - Title: Grafana (gitlab.corp.cez.cz)
+                      URL: https://grafana.cez3.sikademo.com
+                    - Title: Kibana (kibana.corp.cez.cz)
+                      URL: https://kibana.sikademo.com
+              - Blocks:
+                - Heading: Elastic
+                  Links:
+                    - Title: Kibana CEZ1 (kb.cez1.corp.cez.cz)
+                      URL: https://kb.k8s.sikademo.com
+                    - Title: Kibana CEZ3 (kb.cez3.corp.cez.cz)
+                      URL: https://kb.k8s3.sikademo.com
+                - Heading: ArgoCD
+                  Links:
+                    - Title: ArgoCD CEZ1 (argocd.cez1.corp.cez.cz)
+                      URL: https://argocd.k8s.sikademo.com
+                    - Title: ArgoCD CEZ2 (argocd.cez2.corp.cez.cz)
+                      URL: https://argocd.k8s2.sikademo.com
+                    - Title: ArgoCD CEZ3 (argocd.cez3.corp.cez.cz)
+                      URL: https://argocd.k8s3.sikademo.com
+              - Blocks:
+                - Heading: Apps
+                  Links:
+                    - Title: Hello CEZ (hello.cez.cz)
+                      URL: https://cez3.sikademo.com
+                    - Title: Muj CEZ (muj.cez.cz)
+                      URL: https://example.com
+                - Heading: Infra
+                  Links:
+                    - Title: Azure Stack (azure.corp.cez.cz)
+                      URL: https://portal.azure.com
+                    - Title: VMware vCenter (vcenter.corp.cez.cz)
+                      URL: https://example.com
+                    - Title: Proxmox (proxmox.corp.cez.cz)
+                      URL: https://example.com
+                - Heading: Storage
+                  Links:
+                    - Title: Minio (minio.corp.cez.cz)
+                      URL: https://minio-console.cez3.sikademo.com

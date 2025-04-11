@@ -1,0 +1,1 @@
+# argocd-apps-cez-example

@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-of-apps-cez
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: argocd
+    server: https://kubernetes.default.svc
+  project: default
+  sources:
+    - repoURL: https://gitlab.sikademo.com/examples/cez/argocd-apps-cez-example.git
+      path: apps/cez
+      directory:
+        recurse: true
+        exclude: '{**/manifests/**,**/Chart.yaml,**/values.y*ml,**/*.values.y*ml,**/templates/**}'
+    - repoURL: https://gitlab.sikademo.com/examples/cez/argocd-apps-cez-example.git
+      path: clusters/cez
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

@@ -1,0 +1,41 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: minio
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-5"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: minio
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+  ignoreDifferences:
+    - group: external-secrets.io
+      kind: ExternalSecret
+      jqPathExpressions:
+        - '.spec.dataFrom[].extract.conversionStrategy'
+        - '.spec.dataFrom[].extract.decodingStrategy'
+        - '.spec.dataFrom[].extract.metadataPolicy'
+  sources:
+    - repoURL: https://charts.min.io/
+      chart: minio
+      targetRevision: 5.4.0
+      helm:
+        releaseName: minio
+        # https://github.com/minio/minio/blob/master/helm/minio/values.yaml
+        valueFiles:
+          - $values/apps/cez3/minio/values.yaml
+    - repoURL: https://gitlab.sikademo.com/examples/cez/argocd-apps-cez-example.git
+      ref: values
+    - repoURL: https://gitlab.sikademo.com/examples/cez/argocd-apps-cez-example.git
+      path: apps/cez3/minio/manifests
