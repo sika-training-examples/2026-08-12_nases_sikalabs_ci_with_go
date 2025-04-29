@@ -1,0 +1,12 @@
+services:
+  counter:
+    build: .
+    image: ttl.sh/ondrejsika/counter
+    ports:
+      - 8000:80
+    environment:
+      REDIS: redis
+    depends_on:
+      - redis
+  redis:
+    image: redis

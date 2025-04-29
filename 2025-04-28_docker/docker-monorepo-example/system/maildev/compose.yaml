@@ -1,0 +1,18 @@
+name: maildev
+services:
+  maildev:
+    image: maildev/maildev
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.maildev.loadbalancer.server.port=1080
+      - traefik.http.routers.maildev.rule=Host(`${HOST?}`)
+      - traefik.http.routers.maildev.tls.certresolver=le
+    ports:
+      - 1025:1025
+    networks:
+      - traefik
+
+networks:
+  traefik:
+    name: traefik
+    external: true

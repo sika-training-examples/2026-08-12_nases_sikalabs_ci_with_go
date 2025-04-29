@@ -1,0 +1,22 @@
+name: portainer
+services:
+  portainer:
+    image: portainer/portainer
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer-data:/data
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.portainer.loadbalancer.server.port=9000
+      - traefik.http.routers.portainer.rule=Host(`${HOST?}`)
+      - traefik.http.routers.portainer.tls.certresolver=le
+    networks:
+      - traefik
+
+networks:
+  traefik:
+    name: traefik
+
+volumes:
+  portainer-data:

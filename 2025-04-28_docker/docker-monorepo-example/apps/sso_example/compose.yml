@@ -1,0 +1,23 @@
+services:
+  example:
+    image: sikalabs/hello-world-server
+    networks:
+      - traefik
+    deploy:
+      replicas: 2
+    environment:
+      TEXT: SSO example
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.sso_example.loadbalancer.server.port=8000
+      - traefik.http.routers.sso_example.rule=Host(`${HOST?}`)
+      - traefik.http.routers.sso_example.tls.certresolver=le
+      - traefik.http.middlewares.sso_example.forwardauth.address=https://sso-proxy.lab0.sikademo.com/oauth2/auth
+      - traefik.http.middlewares.sso_example.forwardauth.tls.insecureSkipVerify=true
+      - traefik.http.middlewares.sso_example.forwardauth.trustforwardheader=true
+      - traefik.http.routers.sso_example.middlewares=oauth-signin,oauth-verify
+networks:
+  traefik:
+    name: traefik
+    external: true
+

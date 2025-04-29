@@ -1,0 +1,6 @@
+services:
+  server:
+    build: .
+    image: ttl.sh/ondrejsika/simple-image
+    ports:
+      - 8000:80

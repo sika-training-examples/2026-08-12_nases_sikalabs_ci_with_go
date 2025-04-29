@@ -1,0 +1,17 @@
+name: foo
+
+x-base-service: &base-service
+  image: debian
+  command: ["sh", "-c", "echo $$HELLO"]
+
+services:
+  en:
+    <<: *base-service
+    container_name: foo-en
+    environment:
+      HELLO: Hello
+  cs:
+    <<: *base-service
+    container_name: bar-cs
+    environment:
+      HELLO: Ahoj

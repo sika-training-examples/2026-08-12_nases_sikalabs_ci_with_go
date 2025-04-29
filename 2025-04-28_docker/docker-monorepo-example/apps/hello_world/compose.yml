@@ -1,0 +1,18 @@
+services:
+  hello-world:
+    image: sikalabs/hello-world-server
+    networks:
+      - traefik
+    deploy:
+      replicas: 4
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.hello-world.loadbalancer.server.port=8000
+      - traefik.http.routers.hello-world.rule=Host(`${HOST?}`)
+      - traefik.http.routers.hello-world.tls.certresolver=le
+
+networks:
+  traefik:
+    name: traefik
+    external: true
+

@@ -1,0 +1,21 @@
+services:
+  example:
+    image: sikalabs/hello-world-server
+    networks:
+      - traefik
+    deploy:
+      replicas: 2
+    environment:
+      TEXT: basic auth example
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.basic_auth_example.loadbalancer.server.port=8000
+      - traefik.http.routers.basic_auth_example.rule=Host(`${HOST?}`)
+      - traefik.http.routers.basic_auth_example.tls.certresolver=le
+      - traefik.http.middlewares.basic_auth_example.basicauth.users=${BASIC_AUTH?}
+      - traefik.http.routers.basic_auth_example.middlewares=basic_auth_example@docker
+networks:
+  traefik:
+    name: traefik
+    external: true
+

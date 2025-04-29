@@ -1,0 +1,31 @@
+name: oauth2_proxy
+services:
+  oauth2_proxy:
+    image: quay.io/oauth2-proxy/oauth2-proxy
+    command:
+      - --http-address=http://0.0.0.0:4180
+      - --cookie-secret=n2fkUdEMg5yldFANJFe0FBt1zzo0vwtoEPmIycDWJio=
+      - --provider=keycloak-oidc
+      - --client-id=example_client_id
+      - --client-secret=example_client_secret
+      - --redirect-url=https://${HOST?}/oauth2/callback
+      - --oidc-issuer-url=https://sso.sikalabs.com/realms/training
+      - --email-domain=*
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.oauth2_proxy.loadbalancer.server.port=4180
+      - traefik.http.routers.oauth2_proxy.rule=Host(`${HOST?}`)
+      - traefik.http.routers.oauth2_proxy.tls.certresolver=le
+      - traefik.http.middlewares.oauth-verify.forwardAuth.address=https://sso-proxy.lab0.sikademo.com/oauth2/auth
+      - traefik.http.middlewares.oauth-verify.forwardAuth.trustForwardHeader=true
+      - traefik.http.middlewares.oauth-verify.forwardAuth.authResponseHeaders=X-Auth-Request-User,X-Auth-Request-Email,Set-Cookie
+      - traefik.http.middlewares.oauth-signin.errors.service=oauth2_proxy@docker
+      - traefik.http.middlewares.oauth-signin.errors.status=401
+      - traefik.http.middlewares.oauth-signin.errors.query=/oauth2/sign_in
+    networks:
+      - traefik
+
+networks:
+  traefik:
+    name: traefik
+    external: true

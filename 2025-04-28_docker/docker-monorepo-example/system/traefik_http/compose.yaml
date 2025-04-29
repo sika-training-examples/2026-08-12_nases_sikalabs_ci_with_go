@@ -1,0 +1,25 @@
+name: traefik-http
+services:
+  traefik:
+    image: traefik:3.3
+    command:
+      - --accesslog
+      - --metrics.prometheus=true
+      - --api.insecure=true
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --providers.docker.network=traefik
+      - --entrypoints.http.address=:80
+    userns_mode: host
+    restart: always
+    ports:
+      - 80:80
+      - 8080:8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - traefik
+
+networks:
+  traefik:
+    name: traefik

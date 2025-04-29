@@ -1,0 +1,25 @@
+name: cadvisor
+services:
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:v0.52.1
+    restart: always
+    privileged: true
+    devices:
+      - /dev/kmsg
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.cadvisor.loadbalancer.server.port=8080
+      - traefik.http.routers.cadvisor.rule=Host(`${HOST?}`)
+      - traefik.http.routers.cadvisor.tls.certresolver=le
+    networks:
+      - traefik
+
+networks:
+  traefik:
+    name: traefik
