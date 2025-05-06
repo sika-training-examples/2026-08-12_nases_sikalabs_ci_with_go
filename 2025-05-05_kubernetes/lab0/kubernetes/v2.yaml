@@ -1,0 +1,79 @@
+---
+# Source: hello-world/templates/service.yml
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello
+  labels:
+    release: hello
+    app: hello
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      name: http
+      targetPort: http
+    - port: 8001
+      name: metrics
+      targetPort: metrics
+  selector:
+    app: hello
+---
+# Source: hello-world/templates/deployment.yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello
+  labels:
+    release: hello
+spec:
+  replicas: 4
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: hello
+  template:
+    metadata:
+      labels:
+        app: hello
+    spec:
+      
+      containers:
+        - name: main
+          image: sikalabs/hello-world-server
+          ports:
+            - name: http
+              containerPort: 8000
+          env:
+            - name: PORT
+              value: "8000"
+          
+            - name: "TEXT"
+              value: "Ahoj!"
+---
+# Source: hello-world/templates/ingress.yml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hello
+  labels:
+    release: hello
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - hello.k8s.sikademo.com
+      secretName: hello-tls
+  rules:
+    - host: hello.k8s.sikademo.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: hello
+                port:
+                  name: http

@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: counter-bar
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: counter-bar
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://github.com/sika-training-examples/2025-05-05_kubernetes-training-counter-example.git
+    path: ./helm
+    helm:
+      valuesObject:
+        frontendHost: counter-bar.k8s.sikademo.com
+        EXTRA_TEXT: "bar"
+        backendHost: counter-bar-backend.k8s.sikademo.com
+        FONT_COLOR: green
+        BACKGROUND_COLOR: black

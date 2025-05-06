@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend
+data:
+  FONT_COLOR: '#20883D'
+  BACKGROUND_COLOR: '#F7F8FA'
