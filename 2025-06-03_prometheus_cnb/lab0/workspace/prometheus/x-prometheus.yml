@@ -1,0 +1,109 @@
+global:
+  scrape_interval: 5s
+  evaluation_interval: 5s
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+            - "localhost:9093"
+
+rule_files:
+  - "prometheus.rules.yml"
+
+scrape_configs:
+  - job_name: time-exporter
+    static_configs:
+      - targets:
+        - lab0.sikademo.com:10001
+        - lab0.sikademo.com:10002
+        - podman.sikademo.com:10001
+        - podman.sikademo.com:10002
+
+  - job_name: push-gw
+    metric_relabel_configs:
+      - source_labels: [exported_job]
+        target_label: job
+      - source_labels: [exported_instance]
+        target_label: instance
+      - regex: "exported_instance|exported_job"
+        action: labeldrop
+    static_configs:
+      - targets:
+          - podman.sikademo.com:9091
+
+  - job_name: "consul"
+    consul_sd_configs:
+      - server: "https://7658-85-71-71-34.ngrok-free.app"
+        tags:
+          - prometheus
+    relabel_configs:
+      - source_labels: [__meta_consul_service]
+        target_label: job
+      - source_labels:
+          - __meta_consul_node
+        target_label: instance
+
+  - job_name: apps
+    file_sd_configs:
+      - files:
+          - apps.sd.yml
+        refresh_interval: 5s
+
+  - job_name: hello-cnb
+    static_configs:
+      - targets:
+        - podman.sikademo.com:8001
+
+  - job_name: "podman"
+    static_configs:
+      - targets:
+          - "podman.sikademo.com:9882"
+
+  - job_name: "http"
+    metrics_path: /probe
+    params:
+      module:
+        - http_2xx
+    static_configs:
+      - targets:
+          - https://ondrejsika.com
+          - https://ondrejsika.int
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: lab0.sikademo.com:9115
+
+  - job_name: "blackbox"
+    static_configs:
+      - targets:
+          - "localhost:9115"
+
+  - job_name: "node-exporter"
+    static_configs:
+      - targets:
+          - "linux.sikademo.com:9100"
+          - "podman.sikademo.com:9100"
+          - "lab0.sikademo.com:9100"
+          - "lab1.sikademo.com:9100"
+
+  - job_name: "prometheus"
+    static_configs:
+      - targets:
+          - "localhost:9090"
+          - "lab1.sikademo.com:9090"
+
+  - job_name: "metgen"
+    static_configs:
+      - targets:
+          - "localhost:8000"
+          - "localhost:8001"
+        labels:
+          env: "prod"
+      - targets:
+          - "localhost:8002"
+        labels:
+          env: "dev"

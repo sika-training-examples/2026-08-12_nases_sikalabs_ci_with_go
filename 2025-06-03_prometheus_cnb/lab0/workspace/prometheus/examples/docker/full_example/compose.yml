@@ -1,0 +1,34 @@
+services:
+  metrics-generator:
+    image: sikalabs/slu:v0.34.0
+    command: slu metrics-generator server
+    ports:
+      - 18000:8000
+  example-time-exporter:
+    image: ghcr.io/sikalabs/slr:v0.19.0
+    command: slr time-exporter
+    ports:
+      - 18001:8000
+  example-time-exporter-go:
+    image: ttl.sh/example-time-exporter-go
+  example-time-exporter-python:
+    image: ttl.sh/example-time-exporter-python
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus:/etc/prometheus
+      - prometheus-data:/prometheus
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+      - --web.console.libraries=/usr/share/prometheus/console_libraries
+      - --web.console.templates=/usr/share/prometheus/consoles
+      - --web.enable-lifecycle
+    ports:
+      - 19090:9090
+  grafana:
+    image: grafana/grafana
+    ports:
+      - 13000:3000
+volumes:
+  prometheus-data:

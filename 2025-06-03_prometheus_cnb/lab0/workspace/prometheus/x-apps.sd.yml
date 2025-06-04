@@ -1,0 +1,3 @@
+- targets:
+    - podman.sikademo.com:9001
+    - podman.sikademo.com:9002
