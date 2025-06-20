@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: okd
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  ingressClassName: openshift-default
+  tls:
+    - secretName: ondrej.openshift.sikademo.com-tls
+      hosts:
+        - ondrej.openshift.sikademo.com
+  rules:
+    - host: ondrej.openshift.sikademo.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: hello-world-clusterip
+                port:
+                  number: 80

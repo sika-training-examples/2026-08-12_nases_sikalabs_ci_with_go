@@ -1,0 +1,14 @@
+# Mac
+.DS_Store
+
+# Editor
+.vscode
+.idea
+
+# Generic
+*.log
+*.backup
+.lego
+
+# NodeJS
+node_modules

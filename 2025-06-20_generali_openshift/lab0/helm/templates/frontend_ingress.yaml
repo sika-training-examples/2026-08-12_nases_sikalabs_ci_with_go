@@ -1,0 +1,25 @@
+{{ if .Values.frontend.host }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{.Release.Name}}-frontend
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  ingressClassName: {{ .Values.ingressClassName }}
+  tls:
+    - secretName: {{ .Values.frontend.host }}-tls
+      hosts:
+        - {{ .Values.frontend.host }}
+  rules:
+    - host: {{ .Values.frontend.host }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{.Release.Name}}-frontend
+                port:
+                  number: 80
+{{ end }}

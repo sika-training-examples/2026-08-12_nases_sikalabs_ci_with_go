@@ -1,0 +1,70 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: example-https-custom-cert
+spec:
+  host: example-https-custom-cert.openshift.sikademo.com
+  to:
+    kind: Service
+    name: hello-world-clusterip
+  port:
+    targetPort: 8000
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+    key: |
+      -----BEGIN EC PRIVATE KEY-----
+      MHcCAQEEIAsniCWU4x+VNs1NMHXZJ4inuO2j2072eKJy+dfXQw8voAoGCCqGSM49
+      AwEHoUQDQgAE7v/CmIb80y01zyZPYQsvZlOtFKsAGmTBs9mGI47u0ZWz3R+owH5E
+      2oaFwgrvv4cmEDXfoR68pIMZvr85ASMDdw==
+      -----END EC PRIVATE KEY-----
+    certificate: |
+      -----BEGIN CERTIFICATE-----
+      MIIDsTCCAzegAwIBAgISBuh1s+PDkuuQ2eKXBM4BwIMIMAoGCCqGSM49BAMDMDIx
+      CzAJBgNVBAYTAlVTMRYwFAYDVQQKEw1MZXQncyBFbmNyeXB0MQswCQYDVQQDEwJF
+      NTAeFw0yNTA2MTkxMzAzMDZaFw0yNTA5MTcxMzAzMDVaMCExHzAdBgNVBAMTFm9w
+      ZW5zaGlmdC5zaWthZGVtby5jb20wWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAATu
+      /8KYhvzTLTXPJk9hCy9mU60UqwAaZMGz2YYjju7RlbPdH6jAfkTahoXCCu+/hyYQ
+      Nd+hHrykgxm+vzkBIwN3o4ICPDCCAjgwDgYDVR0PAQH/BAQDAgeAMB0GA1UdJQQW
+      MBQGCCsGAQUFBwMBBggrBgEFBQcDAjAMBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBQm
+      UrbQG14epb/maeH0elWKZ61vPDAfBgNVHSMEGDAWgBSfK1/PPCFPnQS37SssxMZw
+      i9LXDTAyBggrBgEFBQcBAQQmMCQwIgYIKwYBBQUHMAKGFmh0dHA6Ly9lNS5pLmxl
+      bmNyLm9yZy8wOwYDVR0RBDQwMoIYKi5vcGVuc2hpZnQuc2lrYWRlbW8uY29tghZv
+      cGVuc2hpZnQuc2lrYWRlbW8uY29tMBMGA1UdIAQMMAowCAYGZ4EMAQIBMCwGA1Ud
+      HwQlMCMwIaAfoB2GG2h0dHA6Ly9lNS5jLmxlbmNyLm9yZy85LmNybDCCAQMGCisG
+      AQQB1nkCBAIEgfQEgfEA7wB2AMz7D2qFcQll/pWbU87psnwi6YVcDZeNtql+VMD+
+      TA2wAAABl4h+vP8AAAQDAEcwRQIhAPviskxpxxy6n2uALJgQN+LJxc2uh4a/8lLV
+      aruFd4lkAiBuoh019bS1MNPPhUKh4AJ3Bq44ioqm7+G4fMwt9VyNzAB1AKRCxQZJ
+      YGFUjw/U6pz7ei0mRU2HqX8v30VZ9idPOoRUAAABl4h+vPUAAAQDAEYwRAIgVb3K
+      JAaRfUK8hb1jHThoewZfc5+V0Aqw727rHeAwEFsCID6LanwnpOwTWHWlYmblHruL
+      HLR2gozmqxO+0qbXwTPOMAoGCCqGSM49BAMDA2gAMGUCMGB66+TGqeG71gC3J07G
+      Vy3cRhJNHrijZafQwrxd+3BazxQLQ4koVk7fdk3z2l5IeQIxALpM/GHe8DXxjlO1
+      /ZWvv+ZjJb7bFI4WBYeF8KPwZ5nYVb44zAamPBSbUJYnmvdXbQ==
+      -----END CERTIFICATE-----
+
+      -----BEGIN CERTIFICATE-----
+      MIIEVzCCAj+gAwIBAgIRAIOPbGPOsTmMYgZigxXJ/d4wDQYJKoZIhvcNAQELBQAw
+      TzELMAkGA1UEBhMCVVMxKTAnBgNVBAoTIEludGVybmV0IFNlY3VyaXR5IFJlc2Vh
+      cmNoIEdyb3VwMRUwEwYDVQQDEwxJU1JHIFJvb3QgWDEwHhcNMjQwMzEzMDAwMDAw
+      WhcNMjcwMzEyMjM1OTU5WjAyMQswCQYDVQQGEwJVUzEWMBQGA1UEChMNTGV0J3Mg
+      RW5jcnlwdDELMAkGA1UEAxMCRTUwdjAQBgcqhkjOPQIBBgUrgQQAIgNiAAQNCzqK
+      a2GOtu/cX1jnxkJFVKtj9mZhSAouWXW0gQI3ULc/FnncmOyhKJdyIBwsz9V8UiBO
+      VHhbhBRrwJCuhezAUUE8Wod/Bk3U/mDR+mwt4X2VEIiiCFQPmRpM5uoKrNijgfgw
+      gfUwDgYDVR0PAQH/BAQDAgGGMB0GA1UdJQQWMBQGCCsGAQUFBwMCBggrBgEFBQcD
+      ATASBgNVHRMBAf8ECDAGAQH/AgEAMB0GA1UdDgQWBBSfK1/PPCFPnQS37SssxMZw
+      i9LXDTAfBgNVHSMEGDAWgBR5tFnme7bl5AFzgAiIyBpY9umbbjAyBggrBgEFBQcB
+      AQQmMCQwIgYIKwYBBQUHMAKGFmh0dHA6Ly94MS5pLmxlbmNyLm9yZy8wEwYDVR0g
+      BAwwCjAIBgZngQwBAgEwJwYDVR0fBCAwHjAcoBqgGIYWaHR0cDovL3gxLmMubGVu
+      Y3Iub3JnLzANBgkqhkiG9w0BAQsFAAOCAgEAH3KdNEVCQdqk0LKyuNImTKdRJY1C
+      2uw2SJajuhqkyGPY8C+zzsufZ+mgnhnq1A2KVQOSykOEnUbx1cy637rBAihx97r+
+      bcwbZM6sTDIaEriR/PLk6LKs9Be0uoVxgOKDcpG9svD33J+G9Lcfv1K9luDmSTgG
+      6XNFIN5vfI5gs/lMPyojEMdIzK9blcl2/1vKxO8WGCcjvsQ1nJ/Pwt8LQZBfOFyV
+      XP8ubAp/au3dc4EKWG9MO5zcx1qT9+NXRGdVWxGvmBFRAajciMfXME1ZuGmk3/GO
+      koAM7ZkjZmleyokP1LGzmfJcUd9s7eeu1/9/eg5XlXd/55GtYjAM+C4DG5i7eaNq
+      cm2F+yxYIPt6cbbtYVNJCGfHWqHEQ4FYStUyFnv8sjyqU8ypgZaNJ9aVcWSICLOI
+      E1/Qv/7oKsnZCWJ926wU6RqG1OYPGOi1zuABhLw61cuPVDT28nQS/e6z95cJXq0e
+      K1BcaJ6fJZsmbjRgD5p3mvEf5vdQM7MCEvU0tHbsx2I5mHHJoABHb8KVBgWp/lcX
+      GWiWaeOyB7RP+OfDtvi2OsapxXiV7vNVs7fMlrRjY1joKaqmmycnBvAq14AEbtyL
+      sVfOS66B8apkeFX2NY4XPEYV4ZSCe8VHPrdrERk2wILG3T/EGmSIkCYVUMSnjmJd
+      VQD9F6Na/+zmXCc=
+      -----END CERTIFICATE-----

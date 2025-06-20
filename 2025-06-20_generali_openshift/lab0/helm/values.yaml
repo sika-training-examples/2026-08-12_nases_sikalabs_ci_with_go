@@ -1,0 +1,11 @@
+ingressClassName: openshift-default
+
+frontend:
+  host:
+  FONT_COLOR: "#000000"
+  BACKGROUND_COLOR: "#FFFFFF"
+
+backend:
+  slowStart: 0
+  EXTRA_TEXT: ""
+
