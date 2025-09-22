@@ -1,0 +1,4 @@
+name: "example"
+services:
+  example:
+    image: "hello-world"
