@@ -1,0 +1,12 @@
+services:
+  hello-world:
+    image: ghcr.io/sikalabs/hello-world-server:v0.10.0
+    networks:
+      - traefik
+    deploy:
+      replicas: 4
+
+networks:
+  traefik:
+    name: traefik
+    external: true

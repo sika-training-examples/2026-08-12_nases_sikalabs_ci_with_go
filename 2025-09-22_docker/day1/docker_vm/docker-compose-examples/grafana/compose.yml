@@ -1,0 +1,10 @@
+name: grafana
+services:
+  grafana:
+    image: grafana/grafana
+    restart: always
+    volumes:
+      - grafana-data:/var/lib/grafana
+
+volumes:
+  grafana-data:

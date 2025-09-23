@@ -1,0 +1,11 @@
+services:
+  test:
+    build: test
+    depends_on:
+      - counter
+
+  ab:
+    image: ondrejsika/ab
+    command: ab -n 100 http://counter/
+    depends_on:
+      - counter

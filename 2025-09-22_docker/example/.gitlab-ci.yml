@@ -1,0 +1,68 @@
+image: docker:git
+
+variables:
+  IMAGE_BACKEND: $CI_REGISTRY_IMAGE/backend:${CI_COMMIT_REF_SLUG}
+  IMAGE_FRONTEND: $CI_REGISTRY_IMAGE/frontend:${CI_COMMIT_REF_SLUG}
+
+stages:
+  - build
+  - tests
+  - deploy_dev
+
+before_script:
+  - docker login $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
+
+build:
+  stage: build
+  script:
+    - docker compose build
+    - docker compose push
+
+tests:
+  stage: tests
+  variables:
+    COMPOSE_FILE: compose.yml:compose.tests.yml
+    COMPOSE_PROJECT_NAME: ci-${CI_JOB_ID}
+  parallel:
+    matrix:
+      - TEST_SUITE:
+          - tests
+          - ab-be-api
+          - ab-be
+          - ab-fe
+  script:
+    - docker compose run $TEST_SUITE
+  after_script:
+    - docker compose down -v --remove-orphans
+
+deploy_dev:
+  stage: deploy_dev
+  tags:
+    - deploy
+  variables:
+    COMPOSE_FILE: compose.yml:compose.scaled.yml:compose.traefik.yml
+    COMPOSE_PROJECT_NAME: $CI_PROJECT_PATH_SLUG-$CI_COMMIT_REF_SLUG
+    TRAEFIK_NAME: $COMPOSE_PROJECT_NAME
+    HOST: $CI_PROJECT_PATH_SLUG-$CI_COMMIT_REF_SLUG.docker.sikademo.com
+  script:
+    - docker compose pull
+    - docker compose up -d --no-build
+  environment:
+    name: dev/$CI_COMMIT_REF_SLUG
+    url: http://$HOST
+    on_stop: deploy_dev_stop
+
+deploy_dev_stop:
+  stage: deploy_dev
+  tags:
+    - deploy
+  when: manual
+  variables:
+    COMPOSE_FILE: compose.yml:compose.scaled.yml:compose.traefik.yml
+    COMPOSE_PROJECT_NAME: $CI_PROJECT_PATH_SLUG-$CI_COMMIT_REF_SLUG
+    GIT_STRATEGY: none
+  script:
+    - docker compose down -v --remove-orphans
+  environment:
+    name: dev/$CI_COMMIT_REF_SLUG
+    action: stop

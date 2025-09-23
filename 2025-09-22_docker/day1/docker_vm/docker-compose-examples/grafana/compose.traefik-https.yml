@@ -1,0 +1,14 @@
+services:
+  grafana:
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.grafana.loadbalancer.server.port=3000
+      - traefik.http.routers.grafana.rule=Host(`${HOST:-grafana-127-0-0-1.nip.io}`)
+      - traefik.http.routers.grafana.entrypoints=http,https
+      - traefik.http.routers.grafana.tls.certresolver=le
+    networks:
+      - traefik
+
+networks:
+  traefik:
+    name: traefik

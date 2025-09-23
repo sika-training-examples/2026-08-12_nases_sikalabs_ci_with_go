@@ -1,0 +1,10 @@
+services:
+  caddy:
+    image: caddy
+    networks:
+      - traefik
+
+networks:
+  traefik:
+    name: traefik
+    external: true

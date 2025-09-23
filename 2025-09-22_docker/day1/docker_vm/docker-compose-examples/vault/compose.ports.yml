@@ -1,0 +1,4 @@
+services:
+  vault:
+    ports:
+      - ${PORT:-8200}:8200

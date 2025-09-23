@@ -1,0 +1,25 @@
+services:
+  counter:
+    image: ghcr.io/ondrejsika/counter
+    depends_on:
+      - redis
+    labels:
+      traefik.enable: true
+      traefik.port: 80
+      traefik.frontend.rule: Host:127.0.0.1
+      traefik.docker.network: traefik
+    environment:
+      REDIS: redis
+    networks:
+      - traefik
+      - backend
+  redis:
+    image: redis
+    networks:
+      - backend
+networks:
+  backend:
+    internal: true
+  traefik:
+    external:
+      name: traefik

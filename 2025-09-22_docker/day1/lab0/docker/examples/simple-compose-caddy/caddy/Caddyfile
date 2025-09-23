@@ -1,0 +1,4 @@
+
+lab0.sikademo.com {
+    reverse_proxy counter
+}

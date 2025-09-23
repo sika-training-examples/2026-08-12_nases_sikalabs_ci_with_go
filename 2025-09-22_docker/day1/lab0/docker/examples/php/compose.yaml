@@ -1,0 +1,9 @@
+services:
+  php:
+    image: php:8.3
+    command: bash
+    working_dir: /workspace
+    ports:
+      - ${PORT:-8000}:8000
+    volumes:
+      - ./src:/workspace

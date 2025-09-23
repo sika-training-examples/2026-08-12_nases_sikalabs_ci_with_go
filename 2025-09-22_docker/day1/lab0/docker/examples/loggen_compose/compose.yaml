@@ -1,0 +1,10 @@
+services:
+  foo:
+    image: sikalabs/slu:v0.88.0
+    command: slu loggen -p foo
+  bar:
+    image: sikalabs/slu:v0.88.0
+    command: slu loggen -p bar
+  baz:
+    image: sikalabs/slu:v0.88.0
+    command: slu loggen -p baz

@@ -1,0 +1,12 @@
+services:
+  vault:
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.vault.loadbalancer.server.port=8200
+      - traefik.http.routers.vault.rule=Host(`${HOST:-vault-127-0-0-1.nip.io}`)
+    networks:
+      - traefik
+
+networks:
+  traefik:
+    name: traefik
