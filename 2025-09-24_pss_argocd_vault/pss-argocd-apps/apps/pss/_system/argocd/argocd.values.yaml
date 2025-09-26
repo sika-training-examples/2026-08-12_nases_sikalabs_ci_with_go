@@ -1,0 +1,46 @@
+configs:
+  cm:
+    url: https://argocd.k8s.sikademo.com
+    exec.enabled: "true"
+    oidc.config: |
+      name: SSO
+      issuer: https://sso.k8s.sikademo.com/realms/pss
+      clientID: argocd
+      clientSecret: WCKqPUUg9wBqS1ZAAq5EuC4fjU2qJkJ6
+      requestedScopes: ["openid", "profile", "email", "groups"]
+      logoutURL: "https://sso.k8s.sikademo.com/realms/pss/protocol/openid-connect/logout?client_id=argocd&id_token_hint={{token}}&post_logout_redirect_uri=https://argocd.k8s.sikademo.com"
+  rbac:
+    scopes: '[groups]'
+    policy.default: ""
+    policy.csv: |
+      g, argocd_admins, role:admin
+
+      g, hello_pss_dev, role:hello-pss-dev
+      p, role:hello-pss-dev, extensions, invoke, metrics, allow
+
+      p, role:hello-pss-dev, projects, get, hello-pss-dev/*, allow
+      p, role:hello-pss-dev, applications, get, hello-pss-dev/*, allow
+      p, role:hello-pss-dev, applications, action/apps/Deployment/restart, hello-pss-dev/*, allow
+      p, role:hello-pss-dev, applications, sync, hello-pss-dev/*, allow
+      p, role:hello-pss-dev, applications, update, hello-pss-dev/*, allow
+      p, role:hello-pss-dev, exec, create, hello-pss-dev/*, allow
+
+      g, hello_pss_prod, role:hello-pss-prod
+      p, role:hello-pss-prod, extensions, invoke, metrics, allow
+
+      p, role:hello-pss-prod, projects, get, hello-pss-prod/*, allow
+      p, role:hello-pss-prod, applications, get, hello-pss-prod/*, allow
+      p, role:hello-pss-prod, applications, action/apps/Deployment/restart, hello-pss-prod/*, allow
+      p, role:hello-pss-prod, applications, sync, hello-pss-prod/*, allow
+      p, role:hello-pss-prod, applications, update, hello-pss-prod/*, allow
+      p, role:hello-pss-prod, exec, create, hello-pss-prod/*, allow
+
+server:
+  ingress:
+    enabled: true
+    hostname: argocd.k8s.sikademo.com
+    tls: true
+    ingressClassName: nginx
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+      nginx.ingress.kubernetes.io/backend-protocol: HTTPS

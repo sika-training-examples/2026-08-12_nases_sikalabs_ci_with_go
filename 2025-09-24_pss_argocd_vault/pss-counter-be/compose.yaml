@@ -1,0 +1,17 @@
+services:
+  backend:
+    build: .
+    ports:
+      - 8000:8000
+    environment:
+      MONGODB_URI: mongodb://root:root@mongo:27017
+  mongo:
+    image: mongo
+    volumes:
+      - mongo-data:/data
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+
+volumes:
+  mongo-data:

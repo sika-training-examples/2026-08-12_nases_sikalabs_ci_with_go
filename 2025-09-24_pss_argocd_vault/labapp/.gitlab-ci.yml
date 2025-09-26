@@ -1,0 +1,9 @@
+include:
+  - project: 'examples/pss/pss-gitlab-ci'
+    file: '/simple_image.gitlab-ci.yml'
+
+variables:
+  ARGOCD_APPS_PROJECT_ID: 734
+  ARGOCD_APPS_BRANCH: master
+  IMAGE_VALUES_FILE_DEV: labapp.image.values.yaml
+  IMAGE_VALUES_FILE_PROD: labapp.image.values.yaml

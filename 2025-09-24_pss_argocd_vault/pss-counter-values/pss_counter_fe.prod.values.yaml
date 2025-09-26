@@ -1,0 +1,3 @@
+host: pss-counter.k8s.sikademo.com
+env:
+  API_ORIGIN: http://pss-counter-prod-be

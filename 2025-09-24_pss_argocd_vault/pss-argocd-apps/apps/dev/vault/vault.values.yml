@@ -1,0 +1,29 @@
+global:
+  tlsDisable: true
+injector:
+  enabled: false
+server:
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+    ingressClassName: nginx
+    pathType: Prefix
+    tls:
+    - secretName: vault.k8s.sikademo.com
+      hosts:
+        - vault.k8s.sikademo.com
+    hosts:
+    - host: vault.k8s.sikademo.com
+      paths:
+        - /
+  dataStorage:
+    enabled: true
+    size: 1Gi
+  auditStorage:
+    enabled: false
+  ha:
+    enabled: true
+    replicas: 3
+    raft:
+      enabled: true

@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Release.Name }}-slave
+spec:
+  serviceName: {{ .Release.Name }}-slave
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: {{ .Values.storage }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data
+      initContainers:
+        - name: chown-data
+          image: debian:12-slim
+          command: ['sh', '-c', 'chown -R 1001:1001 /bitnami/mongodb']
+          volumeMounts:
+            - mountPath: /bitnami/mongodb
+              name: data
+      containers:
+        - name: main
+          image: {{ .Values.image }}
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - mountPath: /bitnami/mongodb
+              name: data
+          env:
+            - name: MONGODB_REPLICA_SET_MODE
+              value: secondary
+            - name: MONGODB_PRIMARY_HOST
+              value: {{ .Release.Name }}-master.{{ .Release.Namespace }}
+            - name: MONGODB_PRIMARY_PORT_NUMBER
+              value: "27017"
+            - name: MONGODB_ADVERTISED_HOSTNAME
+              value: {{ .Release.Name }}-slave.{{ .Release.Namespace }}
+            - name: MONGODB_REPLICA_SET_KEY
+              value: replicasetkey
+            - name: MONGODB_PRIMARY_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-root-password
+                  key: MONGODB_ROOT_PASSWORD

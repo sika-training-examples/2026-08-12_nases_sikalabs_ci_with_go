@@ -1,0 +1,6 @@
+# Required
+vaultMongoDBRootPasswordSecretPath:
+
+# Optional
+image: mongo
+storage: 1Gi

@@ -1,0 +1,12 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info
+  endpoint:
+    health:
+      show-details: never
+
+vault:
+  role_id: 8a925383-94cc-876d-6e20-cc858a595707
+  secret_id: dbb7f8c5-7775-f701-ee7b-874eac202d50

@@ -1,0 +1,4 @@
+containerPort: 8080
+port: 80
+replicas: 2
+host: labapp.k8s.sikademo.com

@@ -1,0 +1,1 @@
+vaultMongoDBRootPasswordSecretPath: secret/pss/project_counter/prod/mongodb_root_password

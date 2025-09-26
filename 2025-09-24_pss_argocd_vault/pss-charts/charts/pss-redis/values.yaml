@@ -1,0 +1,3 @@
+# Optional
+image: redis
+storage: 1Gi

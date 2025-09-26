@@ -1,0 +1,2 @@
+host: hello-pss.k8s.sikademo.com
+vaultEnvSecretPath: secret/pss/hello_pss_prod/env

@@ -1,0 +1,4 @@
+host: hello-pss-dev.k8s.sikademo.com
+vaultEnvSecretPath: secret/pss/hello_pss_dev/env
+env:
+  TEXT_SUFFIX: (dev)
