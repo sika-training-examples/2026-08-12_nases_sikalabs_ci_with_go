@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: iceland-3
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: iceland-3
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  sources:
+    - repoURL: https://gitlab.sikademo.com/training/ondrejsika.git
+      path: ./examples/helm_with_dependencies
+      helm:
+        valueFiles:
+        - $values/examples/multiple_sources/apps/iceland_3/values.yml
+    - repoURL: https://gitlab.sikademo.com/training/ondrejsika.git
+      ref: values

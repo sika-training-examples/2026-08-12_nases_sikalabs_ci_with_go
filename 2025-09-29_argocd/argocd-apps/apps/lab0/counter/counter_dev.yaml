@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: counter-dev
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: counter
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: counter-dev
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  sources:
+    - repoURL: https://github.com/ondrejsika/counter
+      path: charts/counter
+      helm:
+        valueFiles:
+          - $values/apps/lab0/counter/counter_dev.values.yaml
+    - repoURL: https://gitlab.sikademo.com/training/ondrejsika-argocd-apps.git
+      ref: values

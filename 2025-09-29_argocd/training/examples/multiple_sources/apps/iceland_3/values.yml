@@ -1,0 +1,3 @@
+hello-world: 
+  host: iceland-3.lab0.sikademo.com
+  TEXT: "Iceland 3"

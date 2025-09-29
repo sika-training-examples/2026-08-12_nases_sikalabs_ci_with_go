@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: counter-fe-prod
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: counter
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: counter-prod
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  sources:
+    - repoURL: https://github.com/sikalabs/charts.git
+      path: charts/one-image
+      helm:
+        valueFiles:
+          - $values/counter_fe_prod.values.yaml
+    - repoURL: https://gitlab.sikademo.com/training/ondrejsika-counter-values.git
+      ref: values

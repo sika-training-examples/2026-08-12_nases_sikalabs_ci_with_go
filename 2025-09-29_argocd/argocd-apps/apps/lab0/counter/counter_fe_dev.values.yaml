@@ -1,0 +1,7 @@
+image: ghcr.io/ondrejsika/counter-frontend-go
+host: counter-dev.lab0.sikademo.com
+replicas: 4
+containerPort: 3000
+containerEnv:
+  - name: API_ORIGIN
+    value: http://counter-dev-counter

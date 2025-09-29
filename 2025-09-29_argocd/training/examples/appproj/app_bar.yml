@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: bar
+  namespace: argocd
+spec:
+  project: bar
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: bar
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://gitlab.sikademo.com/training/ondrejsika.git
+    path: examples/helm_with_dependencies

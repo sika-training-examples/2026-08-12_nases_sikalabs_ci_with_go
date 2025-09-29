@@ -1,0 +1,4 @@
+hello-world:
+  replicas: 2
+  host: hello3.lab0.sikademo.com
+  TEXT: "Sync Window!!!"
