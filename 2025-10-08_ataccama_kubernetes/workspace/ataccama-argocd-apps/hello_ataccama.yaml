@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hello-atacama
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: hello-atacama
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://github.com/sikalabs/charts.git
+    path: ./charts/hello-world
+    helm:
+      valuesObject:
+        # https://github.com/sikalabs/charts/blob/master/charts/hello-world/values.yaml
+        host: hello-atacama.lab0.sikademo.com
+        image: ghcr.io/sikalabs/hello-world-server:ataccama
+        replicas: 4

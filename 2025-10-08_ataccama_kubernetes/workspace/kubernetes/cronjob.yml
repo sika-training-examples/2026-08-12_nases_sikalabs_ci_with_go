@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cronjob
+spec:
+  # https://crontab.guru/
+  schedule: "*/1 * * * *"
+  concurrencyPolicy: Allow
+  failedJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: main
+              image: ghcr.io/sikalabs/slu:v0.91.0
+              args:
+                - slu
+                - os
+                - dogsay
+                - Hello from the Kubernetes cluster

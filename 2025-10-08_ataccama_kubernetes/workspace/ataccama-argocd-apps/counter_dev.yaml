@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: counter-dev
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: counter-dev
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  sources:
+    - repoURL: https://github.com/sika-training-examples/2025-10-08_ataccama-helm-example.git
+      path: .
+      helm:
+        valueFiles:
+          - $values/counter/common.values.yaml
+          - $values/counter/dev.values.yaml
+    - repoURL: https://github.com/sika-training-examples/2025-10-09_ataccama_values.git
+      ref: values

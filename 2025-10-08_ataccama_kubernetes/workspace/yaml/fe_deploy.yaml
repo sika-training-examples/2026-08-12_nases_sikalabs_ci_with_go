@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fe
+spec:
+  revisionHistoryLimit: 0
+  replicas: 4
+  selector:
+    matchLabels:
+      app: fe
+  template:
+    metadata:
+      labels:
+        app: fe
+    spec:
+      initContainers:
+        - name: wait-for-be
+          image: sikalabs/slu:v0.91.0
+          args:
+            - /bin/sh
+            - -c
+            - slu wait-for tcp -a be:80
+      containers:
+        - name: main
+          image: ghcr.io/ondrejsika/counter-frontend-go
+          ports:
+            - containerPort: 3000
+          env:
+            - name: API_ORIGIN
+              value: http://be
+            - name: FAIL_ON_ERROR
+              value: '1'
+          startupProbe:
+            httpGet:
+              path: /api/livez
+              port: 3000
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: 200m
+              memory: 200Mi

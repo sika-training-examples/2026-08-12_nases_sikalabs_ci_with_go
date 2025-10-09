@@ -1,0 +1,12 @@
+# Required
+host:
+
+# Optional
+TEXT: 'Hello Ataccama!'
+TEXT_SUFFIX: ''
+FONT_COLOR: '#A30053'
+BACKGROUND_COLOR: null
+SLOW_START: 0
+
+backendReplicas: 2
+frontendReplicas: 2

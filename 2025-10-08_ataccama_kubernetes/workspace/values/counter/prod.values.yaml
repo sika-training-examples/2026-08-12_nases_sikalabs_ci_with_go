@@ -1,0 +1,4 @@
+host: counter-prod.lab0.sikademo.com
+TEXT_SUFFIX: (prod)
+backendReplicas: 4
+frontendReplicas: 6

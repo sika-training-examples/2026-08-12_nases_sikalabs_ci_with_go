@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-be
+spec:
+  revisionHistoryLimit: 0
+  replicas: {{ .Values.backendReplicas }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-be
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-be
+    spec:
+      containers:
+        - name: main
+          image: ghcr.io/ondrejsika/counter
+          ports:
+            - containerPort: 8000
+          env:
+            - name: EXTRA_TEXT
+              value: '{{ .Values.TEXT }} {{ .Values.TEXT_SUFFIX }}'
+            - name: PORT
+              value: '8000'
+            - name: REDIS
+              value: '{{ .Release.Name }}-redis'
+            - name: SLOW_START
+              value: '{{ .Values.SLOW_START }}'
+          startupProbe:
+            httpGet:
+              path: /livez
+              port: 8000
+          resources:
+            requests:
+              cpu: 20m
+              memory: 20Mi
+            limits:
+              cpu: 50m
+              memory: 30Mi

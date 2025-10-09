@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: counter-helm
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: counter-helm
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://github.com/sika-training-examples/2025-10-08_ataccama-helm-example.git
+    path: .
+    helm:
+      valuesObject: 
+        # https://github.com/sika-training-examples/2025-10-08_ataccama-helm-example/blob/master/values.yaml
+        host: counter-helm.lab0.sikademo.com
+        BACKGROUND_COLOR: '#FFC61C'

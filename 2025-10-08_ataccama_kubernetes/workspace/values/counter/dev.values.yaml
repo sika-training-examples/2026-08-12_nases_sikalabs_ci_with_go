@@ -1,0 +1,4 @@
+host: counter-dev.lab0.sikademo.com
+TEXT_SUFFIX: (dev)
+backendReplicas: 1
+frontendReplicas: 1
