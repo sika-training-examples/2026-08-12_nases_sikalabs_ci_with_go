@@ -1,0 +1,19 @@
+services:
+  counter:
+    build: .
+    image: ttl.sh/training/ondrejsika/counter
+    environment:
+      REDIS: redis
+    ports:
+      - ${PORT:-8000}:80
+    depends_on:
+      - redis
+  redis:
+    image: redis:8
+    ports:
+      - 6379:6379
+    volumes:
+      - redis-data:/data
+
+volumes:
+  redis-data:

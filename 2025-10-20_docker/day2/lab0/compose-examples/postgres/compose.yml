@@ -1,0 +1,14 @@
+name: postgres
+services:
+  postgres:
+    image: postgres:16
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-pg}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "${PORT:-5432}:5432"
+
+volumes:
+  postgres_data:

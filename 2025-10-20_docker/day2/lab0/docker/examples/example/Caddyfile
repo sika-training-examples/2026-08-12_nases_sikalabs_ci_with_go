@@ -1,0 +1,6 @@
+simple-compose-go.lab0.sikademo.com {
+  reverse_proxy {
+    dynamic a counter 8000
+    lb_policy round_robin
+  }
+}

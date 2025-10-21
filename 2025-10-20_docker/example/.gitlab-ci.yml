@@ -1,0 +1,55 @@
+image: ghcr.io/sikalabs/ci
+
+variables:
+  IMAGE_BACKEND: $CI_REGISTRY_IMAGE/backend:$CI_COMMIT_REF_SLUG
+  IMAGE_FRONTEND: $CI_REGISTRY_IMAGE/frontend:$CI_COMMIT_REF_SLUG
+
+stages:
+  - build
+  - test
+  - deploy
+
+before_script:
+  - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
+
+build:
+  stage: build
+  script:
+    - docker compose build
+    - docker compose push
+
+test:
+  variables:
+    COMPOSE_PROJECT_NAME: counter_$CI_JOB_ID
+  parallel:
+    matrix:
+      - TEST:
+          - tests
+          - ab-be-api
+          - ab-be
+          - ab-fe
+  script:
+    - make use-tests
+    - docker compose pull
+    - docker compose run $TEST
+  after_script:
+    - docker compose down
+
+deploy:
+  variables:
+    COMPOSE_PROJECT_NAME: counter-$CI_COMMIT_REF_SLUG
+    DOCKER_HOST: ssh://root@docker.sikademo.com
+    HOST: counter-$CI_COMMIT_REF_SLUG.docker.sikademo.com
+    TRAEFIK_NAME: $CI_COMMIT_REF_SLUG
+  stage: deploy
+  script:
+    - mkdir -p ~/.ssh
+    - echo $B64 | base64 --decode > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n\tUserKnownHostsFile=/dev/null\n" > ~/.ssh/config
+    - make use-traefik
+    - docker compose pull
+    - make up
+  environment:
+    name: $CI_COMMIT_REF_SLUG
+    url: https://$HOST

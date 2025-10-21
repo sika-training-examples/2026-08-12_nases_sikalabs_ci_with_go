@@ -1,0 +1,12 @@
+services:
+  test-ab:
+    image: ghcr.io/sikalabs/dev
+    command: ab -n 100 http://counter:8000/
+    depends_on:
+      - counter
+
+  test-curl:
+    image: ghcr.io/sikalabs/dev
+    command: curl http://counter:8000
+    depends_on:
+      - counter

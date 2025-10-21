@@ -1,0 +1,23 @@
+services:
+  hello-world:
+    image: ghcr.io/sikalabs/hello-world-server:v0.10.0
+    environment:
+      TEXT: "Restricted!"
+    networks:
+      - traefik
+    deploy:
+      replicas: 4
+    labels:
+      # For Docker Compose Traefik Deployment (single node)
+      - traefik.enable=true
+      - traefik.http.services.restricted-hello-world.loadbalancer.server.port=8000
+      - traefik.http.routers.restricted-hello-world.rule=Host(`${HOST:-hello-127-0-0-1.nip.io}`)
+
+      # Apply IP whitelist middleware
+      - traefik.http.middlewares.hello-world-ipwhitelist.ipwhitelist.sourcerange=85.71.71.34/32
+      - traefik.http.routers.restricted-hello-world.middlewares=hello-world-ipwhitelist@docker
+
+networks:
+  traefik:
+    name: traefik
+    external: true

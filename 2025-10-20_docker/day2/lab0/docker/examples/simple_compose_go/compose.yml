@@ -1,0 +1,48 @@
+services:
+  caddy:
+    build:
+      dockerfile_inline: |
+        FROM caddy
+        COPY Caddyfile /etc/caddy/Caddyfile
+
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config 
+    depends_on:
+      - counter
+
+  counter:
+    build: .
+    image: ttl.sh/dte/simple-compose/counter
+    depends_on:
+      - redis
+    environment:
+      REDIS: redis
+
+    deploy:
+      replicas: 4
+
+  redis:
+    image: redis
+    volumes:
+      - redis-data:/data
+
+  test-ab:
+    image: ghcr.io/sikalabs/dev
+    command: ab -n 100 http://counter:8000/
+    depends_on:
+      - counter
+
+  test-curl:
+    image: ghcr.io/sikalabs/dev
+    command: curl http://counter:8000
+    depends_on:
+      - counter
+
+volumes:
+  redis-data:
+  caddy_data:
+  caddy_config:

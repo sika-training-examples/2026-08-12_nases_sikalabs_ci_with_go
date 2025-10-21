@@ -1,0 +1,19 @@
+services:
+  caddy:
+    build:
+      dockerfile_inline: |
+        FROM caddy
+        COPY Caddyfile /etc/caddy/Caddyfile
+
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config 
+    depends_on:
+      - counter
+
+volumes:
+  caddy_data:
+  caddy_config:

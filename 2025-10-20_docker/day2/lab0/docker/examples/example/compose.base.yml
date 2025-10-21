@@ -1,0 +1,31 @@
+services:
+  counter:
+    build: .
+    image: ttl.sh/dte/simple-compose/counter
+    depends_on:
+      - redis
+    environment:
+      REDIS: redis
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.example-counter.rule: Host(`${HOST?}`)
+
+  counter-frontend:
+    image: ghcr.io/ondrejsika/counter-frontend
+    depends_on:
+      - counter
+    environment:
+      API_ORIGIN: http://counter:8000
+      FONT_COLOR: green
+      BACKGROUND_COLOR: lightblue
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.example-counter-frontend.rule: Host(`${HOST_FE?}`)
+
+  redis:
+    image: redis
+    volumes:
+      - redis-data:/data
+
+volumes:
+  redis-data:

@@ -1,0 +1,10 @@
+{
+  auto_https off
+}
+
+:8000 {
+  reverse_proxy {
+    dynamic a counter 8000
+    lb_policy round_robin
+  }
+}

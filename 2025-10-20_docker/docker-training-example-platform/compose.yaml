@@ -1,0 +1,80 @@
+name: platform
+services:
+  traefik:
+    image: traefik:3.5
+    command:
+      - --accesslog
+      - --metrics.prometheus=true
+      - --api.insecure=true
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --providers.docker.network=traefik
+      - --entrypoints.http.address=:80
+      - --entrypoints.http.http.redirections.entryPoint.to=https
+      - --entrypoints.http.http.redirections.entryPoint.scheme=https
+      - --entrypoints.https.address=:443
+      - --entrypoints.https.http.tls.certresolver=le
+      - --certificatesresolvers.le.acme.httpchallenge=true
+      - --certificatesresolvers.le.acme.httpchallenge.entrypoint=http
+      - --certificatesresolvers.le.acme.email=le@sikademo.com
+      - --certificatesresolvers.le.acme.storage=/letsencrypt/acme.json
+    userns_mode: host
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - traefik_letsencrypt:/letsencrypt
+    networks:
+      - traefik
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:v0.52.0
+    restart: always
+    privileged: true
+    devices:
+      - /dev/kmsg
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+    networks:
+      - traefik
+
+  prometheus:
+    build:
+      dockerfile_inline: |
+        FROM prom/prometheus
+        COPY prometheus.yml /etc/prometheus/prometheus.yml
+    restart: always
+    volumes:
+      - prometheus_data:/prometheus
+    networks:
+      - traefik
+
+  grafana:
+    restart: always
+    build:
+      dockerfile_inline: |
+        FROM grafana/grafana
+        COPY grafana/provisioning /etc/grafana/provisioning
+    volumes:
+      - grafana_data:/var/lib/grafana
+    networks:
+      - traefik
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.grafana.loadbalancer.server.port=3000
+      - traefik.http.routers.grafana.rule=Host(`${GRAFANA_HOST:-grafana.docker.sikademo.com}`)
+
+volumes:
+  traefik_letsencrypt:
+  prometheus_data:
+  grafana_data:
+
+networks:
+  traefik:
+    name: traefik

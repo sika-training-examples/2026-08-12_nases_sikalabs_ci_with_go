@@ -1,0 +1,6 @@
+services:
+  app:
+    image: debian
+    command: ["echo", "Hello"]
+    deploy:
+      replicas: 4
