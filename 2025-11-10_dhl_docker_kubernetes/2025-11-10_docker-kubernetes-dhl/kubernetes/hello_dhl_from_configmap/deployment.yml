@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-dhl-from-cm
+spec:
+  revisionHistoryLimit: 0
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hello-dhl-from-cm
+  template:
+    metadata:
+      labels:
+        app: hello-dhl-from-cm
+    spec:
+      volumes:
+        - name: www
+          configMap:
+            name: hello-dhl-from-cm
+      containers:
+        - name: main
+          image: sikalabs/nginx-public
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: www
+              mountPath: /usr/share/nginx/html
+          resources:
+            requests:
+              cpu: 20m
+              memory: 40Mi
+            limits:
+              cpu: 50m
+              memory: 80Mi

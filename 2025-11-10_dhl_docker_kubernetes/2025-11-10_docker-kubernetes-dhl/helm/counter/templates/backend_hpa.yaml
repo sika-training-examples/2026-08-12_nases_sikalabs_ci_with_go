@@ -1,0 +1,23 @@
+{{ if .Values.backendReplicasMax }}
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{.Release.Name}}-backend
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{.Release.Name}}-backend
+  minReplicas: {{ .Values.backendReplicas }}
+  maxReplicas: {{ .Values.backendReplicasMax }}
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 0
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          averageUtilization: 90
+          type: Utilization
+{{ end }}

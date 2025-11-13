@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hello-dhl-openshift
+  annotations:
+    route.openshift.io/termination: edge
+    route.openshift.io/insecureEdgeTerminationPolicy: Redirect
+spec:
+  ingressClassName: openshift-default
+  rules:
+    - host: ondrejsika-hello-dhl-openshift.apps.training.germanywestcentral.aroapp.io
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: hello-dhl-openshift
+                port:
+                  number: 80

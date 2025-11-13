@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ondrejsika-counter-dev
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: ondrejsika-counter-dev
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  sources:
+    - repoURL: https://github.com/sika-training-examples/2025-11-12_dhl-counter-helm-example.git
+      path: .
+      helm:
+        valueFiles:
+          - $values/apps/lab0/counter_dev/common.values.yaml
+          - $values/apps/lab0/counter_dev/dev.values.yaml
+    - repoURL: https://github.com/sika-training-examples/2025-11-12_dhl-argocd-apps-example.git
+      ref: values

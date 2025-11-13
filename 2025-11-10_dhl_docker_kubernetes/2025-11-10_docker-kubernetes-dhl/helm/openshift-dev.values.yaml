@@ -1,0 +1,5 @@
+host: ondrejsika-counter-dev.apps.training.germanywestcentral.aroapp.io
+environment: dev
+backendVersion: v2
+backendReplicas: 2
+frontendReplicas: 2

@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{.Release.Name}}-redis
+spec:
+  serviceName: {{.Release.Name}}-redis
+  volumeClaimTemplates:
+    - metadata:
+        name: redis
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
+  selector:
+    matchLabels:
+      app: {{.Release.Name}}-redis
+  template:
+    metadata:
+      labels:
+        app: {{.Release.Name}}-redis
+    spec:
+      volumes:
+        - name: redis
+          persistentVolumeClaim:
+            claimName: redis
+      initContainers:
+        - name: slow-start
+          image: busybox
+          command: 
+            - sleep
+            - '{{.Values.redisInitSleep}}'
+      containers:
+        - name: main
+          image: redis:8
+          ports:
+            - containerPort: 6379
+          volumeMounts:
+            - name: redis
+              mountPath: /data
+          resources:
+            requests:
+              cpu: 50m
+              memory: 20Mi
+            limits:
+              cpu: 100m
+              memory: 40Mi

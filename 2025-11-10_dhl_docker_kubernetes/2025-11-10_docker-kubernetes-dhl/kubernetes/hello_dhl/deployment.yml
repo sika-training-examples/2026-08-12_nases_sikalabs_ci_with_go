@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-dhl
+spec:
+  revisionHistoryLimit: 0
+  replicas: 4
+  selector:
+    matchLabels:
+      app: hello-dhl
+  template:
+    metadata:
+      labels:
+        app: hello-dhl
+    spec:
+      containers:
+        - name: main
+          image: ghcr.io/ondrejsika/training-example
+          ports:
+            - containerPort: 80
+          env:  
+            - name: TEXT
+              value: "Ahoj DHL!"
+            - name: TEXT_SUFFIX
+              value: v2
+          resources:
+            requests:
+              cpu: 10m
+              memory: 10Mi
+            limits:
+              memory: 20Mi
+              cpu: 20m

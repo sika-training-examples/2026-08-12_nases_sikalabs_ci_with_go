@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{.Release.Name}}-frontend
+spec:
+  revisionHistoryLimit: 0
+  replicas: {{ .Values.frontendReplicas }}
+  selector:
+    matchLabels:
+      app: {{.Release.Name}}-frontend
+  template:
+    metadata:
+      labels:
+        app: {{.Release.Name}}-frontend
+    spec:
+      initContainers:
+        - name: wait-for-backend
+          image: ghcr.io/sikalabs/slu:v0.94.0
+          command: 
+            - /bin/sh
+            - -c
+            - slu wait-for http200 --url http://{{.Release.Name}}-backend
+      containers:
+        - name: main
+          image: ttl.sh/dhl/frontend
+          ports:
+            - containerPort: 8000
+          env:
+            - name: API_ORIGIN
+              value: http://{{.Release.Name}}-backend
+            - name: FAIL_ON_ERROR
+              value: "1"
+          envFrom:
+            - configMapRef:
+                name: {{.Release.Name}}-frontend
+          startupProbe:
+            httpGet:
+              path: /api/livez
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 1
+            failureThreshold: 30
+          livenessProbe:
+            httpGet:
+              path: /api/livez
+              port: 3000
+            failureThreshold: 2
+          resources:
+            requests:
+              cpu: 20m
+              memory: 20Mi
+            limits:
+              cpu: 40m
+              memory: 40Mi

@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hello-dhl-with-keda
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - hello-dhl-with-keda.lab0.sikademo.com
+      secretName: hello-dhl-with-keda-tls
+  rules:
+    - host: hello-dhl-with-keda.lab0.sikademo.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: hello-dhl-with-keda
+                port:
+                  number: 80

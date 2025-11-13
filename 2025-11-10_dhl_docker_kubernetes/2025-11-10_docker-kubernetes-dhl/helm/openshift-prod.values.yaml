@@ -1,0 +1,6 @@
+host: ondrejsika-counter-prod.apps.training.germanywestcentral.aroapp.io
+environment: prod
+backendReplicas: 4
+backendReplicasMax: 16
+frontendReplicas: 4
+frontendReplicasMax: 16

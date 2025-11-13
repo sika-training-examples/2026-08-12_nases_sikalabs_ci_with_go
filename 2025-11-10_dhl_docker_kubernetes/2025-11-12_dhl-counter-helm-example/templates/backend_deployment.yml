@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{.Release.Name}}-backend
+spec:
+  revisionHistoryLimit: 0
+  replicas: {{ .Values.backendReplicas }}
+  selector:
+    matchLabels:
+      app: {{.Release.Name}}-backend
+  template:
+    metadata:
+      labels:
+        app: {{.Release.Name}}-backend
+    spec:
+      initContainers:
+        - name: wait-for-redis
+          image: ghcr.io/sikalabs/slu:v0.94.0
+          command: 
+            - /bin/sh
+            - -c
+            - slu wait-for tcp --address {{.Release.Name}}-redis:6379
+      containers:
+        - name: main
+          image: ttl.sh/dhl/backend
+          ports:
+            - containerPort: 8000
+          env:
+            - name: REDIS
+              value: {{.Release.Name}}-redis
+            - name: EXTRA_TEXT
+              value: "DHL {{.Values.backendVersion}} ({{ required ".Values.environment is required" .Values.environment}})"
+            - name: SLOW_START
+              value: '{{ .Values.backendSlowStart }}'
+          startupProbe:
+            httpGet:
+              path: /readyz
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 1
+            failureThreshold: 30
+          livenessProbe:
+            httpGet:
+              path: /livez
+              port: 8000
+            failureThreshold: 2
+          resources:
+            requests:
+              cpu: 50m
+              memory: 20Mi
+            limits:
+              cpu: 100m
+              memory: 40Mi

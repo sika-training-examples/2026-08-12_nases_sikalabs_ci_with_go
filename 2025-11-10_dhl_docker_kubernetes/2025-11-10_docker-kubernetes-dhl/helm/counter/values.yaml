@@ -1,0 +1,16 @@
+# Required
+host:
+environment:
+
+# Optional
+backendVersion: v0
+backendSlowStart: 0
+backendReplicas: 2
+backendReplicasMax: null
+
+redisInitSleep: 0
+frontendReplicas: 2
+frontendReplicasMax: null
+
+ingressClassName: nginx
+ingressTlsDisable: false

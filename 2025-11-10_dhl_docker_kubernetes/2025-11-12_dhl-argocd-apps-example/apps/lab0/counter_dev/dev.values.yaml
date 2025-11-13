@@ -1,0 +1,5 @@
+host: ondrejsika-counter-dev.lab0.sikademo.com
+environment: lab
+backendVersion: v3
+backendReplicas: 2
+frontendReplicas: 2

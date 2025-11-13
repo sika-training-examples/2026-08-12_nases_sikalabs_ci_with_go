@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hello-dhl-from-cm
+data:
+  hello.html: |
+    <body style="background-color: #FFCC00">
+      <h1 style="color: #D40511">Hello DHL from ConfigMap</h1>
+    </body>

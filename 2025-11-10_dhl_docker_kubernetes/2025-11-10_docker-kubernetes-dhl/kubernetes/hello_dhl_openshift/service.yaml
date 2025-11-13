@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-dhl-openshift
+spec:
+  selector:
+    app: hello-dhl-openshift
+  ports:
+    - port: 80
+      targetPort: 8000

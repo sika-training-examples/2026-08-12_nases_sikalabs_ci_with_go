@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ondrejsika-counter-prod
+  namespace: openshift-gitops
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: ondrejsika-counter-prod
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://github.com/sika-training-examples/2025-11-10_docker-kubernetes-dhl.git
+    path: ./helm/counter
+    helm:
+      valueFiles:
+        - ../openshift-common.values.yaml
+        - ../openshift-prod.values.yaml

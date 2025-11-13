@@ -1,0 +1,16 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: hello-dhl-with-keda
+spec:
+  scaleTargetRef:
+    name: hello-dhl-with-keda
+  minReplicaCount: 1
+  cooldownPeriod: 1
+  triggers:
+    - type: cron
+      metadata:
+        timezone: Europe/Prague
+        start: 57 * * * *
+        end: 59 * * * *
+        desiredReplicas: "10"

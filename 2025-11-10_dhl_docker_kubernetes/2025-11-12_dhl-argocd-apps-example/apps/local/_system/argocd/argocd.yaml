@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: system
+  destination:
+    namespace: argocd
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+  sources:
+    - repoURL: https://argoproj.github.io/argo-helm
+      chart: argo-cd
+      targetRevision: 8.5.10
+      helm:
+        valueFiles:
+          - $values/apps/local/_system/argocd/argocd.values.yaml
+    - repoURL: https://github.com/sika-training-examples/2025-11-12_dhl-argocd-apps-example.git
+      ref: values
+    - repoURL: https://github.com/sika-training-examples/2025-11-12_dhl-argocd-apps-example.git
+      path: ./apps/local/_system/argocd/manifests

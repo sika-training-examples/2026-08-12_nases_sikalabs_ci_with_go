@@ -1,0 +1,5 @@
+apiVersion: v2
+name: dhl-counter
+description: An Example App for DHL Kubernetes Training
+type: application
+version: 0.0.0

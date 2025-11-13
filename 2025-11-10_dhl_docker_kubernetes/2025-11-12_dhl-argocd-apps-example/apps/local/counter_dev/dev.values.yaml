@@ -1,0 +1,5 @@
+host: ondrejsika-counter-dev.127-0-0-1.uk
+environment: lab
+backendVersion: v3
+backendReplicas: 2
+frontendReplicas: 2
