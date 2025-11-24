@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: backend-migrations
+spec:
+  template:
+    spec:
+      initContainers:
+        - name: wait-for-redis
+          image: ghcr.io/sikalabs/slu:v0.95.1
+          command:
+            - "/bin/sh"
+            - "-c"
+            - "slu wait-for tcp -a redis:6379"
+      containers:
+        - name: migrations
+          image: redis
+          command: ["/bin/sh", "-c"]
+          args: ["sleep 10 && redis-cli -h redis incrby counter 10000"]
+      restartPolicy: Never
