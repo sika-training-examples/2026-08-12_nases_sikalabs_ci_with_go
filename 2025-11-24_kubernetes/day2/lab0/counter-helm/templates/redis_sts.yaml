@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{.Release.Name}}-redis
+spec:
+  serviceName: {{.Release.Name}}-redis
+  volumeClaimTemplates:
+    - metadata:
+        name: redis
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
+  selector:
+    matchLabels:
+      app: {{.Release.Name}}-redis
+  template:
+    metadata:
+      labels:
+        app: {{.Release.Name}}-redis
+    spec:
+      volumes:
+        - name: redis
+          persistentVolumeClaim:
+            claimName: redis
+      initContainers:
+        - name: setup-fs
+          image: debian:12-slim
+          command:
+            - /bin/sh
+            - -c
+            - chown -R 999:999 /data
+          volumeMounts:
+            - name: redis
+              mountPath: /data
+      containers:
+        - name: main
+          image: docker.io/library/redis:8
+          ports:
+            - containerPort: 6379
+          resources:
+            requests:
+              memory: 50Mi
+              cpu: 50m
+            limits:
+              memory: 100Mi
+              cpu: 100m
+          volumeMounts:
+            - name: redis
+              mountPath: /data

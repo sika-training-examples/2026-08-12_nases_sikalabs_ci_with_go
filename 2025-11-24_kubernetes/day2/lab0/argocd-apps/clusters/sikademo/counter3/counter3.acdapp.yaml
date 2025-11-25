@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: counter3
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: counter3
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  sources:
+    - repoURL: https://github.com/sika-training-examples/2025-11-24_counter_helm_example.git
+      path: .
+      helm:
+        valueFiles:
+          - $values/clusters/sikademo/counter3/counter3.values.yaml
+
+    - repoURL: https://github.com/sika-training-examples/2025-11-24_argocd_apps_example.git
+      ref: values

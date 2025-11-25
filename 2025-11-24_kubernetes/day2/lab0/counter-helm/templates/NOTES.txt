@@ -1,0 +1,5 @@
+See:
+  - https://{{.Values.frontendGoHost}}
+{{- if .Values.frontendJSHost}}
+  - https://{{ .Values.frontendJSHost}}
+{{ end }}

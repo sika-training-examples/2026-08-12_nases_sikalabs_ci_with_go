@@ -1,0 +1,15 @@
+# Required
+
+frontendGoHost:
+
+# Optional
+
+frontendJSHost:
+frontendGoReplicas: 2
+
+frontendJSReplicas: 2
+
+backendReplicas: 2
+
+FONT_COLOR: black
+BACKGROUND_COLOR: white

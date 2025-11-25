@@ -1,0 +1,13 @@
+apiVersion: v1
+entries:
+  counter:
+  - apiVersion: v2
+    created: "2025-11-25T13:51:35.837598773Z"
+    description: Example for Kubernetes Training
+    digest: 241f4799461ecf005c8023590425aa0f9b5f22bf73e629784591ea4f8d000981
+    name: counter
+    type: application
+    urls:
+    - counter-2025.11.25.tgz
+    version: 2025.11.25
+generated: "2025-11-25T13:51:35.836530761Z"

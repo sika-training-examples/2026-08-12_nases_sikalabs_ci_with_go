@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-go
+spec:
+  revisionHistoryLimit: 0
+  replicas: 4
+  selector:
+    matchLabels:
+      app: frontend-go
+  template:
+    metadata:
+      labels:
+        app: frontend-go
+    spec:
+      initContainers:
+        - name: wait-for-backend
+          image: ghcr.io/sikalabs/slu:v0.95.1
+          command:
+            - /bin/sh
+            - -c
+            - slu wait-for http200 --url http://backend
+      containers:
+        - name: main
+          image: ghcr.io/ondrejsika/counter-frontend-go
+          ports:
+            - containerPort: 3000
+          env:
+            - name: FAIL_ON_ERROR
+              value: '1'
+          envFrom:
+            - configMapRef:
+                name: frontend
+          startupProbe:
+            httpGet:
+              path: /api/livez
+              port: 3000
+          livenessProbe:
+            httpGet:
+              path: /api/livez
+              port: 3000
+          resources:
+            requests:
+              cpu: 20m
+              memory: 20Mi
+            limits:
+              cpu: 40m
+              memory: 40Mi

@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{.Release.Name}}-frontend-go
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - {{ .Values.frontendGoHost }}
+      secretName: {{ .Values.frontendGoHost }}-tls
+  rules:
+    - host: {{ required ".Values.frontendGoHost is required" .Values.frontendGoHost }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{.Release.Name}}-frontend-go
+                port:
+                  number: 80

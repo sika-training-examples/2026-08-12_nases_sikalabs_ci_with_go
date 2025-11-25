@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{.Release.Name}}-frontend
+data:
+  API_ORIGIN: http://{{.Release.Name}}-backend
+  FONT_COLOR: {{ .Values.FONT_COLOR }}
+  BACKGROUND_COLOR: {{ .Values.BACKGROUND_COLOR }}
