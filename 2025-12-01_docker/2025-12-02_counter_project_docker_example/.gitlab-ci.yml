@@ -1,0 +1,69 @@
+image: ghcr.io/sikalabs/ci
+
+variables:
+  IMAGE_BACKEND: $CI_REGISTRY_IMAGE/backend:$CI_COMMIT_REF_SLUG
+  IMAGE_FRONTEND: $CI_REGISTRY_IMAGE/frontend:$CI_COMMIT_REF_SLUG
+  IMAGE_CADDY: $CI_REGISTRY_IMAGE/caddy:$CI_COMMIT_REF_SLUG
+  IMAGE_TESTS: $CI_REGISTRY_IMAGE/tests:$CI_COMMIT_REF_SLUG
+
+stages:
+  - build
+  - test
+  - deploy
+
+before_script:
+  - echo $CI_REGISTRY_PASSWORD | docker login $CI_REGISTRY -u $CI_REGISTRY_USER --password-stdin
+
+build:
+  stage: build
+  variables:
+    COMPOSE_FILE: "compose.yml:compose.caddy.yml:compose.tests.yml"
+  script:
+    - docker compose build
+    - docker compose push
+
+tests:
+  stage: test
+  variables:
+    COMPOSE_FILE: "compose.yml:compose.tests.yml"
+    COMPOSE_PROJECT_NAME: "test_$CI_JOB_ID"
+  script:
+    - docker compose pull
+    - make run-tests
+  after_script:
+    - make down-with-volumes
+
+.deploy-template:
+  stage: deploy
+  variables:
+    DOCKER_HOST: ssh://root@docker.sikademo.com
+  script:
+    - mkdir -p ~/.ssh
+    - echo "$SSH_PRIVATE_KEY" | base64 --decode > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - ssh-keyscan docker.sikademo.com >> ~/.ssh/known_hosts
+    - make use-traefik
+    - docker compose pull
+    - make up
+
+deploy:
+  extends: .deploy-template
+  only:
+    - master
+  variables:
+    HOST: counter.docker.sikademo.com
+  environment:
+    name: production
+    url: https://$HOST
+
+deploy-feature:
+  extends: .deploy-template
+  except:
+    - master
+  variables:
+    HOST: counter-$CI_COMMIT_REF_SLUG.docker.sikademo.com
+    COMPOSE_PROJECT_NAME: "counter_$CI_COMMIT_REF_SLUG"
+    TRAEFIK_NAME: "counter-$CI_COMMIT_REF_SLUG"
+  environment:
+    name: feature/$CI_COMMIT_REF_SLUG
+    url: https://$HOST
