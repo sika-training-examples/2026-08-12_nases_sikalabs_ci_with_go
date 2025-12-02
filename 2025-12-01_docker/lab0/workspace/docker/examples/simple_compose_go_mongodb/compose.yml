@@ -1,0 +1,12 @@
+services:
+  counter:
+    build: .
+    ports:
+      - ${PORT:-80}:8000
+    depends_on:
+      - mongodb
+    environment:
+      BACKEND: mongodb
+      MONGODB_URI: mongodb://mongodb:27017
+  mongodb:
+    image: mongo

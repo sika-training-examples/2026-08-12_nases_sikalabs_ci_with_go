@@ -1,0 +1,29 @@
+services:
+  redis:
+    image: redis:8
+    volumes:
+      - redis-data:/data
+      
+  counter: 
+    build: .
+    deploy:
+      replicas: 4
+    environment:
+      REDIS: redis
+    depends_on:
+      - redis
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.counter.rule: Host(`counter.lab0.sikademo.com`)
+      traefik.http.services.counter.loadbalancer.server.port: 80
+    networks:
+      - default
+      - traefik
+
+volumes:
+  redis-data:
+
+networks:
+  traefik:
+    name: traefik
+    external: true
