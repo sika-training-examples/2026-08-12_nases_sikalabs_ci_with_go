@@ -1,0 +1,24 @@
+services:
+  counter:
+    build: .
+    image: ${IMAGE:-ttl.sh/ondrejsika/simple-compose/counter}
+    environment:
+      - REDIS=redis
+    depends_on:
+      - redis
+    deploy:
+      replicas: 4
+    
+  redis:
+    image: redis:8
+    volumes:
+      - redis-data:/data
+
+  caddy:
+    build: ./caddy
+    ports:
+      - 80:80
+      - 443:443
+
+volumes:
+  redis-data:

@@ -1,0 +1,6 @@
+counter.lab0.sikademo.com {
+  reverse_proxy {
+    dynamic a counter 80
+    lb_policy round_robin
+  }
+}

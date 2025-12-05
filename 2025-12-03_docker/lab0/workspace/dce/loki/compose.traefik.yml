@@ -1,0 +1,12 @@
+services:
+  loki:
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.loki.loadbalancer.server.port=3100
+      - traefik.http.routers.loki.rule=Host(`${HOST:-loki-127-0-0-1.nip.io}`)
+    networks:
+      - traefik
+
+networks:
+  traefik:
+    name: traefik

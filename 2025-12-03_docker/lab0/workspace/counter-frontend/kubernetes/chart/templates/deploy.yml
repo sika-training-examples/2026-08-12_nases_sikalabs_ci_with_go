@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  {{ .Release.Name }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  replicas: {{ .Values.replicas }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: main
+          image: {{ .Values.image }}
+          resources:
+            requests:
+              cpu: 60m
+              memory: 100Mi
+            limits:
+              cpu: 120m
+              memory: 200Mi
+          startupProbe:
+            httpGet:
+              path: /api/livez
+              port: 3000
+          env:
+            - name: API_ORIGIN
+              value: {{ required ".Values.API_ORIGIN is required" .Values.API_ORIGIN }}
+            {{ if .Values.FONT_COLOR }}
+            - name: FONT_COLOR
+              value: {{ .Values.FONT_COLOR | quote }}
+            {{ end }}
+            {{ if .Values.BACKGROUND_COLOR }}
+            - name: BACKGROUND_COLOR
+              value: {{ .Values.BACKGROUND_COLOR | quote }}
+            {{ end }}
+          ports:
+            - containerPort: 3000
+

@@ -1,0 +1,42 @@
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether ae:a5:3a:3f:39:ee brd ff:ff:ff:ff:ff:ff
+    altname enp0s3
+    altname ens3
+    inet 206.81.17.80/20 brd 206.81.31.255 scope global eth0
+       valid_lft forever preferred_lft forever
+    inet 10.19.0.16/16 brd 10.19.255.255 scope global eth0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::aca5:3aff:fe3f:39ee/64 scope link 
+       valid_lft forever preferred_lft forever
+3: eth1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 92:a7:a4:60:da:92 brd ff:ff:ff:ff:ff:ff
+    altname enp0s4
+    altname ens4
+    inet 10.114.0.85/20 brd 10.114.15.255 scope global eth1
+       valid_lft forever preferred_lft forever
+    inet6 fe80::90a7:a4ff:fe60:da92/64 scope link 
+       valid_lft forever preferred_lft forever
+4: docker0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default 
+    link/ether 7a:ee:de:d4:85:ea brd ff:ff:ff:ff:ff:ff
+    inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::78ee:deff:fed4:85ea/64 scope link 
+       valid_lft forever preferred_lft forever
+109: br-ad1e51df311a: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default 
+    link/ether 36:89:25:6a:4d:4d brd ff:ff:ff:ff:ff:ff
+    inet 172.18.0.1/16 brd 172.18.255.255 scope global br-ad1e51df311a
+       valid_lft forever preferred_lft forever
+    inet6 fe80::3489:25ff:fe6a:4d4d/64 scope link 
+       valid_lft forever preferred_lft forever
+200: cni-podman0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default qlen 1000
+    link/ether 76:b2:79:5f:9b:51 brd ff:ff:ff:ff:ff:ff
+    inet 10.88.0.1/16 brd 10.88.255.255 scope global cni-podman0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::74b2:79ff:fe5f:9b51/64 scope link 
+       valid_lft forever preferred_lft forever

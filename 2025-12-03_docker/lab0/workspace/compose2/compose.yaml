@@ -1,0 +1,8 @@
+name: aaa
+services:
+  test:
+    image: ghcr.io/sikalabs/hello-world-server
+    ports:
+      - $PORT:8000
+    env_file:
+      - env/$COMPOSE_PROJECT_NAME.env

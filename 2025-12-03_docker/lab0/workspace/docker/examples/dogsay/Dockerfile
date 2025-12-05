@@ -1,0 +1,2 @@
+FROM ghcr.io/sikalabs/slu:v0.95.2
+ENTRYPOINT [ "slu", "os", "dogsay"]

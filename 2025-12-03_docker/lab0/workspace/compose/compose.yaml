@@ -1,0 +1,4 @@
+name: root
+services:
+  test:
+    image: hello-world

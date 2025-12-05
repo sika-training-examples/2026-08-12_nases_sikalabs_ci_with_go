@@ -1,0 +1,9 @@
+FROM golang:1.25 AS build
+WORKDIR /build
+COPY . .
+RUN CGO_ENABLED=0 go build app.go
+
+FROM scratch
+COPY --from=build /build/app /usr/local/bin/app
+CMD ["/usr/local/bin/app"]
+EXPOSE 80
