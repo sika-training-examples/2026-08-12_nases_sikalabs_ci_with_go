@@ -1,0 +1,22 @@
+apiVersion: v1
+entries:
+  counter:
+  - apiVersion: v2
+    created: "2025-12-09T14:21:33.604975433Z"
+    description: Example for Kubernetes Training
+    digest: 132ae233cb4c6c700895241c3b356368a0306d441072e66bf804a300d885c5fd
+    name: counter
+    type: application
+    urls:
+    - counter-2025.12.9.tgz
+    version: 2025.12.9
+  simple-hello-world:
+  - apiVersion: v2
+    created: "2025-12-09T14:21:33.605448568Z"
+    digest: 01c8b08569bf02ae3551ddd9890a88b3c93d7c13c65c2123badacb475c9ed031
+    name: simple-hello-world
+    type: application
+    urls:
+    - simple-hello-world-2025.12.9.tgz
+    version: 2025.12.9
+generated: "2025-12-09T14:21:33.603063285Z"

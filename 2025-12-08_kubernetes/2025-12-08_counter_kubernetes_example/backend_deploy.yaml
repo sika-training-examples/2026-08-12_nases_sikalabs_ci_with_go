@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+spec:
+  revisionHistoryLimit: 0
+  replicas: 4
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      serviceAccountName: migrations-job-read
+      initContainers:
+        - name: wait-for-redis
+          image: ghcr.io/sikalabs/slu:v0.95.2
+          command:
+            - slu
+            - wait-for
+            - tcp
+            - --address
+            - redis:6379
+        - name: wait-for-migrations
+          image: sikalabs/kubectl
+          command:
+            - /bin/sh
+            - -c
+            - sleep 2 && kubectl wait --for=condition=complete --timeout=600s job/migrations
+      containers:
+        - name: main
+          image: ghcr.io/ondrejsika/counter
+          env:
+            - name: REDIS
+              value: redis
+            - name: SLOW_START
+              value: '10'
+            - name: API_ONLY
+              value: '1'
+          ports:
+            - containerPort: 8000
+          startupProbe:
+            httpGet:
+              path: /readyz
+              port: 8000
+            periodSeconds: 2
+            failureThreshold: 20
+          livenessProbe:
+            httpGet:
+              path: /livez
+              port: 8000
+            periodSeconds: 1
+          resources:
+            requests:
+              cpu: 40m
+              memory: 20Mi
+            limits:
+              cpu: 80m
+              memory: 40Mi

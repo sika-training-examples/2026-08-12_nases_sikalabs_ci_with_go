@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backup-server
+spec:
+  revisionHistoryLimit: 0
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backup-server
+  template:
+    metadata:
+      labels:
+        app: backup-server
+    spec:
+      volumes:
+        - name: backups
+          persistentVolumeClaim:
+            claimName: redis-backup
+      containers:
+        - name: main
+          image: sikalabs/nginx-public
+          volumeMounts:
+            - name: backups
+              mountPath: /usr/share/nginx/html
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: 40m
+              memory: 20Mi
+            limits:
+              cpu: 80m
+              memory: 40Mi

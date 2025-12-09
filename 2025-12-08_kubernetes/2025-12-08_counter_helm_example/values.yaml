@@ -1,0 +1,19 @@
+# Required
+host:
+
+# Optional
+backend:
+  # SLOW_START is a number of seconds which app waits before startup
+  # to simulete slow stat
+  SLOW_START: 0
+  # API_ONLY acccep only value `1` to disable UI on backend service
+  API_ONLY: 1
+
+frontend:
+  FONT_COLOR: black
+  BACKGROUND_COLOR: white
+
+# adminServiceAccounts:
+#   - franta
+#   - pepa
+adminServiceAccounts: []

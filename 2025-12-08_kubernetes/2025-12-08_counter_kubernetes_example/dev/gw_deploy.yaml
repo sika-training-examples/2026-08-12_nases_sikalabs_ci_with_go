@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gw
+spec:
+  revisionHistoryLimit: 0
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gw
+  template:
+    metadata:
+      labels:
+        app: gw
+    spec:
+      containers:
+        - name: main
+          image: ghcr.io/sikalabs/slu:v0.95.2
+          command:
+            - slu
+            - proxy
+            - tcp
+            - --local
+            - :8000
+            - --remote
+            - frontend:80
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              cpu: 40m
+              memory: 20Mi
+            limits:
+              cpu: 80m
+              memory: 40Mi

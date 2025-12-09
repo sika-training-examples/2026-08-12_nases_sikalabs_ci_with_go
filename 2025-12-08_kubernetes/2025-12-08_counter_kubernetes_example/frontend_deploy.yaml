@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  revisionHistoryLimit: 0
+  replicas: 4
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      initContainers:
+        - name: wait-for-backend
+          image: ghcr.io/sikalabs/slu:v0.95.2
+          command:
+            - slu
+            - wait-for
+            - http200
+            - --url
+            - http://backend/readyz
+      containers:
+        - name: main
+          image: ghcr.io/ondrejsika/counter-frontend
+          env:
+            - name: API_ORIGIN
+              value: http://backend
+          ports:
+            - containerPort: 3000
+          startupProbe:
+            httpGet:
+              path: /api/livez
+              port: 3000
+            periodSeconds: 2
+            failureThreshold: 20
+          livenessProbe:
+            httpGet:
+              path: /api/livez
+              port: 3000
+            periodSeconds: 1
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: 200m
+              memory: 200Mi

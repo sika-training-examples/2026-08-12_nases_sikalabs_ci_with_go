@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gw
+spec:
+  selector:
+    app: gw
+  ports:
+    - port: 80
+      targetPort: 8000

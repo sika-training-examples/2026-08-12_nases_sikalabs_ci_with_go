@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: lb2
+spec:
+  type: LoadBalancer
+  selector:
+    app: example
+  ports:
+    - port: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lb3
+spec:
+  type: LoadBalancer
+  selector:
+    app: example
+  ports:
+    - port: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lb4
+spec:
+  type: LoadBalancer
+  selector:
+    app: example
+  ports:
+    - port: 80
