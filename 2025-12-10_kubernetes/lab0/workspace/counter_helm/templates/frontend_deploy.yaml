@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  revisionHistoryLimit: 0
+  replicas: {{ .Values.frontend.replicas }}
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: main
+          image: {{ .Values.frontend.image }}
+          env:
+            - name: API_ORIGIN
+              value: http://backend
+            - name: FONT_COLOR
+              value: {{ .Values.frontend.FONT_COLOR | quote}}
+            - name: BACKGROUND_COLOR
+              value: {{ .Values.frontend.BACKGROUND_COLOR | quote}}
+          ports:
+            - containerPort: 3000
+          livenessProbe:
+            httpGet:
+              path: /api/livez
+              port: 3000
+            periodSeconds: 10
+            failureThreshold: 2
+          startupProbe:
+            httpGet:
+              path: /api/livez
+              port: 3000
+            periodSeconds: 1
+            failureThreshold: 20
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: 200m
+              memory: 200Mi

@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: autoscaling-example
+spec:
+  selector:
+    matchLabels:
+      app: autoscaling-example
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: autoscaling-example
+    spec:
+      containers:
+        - name: app
+          image: ghcr.io/ondrejsika/training-example
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: 40m
+              memory: 30Mi
+            limits:
+              cpu: 80m
+              memory: 50Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: autoscaling-example
+spec:
+  ports:
+    - port: 80
+  selector:
+    app: autoscaling-example
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: autoscaling-example
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: autoscaling-example
+  minReplicas: 4
+  maxReplicas: 30
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 0
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          averageUtilization: 90
+          type: Utilization

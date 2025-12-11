@@ -1,0 +1,36 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: redis-backup
+spec:
+  # https://crontab.guru/
+  schedule: "*/5 * * * *"
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          volumes:
+            - name: config
+              configMap:
+                name: redis-backup
+            - name: backups
+              persistentVolumeClaim:
+                claimName: redis-backup
+          containers:
+            - name: main
+              image: ghcr.io/tergum-extra/redis-with-tergum:8-tergum-v0.42.0
+              args:
+                - tergum
+                - backup
+                - -c
+                - /tergum.yml
+              volumeMounts:
+                - name: config
+                  subPath: tergum.yml
+                  mountPath: /tergum.yml
+                - name: backups
+                  mountPath: /backups

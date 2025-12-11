@@ -1,0 +1,93 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pvc-mount-example
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: pvc-mount-example
+  template:
+    metadata:
+      labels:
+        app: pvc-mount-example
+    spec:
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: default-pvc
+      containers:
+        - name: nginx
+          image: sikalabs/nginx-public
+          resources:
+            requests:
+              cpu: 20m
+              memory: 30Mi
+            limits:
+              cpu: 50m
+              memory: 50Mi
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: data
+              mountPath: /usr/share/nginx/html
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pvc-mount-example
+spec:
+  type: ClusterIP
+  selector:
+    app: pvc-mount-example
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 80
+---
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: pvc-mount-example
+#   annotations:
+#     cert-manager.io/cluster-issuer: letsencrypt
+# spec:
+#   ingressClassName: nginx
+#   tls:
+#     - hosts:
+#         - pvc-mount-example.lab0.sikademo.com
+#       secretName: pvc-mount-example.lab0.sikademo.com-tls
+#   rules:
+#     - host: pvc-mount-example.lab0.sikademo.com
+#       http:
+#         paths:
+#           - path: /
+#             pathType: Prefix
+#             backend:
+#               service:
+#                 name: pvc-mount-example
+#                 port:
+#                   number: 80
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pvc-mount-example
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - ondrejsika-pvc-mount-example2.k8s.sikademo.com
+      secretName: ondrejsika-pvc-mount-example2.k8s.sikademo.com-tls
+  rules:
+    - host: ondrejsika-pvc-mount-example2.k8s.sikademo.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: pvc-mount-example
+                port:
+                  number: 80

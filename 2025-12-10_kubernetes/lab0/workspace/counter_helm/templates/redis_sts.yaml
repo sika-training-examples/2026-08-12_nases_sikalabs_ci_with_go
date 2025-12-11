@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: redis
+spec:
+  serviceName: redis
+  volumeClaimTemplates:
+    - metadata:
+        name: redis
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      volumes:
+        - name: redis
+          persistentVolumeClaim:
+            claimName: redis
+      containers:
+        - name: main
+          image: redis:8
+          ports:
+            - containerPort: 6379
+          volumeMounts:
+            - name: redis
+              mountPath: /data
+          startupProbe:
+            exec:
+              command:
+              - redis-cli
+              - ping
+            periodSeconds: 1
+            failureThreshold: 20
+          livenessProbe:
+            tcpSocket:
+              port: 6379
+            periodSeconds: 10
+            failureThreshold: 2
+          resources:
+            requests:
+              cpu: 20m
+              memory: 20Mi
+            limits:
+              cpu: 40m
+              memory: 40Mi

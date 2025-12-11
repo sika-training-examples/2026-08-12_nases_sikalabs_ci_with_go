@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sealed-secret-example
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - sealed-secret-example.lab0.sikademo.com
+      secretName: sealed-secret-example.lab0.sikademo.com-tls
+  rules:
+    - host: sealed-secret-example.lab0.sikademo.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: sealed-secret-example
+                port:
+                  number: 80

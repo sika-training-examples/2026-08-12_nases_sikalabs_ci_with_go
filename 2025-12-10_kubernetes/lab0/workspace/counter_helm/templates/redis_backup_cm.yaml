@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: redis-backup
+data:
+  tergum.yml: |
+    Meta:
+      SchemaVersion: 3
+    Telemetry:
+      CollectBackupLog: true
+    Backups:
+      - ID: redis
+        Source:
+          Redis:
+            Host: redis
+            Port: 6379
+        Targets:
+          - ID: filepath
+            FilePath:
+              Path: /backups/redis-latest.rdb
+          - ID: file
+            File:
+              Dir: /backups
+              Prefix: redis
+              Suffix: rdb

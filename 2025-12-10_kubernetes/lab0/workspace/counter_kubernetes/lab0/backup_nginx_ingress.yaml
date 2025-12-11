@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: backup-nginx
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - counter-backup.lab0.sikademo.com
+      secretName: counter-backup.lab0.sikademo.com-tls
+  rules:
+    - host: counter-backup.lab0.sikademo.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: backup-nginx
+                port:
+                  number: 80

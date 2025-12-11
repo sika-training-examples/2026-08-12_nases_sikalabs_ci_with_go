@@ -1,0 +1,25 @@
+{{ if .Values.backupNginxHost }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: backup-nginx
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - {{ .Values.backupNginxHost }}
+      secretName: {{ .Values.backupNginxHost }}-tls
+  rules:
+    - host: {{ .Values.backupNginxHost }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: backup-nginx
+                port:
+                  number: 80
+{{ end }}

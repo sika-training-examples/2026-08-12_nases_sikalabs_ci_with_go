@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: frontend2
+  annotations:
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - counter-extra.lab0.sikademo.com
+      secretName: tls
+  rules:
+    - host: counter-extra.lab0.sikademo.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend
+                port:
+                  number: 80

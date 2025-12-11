@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: iceland-1
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: counter-1
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://helm.sikalabs.io
+    chart: one-image
+    targetRevision: 1.20.0
+    helm:
+      valuesObject:
+        host: iceland-1.k8s.sikademo.com
+        image: ghcr.io/ondrejsika/iceland-1
+        replicas: 4

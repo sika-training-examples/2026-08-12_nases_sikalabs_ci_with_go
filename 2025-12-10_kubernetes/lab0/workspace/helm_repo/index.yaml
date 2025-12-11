@@ -1,0 +1,40 @@
+apiVersion: v1
+entries:
+  counter:
+  - apiVersion: v2
+    created: "2025-12-11T13:32:21.214571246Z"
+    description: A Helm chart for Kubernetes
+    digest: a8ed7ceed02cd6b2229b32e3475a4c1821aaa3ee9b6305ed27e33e4a59aeabad
+    name: counter
+    type: application
+    urls:
+    - counter-0.3.1.tgz
+    version: 0.3.1
+  - apiVersion: v2
+    created: "2025-12-11T13:32:21.213640585Z"
+    description: A Helm chart for Kubernetes
+    digest: 6e3900bcd324b7ddcef4848837a6a698d56066f7c95b603836f02ff2215e6e96
+    name: counter
+    type: application
+    urls:
+    - counter-0.3.0.tgz
+    version: 0.3.0
+  - apiVersion: v2
+    created: "2025-12-11T13:32:21.21271347Z"
+    description: A Helm chart for Kubernetes
+    digest: 3d36877a6c5562a4831fa468c932477769b2a485834078f0cb71c85f7fb3b6e6
+    name: counter
+    type: application
+    urls:
+    - counter-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
+    created: "2025-12-11T13:32:21.211580398Z"
+    description: A Helm chart for Kubernetes
+    digest: ef68f7c4f21b6603e6df4d0cb56586fc8785359cb84a7865f688d2d7e3463b1d
+    name: counter
+    type: application
+    urls:
+    - counter-0.1.0.tgz
+    version: 0.1.0
+generated: "2025-12-11T13:32:21.210706179Z"
