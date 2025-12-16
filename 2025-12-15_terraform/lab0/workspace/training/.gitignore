@@ -1,0 +1,22 @@
+.vscode
+.env
+.DS_Store
+
+*.local.txt
+
+# Terraform
+.terraform
+*.tfstate*
+*.tfvars
+*.tfplan
+!*-example.tfvars
+!*.EXAMPLE.tfvars
+.infracost
+*.tgz
+.terragrunt-cache
+
+# Config
+config.env.sh
+
+# Ansible
+hosts
