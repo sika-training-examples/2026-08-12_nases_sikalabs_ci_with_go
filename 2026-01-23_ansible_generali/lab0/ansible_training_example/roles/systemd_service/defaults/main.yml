@@ -1,0 +1,12 @@
+# systemd service name
+systemd_service_name:
+
+# systemd service description
+systemd_service_description:
+
+# Command to start
+systemd_service_exec_start:
+
+# Environment varibales for the service
+systemd_service_env: {}
+

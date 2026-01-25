@@ -1,0 +1,23 @@
+---
+- name: Tags Example
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - debug:
+        msg: "Check something"
+      tags:
+        - check
+    - debug:
+        msg: "Install something"
+      tags:
+        - install
+    - debug:
+        msg: "Test something"
+      tags:
+        - test
+    - debug:
+        msg: "Cleanup / Uninstall something"
+      tags:
+        - never # special tag
+        - cleanup

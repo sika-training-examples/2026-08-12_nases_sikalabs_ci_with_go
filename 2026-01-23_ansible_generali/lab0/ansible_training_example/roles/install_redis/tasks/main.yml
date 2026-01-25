@@ -1,0 +1,15 @@
+- name: Install Redis
+  apt:
+    name: redis
+    update_cache: yes
+    state: present
+
+- name: Set Redis password in redis.conf
+  ansible.builtin.lineinfile:
+    path: /etc/redis/redis.conf
+    regexp: '^#?\s*requirepass\s+'
+    line: 'requirepass {{ redis_password}}'
+    backup: yes
+  when: redis_password is defined and redis_password | length > 0
+  notify:
+    - Restart Redis

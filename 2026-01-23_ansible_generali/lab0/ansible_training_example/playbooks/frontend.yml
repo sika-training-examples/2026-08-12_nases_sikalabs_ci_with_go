@@ -1,0 +1,33 @@
+---
+- name: Install Counter frontend
+  hosts: frontend
+  gather_facts: false
+
+  tasks:
+    - name: Install counter frontend using slu
+      command:
+        cmd: slu install-bin counter-frontend-go
+        creates: /usr/local/bin/counter-frontend-go
+
+- name: Create and start counter frontend service
+  hosts: frontend
+  gather_facts: false
+
+  vars:
+    systemd_service_name: counter-frontend
+    systemd_service_description: counter frontend
+    systemd_service_exec_start: /usr/local/bin/counter-frontend-go
+    systemd_service_env:
+      API_ORIGIN: http://ansible-counter-backend.sikademo.com:8000
+      BACKGROUND_COLOR: lightblue
+
+    install_caddy_domain: "{{ ansible_host }}"
+
+  roles:
+    - systemd_service
+    - install_caddy
+
+  tasks:
+    - name: See
+      debug:
+        msg: "See: https://{{ ansible_host }}"

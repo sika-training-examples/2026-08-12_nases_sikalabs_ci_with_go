@@ -1,0 +1,8 @@
+all:
+  hosts:
+    vm0a.sikademo.com:
+      your_name: Dela
+      server_name: aaa
+    vm0b.sikademo.com:
+      your_name: Nela
+      server_name: bbb

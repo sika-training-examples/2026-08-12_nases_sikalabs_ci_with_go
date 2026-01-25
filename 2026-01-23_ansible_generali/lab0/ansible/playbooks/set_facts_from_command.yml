@@ -1,0 +1,28 @@
+---
+- name: Set Facts Example
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - command: slu ipl --json
+      register: ipl_raw
+
+    - set_fact:
+        ipl: "{{ ipl_raw.stdout | from_json }}"
+
+    - debug:
+        var: ipl
+
+- name: Get slu version
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - command: slu version --json
+      register: slu_version_raw
+
+    - set_fact:
+        slu_version: "{{ slu_version_raw.stdout | from_json }}"
+
+    - debug:
+        var: slu_version

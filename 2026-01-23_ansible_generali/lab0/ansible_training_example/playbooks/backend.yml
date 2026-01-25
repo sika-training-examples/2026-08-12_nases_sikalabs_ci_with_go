@@ -1,0 +1,32 @@
+---
+- name: Install Counter backend and Redis
+  hosts: backend
+  gather_facts: false
+
+  roles:
+    - install_redis
+
+  tasks:
+    - name: Install counter backend using slu
+      command:
+        cmd: slu install-bin counter
+        creates: /usr/local/bin/counter
+
+- name: Create and start counter backend service
+  hosts: backend
+  gather_facts: false
+
+  vars:
+    systemd_service_name: counter-backend
+    systemd_service_description: counter backend
+    systemd_service_exec_start: /usr/local/bin/counter
+    systemd_service_env:
+      REDIS_PASSWORD: "{{ redis_password }}"
+
+  roles:
+    - systemd_service
+
+  tasks:
+    - name: See
+      debug:
+        msg: "See: http://{{ ansible_host }}:8000"
