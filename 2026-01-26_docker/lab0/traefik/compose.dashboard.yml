@@ -1,0 +1,7 @@
+name: traefik
+services:
+  traefik:
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.traefik.loadbalancer.server.port=8080
+      - traefik.http.routers.traefik.rule=Host(`${HOST?Traefik dashboard host}`)

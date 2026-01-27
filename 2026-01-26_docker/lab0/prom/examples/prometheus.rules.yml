@@ -1,0 +1,11 @@
+groups:
+  - name: probe_success
+    rules:
+      - alert: ProbeSuccess
+        expr: probe_success{instance="demo",job="demo"} == 0
+        for: 20s
+        labels:
+          severity: critical
+        annotations:
+          summary: "{{ $labels.app }} is down"
+          description: "{{ $labels.app }} has been down for more than 20 seconds."

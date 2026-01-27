@@ -1,0 +1,4 @@
+services:
+  counter:
+    deploy:
+      replicas: 4

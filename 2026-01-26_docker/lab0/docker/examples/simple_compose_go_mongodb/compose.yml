@@ -1,0 +1,18 @@
+services:
+  counter:
+    build: .
+    ports:
+      - ${PORT:-80}:8000
+    depends_on:
+      - mongodb
+    environment:
+      BACKEND: mongodb
+      MONGODB_URI: mongodb://mongodb:27017
+      EXTRA_TEXT: mongo
+  mongodb:
+    image: mongo
+    volumes:
+      - mongo_db_data:/data/db
+
+volumes:
+  mongo_db_data:

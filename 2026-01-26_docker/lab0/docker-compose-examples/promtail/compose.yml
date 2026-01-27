@@ -1,0 +1,9 @@
+services:
+  promtail:
+    build: .
+    volumes:
+      - promtail_data:/promtail_data
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/lib/docker:/var/lib/docker
+volumes:
+  promtail_data:

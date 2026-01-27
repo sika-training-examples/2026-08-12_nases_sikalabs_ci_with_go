@@ -1,0 +1,6 @@
+services:
+  redmine:
+    image: redmine
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.redmine.rule: Host(`redmine.lab0.sikademo.com`)

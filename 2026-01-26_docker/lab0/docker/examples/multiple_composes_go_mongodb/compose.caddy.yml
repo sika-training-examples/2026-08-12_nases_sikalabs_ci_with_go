@@ -1,0 +1,14 @@
+services:
+  caddy:
+    build: ./caddy
+    ports:
+      - ${PORT_BACKEND:-8000}:8000
+      - ${PORT_FRONTEND:-3000}:3000
+    depends_on:
+      backend:
+        condition: service_healthy
+      frontend:
+        condition: service_healthy
+    networks:
+      - frontend
+      - backend

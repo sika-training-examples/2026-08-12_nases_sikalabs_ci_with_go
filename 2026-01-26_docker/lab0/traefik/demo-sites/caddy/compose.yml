@@ -1,0 +1,13 @@
+services:
+  caddy:
+    image: caddy
+    networks:
+      - traefik
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.caddy.rule=Host(`${HOST:-caddy-127-0-0-1.nip.io}`)
+
+networks:
+  traefik:
+    name: traefik
+    external: true

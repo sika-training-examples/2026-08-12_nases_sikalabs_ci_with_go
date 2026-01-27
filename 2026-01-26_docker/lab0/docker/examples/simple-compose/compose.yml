@@ -1,0 +1,17 @@
+services:
+  redis:
+    image: redis:8
+    volumes:
+      - redis_data:/data
+  counter:
+    build: .
+    image: ttl.sh/ondrej/counter
+    ports:
+      - 8000:80
+    environment:
+      REDIS: redis
+    deploy:
+      replicas: 1
+
+volumes:
+  redis_data:

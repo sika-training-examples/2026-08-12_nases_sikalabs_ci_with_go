@@ -1,0 +1,14 @@
+services:
+  frontend:
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.${TRAEFIK_NAME:-counter}.loadbalancer.server.port=3000
+      - traefik.http.routers.${TRAEFIK_NAME:-counter}.rule=Host(`${HOST?Traefik host}`)
+    networks:
+      - traefik
+      - frontend
+
+networks:
+  traefik:
+    name: traefik
+    external: true

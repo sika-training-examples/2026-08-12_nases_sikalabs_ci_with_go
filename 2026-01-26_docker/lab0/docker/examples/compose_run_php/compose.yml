@@ -1,0 +1,7 @@
+services:
+  php:
+    image: php:8
+    working_dir: /workspace
+    command: bash
+    volumes:
+      - .:/workspace

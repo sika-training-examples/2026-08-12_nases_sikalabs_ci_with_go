@@ -1,0 +1,7 @@
+services:
+  loki:
+    build: .
+    volumes:
+      - loki-data:/loki
+volumes:
+  loki-data:

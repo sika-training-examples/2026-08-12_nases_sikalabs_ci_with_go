@@ -1,0 +1,30 @@
+services:
+  counter:
+    build: .
+    image: ttl.sh/dte/simple-compose/counter
+    depends_on:
+      - redis
+    environment:
+      REDIS: redis
+    deploy:
+      replicas: 4
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.counter.rule: Host(`counter.lab0.sikademo.com`)
+
+  redis:
+    image: redis
+    volumes:
+      - redis-data:/data
+
+  test-simple:
+    image: sikalabs/dev
+    command: curl -fsSL http://counter:8000
+
+  test-ab:
+    image: sikalabs/dev
+    command: ab -n 1000 http://counter:8000/
+
+volumes:
+  redis-data:
+  letsencrypt:

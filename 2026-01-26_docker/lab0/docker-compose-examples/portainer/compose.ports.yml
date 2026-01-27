@@ -1,0 +1,4 @@
+services:
+  portainer:
+    ports:
+      - ${PORT:-9000}:9000
