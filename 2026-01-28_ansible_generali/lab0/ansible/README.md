@@ -1,0 +1,1095 @@
+[Ondrej Sika (sika.io)](https://sika.io) | <ondrej@sika.io> | [go to course ->](#course) | [**Skoleni Ansible**](https://ondrej-sika.cz/skoleni/ansible/) 🚀💻
+
+# Ansible Training
+
+    2020 Ondrej Sika <ondrej@ondrejsika.com>
+    https://github.com/ondrejsika/ansible-training
+
+## About Me - Ondrej Sika
+
+**DevOps Engineer, Consultant & Lecturer**
+
+Git, Gitlab, Gitlab CI, Docker, Kubernetes, Terraform, Prometheus, ELK / EFK
+
+## Star, Create Issues, Fork, and Contribute
+
+Feel free to star this repository or fork it.
+
+If you find a bug, create an issue or pull request.
+
+Also, feel free to propose improvements by creating issues.
+
+## Chat
+
+For sharing links & "secrets".
+
+- Slack - https://sikapublic.slack.com/
+- Microsoft Teams
+- https://sika.link/chat (tlk.io)
+
+## Course
+
+## Introduction to Ansible
+
+### What is Ansible?
+
+Ansible is an open-source software provisioning, configuration management, and application-deployment tool.
+
+### Ansible Use Cases
+
+- Server configuration
+- Installation of software
+- Application Deployment
+- Batch Tasks
+
+### Key Ansible Features
+
+- Declarative configuration language
+- Git versioned configuration, Collaboration
+- Parallel execution / deployment on many servers
+- No Agents (just SSH connection)
+- Written in Python (not Ruby)
+- Absence of state
+- Encrypted storage for sensitive data
+- Large Community, Ansible Galaxy
+
+#### Declarative configuration language
+
+Ansible has own YAML based declarative language.
+
+You can apply configuration as many times as you want and Ansible find and modify actual state of your infrastructure to match your desired state.
+
+You don't have to care about what if it's exist, Ansible do it for you out of the box.
+
+#### Git Versioned Configuration
+
+You have all yours configuration on one place in Git repository.
+
+That's easiest way how to collaborate on it. You can make pull request & reviews as well as you know from your code on your configuration.
+
+Ansible supports encryption (Ansible Vault) for your secret data to protect them inside a Git repository.
+
+#### Parallel Execution
+
+Ansible run task in parallel on many servers which saves your time and make all updates & deployments faster.
+
+You can execute Ansible manifest as well as own shell scripts.
+
+#### No Agent is Required
+
+Ansible don't need an agent running on computer which you want manage.
+
+Ansible requires only SSH connection to that server and Python (3) installed.
+
+Some Ansible modules requires specific Python packages on servers which can be also installed by Ansible. For example Docker module requires "docker" python package, Consul requires "python-consul".
+
+#### Written in Python
+
+Written in Python (not Ruby as Puppet, Chef, ...), requires only Python (which is on many Linux distributions by default). Python 3 is preferred.
+
+Sadly, It's not Go (as resto of DevOps world).
+
+#### Absence of state
+
+Ansible doesn't store state (like Terraform) which resources has been created by Ansible.
+
+If you remove resource from Ansible manifest, Ansible stops taking care of it, keep it in latest version. If you want to remove some resource, you have to say it explicitly.
+
+Absence of state is not only disadvantage. You don't need store & sync critical part of your deployment. Ansible check all requirement on every run.
+
+#### Ansible Vault
+
+Ansible Vault is a storage for sensitive data.
+
+You can encrypt any value in any YAML. Also you can encrypt whole file.
+
+You can commit secret data into repository (even public) and be safe no one has access to your secrets.
+
+#### Large Community, Ansible Galaxy
+
+Ansible is easy to use and widely spread. Ansible has a large community, you can find answer for almost any question.
+
+You can find prepared roles (reusable packages) for many cases like Docker installation or set up of Kubernetes cluster.
+
+You can also create a public role and publish it using Ansible Galaxy.
+
+### Installation
+
+We can install Ansible using Python package manager:
+
+```
+pip3 install ansible
+```
+
+or
+
+```
+pipx install ansible
+```
+
+or
+
+```
+pipenv install ansible
+```
+
+### Ansible Directory Structure
+
+- `ansible.cfg`- main ansible config
+- `hosts.yml`- inventory (host config)
+- `group_vars/`- group specific variables
+- `host_vars/`- host specific variables
+- `roles/`- your roles
+- `site.yml`- master playbook
+- `web.yml`- playbook for web servers
+- `proxy.yml`- playbook for proxy servers
+
+### Inventory
+
+Inventory store all hosts (servers) we want to manage.
+
+You can create groups (eg.: web servers, DB servers) and apply some configuration per group.
+
+Inside the inventory you can set host & groups variables which can be used in playbooks.
+
+### Host & Group Vars
+
+You can store your variables configuration in own YAML files inside `group_vars` and `host_vars` directories. One file per group or host.
+
+### Playbooks
+
+In you store configuration in playbooks. Playbooks are sets of Ansible task, roles, variables, ... which contains your desired configuration.
+
+You can apply playbook using:
+
+```
+ansible-playbook site.yml
+```
+
+Default playbook should be `site.yml`.
+
+### Tasks
+
+Tasks are simple calls of ansible modules executed inside of playbooks.
+
+Tasks are minimal executable units in Ansible.
+
+There task for install package, copy file, create file from template, start systemd, run a Docker container, ...
+
+### Handlers
+
+Handlers are very similar to tasks, but they are executed only on updates of specific tasks.
+
+If you for example update Nginx configuration, you want to restart it. If not, you want to keep it running.
+
+### Roles
+
+Ansible role is an independent component which allows reuse of common configuration steps. You can write own roles (store in `roles/` directory) or you can use roles from Ansible Galaxy.
+
+### Role Directory Structure
+
+```
+myrole/       # role directory
+  tasks/      # ansible tasks
+  handlers/   # ansible handlers
+  templates/  # jinja2 Templates
+  files/      # role files
+  vars/       # role variables
+  defaults/   # default variables
+  meta/       # dependencies & Gallaxy config
+```
+
+## Workshop Environment
+
+Lab
+
+```
+ssh root@labX.sikademo.com
+```
+
+where `X` is your lab number.
+
+For example for lab0:
+
+```
+ssh root@lab0.sikademo.com
+```
+
+VS Code for lab0 is available at <https://code0.sikademo.com>
+
+Target VMs
+
+```
+ssh root@labX-vmY.sikademo.com
+```
+
+Everyone has two VMs, for example for lab0:
+
+```
+ssh root@lab0-vm0.sikademo.com
+ssh root@lab0-vm1.sikademo.com
+```
+
+## Install Ansible
+
+- Github - <https://github.com/ansible/ansible>
+
+### Install Ansible using Pipx
+
+```
+pipx install ansible
+```
+
+Check installation and version
+
+```
+ansible --version
+```
+
+If you don't have `pipx` installed, install it using:
+
+```
+python3 -m pip install --user pipx
+python3 -m pipx ensurepath
+```
+
+Sometimes I had to manually link Ansible to PATH
+
+```
+ln -s /Users/ondrej/.local/pipx/venvs/ansible/bin/ansible /Users/ondrej/bin
+ln -s /Users/ondrej/.local/pipx/venvs/ansible/bin/ansible-playbook /Users/ondrej/bin
+```
+
+### Install Ansible using Pip
+
+```
+pip3 install ansible
+```
+
+```
+ansible --version
+```
+
+### Install Ansible on Workshop Environment
+
+```
+apt-get update && apt-get install -y python3 python3-pip && pip3 install ansible
+```
+
+```
+ansible --version
+```
+
+### Install Ansible using Pipenv
+
+```
+pipenv --python 3.7
+```
+
+```
+pipenv install ansible
+```
+
+```
+. $(pipenv --venv)/bin/activate
+```
+
+```
+ansible --version
+```
+
+## Ansible.cfg
+
+Main ansible configuration file. [Docs](https://docs.ansible.com/ansible/latest/reference_appendices/config.html)
+
+Location:
+
+- `ANSIBLE_CONFIG` (environment variable if set)
+- `ansible.cfg` (in the current directory)
+- `~/.ansible.cfg` (in the home directory)
+- `/etc/ansible/ansible.cfg`
+
+Our `ansible.cfg`:
+
+```cfg
+[defaults]
+inventory=hosts.ini
+remote_user=root
+interpreter_python=/usr/bin/python3
+roles_path=roles
+```
+
+## Inventory
+
+[Docs](https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html)
+
+See inventory file `hosts.ini`
+
+```
+vm[0:1].sikademo.com
+```
+
+Check if you can access those VMs
+
+```
+ansible all -m ping
+```
+
+or
+
+```
+ansible all -a "/bin/echo hello"
+```
+
+or
+
+```
+ansible all -a "cat /etc/hostname"
+```
+
+or `slu ondrejsika dogsay`
+
+```
+ansible all -a 'slu ondrejsika dogsay Woof!'
+```
+
+## Inventory with Groups
+
+```
+ansible -i hosts-with-groups.ini all -m ping
+```
+
+## Inventory in YAML
+
+See `hosts.yml`
+
+Try:
+
+```
+ansible -i hosts.yml all -m ping
+```
+
+See `hosts-with-groups.yml`
+
+Try:
+
+```
+ansible -i hosts-with-groups.yml all -m ping
+```
+
+## Dynamic Inventory
+
+See `hosts.py`
+
+Try:
+
+```
+ansible -i hosts.py all -m ping
+```
+
+## Dynamic Inventory from Terraform
+
+See `terraform-hosts.sh`
+
+Example:
+
+```
+ansible -i terraform-hosts.sh all -m ping
+```
+
+## Modules
+
+### Ping Module
+
+```
+ansible all -m ping
+```
+
+```
+ansible lab0-vm1.sikademo.com -m ping
+```
+
+### File Module
+
+```
+ansible all -m file -a "path=/tmp/foo mode=600"
+```
+
+```
+ansible all -m file -a "path=/tmp/foo mode=600 state=touch"
+```
+
+### Copy Module
+
+```
+ansible all -m copy -a "src=examples/hello.txt dest=/etc/motd"
+```
+
+```
+ansible all -m copy -a "content=\"foo bar foo\" dest=/etc/motd"
+```
+
+and with dogsay
+
+```
+ansible all -m copy -a "src=examples/hello_dogsay.txt dest=/etc/motd"
+```
+
+### Setup Module
+
+Gather usefull information from target hosts
+
+```
+ansible all -m setup
+```
+
+## Playbook
+
+[Docs](https://docs.ansible.com/ansible/latest/user_guide/playbooks.html)
+
+### Cowsay Example
+
+Install Cowsay manually
+
+```
+ansible lab0-vm0.sikademo.com -m apt -a "name=cowsay update_cache=yes state=present"
+```
+
+using playbook (dry run using `--check`)
+
+```
+ansible-playbook playbooks/cowsay.yml --check
+```
+
+run the playbook
+
+```
+ansible-playbook playbooks/cowsay.yml
+```
+
+Check it
+
+```
+ansible all -a "/usr/games/cowsay hello"
+```
+
+### Ping Module
+
+```
+ansible-playbook playbooks/ping.yml
+```
+
+### Debug Module
+
+```
+ansible-playbook playbooks/debug.yml
+```
+
+### Pause Module
+
+Pause for 10 seconds:
+
+```
+ansible-playbook playbooks/pause.yml
+```
+
+Pause with prompt:
+
+```
+ansible-playbook playbooks/prompt.yml
+```
+
+### Wait For Module
+
+Wait for port example:
+
+```
+ansible-playbook playbooks/wait-for-port.yml
+```
+
+## Start at Task
+
+```
+ansible-playbook playbooks/start_at_task.yml
+```
+
+```
+ansible-playbook playbooks/start_at_task.yml --start-at-task="Second Task"
+```
+
+```
+ansible-playbook playbooks/start_at_task.yml --start-at-task="Third Task"
+```
+
+### Nginx Example
+
+Run playbook
+
+```
+ansible-playbook playbooks/nginx.yml
+```
+
+See: <http://lab0-vm0.sikademo.com/> and <http://lab0-vm1.sikademo.com/>
+
+### Nginx Example with Jinja2 Template
+
+Run playbook
+
+```
+ansible-playbook playbooks/nginx2.yml
+```
+
+See: <http://lab0-vm0.sikademo.com/> and <http://lab0-vm1.sikademo.com/>
+
+Try with variables defined as an argument `-e` or `--extra-vars`:
+
+```
+ansible-playbook playbooks/nginx2.yml -e your_name=Dela
+```
+
+```
+ansible-playbook playbooks/nginx2.yml -e '{"your_name": "Nela"}'
+```
+
+See: <http://lab0-vm0.sikademo.com/> and <http://lab0-vm1.sikademo.com/>
+
+Try with variables defined in the file:
+
+```
+ansible-playbook playbooks/nginx2.yml -e '@playbooks/nginx2-vars.yml'
+```
+
+See: <http://lab0-vm0.sikademo.com/> and <http://lab0-vm1.sikademo.com/>
+
+### Variables from Inventory
+
+See the `hosts-with-variables.ini` and `hosts-with-group-variables.ini` inventories.
+
+Try with default inventory:
+
+```
+ansible-playbook playbooks/nginx3.yml
+```
+
+Check new inventory `hosts-with-variables.ini` and apply:
+
+```
+cat hosts-with-variables.ini
+ansible-playbook -i hosts-with-variables.ini playbooks/nginx3.yml
+```
+
+See: <http://lab0-vm0.sikademo.com/> and <http://lab0-vm1.sikademo.com/>
+
+Check new inventory `host-sn2` and apply:
+
+```
+cat hosts-with-group-variables.ini
+ansible-playbook -i hosts-with-group-variables.ini playbooks/nginx3.yml
+```
+
+See: <http://lab0-vm0.sikademo.com/> and <http://lab0-vm1.sikademo.com/>
+
+## Jinja2 Template Language
+
+Jinja2 Homepage: <https://jinja.palletsprojects.com/>
+
+### Variable
+
+```jinja2
+<h1>Hello {{ your_name }}, how are you?</h1>
+```
+
+### If Condition
+
+```jinja2
+<h1>Hello {% if your_name %}{{ your_name }}{% else %}Unknown{% endif %}, how are you?</h1>
+<h1>Ahoj {% if jmeno %}{{ jmeno }}{% else %}Neznamy{% endif %}, jak se mas?</h1>
+```
+
+### For Loop
+
+```jinja2
+<ul>
+{% for pet in pets %}
+<li>{{ pet }}</li>
+{% endfor %}
+</ul>
+```
+
+Try:
+
+```
+ansible-playbook playbooks/nginx4.yml
+```
+
+See: <http://lab0-vm0.sikademo.com/> and <http://lab0-vm1.sikademo.com/>
+
+Try with variables defined as an argument:
+
+```
+ansible-playbook playbooks/nginx4.yml -e your_name=Zuz -e jmeno=Nela
+```
+
+```
+ansible-playbook playbooks/nginx4.yml -e '{"your_name": "Johy", "jmeno": "Dela"}'
+```
+
+See: <http://lab0-vm0.sikademo.com/> and <http://lab0-vm1.sikademo.com/>
+
+## Ansible Facts
+
+Get all available facts
+
+```
+ansible all -m gather_facts
+```
+
+Filter facts
+
+```
+ansible all -m gather_facts -a filter=ansible_all_ipv4_addresses
+```
+
+### IP Address Example
+
+Try:
+
+```
+ansible-playbook playbooks/nginx-facts.yml
+```
+
+See: <http://lab0-vm0.sikademo.com/> and <http://lab0-vm1.sikademo.com/>
+
+### Custom Facts
+
+Deploy & See facts
+
+```
+ansible-playbook playbooks/custom-facts.yml
+```
+
+```
+ansible all -m gather_facts -a filter=ansible_local
+```
+
+## Loops
+
+[Docs](https://docs.ansible.com/ansible/latest/user_guide/playbooks_loops.html)
+
+Example:
+
+```
+ansible-playbook playbooks/loop.yml
+```
+
+Loop with `range`
+
+```
+ansible-playbook playbooks/loop_range.yml
+```
+
+```
+ansible-playbook playbooks/loop_range.yml -e count=1
+```
+
+```
+ansible-playbook playbooks/loop_range.yml -e count=3
+```
+
+## Conditionals
+
+[Docs](https://docs.ansible.com/ansible/latest/user_guide/playbooks_conditionals.html)
+
+### When
+
+```
+ansible-playbook playbooks/when.yml
+```
+
+## Register
+
+```
+ansible-playbook playbooks/register.yml
+```
+
+```
+ansible-playbook playbooks/register-nginx.yml
+```
+
+## Tags
+
+Run everything:
+
+```
+ansible-playbook playbooks/tags.yml
+```
+
+Skip tag `test`
+
+```
+ansible-playbook playbooks/tags.yml --skip-tags test
+```
+
+Run only tag `check`
+
+```
+ansible-playbook playbooks/tags.yml --tags check
+```
+
+## Skiped Tasks
+
+```
+ansible-playbook playbooks/skip.yml
+```
+
+![](_images/display_skipped_hosts_true.png)
+
+## Skiped Task with display_skipped_hosts=False
+
+in `ansible.cfg`
+
+```ini
+display_skipped_hosts = False
+```
+
+```
+ansible-playbook playbooks/skip.yml
+```
+
+![](_images/display_skipped_hosts_false.png)
+
+## Handlers
+
+```
+ansible-playbook playbooks/handlers.yml
+```
+
+And run again.
+
+Or another example
+
+```
+ansible-playbook playbooks/handlers2.yml
+```
+
+And run again.
+
+## Norway Problem
+
+```
+ansible-playbook playbooks/norway.yml
+```
+
+## Rescue (try/catch)
+
+```
+ansible-playbook playbooks/rescue.yml
+```
+
+## Set Facts
+
+```
+ansible-playbook playbooks/set_facts.yml
+```
+
+From command (like custom facts)
+
+```
+ansible-playbook playbooks/set_facts_from_command.yml
+```
+
+## Local Execution
+
+```
+ansible-playbook playbooks/local.yml
+```
+
+## Ansible Valult
+
+[Docs](https://docs.ansible.com/ansible/latest/user_guide/vault.html)
+
+### Encrypt a String
+
+```
+
+ansible-vault encrypt_string --name 'secret' 'secret-foo-key'
+
+```
+
+```
+ansible-vault encrypt_string --vault-password-file .vault_password 'secret' --name 'secret-bar-key'
+```
+
+You can set a `vault_password_file` in `ansible.cfg`:
+
+```ini
+vault_password_file = .vault_password
+```
+
+Use encrypted string:
+
+```
+ansible-playbook --ask-vault-pass playbooks/nginx-secret.yml
+```
+
+```
+ansible-playbook --vault-password-file .vault_password playbooks/nginx-secret.yml
+```
+
+See: <http://lab0-vm0.sikademo.com/> and <http://lab0-vm1.sikademo.com/>
+
+### Encrypt a File
+
+Create file vault `secrets.yml`
+
+```
+ansible-vault create secrets.yml
+```
+
+View decrypted data
+
+```
+ansible-vault view secrets.yml
+```
+
+Edit data
+
+```
+ansible-vault edit secrets.yml
+```
+
+Encrypt data again
+
+```
+ansible-vault encrypt secrets.yml
+```
+
+### Encrypted File Example
+
+Use encrypted string:
+
+```
+ansible-playbook --ask-vault-pass playbooks/nginx-secret2.yml
+```
+
+```
+ansible-playbook --vault-password-file .vault_password playbooks/nginx-secret2.yml
+```
+
+See: <http://lab0-vm0.sikademo.com/> and <http://lab0-vm1.sikademo.com/>
+
+### Example of encrypted playbook
+
+```
+ansible-playbook --vault-password-file .vault_password playbooks/nginx_encrypted.yml
+```
+
+## Docker Example
+
+Remove Nginx by:
+
+```
+ansible-playbook playbooks/remove-nginx.yml
+```
+
+Install roles from Ansible Galaxy:
+
+```
+ansible-galaxy install geerlingguy.docker
+```
+
+Run Docker example:
+
+```
+ansible-playbook playbooks/docker-hello-world.yml
+```
+
+See: <http://lab0-vm0.sikademo.com/> and <http://lab0-vm1.sikademo.com/>
+
+If you want to remove those Docker containers, run:
+
+```
+ansible-playbook playbooks/docker-hello-world-cleanup.yml
+```
+
+## Import Playbook
+
+```
+ansible-playbook playbooks/nginx-pages.yml
+```
+
+## Ansible Roles
+
+[Docs](https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html)
+
+### Role Directory Structure
+
+- `tasks` - contains the main list of tasks to be executed by the role.
+- `handlers` - contains handlers, which may be used by this role or even anywhere outside this role.
+- `defaults` - default variables for the role (see Using Variables for more information).
+- `vars` - other variables for the role (see Using Variables for more information).
+- `files` - contains files which can be deployed via this role.
+- `templates` - contains templates which can be deployed via this role.
+- `meta` - defines some meta data for this role. See below for more details.
+
+### Example Role
+
+See [nginx-hello](./roles/nginx-hello) role.
+
+Use it:
+
+```
+ansible-playbook playbooks/role-nginx-hello.yml
+```
+
+See: <http://lab0-vm0.sikademo.com/> and <http://lab0-vm1.sikademo.com/>
+
+### Ansible Galaxy
+
+<https://galaxy.ansible.com/>
+
+## AWX
+
+AWX provides a web-based user interface, REST API, and task engine built on top of Ansible.
+
+<http://awx.sikademo.com>
+
+### Install AWX
+
+Open `awx` dir
+
+```
+cd awx
+```
+
+Apply cluster setup, if it's necessary
+
+```
+make setup-cluster
+```
+
+Install AWX Operator
+
+```
+make install-operator
+```
+
+Instal one AWX instance
+
+```
+make install-awx
+```
+
+Wait until AWX will be ready with valid HTTPS certificate
+
+```
+slu wait-for tls -a awx.sikademo.com:443
+```
+
+Get `admin` password for AWX
+
+```
+slu awx password
+```
+
+```
+slu awx password | pbcopy
+```
+
+See: https://awx.sikademo.com
+
+### AWX Execution Environments
+
+https://awx.sikademo.com/#/execution_environments
+
+#### `sikalabs/awx-ee` image
+
+https://github.com/sikalabs/sikalabs-container-images/tree/master/awx-ee
+
+### AWX Inventories
+
+https://awx.sikademo.com/#/inventories
+
+### AWX Credentials
+
+https://awx.sikademo.com/#/credentials
+
+- Machines (SSH)
+- Source Control (GIT)
+
+### AWX Hosts
+
+https://awx.sikademo.com/#/hosts
+
+### AWX Projects
+
+https://awx.sikademo.com/#/projects
+
+### AWX (Job) Templates
+
+https://awx.sikademo.com/#/templates
+
+### AWX Jobs
+
+https://awx.sikademo.com/#/jobs
+
+## Examples
+
+- HAProxy + Nginx Example - <https://github.com/ondrejsika/ansible-example-nginx-haproxy>
+- <https://github.com/ondrejsika/example-ansible-monorepo>
+- Docker Compose Example - <https://github.com/ondrejsika/ansible-docker-compose--example/>
+- AWX Example - <https://github.com/ondrejsika/example-awx-playbooks>
+
+## Resources & Used Modules
+
+- Inventory - https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html
+- Playbooks - https://docs.ansible.com/ansible/latest/user_guide/playbooks.html
+- Playbooks Best Practices - https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html
+- Variables - https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html
+- Filters - https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html
+- Valult - https://docs.ansible.com/ansible/latest/user_guide/vault.html
+- Using Vault in playbooks - https://docs.ansible.com/ansible/latest/user_guide/playbooks_vault.html
+- Roles - https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html
+- Loops - https://docs.ansible.com/ansible/latest/user_guide/playbooks_loops.htm
+- Conditionals - https://docs.ansible.com/ansible/latest/user_guide/playbooks_conditionals.html
+
+Modules:
+
+- All modules (index) - https://docs.ansible.com/ansible/latest/modules/modules_by_category.html
+- Apt - https://docs.ansible.com/ansible/latest/modules/apt_module.html
+- User - https://docs.ansible.com/ansible/latest/modules/user_module.html
+- Line in file - https://docs.ansible.com/ansible/latest/modules/lineinfile_module.html
+- Authorized Key - https://docs.ansible.com/ansible/latest/modules/authorized_key_module.html
+- Copy - https://docs.ansible.com/ansible/latest/modules/copy_module.html
+- Template - https://docs.ansible.com/ansible/latest/modules/template_module.html
+- Docker Container - https://docs.ansible.com/ansible/latest/modules/docker_container_module.html
+- Pip - https://docs.ansible.com/ansible/latest/modules/pip_module.html
+- OpenSSH Keypair - https://docs.ansible.com/ansible/latest/modules/openssh_keypair_module.html
+- Fetch (Copy from remote to local) - https://docs.ansible.com/ansible/latest/modules/fetch_module.html
+- Wait for - https://docs.ansible.com/ansible/latest/modules/wait_for_module.html
+
+Roles:
+
+- `geerlingguy.docker` - [Ansible Galaxy](https://galaxy.ansible.com/geerlingguy/docker), [Github](https://github.com/geerlingguy/ansible-role-docker)
+- `geerlingguy.ntp` - [Ansible Galaxy](https://galaxy.ansible.com/geerlingguy/ntp), [Github](https://github.com/geerlingguy/ansible-role-ntp)
+
+CLI:
+
+- Ping - https://docs.ansible.com/ansible/latest/modules/ping_module.html
+- Gather Facts - https://docs.ansible.com/ansible/latest/modules/gather_facts_module.html
+
+## Thank you! & Questions?
+
+That's it. Do you have any questions? **Let's go for a beer!**
+
+### Ondrej Sika
+
+- email: <ondrej@sika.io>
+- web: <https://sika.io>
+- twitter: [@ondrejsika](https://twitter.com/ondrejsika)
+- linkedin: [/in/ondrejsika/](https://linkedin.com/in/ondrejsika/)
+- Newsletter, Slack, Facebook & Linkedin Groups: <https://join.sika.io>
+
+_Do you like the course? Write me a recommendation on Twitter (with handle `@ondrejsika`) and LinkedIn (add me [/in/ondrejsika](https://www.linkedin.com/in/ondrejsika/) and I'll send you Request for the recommendation). **Thanks**._
+
+Wanna go for a beer or do some work together? Just [book me](https://book-me.sika.io) :)

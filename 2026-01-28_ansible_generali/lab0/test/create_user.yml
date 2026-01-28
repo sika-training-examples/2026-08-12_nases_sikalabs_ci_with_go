@@ -1,0 +1,24 @@
+---
+- name: Create User Playbook
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Create user generali
+      ansible.builtin.user:
+        name: generali
+        create_home: yes
+        shell: /bin/bash
+        groups: sudo
+    - name: Set authorized key to user generali
+      authorized_key:
+        user: generali
+        state: present
+        key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPkABc2RE2nmH/w0Sm3VE2SrQxlj71uBMqORAIyIUftv ondrejsika_lab"
+    - name: Set passwordless sudo for user generali
+      lineinfile:
+        path: /etc/sudoers.d/generali
+        line: "generali ALL=(ALL) NOPASSWD:ALL"
+        create: yes
+        mode: 0440
+        validate: "visudo -cf %s"

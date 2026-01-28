@@ -1,0 +1,18 @@
+servers:
+  children:
+    web:
+    db:
+
+web:
+  hosts:
+    lab0-vm0.sikademo.com:
+    lab0-vm1.sikademo.com:
+
+db:
+  hosts:
+    lab0-vm2.sikademo.com:
+    lab0-vm3.sikademo.com:
+
+router:
+  hosts:
+    lab0-vm4.sikademo.com:

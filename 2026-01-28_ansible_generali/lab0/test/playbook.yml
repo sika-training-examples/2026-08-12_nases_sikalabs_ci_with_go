@@ -1,0 +1,35 @@
+---
+- name: Generali Test Playbook
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Install hello-world-server
+      command:
+        cmd: slu install-bin hello-world-server
+        creates: /usr/local/bin/hello-world-server
+    - name: Create hello-world-server systemd service
+      include_role:
+        name: my_systemd_service
+      vars:
+        service_name: hello-world-server
+        exec_start: /usr/local/bin/hello-world-server
+        env:
+          COLOR: red
+          BACKGROUND_COLOR: white
+    - name: Install Caddy
+      apt:
+        name: caddy
+        state: present
+    - name: Create Caddyfile
+      template:
+        src: Caddyfile.j2
+        dest: /etc/caddy/Caddyfile
+      notify:
+        - Restart Caddy
+
+  handlers:
+    - name: Restart Caddy
+      systemd:
+        name: caddy
+        state: restarted

@@ -1,0 +1,17 @@
+[Unit]
+Description={{ systemd_service_name }}
+After=network.target
+
+[Service]
+{% for env_name, env_val in systemd_service_environment.items() %}
+Environment="{{ env_name }}={{ env_val }}"
+{% endfor %}
+Type=simple
+ExecStart={{ systemd_service_exec_start }}
+Restart=on-failure
+RestartSec=5s
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

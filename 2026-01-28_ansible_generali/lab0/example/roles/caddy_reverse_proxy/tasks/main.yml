@@ -1,0 +1,13 @@
+- name: Install Caddy
+  apt:
+    name: caddy
+    state: present
+- name: Create Caddyfile
+  template:
+    src: Caddyfile.j2
+    dest: /etc/caddy/Caddyfile
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    -  Restart Caddy

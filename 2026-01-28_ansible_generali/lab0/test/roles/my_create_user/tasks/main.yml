@@ -1,0 +1,18 @@
+- name: Create user {{ username }}
+  ansible.builtin.user:
+    name: "{{ username }}"
+    create_home: yes
+    shell: /bin/bash
+    groups: sudo
+- name: Set authorized key to user {{ username }}
+  authorized_key:
+    user: '{{ username }}'
+    state: present
+    key: "{{ ssh_key }}"
+- name: Set passwordless sudo for user {{ username }}
+  lineinfile:
+    path: /etc/sudoers.d/{{ username }}
+    line: "{{ username }} ALL=(ALL) NOPASSWD:ALL"
+    create: yes
+    mode: 0440
+    validate: "visudo -cf %s"

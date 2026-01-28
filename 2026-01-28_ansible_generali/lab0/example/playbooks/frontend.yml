@@ -1,0 +1,33 @@
+---
+- name: Frontend Setup
+  hosts: frontend
+  gather_facts: false
+
+  tasks:
+    - name: Install counter-frontend-go (frontend)
+      command:
+        cmd: slu install-bin counter-frontend-go
+        creates: /usr/local/bin/counter-frontend-go
+
+- name: Frontend Systemd Service
+  hosts: frontend
+  gather_facts: false
+
+  roles:
+    - role: systemd_service
+      vars:
+        systemd_service_name: counter-frontend
+        systemd_service_exec_start: /usr/local/bin/counter-frontend-go
+        systemd_service_environment:
+          API_ORIGIN: https://example-backend.sikademo.com
+          FONT_COLOR: '#C21B18'
+          BACKGROUND_COLOR: white
+    - role: caddy_reverse_proxy
+      vars:
+        caddy_reverse_proxy_domain: "{{ ansible_host }}"
+        caddy_reverse_proxy_port: 3000
+
+  tasks:
+    - name: See
+      debug:
+        msg: "See: https://{{ ansible_host }}"

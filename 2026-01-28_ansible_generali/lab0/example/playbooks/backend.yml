@@ -1,0 +1,38 @@
+---
+- name: Backend Setup
+  hosts: backend
+  gather_facts: false
+
+  tasks:
+    - name: Install counter (backend)
+      command:
+        cmd: slu install-bin counter
+        creates: /usr/local/bin/counter
+    - name: Install Redis
+      apt:
+        name: redis
+        state: present
+
+- name: Backend Systemd Service
+  hosts: backend
+  gather_facts: false
+
+  roles:
+    - role: systemd_service
+      vars:
+        systemd_service_name: counter-backend
+        systemd_service_exec_start: /usr/local/bin/counter
+        systemd_service_environment:
+          EXTRA_TEXT: "Hello Generali"
+
+    - role: caddy_reverse_proxy
+      vars:
+        caddy_reverse_proxy_domain: "{{ ansible_host }}"
+        caddy_reverse_proxy_port: 8000
+
+
+  tasks:
+    - name: See
+      debug:
+        msg: "See: https://{{ ansible_host }}"
+

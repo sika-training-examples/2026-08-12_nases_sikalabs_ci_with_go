@@ -1,0 +1,9 @@
+- name: Create {{ service_name }} systemd service
+  template:
+    src: service.j2
+    dest: /etc/systemd/system/{{ service_name }}.service
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    -  Restart {{ service_name }} service

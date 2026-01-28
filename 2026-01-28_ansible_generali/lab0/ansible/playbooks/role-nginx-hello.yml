@@ -1,0 +1,26 @@
+---
+- name: Setup vm0
+  hosts: lab0-vm0.sikademo.com
+
+  vars:
+    your_name: Ondrej
+
+  roles:
+    - hello_from_sikalabs
+    - nginx-hello
+
+  tasks:
+    - name: See
+      debug:
+        msg: "See: http://{{ ansible_host }}"
+
+- name: Setup vm1
+  hosts: lab0-vm1.sikademo.com
+
+  roles:
+    - nginx-hello
+
+  tasks:
+    - name: See
+      debug:
+        msg: "See: http://{{ ansible_host }}"
