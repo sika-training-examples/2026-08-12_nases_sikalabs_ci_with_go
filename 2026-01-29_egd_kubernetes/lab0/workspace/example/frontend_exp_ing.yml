@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: frontend-exp
+spec:
+  ingressClassName: openshift-default
+  tls:
+    - hosts:
+        - counter-exp.egd.sikademo.com
+      secretName: frontend-tls
+  rules:
+    - host: counter-exp.egd.sikademo.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend-exp
+                port:
+                  number: 80

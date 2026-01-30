@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: my-replicaset
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-replicaset
+  template:
+    metadata:
+      labels:
+        app: my-replicaset
+        svc: example
+    spec:
+      containers:
+        - name: main
+          # image: ghcr.io/ondrejsika/training-example:v1
+          image: ghcr.io/ondrejsika/training-example:v2
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: 10m
+              memory: 10Mi
+            limits:
+              cpu: 20m
+              memory: 20Mi

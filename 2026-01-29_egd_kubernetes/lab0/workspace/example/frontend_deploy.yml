@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  annotations:
+    app.openshift.io/connects-to: |
+      [{"apiVersion":"apps/v1","kind":"Deployment","name":"backend"}]
+spec:
+  revisionHistoryLimit: 0
+  replicas: 4
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: ghcr.io/ondrejsika/counter-frontend
+          env:
+            - name: API_ORIGIN
+              value: http://backend
+          envFrom:
+            - configMapRef:
+                name: env
+          ports:
+            - name: http
+              containerPort: 3000
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: 200m
+              memory: 200Mi
+          startupProbe:
+            httpGet:
+              path: /api/livez
+              port: http
+          livenessProbe:
+            httpGet:
+              path: /api/livez
+              port: http

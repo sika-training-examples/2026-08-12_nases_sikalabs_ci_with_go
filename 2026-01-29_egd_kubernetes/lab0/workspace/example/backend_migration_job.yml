@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: migrations
+spec:
+  template:
+    metadata:
+      labels:
+        job: migrations
+    spec:
+      restartPolicy: Never
+      initContainers:
+        - name: wait-for-redis
+          image: sikalabs/slu:v0.80.0
+          args:
+            - /bin/sh
+            - -c
+            - slu wait-for tcp -a redis:6379
+      containers:
+        - name: migrations
+          image: redis:8
+          command: ["redis-cli", "-h", "redis", "incrby", "counter", "10000"]

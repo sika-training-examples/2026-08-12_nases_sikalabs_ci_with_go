@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  annotations:
+    app.openshift.io/connects-to: |
+      [{"apiVersion":"apps/v1","kind":"StatefulSet","name":"redis"}]
+spec:
+  revisionHistoryLimit: 0
+  replicas: 4
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      serviceAccountName: backend
+      initContainers:
+        - name: wait-for-migrations
+          image: sikalabs/kubectl
+          command:
+            - "/bin/sh"
+            - "-c"
+            - "sleep 2 && kubectl wait --for=condition=complete --timeout=600s job/migrations"
+      containers:
+        - name: backend
+          image: ghcr.io/ondrejsika/counter
+          env:
+            - name: REDIS
+              value: redis
+            - name: EXTRA_TEXT
+              value: v3
+          ports:
+            - name: http
+              containerPort: 8000
+          resources:
+            requests:
+              cpu: 50m
+              memory: 20Mi
+            limits:
+              cpu: 100m
+              memory: 40Mi
+          startupProbe:
+            httpGet:
+              path: /readyz
+              port: http
+          livenessProbe:
+            httpGet:
+              path: /livez
+              port: http
