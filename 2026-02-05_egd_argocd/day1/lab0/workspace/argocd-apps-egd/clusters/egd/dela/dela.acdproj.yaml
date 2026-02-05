@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: dela
+  namespace: openshift-gitops
+spec:
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  destinations:
+  - namespace: 'dela-counter'
+    server: 'https://kubernetes.default.svc'
+  - namespace: 'dela-hello-dela'
+    server: 'https://kubernetes.default.svc'
+  sourceRepos:
+  - '*'

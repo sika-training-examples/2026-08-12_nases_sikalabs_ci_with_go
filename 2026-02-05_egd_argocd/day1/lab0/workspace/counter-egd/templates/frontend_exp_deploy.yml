@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-exp
+  annotations:
+    app.openshift.io/connects-to: |
+      [{"apiVersion":"apps/v1","kind":"Deployment","name":"backend"}]
+spec:
+  revisionHistoryLimit: 0
+  replicas: {{ .Values.frontendExpReplicas }}
+  selector:
+    matchLabels:
+      app: frontend-exp
+  template:
+    metadata:
+      labels:
+        app: frontend-exp
+    spec:
+      initContainers:
+        - name: wait-for-backend
+          image: sikalabs/slu:v0.96.0
+          args:
+            - /bin/sh
+            - -c
+            - slu wait-for http200 --url http://backend
+      containers:
+        - name: frontend-exp
+          image: ghcr.io/ondrejsika/counter-frontend-go
+          env:
+            - name: API_ORIGIN
+              value: http://backend
+            - name: FAIL_ON_ERROR
+              value: '1'
+            - name: FONT_COLOR
+              value: {{ .Values.FONT_COLOR }}
+            - name: BACKGROUND_COLOR
+              value: {{ .Values.BACKGROUND_COLOR }}
+          ports:
+            - name: http
+              containerPort: 3000
+          resources:
+            requests:
+              cpu: 20m
+              memory: 20Mi
+            limits:
+              cpu: 40m
+              memory: 40Mi
+          startupProbe:
+            httpGet:
+              path: /api/livez
+              port: http
+          livenessProbe:
+            httpGet:
+              path: /api/livez
+              port: http

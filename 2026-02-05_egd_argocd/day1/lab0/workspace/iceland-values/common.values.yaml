@@ -1,0 +1,6 @@
+# https://github.com/sikalabs/charts/blob/master/charts/one-image/values.yaml
+ingressClassName: openshift-default
+tls: false
+ingressExtraAnnotations:
+  route.openshift.io/termination: edge
+  route.openshift.io/insecureEdgeTerminationPolicy: Redirect

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: example-manifests
+spec:
+  selector:
+    app: example-manifests
+  ports:
+    - port: 80
+      targetPort: 8000

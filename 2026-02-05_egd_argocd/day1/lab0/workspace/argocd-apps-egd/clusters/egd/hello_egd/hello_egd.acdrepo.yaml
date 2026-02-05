@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: repo-oci-hello-egd
+  namespace: openshift-gitops
+  labels:
+    argocd.argoproj.io/secret-type: repository
+stringData:
+  type: oci
+  url: oci://registry.sikademo.com
+  username: ondrejsika
+  password: asdfasdf

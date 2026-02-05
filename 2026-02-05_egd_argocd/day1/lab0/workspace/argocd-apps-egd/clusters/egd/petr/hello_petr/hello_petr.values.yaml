@@ -1,0 +1,14 @@
+# https://github.com/sikalabs/charts/blob/master/charts/hello-world/values.yaml
+
+host: hello-petr.apps.egd.germanywestcentral.aroapp.io
+replicas: 3
+TEXT: "Hello Petr"
+TEXT_SUFFIX: v1
+COLOR: green
+BACKGROUND_COLOR: lightred
+
+ingressClassName: openshift-default
+ingressTlsDisable: true
+ingressExtraAnnotations:
+  route.openshift.io/termination: edge
+  route.openshift.io/insecureEdgeTerminationPolicy: Redirect

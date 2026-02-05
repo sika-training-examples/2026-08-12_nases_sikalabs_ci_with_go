@@ -1,0 +1,14 @@
+# https://github.com/sikalabs/charts/blob/master/charts/hello-world/values.yaml
+
+host: hello-dela.apps.egd.germanywestcentral.aroapp.io
+replicas: 1
+TEXT: "Hello Dela"
+TEXT_SUFFIX: v1
+COLOR: green
+BACKGROUND_COLOR: lightgreen
+
+ingressClassName: openshift-default
+ingressTlsDisable: true
+ingressExtraAnnotations:
+  route.openshift.io/termination: edge
+  route.openshift.io/insecureEdgeTerminationPolicy: Redirect

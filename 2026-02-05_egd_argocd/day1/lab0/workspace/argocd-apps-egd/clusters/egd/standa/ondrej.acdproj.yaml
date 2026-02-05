@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: standa
+  namespace: openshift-gitops
+spec:
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  destinations:
+  - namespace: 'standa'
+    server: 'https://kubernetes.default.svc'
+  - namespace: 'standa-counter'
+    server: 'https://kubernetes.default.svc'
+  - namespace: 'standa-hello-standa'
+    server: 'https://kubernetes.default.svc'
+  sourceRepos:
+  - '*'

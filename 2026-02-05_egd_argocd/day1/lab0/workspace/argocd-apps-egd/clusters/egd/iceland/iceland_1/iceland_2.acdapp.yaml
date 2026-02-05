@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: iceland-2
+  namespace: openshift-gitops
+  annotations:
+    argocd.argoproj.io/sync-wave: "-99"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: iceland
+  destination:
+    namespace: iceland-2
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  sources:
+    - repoURL: https://github.com/sikalabs/charts.git
+      path: charts/one-image
+      helm:
+        valueFiles:
+        - '$values/common.values.yaml'
+        - '$values/iceland_2.values.yaml'
+    - repoURL: https://gitlab.sikademo.com/iceland/iceland-values.git
+      ref: values
+
+

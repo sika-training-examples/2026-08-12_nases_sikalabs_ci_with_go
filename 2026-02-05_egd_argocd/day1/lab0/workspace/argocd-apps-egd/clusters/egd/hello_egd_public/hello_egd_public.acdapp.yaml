@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hello-egd-public
+  namespace: openshift-gitops
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: hello-egd-public
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: ttl.sh/hello-egd
+    chart: hello-egd
+    targetRevision: 0.1.0
+    helm:
+      valuesObject:
+        host: hello-egd-public.apps.egd.germanywestcentral.aroapp.io
+        image: ttl.sh/hello-egd/server

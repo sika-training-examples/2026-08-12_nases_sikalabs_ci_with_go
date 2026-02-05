@@ -1,0 +1,4 @@
+See: https://{{ .Values.host }}
+{{- if .Values.hostExp }}
+     https://{{ .Values.hostExp }}
+{{ end }}
