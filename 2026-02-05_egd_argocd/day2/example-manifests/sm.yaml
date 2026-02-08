@@ -1,0 +1,10 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: example-manifests
+spec:
+  selector:
+    matchLabels:
+      app: example-manifests
+  endpoints:
+    - port: metrics

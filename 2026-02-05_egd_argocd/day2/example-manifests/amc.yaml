@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: config-example
+  namespace: example-manifests
+  labels:
+    alertmanagerConfig: main
+spec:
+  route:
+    groupBy: ['namespace']
+    groupWait: 30s
+    groupInterval: 5m
+    repeatInterval: 12h
+    receiver: 'webhook'
+  receivers:
+  - name: 'webhook'
+    webhookConfigs:
+    - url: 'https://webhook.site/a45fe8c3-59a2-42ce-b652-2d59221a9109'

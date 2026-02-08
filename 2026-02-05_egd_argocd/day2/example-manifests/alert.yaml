@@ -1,0 +1,21 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: metrics-example
+  namespace: example-manifests
+spec:
+  groups:
+    - name: metrics-example.rules
+      rules:
+        - alert: ExampleAlertRequestRate
+          annotations:
+          expr: rate(hello_world_server_requests_total{namespace="example-manifests"}[5m]) > 10
+          labels:
+            severity: none
+            team: devs
+        - alert: ExampleAlertRequestRateTotal
+          annotations:
+          expr: sum(rate(hello_world_server_requests_total{namespace="example-manifests"}[5m])) > 10
+          labels:
+            severity: warn
+            team: infra

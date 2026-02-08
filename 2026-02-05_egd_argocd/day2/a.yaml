@@ -1,0 +1,26 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: metrics-example
+  # namespace: openshift-monitoring
+  namespace: example-manifests
+spec:
+  groups:
+    - name: metrics-example.rules
+      rules:
+        - alert: ExampleAlert
+          annotations:
+            message: |
+              Alert on: hello_world_server_requests_total > 10
+          expr: sum(rate(hello_world_server_requests_total{namespace="example-manifests"}[5m])) > 10
+          labels:
+            severity: none
+            team: devs
+        - alert: ExampleRateAlert
+          annotations:
+            message: |
+              High request rate
+          expr: sum(rate(hello_world_server_requests_total{namespace="example-manifests"}[5m])) > 10
+          labels:
+            severity: warn
+            team: infra

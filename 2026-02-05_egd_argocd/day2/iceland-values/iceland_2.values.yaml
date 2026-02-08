@@ -1,0 +1,3 @@
+# https://github.com/sikalabs/charts/blob/master/charts/one-image/values.yaml
+host: iceland-2.apps.egd.germanywestcentral.aroapp.io
+image: ghcr.io/ondrejsika/iceland-2

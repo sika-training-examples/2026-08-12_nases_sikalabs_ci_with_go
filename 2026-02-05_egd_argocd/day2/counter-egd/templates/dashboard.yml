@@ -1,0 +1,31 @@
+{{ if .Values.openshiftDashboardEnabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: '{{ .Release.Namespace }}-counter-dashboard'
+  namespace: openshift-config-managed
+  labels:
+    console.openshift.io/dashboard: "true"
+data:
+  "{{ .Release.Namespace }}-counter-dashboard.json": |
+    {
+      "title": "Counter Dashboard ({{ .Release.Namespace }}/{{ .Release.Name }})",
+      "rows": [
+        {
+          "title": "Request Rate",
+          "panels": [
+            {
+              "title": "Requests per Second",
+              "type": "graph",
+              "targets": [
+                {
+                  "expr": "sum(irate(counter_requests_total{namespace=\"{{ .Release.Namespace }}\"}[10m])) by (path)",
+                  "legendFormat": "{{`{{ path }}`}} req/s"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+{{ end }}

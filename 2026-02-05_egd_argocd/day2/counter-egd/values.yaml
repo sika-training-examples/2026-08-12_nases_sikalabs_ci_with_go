@@ -1,0 +1,19 @@
+#  Required
+host:
+
+# Optional
+EXTRA_TEXT: ''
+FONT_COLOR: black
+BACKGROUND_COLOR: white
+
+hostExp:
+
+backendReplicas: 2
+frontendReplicas: 2
+frontendExpReplicas: 2
+
+enableArgoCDHooks: false
+enableServiceMonitor: true
+openshiftDashboardEnabled: true
+openshiftConsoleLinkEnabled: true
+grafanaDashboardEnabled: true

@@ -1,0 +1,32 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: migrations
+  annotations:
+    app.openshift.io/connects-to: |
+      [{"apiVersion":"apps/v1","kind":"StatefulSet","name":"redis"}]
+    {{ if .Values.enableArgoCDHooks }}
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+    {{ else }}
+    helm.sh/hook: pre-install,pre-upgrade
+    helm.sh/hook-delete-policy: before-hook-creation
+    {{ end }}
+spec:
+  template:
+    metadata:
+      labels:
+        job: migrations
+    spec:
+      restartPolicy: Never
+      initContainers:
+        - name: wait-for-redis
+          image: sikalabs/slu:v0.80.0
+          args:
+            - /bin/sh
+            - -c
+            - slu wait-for tcp -a redis:6379
+      containers:
+        - name: migrations
+          image: redis:8
+          command: ["redis-cli", "-h", "redis", "incrby", "counter", "10000"]

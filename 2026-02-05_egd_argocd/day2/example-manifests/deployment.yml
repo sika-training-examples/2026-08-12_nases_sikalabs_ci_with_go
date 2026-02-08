@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-manifests
+spec:
+  revisionHistoryLimit: 0
+  replicas: 8
+  selector:
+    matchLabels:
+      app: example-manifests
+  template:
+    metadata:
+      labels:
+        app: example-manifests
+    spec:
+      containers:
+        - name: main
+          image: ghcr.io/sikalabs/hello-world-server:egd
+          env:
+            - name: TEXT_SUFFIX
+              value: 'v2'
+          ports:
+            - name: http
+              containerPort: 8000
+            - name: metrics
+              containerPort: 8001
+          resources:
+            requests:
+              cpu: 100m
+              memory: 50Mi
+            limits:
+              memory: 100Mi
+              cpu: 500m
+          startupProbe:
+            httpGet:
+              path: /readyz
+              port: 8000
+          livenessProbe:
+            httpGet:
+              path: /livez
+              port: 8000

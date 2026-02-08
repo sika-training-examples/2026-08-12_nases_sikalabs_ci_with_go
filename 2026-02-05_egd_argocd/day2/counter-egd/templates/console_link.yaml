@@ -1,0 +1,12 @@
+{{ if .Values.openshiftConsoleLinkEnabled }}
+apiVersion: console.openshift.io/v1
+kind: ConsoleLink
+metadata:
+  name: '{{.Release.Namespace}}-counter'
+spec:
+  applicationMenu:
+    section: Counter
+  href: https://{{ .Values.host }}
+  location: ApplicationMenu
+  text: '{{ .Release.Name }}'
+{{ end }}

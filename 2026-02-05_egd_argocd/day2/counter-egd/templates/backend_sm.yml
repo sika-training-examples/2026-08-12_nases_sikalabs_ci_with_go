@@ -1,0 +1,12 @@
+{{ if .Values.enableServiceMonitor }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: backend
+spec:
+  selector:
+    matchLabels:
+      app: backend
+  endpoints:
+    - port: http
+{{ end }}
