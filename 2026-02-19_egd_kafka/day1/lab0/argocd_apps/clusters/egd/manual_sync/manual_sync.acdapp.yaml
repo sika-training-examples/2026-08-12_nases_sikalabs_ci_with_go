@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: manual-sync
+  namespace: openshift-gitops
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: manual-sync
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://github.com/sikalabs/charts.git
+    path: charts/hello-world
+    helm:
+      valuesObject:
+        # https://github.com/sikalabs/charts/blob/master/charts/hello-world/values.yaml
+
+        host: manual-sync.apps.egd.germanywestcentral.aroapp.io
+        replicas: 3
+        TEXT: "manual_sync"
+        TEXT_SUFFIX: v4
+
+        ingressClassName: openshift-default
+        ingressTlsDisable: true
+        ingressExtraAnnotations:
+          route.openshift.io/termination: edge
+          route.openshift.io/insecureEdgeTerminationPolicy: Redirect

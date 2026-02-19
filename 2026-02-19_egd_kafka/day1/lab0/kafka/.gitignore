@@ -1,0 +1,25 @@
+# Mac
+.DS_Store
+
+# Editor
+.vscode
+.idea
+
+# Generic
+*.log
+*.backup
+.env
+
+# NodeJS
+node_modules
+
+# Go Examples
+*.exe
+/producer
+/examples/go/producer/producer
+/consumer
+/examples/go/consumer/consumer
+/simple_producer
+/examples/go/simple_producer/simple_producer
+/simple_consumer
+/examples/go/simple_consumer/simple_consumer

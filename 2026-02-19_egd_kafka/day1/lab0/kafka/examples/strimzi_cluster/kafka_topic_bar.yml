@@ -1,0 +1,13 @@
+apiVersion: kafka.strimzi.io/v1
+kind: KafkaTopic
+metadata:
+  name: my-cluster-bar
+  namespace: kafka
+  labels:
+    strimzi.io/cluster: my-cluster
+spec:
+  topicName: bar
+  partitions: 27
+  replicas: 3
+  config:
+    retention.bytes: 536870912 # 512Mi per partition

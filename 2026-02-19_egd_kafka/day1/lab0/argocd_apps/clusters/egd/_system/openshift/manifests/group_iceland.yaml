@@ -1,0 +1,32 @@
+apiVersion: user.openshift.io/v1
+kind: Group
+metadata:
+  name: iceland
+users:
+  - ondrejsikatest+iceland@gmail.com
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: iceland
+  namespace: iceland-1
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-reader
+subjects:
+  - kind: Group
+    name: iceland
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: iceland
+  namespace: iceland-2
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-reader
+subjects:
+  - kind: Group
+    name: iceland

@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: tch-counter
+  namespace: openshift-gitops
+  annotations:
+    argocd.argoproj.io/sync-wave: "-99"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: tch
+  destination:
+    namespace: tch-counter
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://github.com/sika-training-examples/2026-02-05_counter_egd_helm_example.git
+    path: .
+    helm:
+      valuesObject:
+        # https://github.com/sika-training-examples/2026-02-05_counter_egd_helm_example/blob/master/values.yaml
+
+        host: tch-counter.apps.egd.germanywestcentral.aroapp.io
+        host: tch-counter-exp.apps.egd.germanywestcentral.aroapp.io
