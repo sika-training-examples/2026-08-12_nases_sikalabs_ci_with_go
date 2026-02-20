@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1beta1
+kind: ArgoCD
+metadata:
+  name: openshift-gitops
+  namespace: openshift-gitops
+spec:
+  resourceTrackingMethod: annotation
+  rbac:
+    defaultPolicy: ''
+    scopes: '[groups]'
+    policy: |
+      g, system:cluster-admins, role:admin
+      g, cluster-admins, role:admin
+      g, argocd-admins, role:admin
+      g, argocd-admins, role:admin
+
+      g, iceland, role:iceland
+      p, role:iceland, projects, get, iceland, allow
+      p, role:iceland, applications, get, iceland*, allow
+      p, role:iceland, applications, action/apps/Deployment/restart, iceland*, allow
+      p, role:iceland, applications, sync, iceland*, allow
+      p, role:iceland, applications, update, iceland*, allow
+      p, role:iceland, logs, get, iceland*, allow
+      p, role:iceland, exec, create, iceland*, allow

@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kafka-kafdrop
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: kafka-kafdrop
+  destination:
+    namespace: kafka
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  sources:
+    - repoURL: https://github.com/sikalabs/charts.git
+      path: charts/simple-kafdrop
+      helm:
+        valuesObject:
+          # https://github.com/sikalabs/charts/blob/master/charts/simple-kafdrop/values.yaml
+          host: kafka-praha-kafdrop.egd-rke2.sikademo.com
+          kafkaBootstrapServer: praha-kafka-bootstrap.kafka.svc:9092

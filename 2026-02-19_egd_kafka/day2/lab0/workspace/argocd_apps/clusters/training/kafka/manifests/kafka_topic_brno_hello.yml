@@ -1,0 +1,12 @@
+apiVersion: kafka.strimzi.io/v1
+kind: KafkaTopic
+metadata:
+  name: brno-hello
+  namespace: kafka
+  labels:
+    strimzi.io/cluster: brno
+spec:
+  partitions: 27
+  replicas: 3
+  config:
+    retention.bytes: 536870912 # 512Mi per partition

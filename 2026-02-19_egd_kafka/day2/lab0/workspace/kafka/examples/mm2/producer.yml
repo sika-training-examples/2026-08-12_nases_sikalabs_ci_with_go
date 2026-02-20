@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: producer
+spec:
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: producer
+  template:
+    metadata:
+      labels:
+        app: producer
+    spec:
+      containers:
+        - name: main
+          image: ttl.sh/ondrejsika/example-keda-producer
+          env:
+            - name: KAFKA_BROKER_ADDRESS
+              value: source-cluster-kafka-bootstrap.kafka.svc:9092
+            - name: KAFKA_TOPIC
+              value: my-topic
+          resources:
+            requests:
+              cpu: 10m
+              memory: 10Mi
+            limits:
+              cpu: 100m
+              memory: 100Mi

@@ -1,0 +1,19 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: consumer
+spec:
+  scaleTargetRef:
+    kind: Deployment
+    name: consumer
+  pollingInterval: 3
+  cooldownPeriod: 10
+  minReplicaCount:  1
+  maxReplicaCount:  27
+  triggers:
+  - type: kafka
+    metadata:
+      bootstrapServers: brno-kafka-bootstrap.kafka.svc:9092
+      consumerGroup: default
+      topic: brno-keda
+      lagThreshold: "10"

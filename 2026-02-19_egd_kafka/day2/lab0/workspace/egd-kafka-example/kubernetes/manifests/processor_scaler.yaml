@@ -1,0 +1,19 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: processor
+spec:
+  scaleTargetRef:
+    kind: Deployment
+    name: processor
+  pollingInterval: 3
+  cooldownPeriod: 10
+  minReplicaCount:  1
+  maxReplicaCount:  30
+  triggers:
+  - type: kafka
+    metadata:
+      bootstrapServers: egd-kafka-bootstrap.kafka.svc:9092
+      consumerGroup: foo
+      topic: foo
+      lagThreshold: "10"

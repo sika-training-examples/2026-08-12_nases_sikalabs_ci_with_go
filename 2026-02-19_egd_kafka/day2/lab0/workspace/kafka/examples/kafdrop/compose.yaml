@@ -1,0 +1,9 @@
+name: kafdrop
+services:
+  kafdrop:
+    image: obsidiandynamics/kafdrop
+    environment:
+      KAFKA_BROKERCONNECT: ${KAFKA_PEERS?}
+      SERVER_SERVLET_CONTEXTPATH: "/"
+    ports:
+      - "9000:9000"

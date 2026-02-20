@@ -1,0 +1,10 @@
+apiVersion: console.openshift.io/v1
+kind: ConsoleLink
+metadata:
+  name: kafdrop-source-cluster
+spec:
+  applicationMenu:
+    section: Kafdrop
+  href: https://source-kafdrop.apps.egd.germanywestcentral.aroapp.io
+  location: ApplicationMenu
+  text: Kafdrop Source Cluster

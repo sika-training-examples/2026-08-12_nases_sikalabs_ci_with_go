@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: openebs
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-9"
+spec:
+  project: system
+  destination:
+    namespace: openebs
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+  source:
+    repoURL: https://openebs.github.io/openebs
+    chart: openebs
+    targetRevision: 4.4.0
+    helm:
+      valuesObject:
+        localpv-provisioner:
+          hostpathClass:
+            isDefaultClass: true
+        engines:
+          replicated:
+            mayastor:
+              enabled: false
+          local:
+            lvm:
+              enabled: false
+            zfs:
+              enabled: false
