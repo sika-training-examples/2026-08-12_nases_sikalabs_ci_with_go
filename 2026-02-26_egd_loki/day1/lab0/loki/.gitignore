@@ -1,0 +1,21 @@
+.DS_Store
+.vscode
+
+data-alloy
+.env
+
+compose.override.yml
+
+*.local.txt
+*.local.md
+*.local.yml
+*.local.yaml
+
+# Terraform
+.terraform
+*.tfplan
+*.tfstate
+.terraform.tfstate.lock.info
+*.tfvars
+!*.EXAMPLE.tfvars
+override.tf

@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: tch
+  namespace: openshift-gitops
+spec:
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  destinations:
+  - namespace: 'tch-counter'
+    server: 'https://kubernetes.default.svc'
+  - namespace: 'tch-hello-tch'
+    server: 'https://kubernetes.default.svc'
+  sourceRepos:
+  - '*'

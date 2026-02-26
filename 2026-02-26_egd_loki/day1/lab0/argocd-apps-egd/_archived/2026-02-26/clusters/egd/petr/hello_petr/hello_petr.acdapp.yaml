@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: petr-hello-petr
+  namespace: openshift-gitops
+  annotations:
+    argocd.argoproj.io/sync-wave: "-99"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: petr
+  destination:
+    namespace: petr-hello-petr
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  sources:
+    - repoURL: https://github.com/sikalabs/charts.git
+      path: charts/hello-world
+      helm:
+        valueFiles:
+        - '$values/clusters/egd/petr/hello_petr/hello_petr.values.yaml'
+    - repoURL: https://gitlab.sikademo.com/egd/argocd-apps-egd.git
+      ref: values

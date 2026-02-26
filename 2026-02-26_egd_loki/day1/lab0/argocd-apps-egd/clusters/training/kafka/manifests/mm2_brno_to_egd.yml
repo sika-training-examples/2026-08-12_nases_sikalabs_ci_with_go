@@ -1,0 +1,35 @@
+apiVersion: kafka.strimzi.io/v1
+kind: KafkaMirrorMaker2
+metadata:
+  name: mm2-brno-to-egd
+  namespace: kafka
+spec:
+  version: 4.1.1
+  replicas: 1
+  target:
+    alias: egd
+    bootstrapServers: 20.218.198.58:29092
+    groupId: mm2
+    configStorageTopic: mm2-configs
+    offsetStorageTopic: mm2-offsets
+    statusStorageTopic: mm2-status
+    config:
+      config.storage.replication.factor: 1
+      offset.storage.replication.factor: 1
+      status.storage.replication.factor: 1
+  mirrors:
+    - source:
+        alias: brno
+        bootstrapServers: brno-kafka-bootstrap.kafka.svc:9092
+      sourceConnector:
+        tasksMax: 1
+        config:
+          replication.factor: 1
+          offset-syncs.topic.replication.factor: 1
+          sync.topic.acls.enabled: "false"
+          # Mirror only topics matching this regex
+          topics: "brno-hello"
+      checkpointConnector:
+        config:
+          checkpoints.topic.replication.factor: 1
+          sync.group.offsets.enabled: "true"
