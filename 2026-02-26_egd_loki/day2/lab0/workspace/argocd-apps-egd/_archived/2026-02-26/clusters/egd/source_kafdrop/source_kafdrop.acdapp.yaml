@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: source-kafdrop
+  namespace: openshift-gitops
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: kafka
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  sources:
+    - repoURL: https://github.com/sikalabs/charts.git
+      path: charts/simple-kafdrop
+      helm:
+        valuesObject:
+          # https://github.com/sikalabs/charts/blob/master/charts/simple-kafdrop/values.yaml
+          host: source-kafdrop.apps.egd.germanywestcentral.aroapp.io
+          kafkaBootstrapServer: source-cluster-kafka-bootstrap.kafka.svc:9092
+          ingressClassName: openshift-default
+          tls: false
+          ingressExtraAnnotations:
+            route.openshift.io/termination: edge
+            route.openshift.io/insecureEdgeTerminationPolicy: Redirect
+    - repoURL: https://gitlab.sikademo.com/egd/argocd-apps-egd.git
+      path: ./clusters/egd/source_kafdrop/manifests

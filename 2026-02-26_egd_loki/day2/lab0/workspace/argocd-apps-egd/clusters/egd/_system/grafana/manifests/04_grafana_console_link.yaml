@@ -1,0 +1,11 @@
+apiVersion: console.openshift.io/v1
+kind: ConsoleLink
+metadata:
+  name: grafana
+spec:
+  applicationMenu:
+    section: Grafana
+    imageURL: https://avatars.githubusercontent.com/u/7195757?s=200&v=4
+  href: https://grafana.apps.egd.germanywestcentral.aroapp.io
+  location: ApplicationMenu
+  text: Grafana

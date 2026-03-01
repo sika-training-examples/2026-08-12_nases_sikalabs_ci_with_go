@@ -1,0 +1,10 @@
+apiVersion: console.openshift.io/v1
+kind: ConsoleLink
+metadata:
+  name: kafdrop-brno
+spec:
+  applicationMenu:
+    section: Kafdrop
+  href: https://kafka-brno-kafdrop.apps.training.germanywestcentral.aroapp.io
+  location: ApplicationMenu
+  text: Kafdrop BRNO

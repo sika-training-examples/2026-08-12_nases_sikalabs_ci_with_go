@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: iceland
+  namespace: openshift-gitops
+spec:
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  destinations:
+  - namespace: 'iceland-1'
+    server: 'https://kubernetes.default.svc'
+  - namespace: 'iceland-2'
+    server: 'https://kubernetes.default.svc'
+  sourceRepos:
+  - 'https://github.com/sikalabs/charts.git'
+  - 'https://gitlab.sikademo.com/iceland/iceland-values.git'
