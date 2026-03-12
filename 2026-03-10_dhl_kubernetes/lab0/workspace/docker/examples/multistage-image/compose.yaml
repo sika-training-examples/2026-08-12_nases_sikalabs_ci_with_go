@@ -1,0 +1,9 @@
+services:
+  app:
+    build: .
+    image: ttl.sh/multistage-image
+    environment:
+      PORT: "8000"
+      NAME: DHL
+    ports:
+      - 8000:8000

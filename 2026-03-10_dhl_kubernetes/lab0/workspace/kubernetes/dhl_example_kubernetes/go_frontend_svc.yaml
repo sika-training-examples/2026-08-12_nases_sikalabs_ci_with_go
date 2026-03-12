@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: go-frontend
+spec:
+  selector:
+    app: go-frontend
+  ports:
+    - port: 80
+      targetPort: 3000

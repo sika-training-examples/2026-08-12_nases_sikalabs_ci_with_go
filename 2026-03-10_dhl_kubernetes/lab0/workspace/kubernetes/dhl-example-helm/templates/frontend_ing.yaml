@@ -1,0 +1,34 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: frontend
+  annotations:
+    route.openshift.io/termination: "edge"
+    route.openshift.io/insecureEdgeTerminationPolicy: "Redirect"
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  ingressClassName: {{ .Values.ingressClassName }}
+  {{ if .Values.ingressTls }}
+  tls:
+    - hosts:
+        - {{ .Values.hostFrontend }}
+      secretName: {{ .Values.hostFrontend }}-tls
+  {{ end }}
+  rules:
+    - host: {{ required ".Values.hostFrontend is required" .Values.hostFrontend }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend
+                port:
+                  number: 80
+          - path: /api/counter
+            pathType: Prefix
+            backend:
+              service:
+                name: backend
+                port:
+                  number: 80

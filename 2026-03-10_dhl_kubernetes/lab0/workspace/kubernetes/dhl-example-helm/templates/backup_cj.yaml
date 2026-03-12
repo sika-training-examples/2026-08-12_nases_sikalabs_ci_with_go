@@ -1,0 +1,45 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cronjob
+  annotations:
+    app.openshift.io/connects-to: |
+      [{"apiVersion":"apps/v1","kind":"StatefulSet","name":"redis"}]
+spec:
+  # https://crontab.guru/
+  schedule: {{ .Values.backupSchedule | quote }}
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          volumes:
+            - name: backup
+              persistentVolumeClaim:
+                claimName: backup
+            - name: config
+              configMap:
+                name: backup
+          restartPolicy: OnFailure
+          initContainers:
+            - name: wait-for-redis
+              image: ghcr.io/sikalabs/slu:v0.99.0
+              command: 
+                - slu
+                - wait-for
+                - tcp 
+                - --address
+                - redis:6379
+          containers:
+            - name: main
+              image: ghcr.io/tergum-extra/redis-with-tergum:8-tergum-v0.42.0
+              args:
+                - tergum
+                - backup
+                - -c
+                - /tergum.yaml
+              volumeMounts:
+                - name: backup
+                  mountPath: /backup
+                - name: config
+                  subPath: tergum.yaml
+                  mountPath: /tergum.yaml

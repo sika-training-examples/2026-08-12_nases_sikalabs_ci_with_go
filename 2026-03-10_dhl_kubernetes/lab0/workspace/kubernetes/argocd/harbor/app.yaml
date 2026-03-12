@@ -1,0 +1,47 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: harbor
+  namespace: openshift-gitops
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: harbor
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+  source:
+    repoURL: https://helm.goharbor.io
+    targetRevision: 1.14.0
+    chart: harbor
+    helm:
+      valuesObject:
+        # https://github.com/goharbor/harbor-helm/blob/master/values.yaml
+        # https://artifacthub.io/packages/helm/harbor/harbor?modal=values
+        expose:
+          type: ingress
+          tls:
+            enabled: false
+          ingress:
+            hosts:
+              core: harbor.apps.training.germanywestcentral.aroapp.io
+            className: openshift-default
+            annotations:
+              route.openshift.io/termination: "edge"
+              route.openshift.io/insecureEdgeTerminationPolicy: "Redirect"
+        externalURL: https://harbor.apps.training.germanywestcentral.aroapp.io
+        harborAdminPassword: admin
+        notary:
+          enabled: false
+        persistence:
+          persistentVolumeClaim:
+            registry:
+              size: 20Gi
+            trivy:
+              size: 20Gi

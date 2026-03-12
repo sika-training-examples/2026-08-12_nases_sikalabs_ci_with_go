@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-frontend
+  annotations:
+    app.openshift.io/connects-to: |
+      [{"apiVersion":"apps/v1","kind":"Deployment","name":"backend"}]
+spec:
+  revisionHistoryLimit: 0
+  replicas: {{ .Values.goFrontendReplicas }}
+  selector:
+    matchLabels:
+      app: go-frontend
+  template:
+    metadata:
+      labels:
+        app: go-frontend
+      annotations:
+        checksum/frontend: {{ include (print $.Template.BasePath "/frontend_cm.yaml") . | sha256sum }}
+    spec:
+      initContainers:
+        - name: wait-for-backend-curl # not necessary, just another example
+          image: ghcr.io/sikalabs/ci
+          command: 
+            - /bin/sh
+            - -c
+            - for i in {1..100}; do sleep 1; if curl http://backend; then exit 0; fi; done; exit 1
+        - name: wait-for-backend-slu # not necessary, just another example
+          image: ghcr.io/sikalabs/slu:v0.99.0
+          command: 
+            - slu
+            - wait-for
+            - http200 
+            - --url
+            - http://backend
+      containers:
+        - name: main
+          image: {{ .Values.goFrontendImage }}
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: frontend
+          startupProbe:
+            httpGet:
+              path: /api/livez
+              port: 3000
+            failureThreshold: 10
+            periodSeconds: 1
+          livenessProbe:
+            httpGet:
+              path: /api/livez
+              port: 3000
+          resources:
+            requests:
+              cpu: 50m
+              memory: 100Mi
+            limits:
+              cpu: 100m
+              memory: 200Mi

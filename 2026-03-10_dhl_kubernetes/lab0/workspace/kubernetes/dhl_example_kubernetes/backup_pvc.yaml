@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: backup
+spec:
+  storageClassName: azurefile-csi-retain
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi

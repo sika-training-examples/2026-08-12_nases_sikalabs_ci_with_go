@@ -1,0 +1,8 @@
+See:
+    - https://{{.Values.hostFrontend}}
+{{- if .Values.hostFrontendGo }}
+    - https://{{.Values.hostFrontendGo}}
+{{ end }}
+{{- if .Values.hostBackupNginx }}
+    - https://{{.Values.hostBackupNginx}}
+{{ end }}

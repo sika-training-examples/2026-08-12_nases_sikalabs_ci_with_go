@@ -1,0 +1,13 @@
+:3000 {
+  reverse_proxy {
+    dynamic a frontend 3000
+    lb_policy round_robin
+  }
+}
+
+:8000 {
+  reverse_proxy {
+    dynamic a backend 8000
+    lb_policy round_robin
+  }
+}

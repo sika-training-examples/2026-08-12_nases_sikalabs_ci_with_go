@@ -1,0 +1,73 @@
+{{ if .Values.hostBackupNginx }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backup-nginx
+spec:
+  selector:
+    matchLabels:
+      app: backup-nginx
+  template:
+    metadata:
+      labels:
+        app: backup-nginx
+    spec:
+      volumes:
+        - name: backup
+          persistentVolumeClaim:
+            claimName: backup
+      containers:
+        - name: nginx
+          image: sikalabs/nginx-public
+          resources:
+            requests:
+              cpu: 20m
+              memory: 30Mi
+            limits:
+              cpu: 50m
+              memory: 50Mi
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: backup
+              mountPath: /usr/share/nginx/html
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backup-nginx
+spec:
+  type: ClusterIP
+  selector:
+    app: backup-nginx
+  ports:
+    - port: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: backup-nginx
+  annotations:
+    route.openshift.io/termination: "edge"
+    route.openshift.io/insecureEdgeTerminationPolicy: "Redirect"
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  ingressClassName: {{ .Values.ingressClassName }}
+  {{ if .Values.ingressTls }}
+  tls:
+    - hosts:
+        - {{ .Values.hostBackupNginx }}
+      secretName: {{ .Values.hostBackupNginx }}-tls
+  {{ end }}
+  rules:
+    - host: {{ .Values.hostBackupNginx }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: backup-nginx
+                port:
+                  number: 80
+{{ end }}

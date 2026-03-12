@@ -1,0 +1,12 @@
+{{ if .Values.consoleLinkEnabled }}
+apiVersion: console.openshift.io/v1
+kind: ConsoleLink
+metadata:
+  name: {{ .Release.Namespace }}-frontend
+spec:
+  applicationMenu:
+    section: DHL Example
+  href: https://{{ .Values.hostFrontend }}
+  location: ApplicationMenu
+  text: DHL Example Frontend
+{{ end }}

@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: dhl-dev
+  namespace: openshift-gitops
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: dhl-dev
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: false
+      allowEmpty: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://github.com/sika-training-examples/2026-03-12_dhl-example-helm.git
+    targetRevision: master
+    path: .
+    helm:
+      valuesObject:
+        hostFrontend: dhl-dev.apps.training.germanywestcentral.aroapp.io
+        hostFrontendGo: dhl-dev-go.apps.training.germanywestcentral.aroapp.io
+        hostBackupNginx: dhl-dev-backup.apps.training.germanywestcentral.aroapp.io
+        backupSchedule: "* * * * *"
+        EXTRA_TEXT: dev
+        enableArgoCDHooks: true
+        backendReplicas: 1
+        frontendReplicas: 1
+        goFrontendReplicas: 1
+        backendImage:    harbor.apps.training.germanywestcentral.aroapp.io/dhl/backend
+        frontendImage:   harbor.apps.training.germanywestcentral.aroapp.io/dhl/frontend-js
+        goFrontendImage: harbor.apps.training.germanywestcentral.aroapp.io/dhl/frontend

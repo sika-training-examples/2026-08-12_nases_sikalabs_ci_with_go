@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: example-openshift-custom-domain
+spec:
+  ingressClassName: openshift-default
+  tls:
+    - hosts:
+        - hello-world.openshift.sikademo.com
+      secretName: openshift.sikademo.com-tls
+  rules:
+    - host: hello-world.openshift.sikademo.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: hello-world-nodeport
+                port:
+                  number: 80

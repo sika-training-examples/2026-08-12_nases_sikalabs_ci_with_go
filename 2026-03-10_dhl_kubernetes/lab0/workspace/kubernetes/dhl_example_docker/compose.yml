@@ -1,0 +1,28 @@
+services:
+  frontend:
+    build: ./frontend
+    image: harbor.apps.training.germanywestcentral.aroapp.io/dhl/frontend
+    ports:
+      - ${PORT:-3000}:3000
+    depends_on:
+      - backend
+    environment:
+      API_ORIGIN: http://backend:8000
+      FONT_COLOR: ${FRONTEND_FONT_COLOR:-black}
+      BACKGROUND_COLOR: ${FRONTEND_BACKGROUND_COLOR:-white}
+  backend:
+    build: ./backend
+    image: harbor.apps.training.germanywestcentral.aroapp.io/dhl/backend
+    ports:
+      - ${PORT_BACKEND:-8000}:8000
+    depends_on:
+      - redis
+    environment:
+      REDIS: redis
+  redis:
+    image: redis
+    volumes:
+      - redis-data:/data
+
+volumes:
+  redis-data:
