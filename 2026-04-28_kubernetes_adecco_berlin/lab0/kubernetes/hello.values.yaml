@@ -1,0 +1,2 @@
+host: hello.aks.sikademo.com
+ingressClassName: haproxy

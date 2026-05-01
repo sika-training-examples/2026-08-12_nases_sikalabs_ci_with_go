@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: my-volumes
+spec:
+  accessModes:
+  - ReadWriteMany
+  capacity:
+    storage: 1Gi
+  csi:
+    driver: file.csi.azure.com
+    volumeAttributes:
+      skuName: Standard_LRS
+    volumeHandle: MC_training_training_germanywestcentral#fe7db152d821548da96d84d#my-volume###ondrejsika
+  mountOptions:
+  - mfsymlinks
+  - actimeo=30
+  - nosharesock
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: manual
+  volumeMode: Filesystem

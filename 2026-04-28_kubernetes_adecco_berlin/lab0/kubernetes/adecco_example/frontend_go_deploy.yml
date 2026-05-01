@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  revisionHistoryLimit: 0
+  replicas: 2
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      initContainers:
+        - name: wait-for-backend
+          image: ghcr.io/sikalabs/slu:v0.99.0
+          command: [ 'sh', '-c', 'slu wait-for http200 --url http://backend/api/status' ]
+        - name: wait-for-backend-busybox
+          image: busybox:1.36
+          command:
+          - sh
+          - -c
+          - |
+            echo "Waiting for backend service..."
+            until wget -q --spider http://backend/api/status; do
+              echo "Backend not ready, sleeping 5s"
+              sleep 5
+            done
+            echo "Backend is up!"
+      containers:
+        - name: main
+          image: ghcr.io/ondrejsika/counter-frontend-go
+          ports:
+            - name: http
+              containerPort: 3000
+          env:
+            - name: API_ORIGIN
+              value: http://backend
+            - name: FAIL_ON_ERROR
+              value: '1'
+          envFrom:
+            - configMapRef:
+                name: frontend
+          readinessProbe:
+            httpGet:
+              path: /api/livez
+              port: http
+            failureThreshold: 10
+            periodSeconds: 1
+          livenessProbe:
+            httpGet:
+              path: /api/livez
+              port: http
+          resources:
+            requests:
+              cpu: 40m
+              memory: 20Mi
+            limits:
+              cpu: 80m
+              memory: 40Mi

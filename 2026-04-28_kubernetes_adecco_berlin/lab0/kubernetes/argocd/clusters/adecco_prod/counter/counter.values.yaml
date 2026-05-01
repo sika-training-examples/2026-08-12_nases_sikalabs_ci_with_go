@@ -1,0 +1,7 @@
+# https://github.com/sika-training-examples/2026-04-29_adecco_counter_helm/blob/master/values.yaml
+host: counter.aks-prod.sikademo.com
+hostJs: counter-prod.aks-prod.sikademo.com
+
+backendReplicas: 4
+frontendReplicas: 4
+frontendJsReplicas: 4

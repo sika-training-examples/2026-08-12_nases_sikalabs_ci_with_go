@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-js
+spec:
+  revisionHistoryLimit: 0
+  replicas: 2
+  selector:
+    matchLabels:
+      app: frontend-js
+  template:
+    metadata:
+      labels:
+        app: frontend-js
+    spec:
+      containers:
+        - name: main
+          image: ghcr.io/ondrejsika/counter-frontend
+          ports:
+            - name: http
+              containerPort: 3000
+          env:
+            - name: API_ORIGIN
+              value: http://backend
+          envFrom:
+            - configMapRef:
+                name: frontend
+          readinessProbe:
+            httpGet:
+              path: /api/livez
+              port: http
+            failureThreshold: 10
+            periodSeconds: 1
+          livenessProbe:
+            httpGet:
+              path: /api/livez
+              port: http
+          resources:
+            requests:
+              cpu: 100m
+              memory: 200Mi
+            limits:
+              cpu: 200m
+              memory: 400Mi

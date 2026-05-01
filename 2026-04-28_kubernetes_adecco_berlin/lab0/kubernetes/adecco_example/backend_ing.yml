@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: backend
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  ingressClassName: haproxy
+  tls:
+    - hosts:
+        - counter-from-manifests.aks.sikademo.com
+      secretName: counter-from-manifests.aks.sikademo.com-tls
+  rules:
+    - host: counter-from-manifests.aks.sikademo.com
+      http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: backend
+                port:
+                  number: 80
