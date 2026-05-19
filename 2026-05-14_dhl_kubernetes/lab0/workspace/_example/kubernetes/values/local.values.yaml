@@ -1,0 +1,4 @@
+host: ondrej.aks.sikademo.com
+backupServerHost: ondrej-backups.aks.sikademo.com
+backupAzureStorageAccountSecretName: azure-storage-account-f384c85f6f32e4981982b51-secret
+backend_EXTRA_TEXT_SUFFIX: 'v4'

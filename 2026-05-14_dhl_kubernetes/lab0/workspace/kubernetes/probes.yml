@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: probes
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      app: probes
+  template:
+    metadata:
+      labels:
+        app: probes
+    spec:
+      containers:
+        - name: probes-example-server
+          image: ondrejsika/probes-example-server
+          livenessProbe:
+            httpGet:
+              path: /livez
+              port: 8000
+            failureThreshold: 1
+            periodSeconds: 1
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: 8000
+            failureThreshold: 1
+            periodSeconds: 1
+          startupProbe:
+            httpGet:
+              path: /readyz
+              port: 8000
+            failureThreshold: 10
+            periodSeconds: 1
+          ports:
+            - name: http
+              containerPort: 8000
+          resources:
+            requests:
+              cpu: 10m
+              memory: 1Mi
+            limits:
+              cpu: 20m
+              memory: 20Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: probes
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: http
+  selector:
+    app: probes

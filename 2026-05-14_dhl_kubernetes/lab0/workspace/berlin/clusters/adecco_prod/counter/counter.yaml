@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: counter
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io/foreground
+spec:
+  project: default
+  destination:
+    namespace: counter
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: false
+    syncOptions:
+      - CreateNamespace=true
+  sources:
+    - repoURL: https://github.com/sika-training-examples/2026-04-29_adecco_counter_helm.git
+      path: .
+      helm:
+        valueFiles:
+          - $values/clusters/adecco_prod/counter/counter.values.yaml
+    - repoURL: https://github.com/sika-training-examples/2026-04-30_adecco_argocd.git
+      ref: values

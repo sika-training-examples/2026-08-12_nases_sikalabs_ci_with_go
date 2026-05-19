@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backup
+data:
+  tergum.yaml: |
+    Meta:
+      SchemaVersion: 3
+    Telemetry:
+      CollectBackupLog: true
+      CollectHostData: true
+    Backups:
+      - ID: redis
+        Source:
+          Redis:
+            Host: redis
+            Port: 6379
+        Targets:
+          - ID: file
+            File:
+              Dir: /backup/counter
+              Prefix: counter-redis
+              Suffix: dump
+          - ID: AzureBlob
+            AzureBlob:
+              AccountName: $ACCOUNT_NAME
+              AccountKey: $ACCOUNT_KEY
+              ContainerName: backup
+              Prefix: counter-redis
+              Suffix: dump

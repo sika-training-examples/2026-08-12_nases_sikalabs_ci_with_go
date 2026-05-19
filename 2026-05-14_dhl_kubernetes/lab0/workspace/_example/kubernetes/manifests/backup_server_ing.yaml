@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: backup-server
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  ingressClassName: haproxy
+  tls:
+    - hosts:
+        - ondrej-backup.aks.sikademo.com
+      secretName: ondrej-backup.aks.sikademo.com-tls
+  rules:
+    - host: ondrej-backup.aks.sikademo.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: backup-server
+                port:
+                  number: 80

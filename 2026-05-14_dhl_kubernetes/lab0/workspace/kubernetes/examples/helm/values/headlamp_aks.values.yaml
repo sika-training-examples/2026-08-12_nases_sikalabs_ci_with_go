@@ -1,0 +1,14 @@
+ingress:
+  enabled: true
+  ingressClassName: haproxy
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+  hosts:
+    - host: headlamp.aks.sikademo.com
+      paths:
+        - path: /
+          type: ImplementationSpecific
+  tls:
+    - secretName: headlamp.aks.sikademo.com-tls
+      hosts:
+        - headlamp.aks.sikademo.com

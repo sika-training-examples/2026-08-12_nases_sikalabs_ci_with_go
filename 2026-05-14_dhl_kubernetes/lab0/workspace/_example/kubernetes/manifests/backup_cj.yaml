@@ -1,0 +1,46 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: backup
+spec:
+  schedule: "* * * * *"
+  failedJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          volumes:
+            - name: backup
+              persistentVolumeClaim:
+                claimName: backup
+            - name: config
+              configMap:
+                name: backup
+          containers:
+            - name: main
+              image: ghcr.io/tergum-extra/redis-with-tergum:8-tergum-v0.44.0
+              args:
+                - tergum
+                - backup
+                - -c
+                - /tergum.yaml
+                - --expand-env
+              env:
+                - name: ACCOUNT_NAME
+                  valueFrom:
+                    secretKeyRef:
+                      name: azure-storage-account-f384c85f6f32e4981982b51-secret
+                      key: azurestorageaccountname
+                - name: ACCOUNT_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: azure-storage-account-f384c85f6f32e4981982b51-secret
+                      key: azurestorageaccountkey
+              volumeMounts:
+                - name: backup
+                  mountPath: /backup
+                - name: config
+                  subPath: tergum.yaml
+                  mountPath: /tergum.yaml

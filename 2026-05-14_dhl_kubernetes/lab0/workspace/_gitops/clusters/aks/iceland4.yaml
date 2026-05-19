@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: iceland4
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io/foreground
+spec:
+  project: default
+  destination:
+    namespace: iceland
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://github.com/sikalabs/charts.git
+    path: charts/one-image
+    helm:
+      valuesObject:
+        # https://github.com/sikalabs/charts/blob/master/charts/one-image/values.yaml
+        host: iceland4.aks.sikademo.com
+        image: ghcr.io/ondrejsika/iceland-4
+        ingressClassName: haproxy

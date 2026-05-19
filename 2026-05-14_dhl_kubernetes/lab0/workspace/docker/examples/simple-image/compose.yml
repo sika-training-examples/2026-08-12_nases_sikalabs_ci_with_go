@@ -1,0 +1,7 @@
+name: demo
+services:
+  web:
+    build: .
+    image: ttl.sh/hello-dhl
+    ports:
+      - 80:80

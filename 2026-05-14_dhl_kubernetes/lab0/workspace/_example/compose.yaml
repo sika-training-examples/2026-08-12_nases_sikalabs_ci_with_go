@@ -1,0 +1,36 @@
+name: dhl
+services:
+  redis:
+    image: redis:8
+    volumes:
+      - redis_data:/data
+    networks:
+      - backend
+
+  backend:
+    build: ./backend
+    image: ttl.sh/dhl/backend:${TAG:-latest}
+    ports:
+      - 8000:8000
+    environment:
+      REDIS: redis
+    networks:
+      - backend
+      - frontend
+
+  frontend:
+    build: ./frontend
+    image: ttl.sh/dhl/frontend:${TAG:-latest}
+    ports:
+      - 3000:3000
+    environment:
+      API_ORIGIN: http://backend:8000
+    networks:
+      - frontend
+
+volumes:
+  redis_data:
+
+networks:
+  backend:
+  frontend:

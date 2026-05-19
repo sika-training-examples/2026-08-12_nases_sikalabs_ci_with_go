@@ -1,0 +1,4 @@
+host: helm2.aks.sikademo.com
+backend_EXTRA_TEXT_SUFFIX: helm2 v1
+backendReplicas: 4
+frontendGoReplicas: 4

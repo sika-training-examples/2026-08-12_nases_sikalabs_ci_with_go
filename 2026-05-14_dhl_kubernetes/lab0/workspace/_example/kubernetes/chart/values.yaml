@@ -1,0 +1,23 @@
+# Required
+host:
+
+# Optional
+## Backend
+backendImage: ttl.sh/dhl/backend
+backendReplicas: 2
+backend_SLOW_START: 0
+backend_EXTRA_TEXT_SUFFIX: ''
+
+## Frontend Go
+frontendGoImage: ttl.sh/dhl/frontend
+frontendGoReplicas: 2
+
+## Backup
+backupSchedule: "0 * * * *"
+backupAzureStorageAccountSecretName:
+backupStorageClassName: azurefile-csi
+
+## Backup Server
+backupServerHost:
+
+ingressClassName: haproxy

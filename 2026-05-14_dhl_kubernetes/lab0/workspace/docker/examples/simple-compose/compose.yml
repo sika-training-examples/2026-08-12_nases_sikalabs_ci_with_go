@@ -1,0 +1,15 @@
+services:
+  counter:
+    build: .
+    image: ttl.sh/simple-compose/counter
+    ports:
+      - ${PORT:-80}:80
+    environment:
+      REDIS: redis
+  redis:
+    image: docker.io/library/redis:8
+    volumes:
+      - redis-data:/data
+
+volumes:
+  redis-data:

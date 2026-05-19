@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: migrations-job-read
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: migrations-job-read
+rules:
+  - apiGroups: ["batch"]
+    resources: ["jobs"]
+    resourceNames: ["migrations"]
+    verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: migrations-job-read
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: migrations-job-read
+subjects:
+  - kind: ServiceAccount
+    name: migrations-job-read
