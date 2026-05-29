@@ -1,0 +1,11 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: kargo
+  namespace: kargo
+spec:
+  url: https://github.com/akuity/kargo.git
+  timeout: 60s
+  interval: 1m0s
+  ref:
+    tag: v1.10.4

@@ -1,0 +1,19 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: hello-world
+  namespace: kustomization02
+spec:
+  releaseName: hello-world
+  chart:
+    spec:
+      chart: hello-world
+      sourceRef:
+        kind: HelmRepository
+        name: sikalabs
+        namespace: kustomization02
+      version: 0.10.0
+  interval: 1m
+  values:
+    TEXT: kustomization02
+    replicas: 2

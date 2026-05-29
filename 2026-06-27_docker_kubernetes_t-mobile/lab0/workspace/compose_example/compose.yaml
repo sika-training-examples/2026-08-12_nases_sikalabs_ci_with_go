@@ -1,0 +1,7 @@
+name: demo
+services:
+  demo:
+    build:
+      dockerfile_inline: |
+        FROM debian:12-slim
+        CMD ["echo", "Hello from inline Dockerfile"]

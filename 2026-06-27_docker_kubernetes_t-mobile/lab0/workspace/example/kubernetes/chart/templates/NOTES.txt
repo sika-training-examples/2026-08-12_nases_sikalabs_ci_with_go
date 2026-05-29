@@ -1,0 +1,3 @@
+See: http://{{ .Values.host }}             (fronend)
+     http://{{ .Values.host }}/api/counter (api)
+     http://{{ .Values.host }}/backups     (backups)

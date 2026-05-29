@@ -1,0 +1,26 @@
+image:
+  tag: v1.10.4
+crds:
+  install: true
+  keep: true
+api:
+  host: kargo.wo0.sikademo.com
+  tls:
+    enabled: false
+    terminatedUpstream: true
+  adminAccount:
+    enabled: true
+    passwordHash: "$2y$10$WSVPqKHxmyoc6L7RzlVilucuWXnjDDfDQmyQIfAjoG/PL3AEjyuBq"
+    tokenSigningKey: VDq8SYFpzAtxZPIYvVLobJyBle6D6foX
+  ingress:
+    enabled: true
+    ingressClassName: haproxy
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+    tls:
+      enabled: true
+      selfSignedCert: false
+      secretName: kargo-api-tls
+controller:
+  rollouts:
+    integrationEnabled: false

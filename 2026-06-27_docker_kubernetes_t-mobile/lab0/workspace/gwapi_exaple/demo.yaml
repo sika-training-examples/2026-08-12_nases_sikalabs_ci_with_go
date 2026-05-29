@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-gw
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hello-gw
+  template:
+    metadata:
+      labels:
+        app: hello-gw
+    spec:
+      containers:
+      - name: hello-gw
+        image: ghcr.io/ondrejsika/training-example
+        env:
+          - name: TEXT
+            value: 'Hello GW API!'
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-gw
+spec:
+  selector:
+    app: hello-gw
+  ports:
+  - port: 80

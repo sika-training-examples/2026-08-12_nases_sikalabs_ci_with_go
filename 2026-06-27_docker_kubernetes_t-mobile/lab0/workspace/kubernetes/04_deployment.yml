@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deployment
+spec:
+  revisionHistoryLimit: 0
+  replicas: 6
+  # strategy:
+  #   type: RollingUpdate
+  #   type: Recreate
+  selector:
+    matchLabels:
+      app: my-deployment
+  template:
+    metadata:
+      labels:
+        app: my-deployment
+        svc: example
+    spec:
+      containers:
+        - name: main
+          # image: ghcr.io/ondrejsika/training-example:v1
+          # image: ghcr.io/ondrejsika/training-example:v2
+          image: ghcr.io/ondrejsika/training-example:v3
+          # image: ghcr.io/ondrejsika/training-example:v4
+          # image: ondrejsika/not-existing-image
+          ports:
+            - containerPort: 80
+          env:
+            - name: TEXT
+              value: "Hello T-Mobile!"
+          startupProbe:
+            httpGet:
+              path: /
+              port: 80
+          resources:
+            requests:
+              cpu: 10m
+              memory: 10Mi
+            limits:
+              memory: 20Mi
+              cpu: 20m

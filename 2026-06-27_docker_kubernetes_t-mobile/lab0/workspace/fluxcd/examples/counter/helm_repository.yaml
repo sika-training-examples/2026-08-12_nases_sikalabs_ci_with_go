@@ -1,0 +1,8 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: counter
+  namespace: counter
+spec:
+  url: https://raw.githubusercontent.com/sika-training-examples/2025-01-14-counter-helm-repo/refs/heads/main
+  interval: 1m

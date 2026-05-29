@@ -1,0 +1,8 @@
+# Required
+host: counter-ondrejsika.wo0.sikademo.com
+
+# Optional
+backendImage: ttl.sh/ondrejsika/counter/backend
+frontendImage: ttl.sh/ondrejsika/counter/frontend
+
+EXTRA_TEXT_SUFFIX: v1

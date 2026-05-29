@@ -1,0 +1,18 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: backend
+  namespace: counter
+spec:
+  releaseName: backend
+  chart:
+    spec:
+      chart: counter
+      sourceRef:
+        kind: HelmRepository
+        name: counter
+        namespace: counter
+      version: "*"
+  interval: 1m
+  values:
+    replicas: 2

@@ -1,0 +1,6 @@
+services:
+  app:
+    build: .
+    image: ttl.sh/ondrejsika/hello
+    ports:
+      - 8000:80

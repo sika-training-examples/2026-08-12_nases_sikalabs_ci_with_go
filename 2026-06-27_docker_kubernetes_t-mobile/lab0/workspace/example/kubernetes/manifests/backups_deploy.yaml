@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backups
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backups
+  template:
+    metadata:
+      labels:
+        app: backups
+    spec:
+      securityContext:
+        fsGroup: 101
+      volumes:
+        - name: backups
+          persistentVolumeClaim:
+            claimName: backups
+      initContainers:
+        - name: chmod
+          image: busybox
+          command:
+            - /bin/sh
+            - -c
+            - chmod 755 /usr/share/nginx/html/backups && chmod 644 -R /usr/share/nginx/html/backups
+          volumeMounts:
+            - name: backups
+              mountPath: /usr/share/nginx/html/backups
+      containers:
+        - name: backups
+          image: sikalabs/nginx-public
+          ports:
+            - name: http
+              containerPort: 80
+          volumeMounts:
+            - name: backups
+              mountPath: /usr/share/nginx/html/backups
+          resources:
+            requests:
+              cpu: 50m
+              memory: 20Mi
+            limits:
+              cpu: 100m
+              memory: 40Mi

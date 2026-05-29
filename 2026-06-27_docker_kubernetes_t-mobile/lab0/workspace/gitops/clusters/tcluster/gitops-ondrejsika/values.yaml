@@ -1,0 +1,4 @@
+host: gitops-ondrejsika.wo0.sikademo.com
+backendImage: ttl.sh/ondrejsika/counter/backend:t-mobile-v1
+frontendImage: ttl.sh/ondrejsika/counter/frontend:t-mobile-v1
+EXTRA_TEXT_SUFFIX: v3

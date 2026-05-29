@@ -1,0 +1,11 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: counter
+  namespace: gitops-ondrejsika
+spec:
+  url: https://github.com/sika-training-examples/2026-05-27-t-mobile-docker-and-kubernetes-example.git
+  timeout: 60s
+  interval: 1m0s
+  ref:
+    branch: master

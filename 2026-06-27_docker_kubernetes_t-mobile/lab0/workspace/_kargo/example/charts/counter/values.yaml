@@ -1,0 +1,15 @@
+# Required
+host:
+backendImage:
+frontendImage:
+
+# Optional
+## Backend
+backendReplicas: 2
+backend_SLOW_START: 0
+backend_EXTRA_TEXT_SUFFIX: ''
+
+## Frontend Go
+frontendReplicas: 2
+
+ingressClassName: haproxy

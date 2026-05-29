@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: git-cred-counter
+  namespace: kargo-pipeline-counter
+  labels:
+    kargo.akuity.io/cred-type: git
+stringData:
+  repoURL: git@github.com:sika-training-examples/2026-05-27-t-mobile-gitops-example.git
+  sshPrivateKey: |
+    -----BEGIN OPENSSH PRIVATE KEY-----
+    b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAABFwAAAAdzc2gtcn
+    NhAAAAAwEAAQAAAQEAlLrfBwMYSq9vNJd8UV2KU9Vi7pQjW7y5kuXisV7ZMalMBSxLhYVE
+    fk8XJF0WssBPqhLQ3vSgl/yRonHFWy0gawB2rP8gAKueexx5sUCNctB9NJWq/EHp4twvfu
+    x53UZmYMeVzdRmqi7W7wJIrvAASW6qXsRXR9WB96JAMsG4wkCBYsErL2JlDE8oOIhxG5RI
+    Or5tsv2L9bSf3cZozXhGSIAM+yC756TjHm1OtY+pAPtYOrldGKQ91RqKH10SgXWODy1f3N
+    pi2IssC/4irk1Y2+97YqXIQhFRKXJSHbSeYUdH7XeRTSCQgrtCKTlLaxS78cLgcfyPuGdA
+    c/81nEdQHQAAA7hnIJ/zZyCf8wAAAAdzc2gtcnNhAAABAQCUut8HAxhKr280l3xRXYpT1W
+    LulCNbvLmS5eKxXtkxqUwFLEuFhUR+TxckXRaywE+qEtDe9KCX/JGiccVbLSBrAHas/yAA
+    q557HHmxQI1y0H00lar8Qeni3C9+7HndRmZgx5XN1GaqLtbvAkiu8ABJbqpexFdH1YH3ok
+    AywbjCQIFiwSsvYmUMTyg4iHEblEg6vm2y/Yv1tJ/dxmjNeEZIgAz7ILvnpOMebU61j6kA
+    +1g6uV0YpD3VGoofXRKBdY4PLV/c2mLYiywL/iKuTVjb73tipchCEVEpclIdtJ5hR0ftd5
+    FNIJCCu0IpOUtrFLvxwuBx/I+4Z0Bz/zWcR1AdAAAAAwEAAQAAAQAdumJ06Nn0p69PME5R
+    hyRskFTngiW1Ivpm0dtnf6FjK0c+K3Xm+NXRd2aVRqQQU584y+0C+5uT9ZB4i0wa5uC5co
+    zGFHKln6gcTHtIgjIjtmeoWJgmNtiUl1VJBeRv5a/1/T7EtwVUU+tzN54mlWNBSkT0j0Mw
+    4QzK3hv96TnQXb1clIrMhgHWJI7yOVZs7cuNgRK6InNPpkXT91VfzdUtBDjr+8b1RJdzYB
+    wrSoURxqvITsR1dUJypDy14NH5pP3gD+z8jkpwZIz36iNtyLi/nfu8pdWfuqXEZQgCQLmR
+    jCDFcfM2e0wUparF+nly2TagB0slgnRRHlsnv/f7BrIRAAAAgH87/f+HIeeJ1R1GBdoBdP
+    OFKwLrsWPH3KG7cSrBE97v+y1t6TItgXA92cFf/rth7lwpjKQfxdwmSkBo8wY1aJXDbqVu
+    H+7BKlMWG1nelDwtpKX3DxfrDKKDkRS0iUQmHQfgAEdxBV7w0aQz79uOvAB5hVLvcrhlR7
+    EH94uU4gWlAAAAgQDBMnLaP5GpDV/mBtfBg2vrwgtlEUpaEOoqo+Bmq9u9RoFJkQWo44sa
+    wVqV2e5bS3Kge958/9uQ5iLs6G5PtI3cj3BjlA93PJF7ezRS+0pZJQBKEe6bsE7VArvGGZ
+    C+01Mz/G8qniLQx1W99x0g2aOzHPMf4bA/tTKwsTv8QvvIOQAAAIEAxRPxCAMFF5H05RjH
+    BTSzTPVep0kFeInqXyNh0Ix3kgyb3lmgmeOop8HVknBYuX3DoNADNNRmTJv5tUT5OBs5Iy
+    YPfnL14BhTcUHw610PUeeZ2jX1yyDJoz7hsHy0Vixubb+sXw2vcKTH4GK/PfU+O9LFWh/g
+    Zqa+yq4X/vIJnwUAAAAAAQID
+    -----END OPENSSH PRIVATE KEY-----
+  # insecure: "true"
+  #
+  # public key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3uCDkZHnBfbODAppjLAP6H+ArO78NNRpo55CsFQAnOBCgvkdF7tz1OJXsF/QF04YwtDBviawS6jlATZBBmhnFj73QzsHgrL/d+DPWYVzSDtUAkV5gcPjcmtbkaHY14h7hQ/ih9RH9NeeAH8DKU4kJeauam4rzBAHTFmuhURAFbPN2wte+VTNFtjbW23H+1Y/r5w/GeGDUUwt/4WnSYS4cEokcbWWLxjf4wZ+HG1jyTU2MgVy/6unUZ9x3HpVI0+p1eiatvFqc9lJND840+EvH38BdaPMfGZXOw/kjpZ5buTNFpur6nL7qtR7yBb60g3VTyTD33WlS5fJ/RZ0Aix1t

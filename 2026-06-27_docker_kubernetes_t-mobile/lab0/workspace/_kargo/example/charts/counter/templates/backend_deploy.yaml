@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+spec:
+  revisionHistoryLimit: 0
+  replicas: {{ .Values.backendReplicas }}
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+      annotations:
+        checksum/backend-cm: {{ include (print $.Template.BasePath "/backend_cm.yaml") . | sha256sum }}
+    spec:
+      containers:
+        - name: main
+          image: {{ required ".Values.backendImage is required" .Values.backendImage }}
+          ports:
+            - containerPort: 8000
+          env:
+            - name: REDIS
+              value: redis
+          envFrom:
+            - configMapRef:
+                name: backend
+          resources:
+            requests:
+              cpu: 40m
+              memory: 50Mi
+            limits:
+              cpu: 80m
+              memory: 100Mi
+          startupProbe:
+            httpGet:
+              path: /livez
+              port: 8000
+            periodSeconds: 1
+            failureThreshold: 20
+          livenessProbe:
+            httpGet:
+              path: /livez
+              port: 8000

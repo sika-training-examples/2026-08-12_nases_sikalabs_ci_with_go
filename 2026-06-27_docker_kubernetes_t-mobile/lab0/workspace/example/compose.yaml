@@ -1,0 +1,35 @@
+services:
+  redis:
+    image: redis:8
+    volumes:
+      - redis-data:/data
+    networks:
+      - backend
+      
+  backend:
+    build: ./backend
+    image: ${BACKEND_IMAGE:-ttl.sh/counter/backend}
+    environment:
+      REDIS: redis
+    ports:
+      - 8000:8000
+    networks:
+      - backend
+      - frontend
+
+  frontend:
+    build: ./frontend
+    image: ${FRONTEND_IMAGE:-ttl.sh/counter/frontend}
+    environment:
+      API_ORIGIN: http://backend:8000
+    ports:
+      - 3000:3000
+    networks:
+      - frontend
+
+volumes:
+  redis-data:
+
+networks:
+  backend:
+  frontend:

@@ -1,0 +1,20 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: frontend
+  namespace: counter
+spec:
+  releaseName: frontend
+  chart:
+    spec:
+      chart: counter-frontend
+      sourceRef:
+        kind: HelmRepository
+        name: counter
+        namespace: counter
+      version: "*"
+  interval: 1m
+  values:
+    host: counter-frontend.local
+    API_ORIGIN: http://backend-counter
+    replicas: 2

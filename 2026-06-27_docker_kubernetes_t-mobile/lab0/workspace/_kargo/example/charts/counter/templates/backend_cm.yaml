@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend
+data:
+  SLOW_START: {{ .Values.backend_SLOW_START | quote }}
+  EXTRA_TEXT_SUFFIX: {{ .Values.backend_EXTRA_TEXT_SUFFIX | quote}}

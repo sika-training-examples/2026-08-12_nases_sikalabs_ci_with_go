@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: ttl.sh/ondrejsika/counter/frontend
+          env:
+            - name: API_ORIGIN
+              value: http://backend
+          livenessProbe:
+            httpGet:
+              path: /api/livez
+              port: 3000
+            failureThreshold: 1
+            periodSeconds: 1
+          readinessProbe:
+            httpGet:
+              path: /api/livez
+              port: 3000
+            failureThreshold: 1
+            periodSeconds: 1
+          startupProbe:
+            httpGet:
+              path: /api/livez
+              port: 3000
+            failureThreshold: 10
+            periodSeconds: 1
+          ports:
+            - name: http
+              containerPort: 3000
+          resources:
+            requests:
+              cpu: 50m
+              memory: 20Mi
+            limits:
+              cpu: 100m
+              memory: 40Mi
