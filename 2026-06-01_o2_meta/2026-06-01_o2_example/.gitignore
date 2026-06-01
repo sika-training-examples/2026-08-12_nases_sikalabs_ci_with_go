@@ -1,0 +1,28 @@
+# Mac
+.DS_Store
+
+# Editor
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# Generic
+/temp
+*.log
+*.backup
+*.local.sh
+*.local.yml
+*.local.yaml
+*.local.json
+*.local.txt
+*.local.md
+Makefile.local.mk
+.env
+.env.*
+!.env.EXAMPLE
+
+# JS
+node_modules
+.next

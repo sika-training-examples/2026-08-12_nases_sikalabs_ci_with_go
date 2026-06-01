@@ -1,0 +1,18 @@
+meta:
+  schema_version: 3
+global:
+  no_strict_host_key_checking: true
+hosts:
+  all:
+    - ssh_target: root@docker.sikademo.com
+plays:
+  - name: Deploy
+    hosts: [all]
+    tasks:
+      - name: Git Pull
+        command:
+          cmd: cd /docker/counter && git pull
+
+      - name: Run
+        command:
+          cmd: cd /docker/counter && make up-prod

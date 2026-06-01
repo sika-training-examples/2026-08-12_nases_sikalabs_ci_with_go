@@ -1,0 +1,24 @@
+services:
+  redis:
+    image: redis:8
+    volumes:
+      - redis_data:/data
+
+  backend:
+    build: ./backend
+    platform: linux/amd64
+    image: ${BACKEND_IMAGE:-ttl.sh/o2/backend}:${BACKEND_TAG:-v5}
+    environment:
+      REDIS: redis
+
+  frontend:
+    build: ./frontend
+    platform: linux/amd64
+    image: ${FRONTEND_IMAGE:-ttl.sh/o2/frontend}:${FRONTEND_TAG:-v5}
+    environment:
+      API_ORIGIN: http://backend:8000
+    ports:
+      - ${PORT:-3000}:3000
+
+volumes:
+  redis_data:

@@ -1,0 +1,54 @@
+version: 2
+
+before:
+  hooks:
+    - rm -rf dist
+    - go mod tidy
+    - git diff --exit-code
+    - git push
+    - git push --tags
+
+builds:
+  - id: o2
+    main: ./cmd/o2
+    binary: o2
+    ldflags:
+      - -s -w
+      - -X o2-cli/version.Version={{.Version}}
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+
+archives:
+  - id: o2
+    ids:
+      - o2
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    format_overrides:
+      - goos: windows
+        formats:
+          - zip
+
+checksum:
+  name_template: "checksums.txt"
+
+brews:
+  -
+    name: o2
+    repository:
+      owner: ondrejsikax
+      name: homebrew-tap
+    skip_upload: auto
+    homepage: https://github.com/sika-training-examples/2026-06-01-o2-cli
+    url_template: "https://github.com/sika-training-examples/2026-06-01-o2-cli/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
+    directory: Formula
+    caveats: "How to use this binary: https://github.com/sika-training-examples/2026-06-01-o2-cli"
+    description: "O2 CLI"
+    install: |
+      bin.install "o2"
+    test: |
+      system "#{bin}/o2 version"

@@ -1,0 +1,28 @@
+# Mac
+.DS_Store
+
+# Editor
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# Generic
+/temp
+*.log
+*.backup
+*.local.sh
+*.local.yml
+*.local.yaml
+*.local.json
+*.local.txt
+*.local.md
+Makefile.local.mk
+
+# Project o2 cli
+/o2
+/o2.exe
+/cmd/o2/o2
+/cmd/o2/o2.exec
+/dist
