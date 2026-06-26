@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer
+  namespace: kafka
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: consumer
+  template:
+    metadata:
+      labels:
+        app: consumer
+    spec:
+      containers:
+        - name: consumer
+          image: ttl.sh/debezium-example-consumer:v1
+          env:
+            - name: BOOTSTRAP_SERVERS
+              value: ceps-kafka-bootstrap.kafka.svc:9092
+            - name: GROUP_ID
+              value: debezium-consumer
+            - name: TOPICS_PATTERN
+              value: "^dbz\\..*"
+          resources:
+            requests:
+              cpu: "10m"
+              memory: "32Mi"
+            limits:
+              cpu: "50m"
+              memory: "64Mi"

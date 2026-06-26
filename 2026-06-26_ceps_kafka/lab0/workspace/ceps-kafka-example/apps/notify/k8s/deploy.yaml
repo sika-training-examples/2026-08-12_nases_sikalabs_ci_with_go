@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notify
+spec:
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: notify
+  template:
+    metadata:
+      labels:
+        app: notify
+    spec:
+      containers:
+        - name: main
+          image: ttl.sh/ceps/notify:v2
+          env:
+            - name: BROKER_ADDR
+              value: ceps-kafka-bootstrap.kafka.svc:9092
+            - name: TOPIC_IN
+              value: df1-out
+            - name: GROUP_ID
+              value: notify
+          resources:
+            requests:
+              cpu: 10m
+              memory: 10Mi
+            limits:
+              cpu: 100m
+              memory: 100Mi

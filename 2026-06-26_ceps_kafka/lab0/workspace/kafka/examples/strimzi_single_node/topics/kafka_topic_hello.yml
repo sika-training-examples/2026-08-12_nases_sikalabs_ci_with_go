@@ -1,0 +1,11 @@
+apiVersion: kafka.strimzi.io/v1
+kind: KafkaTopic
+metadata:
+  name: my-single-node-hello
+  namespace: kafka
+  labels:
+    strimzi.io/cluster: my-single-node
+spec:
+  topicName: hello
+  partitions: 1
+  replicas: 1

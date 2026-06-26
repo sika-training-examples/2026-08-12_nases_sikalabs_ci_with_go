@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb
+  namespace: kafka
+spec:
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+        - name: mongodb
+          image: mongo:8
+          # replica set is required for Debezium to use MongoDB change streams;
+          # start mongod in the background, wait until ready, initiate the replica set, then foreground mongod
+          command: ["/bin/bash", "-c"]
+          args:
+            - |
+              mongod --replSet rs0 --bind_ip_all &
+              MONGOD_PID=$!
+              WAIT=0
+              until mongosh --eval "db.runCommand({ ping: 1 })" --quiet 2>/dev/null; do
+                sleep 1; WAIT=$((WAIT+1))
+                [ $WAIT -ge 60 ] && echo "MongoDB did not start in time" && exit 1
+              done
+              mongosh --quiet --eval "
+                var res = rs.initiate({ _id: 'rs0', members: [{ _id: 0, host: 'mongodb.kafka.svc:27017' }] });
+                if (res.ok !== 1 && res.codeName !== 'AlreadyInitialized') { quit(1); }
+              "
+              wait $MONGOD_PID
+          ports:
+            - containerPort: 27017
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "300Mi"
+            limits:
+              cpu: "200m"
+              memory: "700Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb
+  namespace: kafka
+spec:
+  selector:
+    app: mongodb
+  ports:
+    - port: 27017

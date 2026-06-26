@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-writer
+  namespace: kafka
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo-writer
+  template:
+    metadata:
+      labels:
+        app: mongo-writer
+    spec:
+      containers:
+        - name: mongo-writer
+          image: ttl.sh/debezium-example-mongo-writer:v2
+          env:
+            - name: MONGO_URI
+              value: mongodb://mongodb.kafka.svc:27017/?replicaSet=rs0
+            - name: INTERVAL
+              value: "2"
+          resources:
+            requests:
+              cpu: "10m"
+              memory: "32Mi"
+            limits:
+              cpu: "50m"
+              memory: "64Mi"

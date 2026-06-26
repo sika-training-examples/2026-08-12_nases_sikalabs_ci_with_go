@@ -1,0 +1,21 @@
+apiVersion: kafka.strimzi.io/v1
+kind: Kafka
+metadata:
+  name: ceps2
+  namespace: kafka
+spec:
+  kafka:
+    version: 4.1.1
+    metadataVersion: 4.1-IV1
+    listeners:
+      - name: plain
+        port: 9092
+        type: internal
+        tls: false
+      - name: lb
+        port: 9093
+        type: loadbalancer
+        tls: false
+  entityOperator:
+    topicOperator: {}
+    userOperator: {}

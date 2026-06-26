@@ -1,0 +1,27 @@
+apiVersion: kafka.strimzi.io/v1
+kind: KafkaConnect
+metadata:
+  name: debezium
+  namespace: kafka
+  annotations:
+    # tells Strimzi to manage connectors via KafkaConnector resources
+    strimzi.io/use-connector-resources: "true"
+spec:
+  # Kafka version to use
+  version: 4.1.1
+  replicas: 1
+  # address of the Kafka broker
+  bootstrapServers: ceps-kafka-bootstrap.kafka.svc:9092
+  # custom image with Debezium PostgreSQL connector plugin installed
+  image: ttl.sh/kafka-connect-debezium:v2
+  # consumer group ID for this Connect cluster (must be unique per cluster)
+  groupId: debezium
+  # internal topics used by Kafka Connect to store connector state
+  offsetStorageTopic: debezium-offsets # tracks read position per connector; reset this to replay from scratch
+  configStorageTopic: debezium-configs # stores connector and task configurations
+  statusStorageTopic: debezium-status  # tracks connector/task state (running, failed, paused)
+  config:
+    # replication factor 1 is fine for single-broker / dev setups
+    config.storage.replication.factor: 1
+    offset.storage.replication.factor: 1
+    status.storage.replication.factor: 1

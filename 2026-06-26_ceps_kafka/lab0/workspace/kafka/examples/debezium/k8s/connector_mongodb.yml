@@ -1,0 +1,20 @@
+apiVersion: kafka.strimzi.io/v1
+kind: KafkaConnector
+metadata:
+  name: mongodb
+  namespace: kafka
+  labels:
+    # must match the KafkaConnect instance name this connector belongs to
+    strimzi.io/cluster: debezium
+spec:
+  # Debezium MongoDB connector class
+  class: io.debezium.connector.mongodb.MongoDbConnector
+  # number of tasks to run in parallel
+  tasksMax: 1
+  config:
+    # MongoDB connection string; replica set is required for change streams
+    mongodb.connection.string: mongodb://mongodb.kafka.svc:27017/?replicaSet=rs0
+    # prefix for all Kafka topics produced by this connector (topic = <prefix>.<database>.<collection>)
+    topic.prefix: dbz.mongo
+    # comma-separated list of collections to capture changes from
+    collection.include.list: example.users,example.pets

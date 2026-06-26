@@ -1,0 +1,63 @@
+apiVersion: kafka.strimzi.io/v1
+kind: Kafka
+metadata:
+  name: my-cluster
+  namespace: kafka
+spec:
+  kafka:
+    version: 4.2.0
+    metadataVersion: 4.2-IV1
+    listeners:
+      # PLAINTEXT — no TLS, no authentication
+      - name: plain
+        port: 9092
+        type: internal
+        tls: false
+      # SSL — TLS + mTLS client certificate authentication
+      - name: ssl
+        port: 9093
+        type: internal
+        tls: true
+        authentication:
+          type: tls
+      # SASL_PLAINTEXT — SASL authentication, no TLS
+      - name: saslplain
+        port: 9094
+        type: internal
+        tls: false
+        authentication:
+          type: scram-sha-512
+      # SASL_SSL — SASL authentication + TLS (recommended for external clients)
+      - name: saslssl
+        port: 9095
+        type: loadbalancer
+        tls: true
+        authentication:
+          type: scram-sha-512
+      # SASL_SSL with OIDC (OAuthBearer) — token from external IdP (Keycloak, Okta, ...)
+      # oauth type was removed in v1; use custom type with OAUTHBEARER SASL mechanism
+      - name: oauth
+        port: 9096
+        type: loadbalancer
+        tls: true
+        authentication:
+          type: custom
+          sasl: true
+          listenerConfig:
+            sasl.enabled.mechanisms: OAUTHBEARER
+            oauthbearer.sasl.server.callback.handler.class: io.strimzi.kafka.oauth.server.JaasServerOauthValidatorCallbackHandler
+            # unsecuredLoginStringClaim_sub gives the broker a dummy identity for its own
+            # OAUTHBEARER login during listener init — client tokens are still validated by
+            # JaasServerOauthValidatorCallbackHandler using the JWKS endpoint
+            oauthbearer.sasl.jaas.config: "org.apache.kafka.common.security.oauthbearer.OAuthBearerLoginModule required unsecuredLoginStringClaim_sub=\"kafka-broker\" oauth.valid.issuer.uri=\"https://sso.sikalabs.com/realms/training\" oauth.jwks.endpoint.uri=\"https://sso.sikalabs.com/realms/training/protocol/openid-connect/certs\" oauth.username.claim=\"preferred_username\";"
+    authorization:
+      type: simple
+    config:
+      offsets.topic.replication.factor: 3
+      transaction.state.log.replication.factor: 3
+      transaction.state.log.min.isr: 3
+      default.replication.factor: 3
+      min.insync.replicas: 2
+  entityOperator:
+    topicOperator: {}
+    userOperator: {}

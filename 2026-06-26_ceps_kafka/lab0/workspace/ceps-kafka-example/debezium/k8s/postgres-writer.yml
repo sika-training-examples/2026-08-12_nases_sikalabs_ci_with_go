@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-writer
+  namespace: kafka
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres-writer
+  template:
+    metadata:
+      labels:
+        app: postgres-writer
+    spec:
+      containers:
+        - name: postgres-writer
+          image: ttl.sh/debezium-example-postgres-writer:v2
+          env:
+            - name: DB_HOST
+              value: postgres.kafka.svc
+            - name: DB_NAME
+              value: example
+            - name: DB_USER
+              value: postgres
+            - name: DB_PASSWORD
+              value: pg
+            - name: INTERVAL
+              value: "2"
+          resources:
+            requests:
+              cpu: "10m"
+              memory: "32Mi"
+            limits:
+              cpu: "50m"
+              memory: "64Mi"

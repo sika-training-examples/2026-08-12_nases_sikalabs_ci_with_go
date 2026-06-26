@@ -1,0 +1,6 @@
+meta:
+  version: 1
+env:
+  - BROKER_ADDR
+  - TOPIC_IN
+  - GROUP_ID

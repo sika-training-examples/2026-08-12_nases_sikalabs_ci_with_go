@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-bridge
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - my-bridge.kafka.sikademo.com
+      secretName: my-bridge.kafka.sikademo.com-tls
+  rules:
+    - host: my-bridge.kafka.sikademo.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: my-bridge-bridge-service
+                port:
+                  number: 8080

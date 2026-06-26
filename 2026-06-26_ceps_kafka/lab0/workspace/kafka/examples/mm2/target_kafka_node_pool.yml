@@ -1,0 +1,24 @@
+apiVersion: kafka.strimzi.io/v1
+kind: KafkaNodePool
+metadata:
+  name: target-cluster
+  namespace: kafka
+  labels:
+    strimzi.io/cluster: target-cluster
+spec:
+  replicas: 1
+  roles:
+    - controller
+    - broker
+  template:
+    pod:
+      securityContext:
+        fsGroup: 0
+  storage:
+    type: jbod
+    volumes:
+      - id: 0
+        type: persistent-claim
+        size: 1Gi
+        deleteClaim: false
+        kraftMetadata: shared

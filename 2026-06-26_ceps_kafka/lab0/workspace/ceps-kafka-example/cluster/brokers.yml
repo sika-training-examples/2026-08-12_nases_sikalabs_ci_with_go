@@ -1,0 +1,18 @@
+apiVersion: kafka.strimzi.io/v1
+kind: KafkaNodePool
+metadata:
+  name: brokers
+  namespace: kafka
+  labels:
+    strimzi.io/cluster: ceps
+spec:
+  replicas: 3
+  roles:
+    - broker
+  storage:
+    type: jbod
+    volumes:
+      - id: 0
+        type: persistent-claim
+        size: 50Gi
+        deleteClaim: false
