@@ -15,3 +15,5 @@ build:
     - docker build -t $IMAGE_TAG -t $IMAGE_LATEST .
     - docker push $IMAGE_TAG
     - docker push $IMAGE_LATEST
+    - echo IMAGE $IMAGE_LATEST
+    - echo IMAGE $IMAGE_TAG
