@@ -1,0 +1,15 @@
+services:
+  counter:
+    build: .
+    image: ttl.sh/dte/simple-compose/counter
+    ports:
+      - ${PORT:-80}:8000
+    depends_on:
+      - redis
+  redis:
+    image: redis
+    volumes:
+      - redis-data:/data
+
+volumes:
+  redis-data:

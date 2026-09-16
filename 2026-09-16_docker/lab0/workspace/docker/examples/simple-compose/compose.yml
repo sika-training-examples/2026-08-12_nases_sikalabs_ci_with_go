@@ -1,0 +1,38 @@
+services:
+  proxy:
+    image: caddy
+    depends_on:
+      - counter
+    command:
+      - sh
+      - -c
+      - caddy reverse-proxy --from :80 --to counter:80
+    ports:
+      - 80:80
+
+  counter:
+    build: .
+    image: ttl.sh/dte/simple-compose/counter
+    depends_on:
+      - redis
+    environment:
+      REDIS: redis
+    deploy:
+      replicas: 4
+
+  redis:
+    image: redis:8
+    volumes:
+      - redis-data:/data
+
+  test:
+    image: ghcr.io/sikalabs/ci
+    depends_on:
+      - counter
+    command: 
+      - /bin/sh
+      - -c
+      - sleep 5 && curl -v http://counter
+
+volumes:
+  redis-data:

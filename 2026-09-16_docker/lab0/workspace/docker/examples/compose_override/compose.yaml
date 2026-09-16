@@ -1,0 +1,5 @@
+services:
+  hello:
+    image: sikalabs/dogsay:v0.2.0
+    entrypoint: dogsay
+    command: Hello from compose.yaml

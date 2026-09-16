@@ -1,0 +1,12 @@
+services:
+  promtail:
+    build: .
+    environment:
+      - LOKI_URL
+      - PROMTAIL_HOST
+    volumes:
+      - promtail_data:/promtail_data
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/lib/docker:/var/lib/docker
+volumes:
+  promtail_data:

@@ -1,0 +1,3 @@
+services:
+  hello:
+    command: Hello from compose.override.yaml - it is overridden!

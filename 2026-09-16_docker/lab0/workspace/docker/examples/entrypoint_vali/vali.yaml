@@ -1,0 +1,7 @@
+meta:
+  version: 1
+env:
+  - TEXT
+  - COLOR
+files:
+  - /config.yaml

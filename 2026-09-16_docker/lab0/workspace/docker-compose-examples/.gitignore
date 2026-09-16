@@ -1,0 +1,11 @@
+# Mac
+.DS_Store
+
+# Editor
+.vscode
+.idea
+
+# Generic
+*.log
+*.backup
+.env

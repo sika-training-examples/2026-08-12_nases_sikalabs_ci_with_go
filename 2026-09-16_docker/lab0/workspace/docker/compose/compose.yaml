@@ -1,0 +1,6 @@
+name: "compose-name-example"
+services:
+  example:
+    image: hello-world
+    deploy:
+      replicas: 4

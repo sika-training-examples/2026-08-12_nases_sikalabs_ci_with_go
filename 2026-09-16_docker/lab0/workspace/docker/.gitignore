@@ -1,0 +1,9 @@
+.vscode
+.env
+.DS_Store
+node_modules
+/examples/multistage-image/app
+*.log
+/.gitstats_output
+compose.override.yml
+compose.override.yaml

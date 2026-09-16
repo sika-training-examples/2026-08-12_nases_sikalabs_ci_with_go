@@ -1,0 +1,36 @@
+services:
+  example:
+    image: sikalabs/hello-world-server:v0.6.0
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.example.rule=Host(`example.127.0.0.1.nip.io`)
+      - traefik.http.services.example.loadbalancer.server.port=8000
+    networks:
+      - traefik
+    deploy:
+      replicas: 4
+  nginx:
+    image: nginx
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.nginx.rule=Host(`nginx.127.0.0.1.nip.io`)
+    networks:
+      - traefik
+  apache:
+    image: httpd
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.apache.rule=Host(`apache.127.0.0.1.nip.io`)
+    networks:
+      - traefik
+  caddy:
+    image: caddy:2
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.caddy.rule=Host(`caddy.127.0.0.1.nip.io`)
+    networks:
+      - traefik
+
+networks:
+  traefik:
+    name: traefik
