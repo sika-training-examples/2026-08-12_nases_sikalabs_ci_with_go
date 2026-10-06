@@ -1,0 +1,85 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: app-c
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-c
+  namespace: app-c
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-c
+  template:
+    metadata:
+      labels:
+        app: app-c
+    spec:
+      containers:
+        - name: app-c
+          image: ghcr.io/sikalabs/hello-world-server
+          env:
+            - name: TEXT
+              value: "c"
+          ports:
+            - containerPort: 8000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-c
+  namespace: app-c
+spec:
+  selector:
+    app: app-c
+  ports:
+    - port: 80
+      targetPort: 8000
+---
+# The app's own HTTPS listener (hostname + cert) on the shared Gateway.
+# cert-manager issues the cert into secret app-c-tls in this namespace.
+apiVersion: gateway.networking.k8s.io/v1
+kind: ListenerSet
+metadata:
+  name: app-c
+  namespace: app-c
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-gw
+    # Solve HTTP-01 via the shared Gateway's http listener
+    # (this ListenerSet is HTTPS only).
+    acme.cert-manager.io/http01-parentreffallback: "true"
+spec:
+  parentRef:
+    name: gw2
+    namespace: gw2
+  listeners:
+    - name: https
+      protocol: HTTPS
+      port: 443
+      hostname: c.gw2.sikademo.com
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - name: app-c-tls
+---
+# The "Ingress" of this app - attaches to its ListenerSet on the shared Gateway.
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: app-c
+  namespace: app-c
+spec:
+  parentRefs:
+    - group: gateway.networking.k8s.io
+      kind: ListenerSet
+      name: app-c
+      sectionName: https
+  hostnames:
+    - c.gw2.sikademo.com
+  rules:
+    - backendRefs:
+        - name: app-c
+          port: 80

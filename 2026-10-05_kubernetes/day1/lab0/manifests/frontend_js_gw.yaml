@@ -1,0 +1,37 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: ListenerSet
+metadata:
+  name: frontend-js
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-gw
+    acme.cert-manager.io/http01-parentreffallback: "true"
+spec:
+  parentRef:
+    name: gw # Gateway Name
+    namespace: gw # Gateway Namespace
+  listeners:
+    - name: https
+      protocol: HTTPS
+      port: 443
+      hostname: frontend-js.gw.sikademo.com
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - name: frontend-js.gw.sikademo.com-tls
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: frontend-js
+spec:
+  parentRefs:
+    - group: gateway.networking.k8s.io
+      kind: ListenerSet
+      name: frontend-js
+      sectionName: https
+  hostnames:
+    - frontend-js.gw.sikademo.com
+  rules:
+    - backendRefs:
+        - name: frontend-js
+          port: 80
