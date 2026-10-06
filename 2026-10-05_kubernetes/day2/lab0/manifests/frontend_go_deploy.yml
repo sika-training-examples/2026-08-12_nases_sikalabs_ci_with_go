@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-go
+spec:
+  revisionHistoryLimit: 0
+  replicas: 2
+  selector:
+    matchLabels:
+      app: frontend-go
+  template:
+    metadata:
+      labels:
+        app: frontend-go
+        service: frontend-shared
+    spec:
+      containers:
+        - name: frontend-go
+          image: ghcr.io/ondrejsika/counter-frontend-go
+          env:
+            - name: API_ORIGIN
+              value: http://backend
+            - name: FONT_COLOR
+              value: green
+          ports:
+            - name: http
+              containerPort: 3000
+          startupProbe:
+            httpGet:
+              path: /api/livez
+              port: 3000
+            failureThreshold: 60
+            periodSeconds: 1
+          livenessProbe:
+            httpGet:
+              path: /api/livez
+              port: 3000
+          resources:
+            requests:
+              cpu: 20m
+              memory: 20Mi
+            limits:
+              cpu: 40m
+              memory: 40Mi
+

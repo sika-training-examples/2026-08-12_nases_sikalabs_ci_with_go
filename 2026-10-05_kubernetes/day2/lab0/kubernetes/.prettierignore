@@ -1,0 +1,6 @@
+kube-prometheus
+examples/helm/
+*.local.json
+*.tfstate
+*.tfstate.backup
+.terraform

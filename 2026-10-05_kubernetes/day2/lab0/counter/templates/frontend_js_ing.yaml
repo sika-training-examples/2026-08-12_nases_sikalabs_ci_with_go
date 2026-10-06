@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: frontend-js
+  annotations:
+    cert-manager.io/cluster-issuer: {{ .Values.clusterIssuer }}
+spec:
+  tls:
+    - hosts:
+        - {{ .Values.hostPrefix }}{{ required ".Values.frontendJsHost is required" .Values.frontendJsHost }}
+      secretName: {{ .Values.hostPrefix }}{{ .Values.frontendJsHost }}-tls
+  rules:
+    - host: {{ .Values.hostPrefix }}{{ .Values.frontendJsHost }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend-js
+                port:
+                  number: 80

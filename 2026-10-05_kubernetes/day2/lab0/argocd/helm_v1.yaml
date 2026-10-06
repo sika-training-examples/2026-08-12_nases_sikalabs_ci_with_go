@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: counter-v1
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: argocd-counter-v1
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://github.com/sika-training-examples/2026-10-05_helm_example.git
+    targetRevision: master
+    path: .
+    helm:
+      valuesObject:
+        frontendHost: argocd-counter-v1.k8s.sikademo.com
+        frontendGoHost: argocd-counter-v1-go.k8s.sikademo.com
+        frontendJsHost: argocd-counter-v1-js.k8s.sikademo.com
+        gatewayFrontendHost:  argocd-counter-v1.gw.sikademo.com
+        FRONTEND_FONT_COLOR: "red"
+        FRONTEND_BACKGROUND_COLOR: "darkblue"

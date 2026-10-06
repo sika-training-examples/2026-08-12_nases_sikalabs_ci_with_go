@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: frontend-go
+  annotations:
+    cert-manager.io/cluster-issuer: {{ .Values.clusterIssuer }}
+spec:
+  tls:
+    - hosts:
+        - {{ .Values.hostPrefix }}{{ required ".Values.frontendGoHost is required" .Values.frontendGoHost }}
+      secretName: {{ .Values.hostPrefix }}{{ .Values.frontendGoHost }}-tls
+  rules:
+    - host: {{ .Values.hostPrefix }}{{ .Values.frontendGoHost }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend-go
+                port:
+                  number: 80

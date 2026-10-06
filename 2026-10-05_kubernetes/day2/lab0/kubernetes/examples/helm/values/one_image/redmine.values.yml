@@ -1,0 +1,4 @@
+image: redmine
+host: redmine.k8s.sikademo.com
+containerPort: 3000
+ingressClassName: traefik

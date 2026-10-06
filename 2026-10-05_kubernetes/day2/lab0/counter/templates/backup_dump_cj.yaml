@@ -1,0 +1,39 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: backup-dump
+spec:
+  # https://crontab.guru/
+  schedule: "*/1 * * * *"
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            is-backup: "true"
+        spec:
+          affinity:
+            podAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                - topologyKey: kubernetes.io/hostname
+                  labelSelector:
+                    matchLabels:
+                      is-backup: "true"
+          restartPolicy: OnFailure
+          volumes:
+            - name: backup
+              persistentVolumeClaim:
+                claimName: backup
+          containers:
+            - name: backup-dump
+              image: redis:8
+              args:
+                - /bin/sh
+                - -c
+                - mkdir -p /backup/dump && redis-cli -h redis --rdb "/backup/dump/$(date +'%Y-%m-%d_%H-%M-%S').rdb"
+              volumeMounts:
+                  - name: backup
+                    mountPath: /backup

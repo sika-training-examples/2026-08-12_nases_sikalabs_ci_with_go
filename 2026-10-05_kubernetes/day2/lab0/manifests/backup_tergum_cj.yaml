@@ -1,0 +1,46 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: tergum-dump
+spec:
+  # https://crontab.guru/
+  schedule: "*/1 * * * *"
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            is-backup: "true"
+        spec:
+          affinity:
+            podAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                - topologyKey: kubernetes.io/hostname
+                  labelSelector:
+                    matchLabels:
+                      is-backup: "true"
+          restartPolicy: OnFailure
+          volumes:
+            - name: backup
+              persistentVolumeClaim:
+                claimName: backup
+            - name: tergum-config
+              configMap:
+                name: backup-tergum
+          containers:
+            - name: backup-tergum
+              image: ghcr.io/tergum-extra/redis-with-tergum:8-tergum-v0.42.0
+              args:
+                - tergum
+                - backup
+                - -c
+                - /tergum.yaml
+              volumeMounts:
+                  - name: backup
+                    mountPath: /backup
+                  - name: tergum-config
+                    subPath: tergum.yaml
+                    mountPath: /tergum.yaml

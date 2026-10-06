@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+spec:
+  revisionHistoryLimit: 0
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      serviceAccountName: job-read
+      initContainers:
+        - name: wait-for-migrations
+          image: registry.k8s.io/kubectl:v1.36.0
+          command:
+            - kubectl
+            - wait
+            - --for=condition=complete
+            - --timeout=600s
+            - job/migrations
+      containers:
+        - name: backend
+          image: {{ .Values.backendImage }}
+          env:
+            - name: REDIS
+              value: redis
+            - name: API_ONLY
+              value: "1"
+            - name: HTTP_CLOSE_CONNECTION
+              value: "1"
+            - name: SLOW_START
+              value: {{ .Values.BACKEND_SLOW_START | quote }}
+            - name: EXTRA_TEXT_SUFFIX
+              value: {{ .Values.BACKEND_EXTRA_TEXT_SUFFIX | quote }}
+          ports:
+            - name: http
+              containerPort: 8000
+          startupProbe:
+            httpGet:
+              path: /readyz
+              port: 8000
+            failureThreshold: 60
+            periodSeconds: 1
+          livenessProbe:
+            httpGet:
+              path: /livez
+              port: 8000
+          resources:
+            requests:
+              cpu: 50m
+              memory: 20Mi
+            limits:
+              cpu: 100m
+              memory: 40Mi
+
